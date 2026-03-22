@@ -574,11 +574,21 @@ public struct OnCreateTerminus
 
 ```csharp
 // 创建并关联业务实体到 Terminus
-FTask<T> terminus.LinkTerminusEntity<T>(bool autoDispose);
+FTask<T> terminus.LinkTerminusEntity<T>(bool autoDispose, bool startForwarding = true);
 
 // 关联已有实体到 Terminus
-FTask terminus.LinkTerminusEntity(Entity entity, bool autoDispose);
+FTask terminus.LinkTerminusEntity(Entity entity, bool autoDispose, bool startForwarding = true);
+
+// 开启或关闭消息转发（关联后可随时调用）
+void terminus.SetForwarding(bool isStartForwarding);
 ```
+
+**参数说明：**
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `autoDispose` | `bool` | — | Terminus 销毁时是否自动销毁关联实体 |
+| `startForwarding` | `bool` | `true` | 关联实体后是否立即开启消息转发到客户端 |
 
 **重要说明：**
 
@@ -587,6 +597,7 @@ FTask terminus.LinkTerminusEntity(Entity entity, bool autoDispose);
 - 如果调用了 `LinkTerminusEntity()`，漫游消息处理器接收到的实体就是关联的业务实体（如 `ChatPlayer`）
 - `OnCreateTerminus.Args` 可以接收 Gate 服务器 `Link()` 方法传递的自定义参数
 - **`OnCreateTerminus.Type` 可用于区分是首次创建还是断线重连**，业务层可根据此参数执行不同的初始化逻辑
+- `startForwarding=false` 时，关联后消息不会转发到客户端，可在准备完成后调用 `SetForwarding(true)` 手动开启
 
 **完整示例（区分 Link 和 ReLink）：**
 
@@ -747,10 +758,12 @@ public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
 }
 ```
 
-**autoDispose 参数说明：**
+**autoDispose 与 startForwarding 参数说明：**
 
 - `autoDispose=true`：Terminus 销毁时**自动销毁**关联的实体（推荐）
 - `autoDispose=false`：Terminus 销毁时**不销毁**关联的实体（需手动管理）
+- `startForwarding=true`（默认）：关联实体后立即开启消息转发到客户端
+- `startForwarding=false`：关联后暂不转发，可在准备完成后调用 `terminus.SetForwarding(true)` 开启
 
 **✅ 路由建立完成！** 现在客户端可以发送 `C2Chat_xxx` 或 `C2Map_xxx` 消息，Gate 会自动转发到对应的后端服务器。
 
@@ -1077,59 +1090,59 @@ public async FTask TransferPlayer(MapPlayer mapPlayer, long targetSceneAddress)
 }
 ```
 
-#### 监听传送完成事件
+#### 监听传送生命周期
 
-在目标服务器上，可以监听 `OnTerminusTransferComplete` 事件来处理传送完成后的逻辑：
+传送过程分为两个阶段，分别通过 `TransferOutSystem` 和 `TransferInSystem` 组件事件处理：
+
+| 组件事件 | 触发时机 | 所在服务器 |
+|----------|----------|------------|
+| `TransferOutSystem` | 传送发起前 | 原服务器 |
+| `TransferInSystem` | 传送到达后 | 目标服务器 |
 
 ```csharp
-// Map 服务器：监听 Terminus 传送完成事件
-public sealed class OnTerminusTransferCompleteHandler : AsyncEventSystem<OnTerminusTransferComplete>
+// 原 Map 服务器：传送前执行（保存数据、清理资源等）
+public sealed class MapPlayerTransferOutSystem : TransferOutSystem<MapPlayer>
 {
-    protected override async FTask Handler(OnTerminusTransferComplete self)
+    protected override async FTask Out(MapPlayer self)
     {
-        var mapPlayer = self.LinkEntity as MapPlayer;
-        if (mapPlayer == null)
+        // 传送前保存玩家数据
+        await self.SaveToDatabase();
+        Log.Debug($"MapPlayer {self.PlayerId} 正在离开当前场景");
+    }
+}
+
+// 目标 Map 服务器：传送到达后执行（加载数据、初始化等）
+public sealed class MapPlayerTransferInSystem : TransferInSystem<MapPlayer>
+{
+    protected override async FTask In(MapPlayer self)
+    {
+        // 传送到达后加载新地图数据，通知客户端
+        await self.LoadMapData();
+        self.Send(new Map2C_TransferCompleteNotification
         {
-            Log.Warning("❌ 传送完成但实体类型不匹配");
-            return;
-        }
-
-        Log.Info($"✅ MapPlayer {mapPlayer.PlayerId} 传送到当前服务器完成");
-
-        // 传送完成后的初始化逻辑
-        mapPlayer.OnTransferComplete();
-
-        // 通知客户端传送完成
-        mapPlayer.Send(new Map2C_TransferCompleteNotification
-        {
-            NewSceneId = self.Scene.SceneConfig.Id
+            MapId = self.Scene.SceneConfig.Id,
+            Position = self.SpawnPosition
         });
-
-        await FTask.CompletedTask;
+        Log.Debug($"MapPlayer {self.PlayerId} 已到达新场景");
     }
 }
 ```
 
-**OnTerminusTransferComplete 事件参数：**
-
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| `Scene` | `Scene` | 传送目标场景 |
-| `Terminus` | `Terminus` | 完成传送的 Terminus 实例 |
-| `LinkEntity` | `Entity` | Terminus 关联的实体（如 MapPlayer） |
+> **注意：** `TransferOutSystem` 和 `TransferInSystem` 均为纯异步接口，由 Source Generator 编译期自动注册，无需手动注册。
 
 #### 传送机制详解
 
 **传送流程：**
 
-1. **锁定 Terminus**：调用 `StartTransfer()` 后，框架锁定 Terminus，暂停所有消息发送
-2. **序列化**：序列化 Terminus 和关联的实体数据
-3. **发送到目标**：通过 `I_TransferTerminusRequest` 将数据发送到目标服务器
-4. **目标服务器接收**：目标服务器调用 `TransferComplete()` 恢复数据
-5. **反序列化**：恢复 Terminus 和关联实体
-6. **解锁**：解锁 Terminus，恢复消息发送
-7. **触发事件**：触发 `OnTerminusTransferComplete` 事件
-8. **原服务器清理**：原服务器销毁 Terminus 和关联实体
+1. **执行 TransferOutSystem**：在原服务器调用 `StartTransfer()` 前，框架触发 `TransferOutSystem`，供业务层保存数据、清理资源
+2. **锁定 Terminus**：锁定 Terminus，暂停所有消息发送
+3. **序列化**：序列化 Terminus 和关联的实体数据
+4. **发送到目标**：通过 `I_TransferTerminusRequest` 将数据发送到目标服务器
+5. **目标服务器接收**：目标服务器调用 `TransferComplete()` 恢复数据
+6. **反序列化**：恢复 Terminus 和关联实体
+7. **解锁**：解锁 Terminus，恢复消息发送
+8. **执行 TransferInSystem**：框架触发 `TransferInSystem`，供业务层加载数据、通知客户端
+9. **原服务器清理**：原服务器销毁 Terminus 和关联实体
 
 **传送注意事项：**
 
@@ -1143,63 +1156,110 @@ public sealed class OnTerminusTransferCompleteHandler : AsyncEventSystem<OnTermi
 
 ```csharp
 // 玩家切换地图的完整流程
-public class MapTransferLogic
+
+// 原 Map 服务器：传送前保存数据（TransferOutSystem）
+public sealed class MapPlayerTransferOutSystem : TransferOutSystem<MapPlayer>
 {
-    // 原 Map 服务器：发起传送
-    public async FTask<uint> TransferToNewMap(MapPlayer mapPlayer, int targetMapId)
+    protected override async FTask Out(MapPlayer self)
     {
         // 1. 保存玩家数据
-        await mapPlayer.SaveToDatabase();
+        await self.SaveToDatabase();
 
-        // 2. 获取目标 Map 服务器配置
-        var targetMapConfig = SceneConfigData.Instance.GetSceneBySceneType(targetMapId)[0];
-
-        // 3. 通知客户端开始传送
-        mapPlayer.Send(new Map2C_TransferStartNotification
+        // 2. 通知客户端开始传送
+        self.Send(new Map2C_TransferStartNotification
         {
-            TargetMapId = targetMapId
+            TargetMapId = self.TargetMapId
         });
 
-        // 4. 发起传送
-        var errorCode = await mapPlayer.StartTransfer(targetMapConfig.Address);
+        Log.Info($"✅ 玩家 {self.PlayerId} 准备离开当前地图");
+    }
+}
 
-        if (errorCode != 0)
-        {
-            Log.Error($"❌ 传送失败: {errorCode}");
-            // 传送失败，通知客户端
-            mapPlayer.Send(new Map2C_TransferFailedNotification
-            {
-                ErrorCode = errorCode
-            });
-        }
+// 原 Map 服务器：发起传送
+public async FTask<uint> TransferToNewMap(MapPlayer mapPlayer, int targetMapId)
+{
+    var targetMapConfig = SceneConfigData.Instance.GetSceneBySceneType(targetMapId)[0];
+    var errorCode = await mapPlayer.StartTransfer(targetMapConfig.Address);
 
-        return errorCode;
+    if (errorCode != 0)
+    {
+        Log.Error($"❌ 传送失败: {errorCode}");
+        mapPlayer.Send(new Map2C_TransferFailedNotification { ErrorCode = errorCode });
     }
 
-    // 目标 Map 服务器：传送完成处理
-    public class OnTransferCompleteHandler : AsyncEventSystem<OnTerminusTransferComplete>
+    return errorCode;
+}
+
+// 目标 Map 服务器：传送到达后初始化（TransferInSystem）
+public sealed class MapPlayerTransferInSystem : TransferInSystem<MapPlayer>
+{
+    protected override async FTask In(MapPlayer self)
     {
-        protected override async FTask Handler(OnTerminusTransferComplete self)
+        // 1. 加载新地图数据
+        await self.LoadMapData(self.Scene);
+
+        // 2. 设置玩家在新地图的初始位置
+        self.SetSpawnPosition();
+
+        // 3. 通知客户端传送完成
+        self.Send(new Map2C_TransferCompleteNotification
         {
-            var mapPlayer = self.LinkEntity as MapPlayer;
-            if (mapPlayer == null) return;
+            MapId = self.Scene.SceneConfig.Id,
+            Position = self.Position
+        });
 
-            // 1. 加载新地图数据
-            await mapPlayer.LoadMapData(self.Scene);
+        Log.Info($"✅ 玩家 {self.PlayerId} 传送到地图 {self.Scene.SceneConfig.Id} 完成");
+    }
+}
+```
 
-            // 2. 设置玩家在新地图的初始位置
-            mapPlayer.SetSpawnPosition();
+---
 
-            // 3. 通知客户端传送完成
-            mapPlayer.Send(new Map2C_TransferCompleteNotification
+### OnDisposeTerminus 事件
+
+当 Terminus 被销毁时，框架会触发 `OnDisposeTerminus` 事件，供业务层执行清理逻辑。
+
+**事件参数：**
+
+```csharp
+public struct OnDisposeTerminus
+{
+    public readonly Scene Scene;      // 所属场景
+    public readonly Terminus Terminus; // 被销毁的 Terminus 实例
+}
+```
+
+**触发时机：**
+
+- 客户端断开连接，Gate 销毁 Terminus 时
+- 手动调用 `terminus.Dispose()` 时
+- 传送完成后，原服务器清理旧 Terminus 时
+
+**使用示例：**
+
+```csharp
+// 监听 Terminus 销毁事件，执行清理逻辑
+public sealed class OnDisposeTerminusHandler : AsyncEventSystem<OnDisposeTerminus>
+{
+    protected override async FTask Handler(OnDisposeTerminus self)
+    {
+        // 根据 RoamingType 区分处理
+        switch (self.Terminus.RoamingType)
+        {
+            case RoamingType.MapRoamingType:
             {
-                MapId = self.Scene.SceneConfig.Id,
-                Position = mapPlayer.Position
-            });
-
-            Log.Info($"✅ 玩家 {mapPlayer.PlayerId} 传送到地图 {self.Scene.SceneConfig.Id} 完成");
-            await FTask.CompletedTask;
+                var mapPlayer = self.Terminus.TerminusEntity as MapPlayer;
+                if (mapPlayer != null)
+                {
+                    // 玩家离线：保存数据、通知其他玩家等
+                    await mapPlayer.SaveToDatabase();
+                    Log.Info($"✅ MapPlayer {mapPlayer.PlayerId} 已离线，数据已保存");
+                }
+                break;
+            }
         }
+
+        await FTask.CompletedTask;
     }
 }
 ```
@@ -1246,10 +1306,11 @@ await roaming.Link(session, battleConfig, RoamingType.BattleRoamingType);
 - 客户端断开连接时，Gate 上的 Terminus 自动销毁
 - Terminus 销毁时，如果 `autoDispose=true`，关联的实体也会销毁
 - 可以手动调用 `terminus.Dispose()` 销毁
+- Terminus 销毁时会触发 `OnDisposeTerminus` 事件，供业务层执行清理逻辑
 
 ---
 
-### Q4: autoDispose 参数应该设置为 true 还是 false？
+### Q4: autoDispose 和 startForwarding 参数应该怎么设置？
 
 ```csharp
 // autoDispose=true（推荐）
@@ -1257,8 +1318,14 @@ await roaming.Link(session, battleConfig, RoamingType.BattleRoamingType);
 var player = await terminus.LinkTerminusEntity<Player>(autoDispose: true);
 
 // autoDispose=false
-// Terminus 销毁时不销毁关联实体，需要手动管理实体生命周期
+// Terminus 销毁时不销毁关联实体，需手动管理实体生命周期
 var player = await terminus.LinkTerminusEntity<Player>(autoDispose: false);
+
+// startForwarding=false
+// 关联后先不转发消息，待准备完成后再手动开启（如需要先从数据库加载数据）
+var player = await terminus.LinkTerminusEntity<Player>(autoDispose: true, startForwarding: false);
+await player.LoadFromDatabase();
+terminus.SetForwarding(true);  // 准备完成后开启转发
 ```
 
 ---
@@ -1350,32 +1417,32 @@ public class ChatPlayerComponent : Entity
 
 ---
 
-### Q8: OnTerminusTransferComplete 事件什么时候触发？
-
-`OnTerminusTransferComplete` 事件在 Terminus 传送完成后，目标服务器上触发：
+### Q8: TransferOutSystem 和 TransferInSystem 什么时候触发？
 
 ```
-原服务器                     目标服务器
-   |                            |
-   | StartTransfer()            |
-   |--------------------------->|
-   |                            | TransferComplete()
-   |                            | 1. 反序列化 Terminus 和实体
-   |                            | 2. 解锁 Terminus
-   |                            | 3. 触发 OnTerminusTransferComplete ⭐
-   |                            |
-   |<---------------------------|
-   | 销毁 Terminus 和实体        |
+原服务器                          目标服务器
+   |                                  |
+   | TransferOutSystem ⭐             |
+   | (传送前：保存数据、通知客户端)    |
+   |                                  |
+   | StartTransfer()                  |
+   |--------------------------------->|
+   |                                  | TransferComplete()
+   |                                  | 1. 反序列化 Terminus 和实体
+   |                                  | 2. 解锁 Terminus
+   |                                  | 3. TransferInSystem ⭐
+   |                                  |    (到达后：加载数据、通知客户端)
+   |<---------------------------------|
+   | 销毁 Terminus 和实体              |
+   | 触发 OnDisposeTerminus ⭐         |
 ```
 
 **使用场景：**
 
-- ✅ 传送完成后的数据加载（如加载新地图数据）
-- ✅ 实体状态初始化（如设置出生点位置）
-- ✅ 通知客户端传送完成
-- ✅ 记录传送日志
+- `TransferOutSystem`：保存玩家数据到数据库、注销当前场景订阅、通知客户端传送开始
+- `TransferInSystem`：加载新场景数据、设置出生点位置、通知客户端传送完成
 
-**注意：** 该事件仅在目标服务器触发，原服务器不会触发。
+**注意：** 两个 System 均仅在对应服务器触发，`TransferOutSystem` 在原服务器，`TransferInSystem` 在目标服务器。
 
 ---
 
@@ -1425,4 +1492,5 @@ Roaming 漫游系统的核心优势：
 - 📌 单次发送：使用 `entity.Send()` 扩展方法，代码简洁
 - 📌 频繁发送：先获取 Terminus，避免重复查找组件
 - 📌 每帧更新：初始化时缓存 Terminus，每帧直接使用
-- 📌 传送操作：使用 `OnTerminusTransferComplete` 事件处理传送完成逻辑
+- 📌 传送操作：使用 `TransferOutSystem` 处理传送前逻辑，`TransferInSystem` 处理到达后逻辑
+- 📌 延迟转发：关联实体时设置 `startForwarding=false`，数据准备完成后调用 `SetForwarding(true)`

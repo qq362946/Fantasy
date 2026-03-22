@@ -17,7 +17,11 @@ public sealed class ProjectWizard
             TargetFramework = AnsiConsole.Prompt(
                 new SelectionPrompt<TargetFrameworkVersion>()
                     .Title(loc.TargetFrameworkPrompt)
-                    .AddChoices(TargetFrameworkVersion.Net8, TargetFrameworkVersion.Net9, TargetFrameworkVersion.Multi)
+                    .AddChoices(
+                        TargetFrameworkVersion.Net8, 
+                        TargetFrameworkVersion.Net9, 
+                        TargetFrameworkVersion.Net10,
+                        TargetFrameworkVersion.Multi)
                     .UseConverter(GetFrameworkText)
             ),
             // 3.Add NLog

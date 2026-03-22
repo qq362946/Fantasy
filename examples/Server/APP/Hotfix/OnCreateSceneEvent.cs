@@ -1,7 +1,27 @@
 using Fantasy.Async;
+using Fantasy.Entitas;
+using Fantasy.Entitas.Interface;
 using Fantasy.Event;
 
 namespace Fantasy;
+
+public sealed class UnitTransferOutSystem : TransferOutSystem<Unit>
+{
+    protected override async FTask Out(Unit self)
+    {
+        Log.Debug("UnitTransferOutSystem");
+        await FTask.CompletedTask;
+    }
+}
+
+public sealed class UnitTransferInSystem : TransferInSystem<Unit>
+{
+    protected override async FTask In(Unit self)
+    {
+        Log.Debug("UnitTransferInSystem");
+        await FTask.CompletedTask;
+    }
+}
 
 public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
@@ -42,6 +62,11 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
             case SceneType.Gate:
             {
                 scene.AddComponent<AccountManageComponent>();
+
+                var unit = Entity.Create<Unit>(scene);
+                
+                await scene.EntityComponent.TransferOut(unit);
+                await scene.EntityComponent.TransferIn(unit);
                 break;
             }
         }

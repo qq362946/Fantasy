@@ -1,10 +1,6 @@
-using System;
 using Fantasy.SourceGenerator.Common;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections.Immutable;
 // ReSharper disable VariableHidesOuterVariable
 // ReSharper disable CollectionNeverUpdated.Local
@@ -355,7 +351,7 @@ namespace Fantasy.SourceGenerator.Generators
                         genericWrappers.Add(new SystemSymbolWrapper(
                             symbol: systemTypeSymbol,
                             targetEntityArg: entityTypeSymbol,
-                            null!  /// Note : 注意这里, SceneTypes 目前不进行跨程序集传递，留空了, 以后处理!
+                            null!  // Note : 注意这里, SceneTypes 目前不进行跨程序集传递，留空了, 以后处理!
                         ));
                     }
                 }
@@ -430,7 +426,7 @@ namespace Fantasy.SourceGenerator.Generators
         /// <summary>
         /// 从可实例化的System的Symbol中创建<see cref="EntitySystemTypeInfo"/>。
         /// </summary>
-        private static EntitySystemTypeInfo? CreateInfoFromInstantiableSymbol(INamedTypeSymbol instantiableSystemSymbol,int[] sceneTypes)
+        private static EntitySystemTypeInfo? CreateInfoFromInstantiableSymbol(INamedTypeSymbol instantiableSystemSymbol, int[] sceneTypes)
         {
             var baseType = instantiableSystemSymbol.BaseType;
             
@@ -448,6 +444,8 @@ namespace Fantasy.SourceGenerator.Generators
                 "DestroySystem" => EntitySystemTypeInfo.Create(EntitySystemType.DestroySystem, instantiableSystemSymbol, sceneTypes),
                 "DeserializeSystem" => EntitySystemTypeInfo.Create(EntitySystemType.DeserializeSystem, instantiableSystemSymbol, sceneTypes),
                 "LateUpdateSystem" => EntitySystemTypeInfo.Create(EntitySystemType.LateUpdateSystem, instantiableSystemSymbol, sceneTypes),
+                "TransferOutSystem" => EntitySystemTypeInfo.Create(EntitySystemType.TransferOutSystem, instantiableSystemSymbol, sceneTypes),
+                "TransferInSystem" => EntitySystemTypeInfo.Create(EntitySystemType.TransferInSystem, instantiableSystemSymbol, sceneTypes),
                 _ => null
             };
         }
@@ -530,6 +528,8 @@ namespace Fantasy.SourceGenerator.Generators
             var destroy = new List<EntitySystemTypeInfo>();
             var deserialize = new List<EntitySystemTypeInfo>();
             var lateUpdate = new List<EntitySystemTypeInfo>();
+            var transferOut  = new List<EntitySystemTypeInfo>();
+            var transferIn = new List<EntitySystemTypeInfo>();
             
             foreach (var systemTypeInfo in entitySystemTypeInfos)
             {
@@ -538,35 +538,45 @@ namespace Fantasy.SourceGenerator.Generators
                     metadata += MakeSystemGenericMapAttribute(systemTypeInfo)+"\n";
                 }
                 else  //非泛型, 正常生成代码
-                {   
+                {
                     switch (systemTypeInfo.EntitySystemType)
                     {
                         case EntitySystemType.AwakeSystem:
-                            {
-                                awake.Add(systemTypeInfo);
+                        {
+                            awake.Add(systemTypeInfo);
 
-                                continue;
-                            }
+                            continue;
+                        }
                         case EntitySystemType.UpdateSystem:
-                            {
-                                update.Add(systemTypeInfo);
-                                continue;
-                            }
+                        {
+                            update.Add(systemTypeInfo);
+                            continue;
+                        }
                         case EntitySystemType.DestroySystem:
-                            {
-                                destroy.Add(systemTypeInfo);
-                                continue;
-                            }
+                        {
+                            destroy.Add(systemTypeInfo);
+                            continue;
+                        }
                         case EntitySystemType.DeserializeSystem:
-                            {
-                                deserialize.Add(systemTypeInfo);
-                                continue;
-                            }
+                        {
+                            deserialize.Add(systemTypeInfo);
+                            continue;
+                        }
                         case EntitySystemType.LateUpdateSystem:
-                            {
-                                lateUpdate.Add(systemTypeInfo);
-                                continue;
-                            }
+                        {
+                            lateUpdate.Add(systemTypeInfo);
+                            continue;
+                        }
+                        case EntitySystemType.TransferOutSystem:
+                        {
+                            transferOut.Add(systemTypeInfo);
+                            continue;
+                        }
+                        case EntitySystemType.TransferInSystem:
+                        {
+                            transferIn.Add(systemTypeInfo);
+                            continue;
+                        }
                     }
                 }
             }
@@ -580,11 +590,15 @@ namespace Fantasy.SourceGenerator.Generators
             GenerateSystemCode(builder, string.Empty, "DeserializeTypeHandles", "DeserializeHandles", deserialize);
             // LateUpdate
             GenerateSystemCode(builder, "#if FANTASY_UNITY", "LateUpdateTypeHandles", "LateUpdateHandles", lateUpdate);
+            // TransferOut
+            GenerateSystemCode(builder, string.Empty, "TransferOutTypeHandles", "TransferOutHandles", transferOut, true);
+            // TransferIn
+            GenerateSystemCode(builder, string.Empty, "TransferInTypeHandles", "TransferInHandles", transferIn, true);
             // Metadata
             return metadata;
         }
         
-        private static void GenerateSystemCode(SourceCodeBuilder builder, string defineConstants, string typeHandle, string handler, List<EntitySystemTypeInfo> systemTypeInfos)
+        private static void GenerateSystemCode(SourceCodeBuilder builder, string defineConstants, string typeHandle, string handler, List<EntitySystemTypeInfo> systemTypeInfos, bool isAsyncMethod = false)
         {
             var typeHandleBuilder = new SourceCodeBuilder(2);
             var handlerBuilder = new SourceCodeBuilder(2);
@@ -598,17 +612,26 @@ namespace Fantasy.SourceGenerator.Generators
             typeHandleBuilder.AddXmlComment(typeHandle);
             typeHandleBuilder.BeginMethod($"public global::System.RuntimeTypeHandle[] {typeHandle}()");
             handlerBuilder.AddXmlComment(handler);
-            handlerBuilder.BeginMethod($"public global::System.Action<global::Fantasy.Entitas.Entity>[] {handler}()");
+
+            handlerBuilder.BeginMethod(isAsyncMethod
+                ? $"public global::System.Func<global::Fantasy.Entitas.Entity, global::Fantasy.Async.FTask>[] {handler}()"
+                : $"public global::System.Action<global::Fantasy.Entitas.Entity>[] {handler}()");
 
             if (systemTypeInfos.Any())
             {
                 typeHandleBuilder.AppendLine($"var array = new global::System.RuntimeTypeHandle[{systemTypeInfos.Count}];");
-                handlerBuilder.AppendLine($"var array = new global::System.Action<global::Fantasy.Entitas.Entity>[{systemTypeInfos.Count}];");
+
+                handlerBuilder.AppendLine(isAsyncMethod
+                    ? $"var array = new global::System.Func<global::Fantasy.Entitas.Entity, global::Fantasy.Async.FTask>[{systemTypeInfos.Count}];"
+                    : $"var array = new global::System.Action<global::Fantasy.Entitas.Entity>[{systemTypeInfos.Count}];");
+
                 for (var i = 0; i < systemTypeInfos.Count; i++)
                 {
                     var entitySystemTypeInfo = systemTypeInfos[i];
                     typeHandleBuilder.AppendLine($"array[{i}] = typeof({entitySystemTypeInfo.EntityTypeFullName}).TypeHandle;");
-                    handlerBuilder.AppendLine($"array[{i}] = new {entitySystemTypeInfo.GlobalTypeFullName}().Invoke;");
+                    handlerBuilder.AppendLine(isAsyncMethod
+                        ? $"array[{i}] = new {entitySystemTypeInfo.GlobalTypeFullName}().InvokeAsync;"
+                        : $"array[{i}] = new {entitySystemTypeInfo.GlobalTypeFullName}().Invoke;");
                 }
                 typeHandleBuilder.AppendLine("return array;");
                 handlerBuilder.AppendLine("return array;");
@@ -616,7 +639,9 @@ namespace Fantasy.SourceGenerator.Generators
             else
             {
                 typeHandleBuilder.AppendLine("return Array.Empty<global::System.RuntimeTypeHandle>();");
-                handlerBuilder.AppendLine("return Array.Empty<global::System.Action<global::Fantasy.Entitas.Entity>>();");
+                handlerBuilder.AppendLine(isAsyncMethod
+                    ? "return Array.Empty<global::System.Func<global::Fantasy.Entitas.Entity, global::Fantasy.Async.FTask>>();"
+                    : "return Array.Empty<global::System.Action<global::Fantasy.Entitas.Entity>>();");
             }
 
             typeHandleBuilder.EndMethod();
@@ -702,7 +727,9 @@ namespace Fantasy.SourceGenerator.Generators
                    baseListText.Contains("UpdateSystem") ||
                    baseListText.Contains("DestroySystem") ||
                    baseListText.Contains("DeserializeSystem") ||
-                   baseListText.Contains("LateUpdateSystem");
+                   baseListText.Contains("LateUpdateSystem") ||
+                   baseListText.Contains("TransferOutSystem") ||
+                   baseListText.Contains("TransferInSystem");
         }
         #endregion
 
@@ -735,7 +762,9 @@ namespace Fantasy.SourceGenerator.Generators
             UpdateSystem,
             DestroySystem,
             DeserializeSystem,
-            LateUpdateSystem
+            LateUpdateSystem,
+            TransferOutSystem,
+            TransferInSystem
         }
 
         private sealed class EntitySystemTypeInfo

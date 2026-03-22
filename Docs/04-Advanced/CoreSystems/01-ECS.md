@@ -214,6 +214,51 @@ public class PlayerDeserializeSystem : DeserializeSystem<Player>
 3. `LateUpdateSystem` - 延迟更新（仅 Unity）
 4. `DestroySystem` - 实体销毁时
 
+### 传送生命周期事件
+
+当 Entity 关联了漫游 Terminus 并参与跨服传送时，框架额外提供两个传送专用的组件事件：
+
+| System | 触发时机 |
+|--------|----------|
+| `TransferOutSystem` | 传送发起前，在当前场景执行 |
+| `TransferInSystem` | 传送到达后，在目标场景执行 |
+
+```csharp
+// 传送前：保存状态、注销订阅、清理当前场景资源等
+public sealed class PlayerTransferOutSystem : TransferOutSystem<Player>
+{
+    protected override async FTask Out(Player self)
+    {
+        // 例如：将玩家状态持久化，解除当前场景的 Addressable 注册
+        await self.GetComponent<PlayerDataComponent>().Save();
+        Log.Debug($"Player {self.Id} is leaving the scene.");
+    }
+}
+
+// 传送后：重新初始化、注册订阅、加载目标场景数据等
+public sealed class PlayerTransferInSystem : TransferInSystem<Player>
+{
+    protected override async FTask In(Player self)
+    {
+        // 例如：在目标场景重新注册 Addressable，加载场景配置
+        await self.GetComponent<PlayerDataComponent>().Load();
+        Log.Debug($"Player {self.Id} has arrived in the new scene.");
+    }
+}
+```
+
+框架通过 `EntityComponent` 调度这两个事件，调用方式如下：
+
+```csharp
+// 传送前（在 StartTransfer 之前调用）
+await scene.EntityComponent.TransferOut(player);
+
+// 传送后（在 OnTerminusTransferComplete 事件回调中调用）
+await scene.EntityComponent.TransferIn(player);
+```
+
+> **注意：** `TransferOutSystem` 和 `TransferInSystem` 均为**纯异步**接口，框架只会调用其异步路径，不支持同步调用。与其他生命周期 System 一样，实现类由 Source Generator 在编译期自动注册，无需手动注册。
+
 ---
 
 ## 对象池和内存管理
@@ -290,7 +335,7 @@ Fantasy 的 ECS 系统是一个**层级化的组件系统**，核心特点：
 
 - **Entity 即 Component**：一切皆实体，组件也是实体
 - **层级关系**：支持父子树状结构，销毁自动级联
-- **生命周期自动化**：通过 System 自动管理 Awake/Update/Destroy
+- **生命周期自动化**：通过 System 自动管理 Awake/Update/Destroy/TransferOut/TransferIn
 - **内存优化**：内置对象池，减少 GC 压力
 - **数据库集成**：原生支持 MongoDB 持久化
 - **Source Generator**：编译时自动注册，零反射开销

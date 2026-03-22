@@ -16,7 +16,8 @@ public class ProjectConfig
         {
             TargetFrameworkVersion.Net8 => "net8.0",
             TargetFrameworkVersion.Net9 => "net9.0",
-            TargetFrameworkVersion.Multi => "net8.0;net9.0",
+            TargetFrameworkVersion.Net10 => "net10.0",
+            TargetFrameworkVersion.Multi => "net8.0;net9.0;net10.0",
             _ => "net8.0"
         };
     }
