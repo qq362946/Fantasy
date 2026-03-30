@@ -185,7 +185,7 @@ namespace Fantasy.Async
     /// 此外, 在手动销毁、 调用 AsyncDispose 时 ,请注意其 AsyncDispose的异步性。
     /// 
     /// </summary>
-    public sealed class FTaskFlowLock : ICoroutineLock, IAsyncDisposable
+    public sealed class FTaskFlowLock : ICoroutineLock
     {
         /// <summary>
         /// FTask 限制量

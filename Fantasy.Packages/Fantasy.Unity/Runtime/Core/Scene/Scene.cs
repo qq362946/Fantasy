@@ -495,6 +495,7 @@ namespace Fantasy
             scene.RootScene = parentScene;
             scene.Type = typeof(SubScene);
             scene.SceneType = sceneType;
+            scene.SceneConfigId = parentScene.SceneConfigId;
             scene.World = parentScene.World;
             scene.Process = parentScene.Process;
             scene.SceneRuntimeType = SceneRuntimeType.SubScene;

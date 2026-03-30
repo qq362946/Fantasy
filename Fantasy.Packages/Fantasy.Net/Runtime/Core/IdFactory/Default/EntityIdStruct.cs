@@ -11,7 +11,7 @@ namespace Fantasy.IdFactory
     /// 表示一个唯一实体的ID。
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    internal struct EntityIdStruct
+    public struct EntityIdStruct
     {
         // EntityId:39 + 16 + 18 =  64
         // +-------------------+-----------------------------+------------------------------------+

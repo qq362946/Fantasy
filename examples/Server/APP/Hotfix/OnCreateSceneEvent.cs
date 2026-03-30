@@ -2,6 +2,7 @@ using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Entitas.Interface;
 using Fantasy.Event;
+using Fantasy.IdFactory;
 
 namespace Fantasy;
 

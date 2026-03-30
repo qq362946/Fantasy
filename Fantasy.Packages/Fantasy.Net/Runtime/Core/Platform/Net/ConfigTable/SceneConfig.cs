@@ -103,7 +103,7 @@ namespace Fantasy.Platform.Net
 				return sceneConfigInfo;
 			}
 
-			throw new FileNotFoundException($"WorldConfig not find {id} Id");
+			throw new FileNotFoundException($"SceneConfig not find {id} Id");
 		}
 
 		/// <summary>

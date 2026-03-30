@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 // ReSharper disable SuspiciousTypeConversion.Global
 // ReSharper disable NullCoalescingConditionIsAlwaysNotNullAccordingToAPIContract
 // ReSharper disable CheckNamespace
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -635,15 +636,17 @@ namespace Fantasy.Entitas
             
             var typeHashCode = TypeHashCache<T>.HashCode;
 
-            if (Tree.Remove(typeHashCode, out var component))
+            if (!Tree.Remove(typeHashCode, out var component))
             {
-                if (Tree.Count == 0)
-                {
-                    Tree.Dispose();
-                    Tree = null;
-                }
+                return;
             }
             
+            if (Tree.Count == 0)
+            {
+                Tree.Dispose();
+                Tree = null;
+            }
+                
             if (isDispose)
             {
                 component.Dispose();
@@ -663,15 +666,17 @@ namespace Fantasy.Entitas
                 return;
             }
 
-            if (Multi.Remove(id, out var component))
+            if (!Multi.Remove(id, out var component))
             {
-                if (Multi.Count == 0)
-                {
-                    Multi.Dispose();
-                    Multi = null;
-                }
+                return;
             }
             
+            if (Multi.Count == 0)
+            {
+                Multi.Dispose();
+                Multi = null;
+            }
+                
             if (isDispose)
             {
                 component.Dispose();
@@ -685,7 +690,7 @@ namespace Fantasy.Entitas
         /// <param name="isDispose">是否执行删除实体的Dispose方法</param>
         public void RemoveComponent(Entity component, bool isDispose = true)
         {
-            if (this == component)
+            if (this == component || component == null)
             {
                 return;
             }
@@ -717,8 +722,8 @@ namespace Fantasy.Entitas
                     }
                 }
             }
-            
-            if (isDispose)
+
+            if (isDispose && component != null)
             {
                 component.Dispose();
             }
