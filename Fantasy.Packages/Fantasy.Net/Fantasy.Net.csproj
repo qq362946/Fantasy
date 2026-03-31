@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
-        <PackageVersion>2026.0.1009</PackageVersion>
+        <PackageVersion>2026.0.1010</PackageVersion>
         <Title>Fantasy-Net</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>
@@ -29,7 +29,6 @@
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-      <DocumentationFile>true</DocumentationFile>
       <!-- 启用 Source Generator 文件输出（可选，用于调试） -->
        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles> 
        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath> 

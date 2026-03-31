@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Condition="Exists('$(ProjectDir)Fantasy.config')">
-    <None Update="Fantasy.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="$(ProjectDir)Fantasy.config" Link="Fantasy.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 </Project>

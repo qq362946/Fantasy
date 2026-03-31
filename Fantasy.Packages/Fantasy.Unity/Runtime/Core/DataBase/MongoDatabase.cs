@@ -53,7 +53,7 @@ namespace Fantasy.Database
         {
             try
             {
-                Log.Info($"dbName:{dbName} Initialize the db database and connect to the target.");
+                // Log.Info($"dbName:{dbName} Initialize the db database and connect to the target.");
                 _scene = scene;
                 _mongoClient = Initializer.MongoDbCustomInitialize != null
                     ? Initializer.MongoDbCustomInitialize(new DataBaseCustomConfig()
@@ -67,7 +67,7 @@ namespace Fantasy.Database
                 // 记录所有集合名
                 _collections.UnionWith(_mongoDatabase.ListCollectionNames().ToList());
                 _serializer = SerializerManager.BsonPack;
-                Log.Info($"dbName:{dbName} Database connection successful.");
+                // Log.Info($"dbName:{dbName} Database connection successful.");
             }
             catch (Exception e)
             {
