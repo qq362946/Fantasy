@@ -16,7 +16,8 @@
              Condition="'$(FantasyConfigDiagnostics)' == 'true'" />
 
     <ItemGroup>
-      <_FantasyConfigFiles Include="$(MSBuildProjectDirectory)/Fantasy.config" />
+      <_FantasyConfigFiles Include="$(MSBuildProjectDirectory)/Fantasy.config"
+                           Condition="Exists('$(MSBuildProjectDirectory)/Fantasy.config')" />
       <AdditionalFiles Include="@(_FantasyConfigFiles)" SourceItemGroup="FantasyConfig" />
     </ItemGroup>
     <Message Text="[Fantasy.Net] Found @(_FantasyConfigFiles->Count()) Fantasy.config file(s)"

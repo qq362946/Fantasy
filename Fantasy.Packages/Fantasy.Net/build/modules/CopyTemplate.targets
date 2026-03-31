@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Target Name="_FantasyCopyTemplateFiles"
+  <!--
+    CopyTemplate.targets
+
+    Copies Fantasy.config and Fantasy.xsd from the NuGet package cache to the
+    user's project directory on first build, if they don't already exist.
+  -->
+  <Target Name="_FantasyCopyConfigTemplate"
           BeforeTargets="PreBuildEvent;CoreCompile"
-          Condition="'$(IsDirectFantasyNetReference)' == 'true'">
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)../Fantasy.config"
-          DestinationFolder="$(ProjectDir)"
-          SkipUnchangedFiles="true"
-          Condition="Exists('$(MSBuildThisFileDirectory)../Fantasy.config') And !Exists('$(ProjectDir)Fantasy.config')" />
-    <Copy SourceFiles="$(MSBuildThisFileDirectory)../Fantasy.xsd"
-          DestinationFolder="$(ProjectDir)"
-          SkipUnchangedFiles="true"
-          Condition="Exists('$(MSBuildThisFileDirectory)../Fantasy.xsd') And !Exists('$(ProjectDir)Fantasy.xsd')" />
-    
-    <Message Text="[Fantasy.Net] Copied template configuration files to project"
-             Importance="high"
-             Condition="!Exists('$(ProjectDir)Fantasy.config')" />
+          Condition="'$(IsDirectFantasyNetReference)' == 'true' AND
+                     '$(MSBuildProjectName)' != 'Fantasy.Net' AND
+                     '$(MSBuildProjectName)' != 'Fantasy-Net'">
+
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Fantasy.config"
+          DestinationFiles="$(ProjectDir)Fantasy.config"
+          Condition="!Exists('$(ProjectDir)Fantasy.config')" />
+
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)..\Fantasy.xsd"
+          DestinationFiles="$(ProjectDir)Fantasy.xsd"
+          Condition="!Exists('$(ProjectDir)Fantasy.xsd')" />
+
   </Target>
 </Project>

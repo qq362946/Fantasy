@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
-        <PackageVersion>2026.0.1008</PackageVersion>
+        <PackageVersion>2026.0.1009</PackageVersion>
         <Title>Fantasy-Net</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>
@@ -29,7 +29,7 @@
       <DefineConstants>TRACE;FANTASY_NET</DefineConstants>
       <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
       <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-      <DocumentationFile></DocumentationFile>
+      <DocumentationFile>true</DocumentationFile>
       <!-- 启用 Source Generator 文件输出（可选，用于调试） -->
        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles> 
        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath> 
@@ -64,7 +64,7 @@
         <None Include="build\Fantasy-Net.targets" Pack="true" PackagePath="build;buildTransitive" />
         <!-- MSBuild Modules -->
         <None Include="build\modules\*.targets" Pack="true" PackagePath="build\modules;buildTransitive\modules" />
-        <!-- 配置文件模板：供 CopyTemplate 模块使用 -->
+        <!-- 配置文件模板：供 CopyTemplate 模块在首次构建时复制到用户项目目录 -->
         <None Include="Fantasy.config" Pack="true" PackagePath="build;buildTransitive" />
         <None Include="Fantasy.xsd" Pack="true" PackagePath="build;buildTransitive" />
         <!-- 包元数据文件 -->
