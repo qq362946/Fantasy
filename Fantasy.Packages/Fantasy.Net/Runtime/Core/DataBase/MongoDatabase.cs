@@ -55,8 +55,8 @@ namespace Fantasy.Database
             {
                 Log.Info($"dbName:{dbName} Initialize the db database and connect to the target.");
                 _scene = scene;
-                _mongoClient = DataBaseSetting.MongoDbCustomInitialize != null
-                    ? DataBaseSetting.MongoDbCustomInitialize(new DataBaseCustomConfig()
+                _mongoClient = Initializer.MongoDbCustomInitialize != null
+                    ? Initializer.MongoDbCustomInitialize(new DataBaseCustomConfig()
                     {
                         Scene = scene, ConnectionString = connectionString, DBName = dbName
                     })

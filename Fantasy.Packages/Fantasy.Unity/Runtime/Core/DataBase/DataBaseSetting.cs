@@ -1,22 +1,8 @@
 #if FANTASY_NET
-using System;
-using System.Collections.Frozen;
-using MongoDB.Driver;
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
 namespace Fantasy.Database;
-
-/// <summary>
-/// 数据库设置助手
-/// </summary>
-public static class DataBaseSetting
-{
-    /// <summary>
-    /// MongoDB 初始化自定义委托，当设置了这个委托后，就不会自动创建MongoClient，把创建权交给自定义。
-    /// </summary>
-    public static Func<DataBaseCustomConfig, MongoClient>? MongoDbCustomInitialize;
-}
 
 /// <summary>
 /// 数据库自定义连接参数

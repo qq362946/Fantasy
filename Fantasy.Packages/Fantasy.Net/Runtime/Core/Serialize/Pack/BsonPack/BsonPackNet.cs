@@ -10,6 +10,7 @@ using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Bson.Serialization.Serializers;
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -43,6 +44,11 @@ namespace Fantasy.Serialize
             // BsonSerializer.TryRegisterSerializer(typeof(float4), new StructBsonSerialize<float4>());
             // BsonSerializer.TryRegisterSerializer(typeof(quaternion), new StructBsonSerialize<quaternion>());
             BsonSerializer.RegisterSerializer(new ObjectSerializer(x => true));
+            
+            if (Initializer.OnBsonInitialize != null)
+            {
+                Initializer.OnBsonInitialize();
+            }
         }
 
         #region AssemblyManifest
