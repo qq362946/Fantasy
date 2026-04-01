@@ -31,7 +31,7 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
     {
         _network = (WebSocketServerNetwork)network;
         _webSocket = httpListenerWebSocketContext.WebSocket;
-        _packetParser = PacketParserFactory.CreateServerReadOnlyMemoryPacket(network);
+        _packetParser = (ReadOnlyMemoryPacketParser)PacketParserFactory.CreateWebglBufferPacketParser(network);
         ReadPipeDataAsync().Coroutine();
         ReceiveSocketAsync().Coroutine();
     }

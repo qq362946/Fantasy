@@ -1,8 +1,9 @@
 using System;
+using System.Runtime.CompilerServices;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
+using Fantasy.Network.WebSocket;
 using Fantasy.PacketParser.Interface;
-
 // ReSharper disable PossibleNullReferenceException
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
@@ -10,163 +11,136 @@ using Fantasy.PacketParser.Interface;
 #pragma warning disable CS8603 // Possible null reference return.
 namespace Fantasy.PacketParser
 {
-    internal static class PacketParserFactory
+    public static class PacketParserFactory
     {
 #if FANTASY_NET
-        internal static ReadOnlyMemoryPacketParser CreateServerReadOnlyMemoryPacket(ANetwork network)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static APacketParser CreatePacketParser(NetworkTarget  networkTarget)
         {
-            ReadOnlyMemoryPacketParser readOnlyMemoryPacketParser = null;
-            
-            switch (network.NetworkTarget)
-            {
-                case NetworkTarget.Inner:
-                {
-                    readOnlyMemoryPacketParser = new InnerReadOnlyMemoryPacketParser();
-                    break;
-                }
-                case NetworkTarget.Outer:
-                {
-                    readOnlyMemoryPacketParser = new OuterReadOnlyMemoryPacketParser();
-                    break;
-                }
-            }
-            
-            readOnlyMemoryPacketParser.Scene = network.Scene;
-            readOnlyMemoryPacketParser.Network = network;
-            readOnlyMemoryPacketParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
-            return readOnlyMemoryPacketParser;
-        }
-
-        public static BufferPacketParser CreateServerBufferPacket(ANetwork network)
-        {
-            BufferPacketParser bufferPacketParser = null;
-            
-            switch (network.NetworkTarget)
-            {
-                case NetworkTarget.Inner:
-                {
-                    bufferPacketParser = new InnerBufferPacketParser();
-                    break;
-                }
-                case NetworkTarget.Outer:
-                {
-                    bufferPacketParser = new OuterBufferPacketParser();
-                    break;
-                }
-            }
-            
-            bufferPacketParser.Scene = network.Scene;
-            bufferPacketParser.Network = network;
-            bufferPacketParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
-            return bufferPacketParser;
+            return CreatePacketParser(ProgramDefine.InnerNetwork, networkTarget);
         }
 #endif
-        internal static ReadOnlyMemoryPacketParser CreateClientReadOnlyMemoryPacket(ANetwork network)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static APacketParser CreatePacketParser(NetworkProtocolType networkProtocolType, NetworkTarget networkTarget)
         {
-            ReadOnlyMemoryPacketParser readOnlyMemoryPacketParser = null;
-
-            switch (network.NetworkTarget)
+            switch (networkProtocolType)
             {
-#if FANTASY_NET
-                case NetworkTarget.Inner:
+                case NetworkProtocolType.KCP:
                 {
-                    readOnlyMemoryPacketParser = new InnerReadOnlyMemoryPacketParser();
-                    break;
+                    return CreateBufferPacketParser(networkTarget);
                 }
-#endif
-                case NetworkTarget.Outer:
+                case NetworkProtocolType.TCP:
                 {
-                    readOnlyMemoryPacketParser = new OuterReadOnlyMemoryPacketParser();
-                    break;
+                    return CreateReadOnlyMemoryPacketParser(networkTarget);
                 }
-            }
-
-            readOnlyMemoryPacketParser.Scene = network.Scene;
-            readOnlyMemoryPacketParser.Network = network;
-            readOnlyMemoryPacketParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
-            return readOnlyMemoryPacketParser;
-        }
-
-#if !FANTASY_WEBGL
-        public static BufferPacketParser CreateClientBufferPacket(ANetwork network)
-        {
-            BufferPacketParser bufferPacketParser = null;
-
-            switch (network.NetworkTarget)
-            {
-#if FANTASY_NET
-                case NetworkTarget.Inner:
+                case NetworkProtocolType.WebSocket:
                 {
-                    bufferPacketParser = new InnerBufferPacketParser();
-                    break;
-                }
-#endif
-                case NetworkTarget.Outer:
-                {
-                    bufferPacketParser = new OuterBufferPacketParser();
-                    break;
-                }
-            }
-
-            bufferPacketParser.Scene = network.Scene;
-            bufferPacketParser.Network = network;
-            bufferPacketParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
-            return bufferPacketParser;
-        }
-#endif
-        public static T CreateClient<T>(ANetwork network) where T : APacketParser
-        {
-            var packetParserType = typeof(T);
-            
-            switch (network.NetworkTarget)
-            {
-#if FANTASY_NET
-                case NetworkTarget.Inner:
-                {
-                    APacketParser innerPacketParser = null;
-
-                    if (packetParserType == typeof(ReadOnlyMemoryPacketParser))
-                    {
-                        innerPacketParser = new InnerReadOnlyMemoryPacketParser();
-                    }
-                    else if (packetParserType == typeof(BufferPacketParser))
-                    {
-                        innerPacketParser = new InnerBufferPacketParser();
-                    }
-                    // else if(packetParserType == typeof(CircularBufferPacketParser))
-                    // {
-                    //     innerPacketParser = new InnerCircularBufferPacketParser();
-                    // }
-
-                    innerPacketParser.Scene = network.Scene;
-                    innerPacketParser.Network = network;
-                    innerPacketParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
-                    return (T)innerPacketParser;
-                }
-#endif
-                case NetworkTarget.Outer:
-                {
-                    APacketParser outerPacketParser = null;
-
-                    if (packetParserType == typeof(ReadOnlyMemoryPacketParser))
-                    {
-                        outerPacketParser = new OuterReadOnlyMemoryPacketParser();
-                    }
-                    else if (packetParserType == typeof(BufferPacketParser))
-                    {
-#if FANTASY_WEBGL
-                        outerPacketParser = new OuterWebglBufferPacketParser();
-#else
-                        outerPacketParser = new OuterBufferPacketParser();
-#endif
-                    }
-                    outerPacketParser.Scene = network.Scene;
-                    outerPacketParser.Network = network;
-                    outerPacketParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
-                    return (T)outerPacketParser;
+                    return CreateWebglBufferPacketParser(networkTarget);
                 }
                 default:
-                    throw new ArgumentOutOfRangeException();
+                {
+                    throw new NotImplementedException($"NetworkProtocolType:{networkProtocolType.ToString()} Not supported");
+                }
+            }
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static ReadOnlyMemoryPacketParser CreateReadOnlyMemoryPacketParser(ANetwork network)
+        {
+            var readOnlyMemoryPacketParser = CreateReadOnlyMemoryPacketParser(network.NetworkTarget);
+            readOnlyMemoryPacketParser.Scene = network.Scene;
+            readOnlyMemoryPacketParser.Network = network;
+            readOnlyMemoryPacketParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
+            return readOnlyMemoryPacketParser;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static BufferPacketParser CreateBufferPacketParser(ANetwork network)
+        {
+            var bufferPacketParser = CreateBufferPacketParser(network.NetworkTarget);
+            bufferPacketParser.Scene = network.Scene;
+            bufferPacketParser.Network = network;
+            bufferPacketParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
+            return bufferPacketParser;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static APacketParser CreateWebglBufferPacketParser(ANetwork network)
+        {
+            var packetParser = CreateWebglBufferPacketParser(network.NetworkTarget);
+            packetParser.Scene = network.Scene;
+            packetParser.Network = network;
+            packetParser.MessageDispatcherComponent = network.Scene.MessageDispatcherComponent;
+            return packetParser;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static ReadOnlyMemoryPacketParser CreateReadOnlyMemoryPacketParser(NetworkTarget networkTarget)
+        {
+            switch (networkTarget)
+            {
+#if FANTASY_NET
+                case NetworkTarget.Inner:
+                {
+                    return new InnerReadOnlyMemoryPacketParser();
+                }
+#endif
+                case NetworkTarget.Outer:
+                {
+                    return new OuterReadOnlyMemoryPacketParser();
+                }
+                default:
+                {
+                    throw new NotImplementedException($"NetworkTarget:{networkTarget.ToString()} Not supported");
+                }
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static BufferPacketParser CreateBufferPacketParser(NetworkTarget networkTarget)
+        {
+            switch (networkTarget)
+            {
+#if FANTASY_NET
+                case NetworkTarget.Inner:
+                {
+                    return new InnerBufferPacketParser();
+                }
+#endif
+                case NetworkTarget.Outer:
+                {
+                    return new OuterBufferPacketParser();
+                }
+                default:
+                {
+                    throw new NotImplementedException($"NetworkTarget:{networkTarget.ToString()} Not supported");
+                }
+            }
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static APacketParser CreateWebglBufferPacketParser(NetworkTarget networkTarget)
+        {
+            switch (networkTarget)
+            {
+#if FANTASY_NET
+                case NetworkTarget.Inner:
+                {
+                    return new InnerReadOnlyMemoryPacketParser();
+                }
+#endif
+                case NetworkTarget.Outer:
+                {
+#if FANTASY_WEBGL
+                    return new OuterWebglBufferPacketParser();
+#else         
+                    return new OuterReadOnlyMemoryPacketParser(); 
+#endif
+                }
+                default:
+                {
+                    throw new NotImplementedException($"NetworkTarget:{networkTarget.ToString()} Not supported");
+                }
             }
         }
     }

@@ -109,25 +109,6 @@ namespace Fantasy.Network
         }
 
         /// <summary>
-        /// 发送一个消息，框架内部使用建议不要用这个方法。
-        /// </summary>
-        /// <param name="packInfo">一个ProcessPackInfo消息包</param>
-        /// <param name="rpcId">如果是RPC消息需要传递一个RPCId</param>
-        /// <param name="address">address</param>
-        public virtual void Send(ProcessPackInfo packInfo, uint rpcId = 0, long address = 0)
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-
-            using (packInfo)
-            {
-                Channel.Send(rpcId, address, packInfo.MemoryStream, null, packInfo.MessageType);
-            }
-        }
-
-        /// <summary>
         /// 发送一个消息
         /// </summary>
         /// <param name="memoryStream">需要发送的MemoryStreamBuffer</param>

@@ -5,6 +5,7 @@ using System.Linq;
 using Fantasy.Entitas;
 using System.Runtime.CompilerServices;
 using Fantasy.Async;
+using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas.Interface;
 using Fantasy.Helper;
 using Fantasy.Network;
@@ -12,6 +13,7 @@ using Fantasy.Network.Interface;
 using Fantasy.Network.Route;
 using Fantasy.PacketParser;
 using Fantasy.PacketParser.Interface;
+using Fantasy.Serialize;
 using Fantasy.Timer;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
@@ -73,6 +75,7 @@ namespace Fantasy.Scheduler
         public MessageDispatcherComponent MessageDispatcherComponent;
         public readonly SortedDictionary<uint, MessageSender> RequestCallback = new();
         public readonly Dictionary<uint, MessageSender> TimeoutRouteMessageSenders = new();
+        private static readonly APacketParser PacketParser = PacketParserFactory.CreatePacketParser(NetworkTarget.Inner);
         
         public void Send<T>(long address, T message) where T : IAddressMessage
         {
@@ -83,6 +86,13 @@ namespace Fantasy.Scheduler
             }
 
             Scene.GetSession(address).Send(message, 0, address);
+        }
+
+        public void Send(long address, MemoryStreamBuffer memoryStream)
+        {
+            uint rpcId = 0;
+            PacketParser.Pack(ref rpcId, ref address, memoryStream, null, null);
+            Scene.GetSession(address).Send(memoryStream);
         }
 
         internal void Send(long address, Type messageType, APackInfo packInfo)
@@ -96,7 +106,7 @@ namespace Fantasy.Scheduler
             Scene.GetSession(address).Send(0, address, messageType, packInfo);
         }
         
-        public void Send<T>(ICollection<long> addressCollection, T message) where T : IAddressMessage
+        public void Send<T>(ICollection<long> addressCollection, T message, int capacity = 4096) where T : IAddressMessage
         {
             if (addressCollection.Count <= 0)
             {
@@ -104,11 +114,17 @@ namespace Fantasy.Scheduler
                 return;
             }
             
-            using var processPackInfo = ProcessPackInfo.Create(Scene, message, addressCollection.Count);
-            foreach (var address in addressCollection)
+            uint rpcId = 0;
+            long address = 0;
+            var memoryStreamBuffer = new MemoryStreamBuffer(MemoryStreamBufferSource.Pack, capacity, addressCollection.Count);
+            
+            PacketParser.PackMemoryStream(ref rpcId, ref address, message, typeof(T), memoryStreamBuffer);
+            
+            foreach (var sendAddress in addressCollection)
             {
-                processPackInfo.Set(0, address);
-                Scene.GetSession(address).Send(processPackInfo, 0, address);
+                var sendRefAddress = sendAddress;
+                PacketParser.Pack(ref rpcId, ref sendRefAddress, memoryStreamBuffer, null, null);
+                Scene.GetSession(address).Send(memoryStreamBuffer);
             }
         }
 

@@ -32,7 +32,7 @@ namespace Fantasy.Network.KCP
             ChannelId = channelId;
             _maxSndWnd = network.Settings.MaxSendWindowSize;
             Kcp = KCPFactory.Create(network.Settings, ChannelId, KcpSpanCallback);
-            _packetParser = PacketParserFactory.CreateServerBufferPacket(network);
+            _packetParser = PacketParserFactory.CreateBufferPacketParser(network);
         }
 
         public override void Dispose()

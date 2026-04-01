@@ -133,7 +133,7 @@ namespace Fantasy.Network.TCP
                 _onConnectFail?.Invoke();
                 Dispose();
             });
-            _packetParser = PacketParserFactory.CreateClientReadOnlyMemoryPacket(this);
+            _packetParser = PacketParserFactory.CreateReadOnlyMemoryPacketParser(this);
             _remoteEndPoint = NetworkHelper.GetIPEndPoint(remoteAddress);
             _socket = new Socket(_remoteEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             _socket.NoDelay = true;

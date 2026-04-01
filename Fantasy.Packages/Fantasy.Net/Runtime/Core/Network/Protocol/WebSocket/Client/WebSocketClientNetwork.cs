@@ -36,7 +36,7 @@ namespace Fantasy.Network.WebSocket
         public void Initialize(NetworkTarget networkTarget)
         {
             base.Initialize(NetworkType.Client, NetworkProtocolType.WebSocket, networkTarget);
-            _packetParser = PacketParserFactory.CreateClientReadOnlyMemoryPacket(this);
+            _packetParser = (ReadOnlyMemoryPacketParser)PacketParserFactory.CreateWebglBufferPacketParser(this);
         }
 
         public override void Dispose()

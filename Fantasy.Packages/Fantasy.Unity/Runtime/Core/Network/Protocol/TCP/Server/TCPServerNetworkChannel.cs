@@ -40,7 +40,7 @@ namespace Fantasy.Network.TCP
             _socket.NoDelay = true;
             _sendArgs = new SocketAsyncEventArgs();
             _sendArgs.Completed += OnSendCompletedHandler;
-            _packetParser = PacketParserFactory.CreateServerReadOnlyMemoryPacket(network);
+            _packetParser = PacketParserFactory.CreateReadOnlyMemoryPacketParser(network);
             ReadPipeDataAsync().Coroutine();
             ReceiveSocketAsync().Coroutine();
         }

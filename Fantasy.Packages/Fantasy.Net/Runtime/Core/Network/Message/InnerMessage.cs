@@ -171,7 +171,7 @@ namespace Fantasy.InnerMessage
             RpcId = 0;
             ErrorCode = 0;
             Now = 0;
-            MessageObjectPool<PingResponse>.Return(this);
+            // MessageObjectPool<PingResponse>.Return(this);
         }
 
         public uint OpCode()

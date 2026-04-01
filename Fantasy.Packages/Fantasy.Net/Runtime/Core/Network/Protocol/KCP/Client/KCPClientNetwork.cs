@@ -69,7 +69,7 @@ namespace Fantasy.Network.KCP
         public void Initialize(NetworkTarget networkTarget)
         {
             base.Initialize(NetworkType.Client, NetworkProtocolType.KCP, networkTarget);
-            _packetParser = PacketParserFactory.CreateClientBufferPacket(this);
+            _packetParser = PacketParserFactory.CreateBufferPacketParser(this);
         }
         
         public override void Dispose()

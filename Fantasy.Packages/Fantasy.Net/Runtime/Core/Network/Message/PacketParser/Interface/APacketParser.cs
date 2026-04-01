@@ -20,6 +20,7 @@ namespace Fantasy.PacketParser.Interface
         internal MessageDispatcherComponent MessageDispatcherComponent;
         protected bool IsDisposed { get; private set; }
         public abstract MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType);
+        public abstract void PackMemoryStream(ref uint rpcId, ref long address, IMessage message, Type messageType, MemoryStreamBuffer memoryStream);
         public virtual void Dispose()
         {
             IsDisposed = true;

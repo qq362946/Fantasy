@@ -3,6 +3,7 @@ using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.InnerMessage;
 using Fantasy.Network.Interface;
+using Fantasy.Serialize;
 using LightProto;
 using MemoryPack;
 // ReSharper disable UnassignedField.Global
@@ -442,6 +443,21 @@ public sealed partial class Terminus : Entity
         
         Scene.NetworkMessagingComponent.Send(ForwardSessionAddress, message);
     }
+    
+    /// <summary>
+    /// 发送一个消息给客户端
+    /// </summary>
+    /// <param name="memoryStream"></param>
+    public void Send(MemoryStreamBuffer memoryStream)
+    {
+        if (StopForwarding)
+        {
+            return;
+        }
+        
+        Scene.NetworkMessagingComponent.Send(ForwardSessionAddress, memoryStream);
+    }
+    
     /// <summary>
     /// 发送一个漫游消息
     /// </summary>

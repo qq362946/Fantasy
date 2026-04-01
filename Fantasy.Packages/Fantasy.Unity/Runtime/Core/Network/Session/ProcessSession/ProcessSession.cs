@@ -58,11 +58,6 @@ public sealed class ProcessSession : Session
         this.Scheduler(messageType, rpcId, address, packInfo);
     }
 
-    public override void Send(ProcessPackInfo packInfo, uint rpcId = 0, long address = 0)
-    {
-        this.Scheduler(packInfo.MessageType, rpcId, address, packInfo);
-    }
-
     public override void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long address = 0)
     {
         throw new Exception("The use of this method is not supported");
