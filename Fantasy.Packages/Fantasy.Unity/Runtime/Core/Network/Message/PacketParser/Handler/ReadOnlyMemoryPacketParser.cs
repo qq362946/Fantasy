@@ -147,12 +147,30 @@ namespace Fantasy.PacketParser
         {
             if (memoryStream != null)
             {
-                return Pack(ref rpcId, ref address, memoryStream);
+                return memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.MultiPack ? 
+                    CopyAndPack(ref rpcId, ref address, memoryStream) : 
+                    Pack(ref rpcId, ref address, memoryStream);
             }
             
             memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
             PackMemoryStream(ref rpcId, ref address, message, messageType, memoryStream);
             return memoryStream;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private MemoryStreamBuffer CopyAndPack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream)
+        {
+            var length = (int)memoryStream.Position;
+            var newBuffer = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack, length);
+            newBuffer.Write(memoryStream.GetBuffer(), 0, length);
+            
+            var buffer = newBuffer.GetBuffer();
+            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+    
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), address);
+    
+            return newBuffer;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

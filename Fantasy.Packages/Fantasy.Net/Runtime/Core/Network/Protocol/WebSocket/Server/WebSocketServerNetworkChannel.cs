@@ -260,8 +260,8 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
             }
 
             await _webSocket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
-                
-            if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+
+            if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
             {
                 _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
             }

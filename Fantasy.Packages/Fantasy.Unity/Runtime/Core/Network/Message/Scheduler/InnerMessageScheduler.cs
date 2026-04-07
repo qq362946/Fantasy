@@ -5,6 +5,7 @@ using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -172,7 +173,7 @@ namespace Fantasy.Scheduler
                             using (packInfo)
                             {
                                 // 这里如果是Session只可能是Gate的Session、如果是的话、肯定是转发消息
-                                gateSession.Send(packInfo.MemoryStream, packInfo.RpcId);
+                                gateSession.Send(packInfo.MemoryStream, null, packInfo.RpcId);
                             }
                             
                             return;

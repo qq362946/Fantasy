@@ -570,7 +570,7 @@ namespace Fantasy.Network.KCP
             }
             finally
             {
-                if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+                if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
                 {
                     MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
                 }

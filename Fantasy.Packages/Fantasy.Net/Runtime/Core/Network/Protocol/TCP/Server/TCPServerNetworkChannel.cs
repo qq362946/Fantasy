@@ -245,13 +245,15 @@ namespace Fantasy.Network.TCP
                     {
                         return;
                     }
-
-                    ReturnMemoryStream(memoryStreamBuffer);
                 }
                 catch
                 {
                     _isSending = false;
                     return;
+                }
+                finally
+                {
+                    ReturnMemoryStream(memoryStreamBuffer);
                 }
             }
             
@@ -260,7 +262,7 @@ namespace Fantasy.Network.TCP
         
         private void ReturnMemoryStream(MemoryStreamBuffer memoryStream)
         {
-            if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+            if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
             {
                 _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
             }

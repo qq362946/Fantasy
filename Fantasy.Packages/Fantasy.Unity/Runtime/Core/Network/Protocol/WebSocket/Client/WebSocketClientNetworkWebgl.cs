@@ -167,7 +167,7 @@ namespace Fantasy.Network.WebSocket
         {
             _webSocket.SendAsync(memoryStream.GetBuffer(), 0, (int)memoryStream.Position);
 #if !UNITY_EDITOR && UNITY_WEBGL
-            if (memoryStream.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+            if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
             {
                 MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
             }

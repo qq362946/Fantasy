@@ -112,16 +112,18 @@ namespace Fantasy.Network
         /// 发送一个消息
         /// </summary>
         /// <param name="memoryStream">需要发送的MemoryStreamBuffer</param>
+        /// <param name="messageType">消息的类型</param>
+        /// <param name="protocolCode">消息的协议号</param>
         /// <param name="rpcId">如果是RPC消息需要传递一个RPCId</param>
         /// <param name="address">Address</param>
-        public virtual void Send(MemoryStreamBuffer memoryStream, uint rpcId = 0, long address = 0)
+        public virtual void Send(MemoryStreamBuffer memoryStream, Type messageType, uint protocolCode = 0, uint rpcId = 0, long address = 0)
         {
             if (IsDisposed)
             {
                 return;
             }
 
-            Channel.Send(rpcId, address, memoryStream, null, null);
+            Channel.Send(rpcId, address, memoryStream, null, messageType);
         }
 #endif
         /// <summary>

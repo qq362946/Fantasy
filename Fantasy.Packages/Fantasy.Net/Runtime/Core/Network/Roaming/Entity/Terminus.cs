@@ -443,19 +443,21 @@ public sealed partial class Terminus : Entity
         
         Scene.NetworkMessagingComponent.Send(ForwardSessionAddress, message);
     }
-    
+
     /// <summary>
     /// 发送一个消息给客户端
     /// </summary>
+    /// <param name="messageType"></param>
     /// <param name="memoryStream"></param>
-    public void Send(MemoryStreamBuffer memoryStream)
+    /// <param name="protocolCode"></param>
+    public void Send(uint protocolCode, Type messageType, MemoryStreamBuffer memoryStream)
     {
         if (StopForwarding)
         {
             return;
         }
-        
-        Scene.NetworkMessagingComponent.Send(ForwardSessionAddress, memoryStream);
+
+        Scene.NetworkMessagingComponent.Send(ForwardSessionAddress, protocolCode, messageType, memoryStream);
     }
     
     /// <summary>

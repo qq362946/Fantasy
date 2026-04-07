@@ -7,6 +7,7 @@ using Fantasy.PacketParser;
 using Fantasy.Serialize;
 using KCP;
 // ReSharper disable ParameterHidesMember
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -119,15 +120,21 @@ namespace Fantasy.Network.KCP
                 return;
             }
 
-            var buffer = _packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType);
-            Kcp.Send(buffer.GetBuffer().AsSpan(0, (int)buffer.Position));
+            MemoryStreamBuffer buffer = null;
             
-            if (buffer.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+            try
             {
-                _kcpServerNetwork.MemoryStreamBufferPool.ReturnMemoryStream(buffer);
+                buffer = _packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType);
+                Kcp.Send(buffer.GetBuffer().AsSpan(0, (int)buffer.Position));
+                _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
             }
-            
-            _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
+            finally
+            {
+                if (MemoryStreamBufferSource.Return.HasFlag(buffer.MemoryStreamBufferSource))
+                {
+                    _kcpServerNetwork.MemoryStreamBufferPool.ReturnMemoryStream(buffer);
+                }
+            }
         }
 
         private const byte KcpHeaderReceiveData = (byte)KcpHeader.ReceiveData;

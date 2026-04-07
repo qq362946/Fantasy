@@ -88,11 +88,11 @@ namespace Fantasy.Scheduler
             Scene.GetSession(address).Send(message, 0, address);
         }
 
-        public void Send(long address, MemoryStreamBuffer memoryStream)
+        public void Send(long address, uint protocolCode, Type messageType, MemoryStreamBuffer memoryStream)
         {
             uint rpcId = 0;
             PacketParser.Pack(ref rpcId, ref address, memoryStream, null, null);
-            Scene.GetSession(address).Send(memoryStream);
+            Scene.GetSession(address).Send(memoryStream, messageType, protocolCode);
         }
 
         internal void Send(long address, Type messageType, APackInfo packInfo)
@@ -114,17 +114,17 @@ namespace Fantasy.Scheduler
                 return;
             }
             
-            uint rpcId = 0;
-            long address = 0;
-            var memoryStreamBuffer = new MemoryStreamBuffer(MemoryStreamBufferSource.Pack, capacity, addressCollection.Count);
+            var rpcId = 0U;
+            var address = 0L;
+            var protocolCode = message.OpCode();
+            
+            using var memoryStreamBuffer = new MemoryStreamBuffer(MemoryStreamBufferSource.MultiPack, capacity, addressCollection.Count);
             
             PacketParser.PackMemoryStream(ref rpcId, ref address, message, typeof(T), memoryStreamBuffer);
             
             foreach (var sendAddress in addressCollection)
             {
-                var sendRefAddress = sendAddress;
-                PacketParser.Pack(ref rpcId, ref sendRefAddress, memoryStreamBuffer, null, null);
-                Scene.GetSession(address).Send(memoryStreamBuffer);
+                Scene.GetSession(sendAddress).Send(memoryStreamBuffer, typeof(T), protocolCode, rpcId, sendAddress);
             }
         }
 

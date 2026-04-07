@@ -50,7 +50,6 @@ namespace Fantasy.Network
 
             if (_memoryStreamPool.TryDequeue(out var memoryStream))
             {
-                memoryStream.DisposeCount = 1;
                 memoryStream.MemoryStreamBufferSource = memoryStreamBufferSource;
                 return memoryStream;
             }
@@ -64,12 +63,6 @@ namespace Fantasy.Network
         /// <param name="memoryStreamBuffer"></param>
         public void ReturnMemoryStream(MemoryStreamBuffer memoryStreamBuffer)
         {
-            if (memoryStreamBuffer.DisposeCount > 1)
-            {
-                memoryStreamBuffer.DisposeCount--;
-                return;
-            }
-            
             if (memoryStreamBuffer.Capacity > _maxMemoryStreamSize)
             {
                 return;
@@ -82,7 +75,6 @@ namespace Fantasy.Network
                 return;
             }
             
-            memoryStreamBuffer.DisposeCount = 1;
             memoryStreamBuffer.SetLength(0);
             memoryStreamBuffer.MemoryStreamBufferSource = MemoryStreamBufferSource.None;
             _memoryStreamPool.Enqueue(memoryStreamBuffer);
