@@ -10,6 +10,8 @@ using Spectre.Console;
 
 namespace Fantasy.ProtocolExportTool.Generators.Parsers;
 
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+
 /// <summary>
 /// 解析结果
 /// </summary>
