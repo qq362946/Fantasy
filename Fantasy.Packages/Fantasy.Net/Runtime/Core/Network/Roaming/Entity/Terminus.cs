@@ -77,14 +77,13 @@ public sealed partial class Terminus : Entity
             return;
         }
         
-        IsDisposeTerminus = true;
-        DisposeAsync().Coroutine();
+        DisposeAsync(DisposeTerminusType.UnLink).Coroutine();
     }
 
-    private async FTask DisposeAsync()
+    internal async FTask DisposeAsync(DisposeTerminusType disposeTerminusType)
     {
-        Scene.TerminusComponent.RemoveTerminus(Id, false);
-        await Scene.EventComponent.PublishAsync(new OnDisposeTerminus(Scene, this));
+        IsDisposeTerminus = true;
+        await Scene.TerminusComponent.RemoveTerminusAsync(disposeTerminusType, Id, false);
         
         TerminusId = 0;
         RoamingType = 0;
@@ -329,7 +328,7 @@ public sealed partial class Terminus : Entity
                 return response.ErrorCode;
             }
             // 在当前Scene下移除漫游终端。
-            Scene.TerminusComponent.RemoveTerminus(Id, true);
+            await Scene.TerminusComponent.RemoveTerminusAsync(DisposeTerminusType.Transfer, Id, true);
         }
         catch (Exception e)
         {

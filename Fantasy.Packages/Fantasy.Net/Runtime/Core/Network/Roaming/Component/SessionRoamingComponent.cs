@@ -97,14 +97,14 @@ public sealed class SessionRoamingComponent : Entity
 
     #region Remove
 
-    internal void Remove(int roamingType, bool isDisponse)
+    internal void Remove(int roamingType, bool isDispose)
     {
         if (!_roaming.Remove(roamingType, out var roaming))
         {
             return;
         }
 
-        if (isDisponse)
+        if (isDispose)
         {
             roaming.Dispose();
         }
@@ -293,6 +293,14 @@ public sealed class SessionRoamingComponent : Entity
     #endregion
 
     #region UnLink
+    
+    /// <summary>
+    /// 断开当前 Roaming 并且销毁
+    /// </summary>
+    public async FTask Disconnect()
+    {
+        await Scene.RoamingComponent.Remove(Id, 0, 0);
+    }
 
     /// <summary>
     /// 断开当前的所有漫游关系。
