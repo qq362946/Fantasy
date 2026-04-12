@@ -19,6 +19,11 @@ namespace Fantasy.Network.Roaming;
 public enum CreateRoamingStatus
 {
     /// <summary>
+    /// 默认标志位
+    /// </summary>
+    None,
+    
+    /// <summary>
     /// 新创建的漫游组件
     /// </summary>
     NewCreated,
@@ -62,17 +67,19 @@ public readonly struct CreateRoamingResult
 }
 
 /// <summary>
-/// 漫游组件，用来管理当然Scene下的所有漫游消息。
+/// 漫游组件，用来管理当前Scene下的所有漫游消息。
 /// 大多数是在Gate这样的转发服务器上创建的。
 /// </summary>
 public sealed class RoamingComponent : Entity
 {
+    private bool _isInnerDisposed;
     private TimerSchedulerNet _timerSchedulerNet;
     private readonly Dictionary<long, SessionRoamingComponent> _sessionRoamingComponents = new();
     private readonly Dictionary<long, long> _delayRemoveTaskId = new();
 
     internal RoamingComponent Initialize()
     {
+        _isInnerDisposed = false;
         _timerSchedulerNet = Scene.TimerComponent.Net;
         return this;
     }
@@ -82,18 +89,25 @@ public sealed class RoamingComponent : Entity
     /// </summary>
     public override void Dispose()
     {
-        DisposeAsync().Coroutine();
-    }
-
-    private async FTask DisposeAsync()
-    {
+        if (_isInnerDisposed)
+        {
+            return;
+        }
+        
+        _isInnerDisposed =  true;
+        
         foreach (var (_,taskId) in _delayRemoveTaskId)
         {
             _timerSchedulerNet.Remove(taskId);
         }
         
         _delayRemoveTaskId.Clear();
-        
+        _timerSchedulerNet = null;
+        DisposeAsync().Coroutine();
+    }
+
+    private async FTask DisposeAsync()
+    {
         foreach (var (_, sessionRoamingComponent) in _sessionRoamingComponents)
         {
             await sessionRoamingComponent.UnLinkAll();
@@ -101,7 +115,6 @@ public sealed class RoamingComponent : Entity
         }
         
         _sessionRoamingComponents.Clear();
-        _timerSchedulerNet = null;
         base.Dispose();
     }
 
@@ -115,6 +128,11 @@ public sealed class RoamingComponent : Entity
     /// <returns>创建成功会返回SessionRoamingComponent组件，这个组件提供漫游的所有功能。</returns>
     internal async FTask<CreateRoamingResult> Create(Session session, long roamingId, int delayRemove)
     {
+        if (_isInnerDisposed)
+        {
+            return new CreateRoamingResult(CreateRoamingStatus.None, null);
+        }
+        
         CreateRoamingStatus status;
         SessionRoamingComponent sessionRoamingComponent;
 
@@ -240,9 +258,10 @@ public sealed class RoamingComponent : Entity
     }
 
     /// <summary>
-    /// 移动一个设置延迟移除的任务
+    /// 移除一个设置延迟移除的任务
     /// </summary>
     /// <param name="roamingId"></param>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private void CancelRemoveTask(long roamingId)
     {
         if (_delayRemoveTaskId.Remove(roamingId, out var taskId))
@@ -259,6 +278,11 @@ public sealed class RoamingComponent : Entity
     /// <param name="delayRemove">当设置了延迟移除时间后，会在设置的时间后再进行移除。</param>
     internal async FTask Remove(long roamingId, int roamingType, int delayRemove = 0)
     {
+        if (_isInnerDisposed)
+        {
+            return;
+        }
+        
         CancelRemoveTask(roamingId);
 
         if (delayRemove <= 0)
@@ -277,22 +301,34 @@ public sealed class RoamingComponent : Entity
 
     private async FTask InnerRemove(long roamingId, int roamingType)
     {
-        if (!_sessionRoamingComponents.Remove(roamingId, out var sessionRoamingComponent))
+        if (_isInnerDisposed)
+        {
+            return;
+        }
+
+        if (!_sessionRoamingComponents.TryGetValue(roamingId, out var sessionRoamingComponent))
         {
             return;
         }
 
         if (roamingType == 0)
         {
+            // 移除所有漫游连接
             await sessionRoamingComponent.UnLinkAll();
+            _sessionRoamingComponents.Remove(roamingId);
             sessionRoamingComponent.Dispose();
-        }
-        else
-        {
-            await sessionRoamingComponent.UnLink(roamingType, true);
+            _delayRemoveTaskId.Remove(roamingId);
+            return;
         }
         
-        _delayRemoveTaskId.Remove(roamingId);
+        // 移除指定的漫游连接
+        
+        if (await sessionRoamingComponent.UnLink(roamingType, true))
+        {
+            _sessionRoamingComponents.Remove(roamingId);
+            sessionRoamingComponent.Dispose();
+            _delayRemoveTaskId.Remove(roamingId);
+        }
     }
 }
 
@@ -310,7 +346,7 @@ public static class RoamingHelper
     /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
     /// <returns>创建成功会返回SessionRoamingComponent组件，这个组件提供漫游的所有功能。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static async FTask<SessionRoamingComponent> CreateRoaming(this Session session, long roamingId, int delayRemove = 1000 * 60 * 3)
+    public static async FTask<SessionRoamingComponent> CreateRoaming(this Session session, long roamingId, int delayRemove = RoamingConstants.DefaultDelayRemoveMs)
     {
         return (await session.Scene.RoamingComponent.Create(session, roamingId, delayRemove)).Roaming;
     }
@@ -324,7 +360,7 @@ public static class RoamingHelper
     /// <param name="delayRemove">如果开启了自定断开漫游功能需要设置一个延迟多久执行断开。</param>
     /// <returns>返回CreateRoamingResult结构体，包含创建状态和漫游组件。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static FTask<CreateRoamingResult> TryCreateRoaming(this Session session, long roamingId, int delayRemove = 1000 * 60 * 3)
+    public static FTask<CreateRoamingResult> TryCreateRoaming(this Session session, long roamingId, int delayRemove = RoamingConstants.DefaultDelayRemoveMs)
     {
         return session.Scene.RoamingComponent.Create(session, roamingId, delayRemove);
     }
@@ -333,10 +369,10 @@ public static class RoamingHelper
     /// 获取指定的漫游组件
     /// </summary>
     /// <param name="scene"></param>
-    /// <param name="roamingId">自定义roamingId</param>zg
+    /// <param name="roamingId">自定义roamingId</param>
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static SessionRoamingComponent GetRoaming(Scene scene, long roamingId)
+    public static SessionRoamingComponent GetRoaming(this Scene scene, long roamingId)
     {
         return scene.RoamingComponent.Get(roamingId);
     }
@@ -349,7 +385,7 @@ public static class RoamingHelper
     /// <param name="sessionRoamingComponent"></param>
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool TryGetRoaming(Scene scene, long roamingId, out SessionRoamingComponent sessionRoamingComponent)
+    public static bool TryGetRoaming(this Scene scene, long roamingId, out SessionRoamingComponent sessionRoamingComponent)
     {
         return scene.RoamingComponent.TryGet(roamingId, out sessionRoamingComponent);
     }
@@ -402,7 +438,7 @@ public static class RoamingHelper
     /// <param name="roamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
     /// <param name="delayRemove">当设置了延迟移除时间后，会在设置的时间后再进行移除。</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static async FTask RemoveRoaming(Scene scene, long roamingId, int roamingType = 0, int delayRemove = 0)
+    public static async FTask RemoveRoaming(this Scene scene, long roamingId, int roamingType = 0, int delayRemove = 0)
     {
         if (roamingId == 0)
         {

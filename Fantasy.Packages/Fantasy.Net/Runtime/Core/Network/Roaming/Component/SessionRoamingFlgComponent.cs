@@ -6,11 +6,18 @@ namespace Fantasy.Network.Roaming;
 
 internal sealed class SessionRoamingFlgComponent : Entity
 {
+    private bool _isInnerDisposed;
     public bool DoNotRemove;
     public int DelayRemove;
     
     public override void Dispose()
     {
+        if (_isInnerDisposed)
+        {
+            return;
+        }
+        
+        _isInnerDisposed = true;
         DisposeAsync().Coroutine();
     }
 
@@ -31,6 +38,7 @@ internal sealed class SessionRoamingFlgComponent : Entity
 
         DelayRemove = 0;
         DoNotRemove = false;
+        _isInnerDisposed = false;
         
         base.Dispose();
     }

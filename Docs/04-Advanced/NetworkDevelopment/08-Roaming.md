@@ -1266,6 +1266,71 @@ public sealed class OnDisposeTerminusHandler : AsyncEventSystem<OnDisposeTerminu
 
 ---
 
+## 错误码参考
+
+漫游模块使用精细化的错误码，帮助快速定位问题。所有错误码定义在 `InnerErrorCode.cs` 中。
+
+### 漫游相关错误码
+
+| 错误码常量名 | 值 | 含义 | 常见原因 |
+|-------------|-----|------|---------|
+| `ErrNotFoundRoaming` | `100000011` | 未找到漫游连接 | 指定的 roamingType 从未 Link 过，或已被 UnLink |
+| `ErrRoamingNotReady` | `100000030` | 漫游正在连接中，尚未就绪 | Link 尚未完成时就并发发送了消息 |
+| `ErrRoamingDisposed` | `100000032` | 漫游组件已销毁 | Session 断开或漫游被主动移除后仍在发送消息 |
+| `ErrRoamingTimeout` | `100000012` | 漫游消息超时 | 消息发送过程中组件被销毁或网络超时 |
+| `ErrRoamingRetryExhausted` | `100000031` | 漫游消息重试次数超限 | 连续重试超过上限仍无法送达 |
+| `ErrReLinkNotFoundRoaming` | `100000033` | ReLink 时找不到已有连接 | 调用了已废弃的 ReLink 方法，但该 roamingType 从未 Link 过 |
+| `ErrTerminusNotLinked` | `100000034` | Entity 未关联 Terminus | 通过 TerminusHelper 扩展方法发送消息，但 Entity 没有调用过 LinkTerminusEntity |
+
+### Terminus 相关错误码
+
+| 错误码常量名 | 值 | 含义 | 常见原因 |
+|-------------|-----|------|---------|
+| `ErrAddRoamingTerminalAlreadyExists` | `100000010` | 漫游终端已存在 | 同一个 roamingId 重复创建 Terminus |
+| `ErrCreateTerminusInvalidRoamingId` | `100000028` | 无效的 RoamingId | 传入的 roamingId 为 0 |
+| `ErrSetForwardSessionAddressNotFoundTerminus` | `100000027` | 未找到漫游终端 | 更新转发地址时找不到对应的 Terminus |
+| `ErrTerminusStartTransfer` | `100000017` | 传送过程发生错误 | StartTransfer 执行中抛出异常 |
+| `ErrTransfer` | `100000029` | 传送通用错误 | 传送过程中的通用错误 |
+
+### 锁定相关错误码
+
+| 错误码常量名 | 值 | 含义 | 常见原因 |
+|-------------|-----|------|---------|
+| `ErrLockTerminusIdNotFoundRoamingType` | `100000014` | 锁定时找不到漫游类型 | Lock/Unlock/GetTerminusId 请求到达 Gate 时，对应的 Roaming 已不存在 |
+
+### 常见排查场景
+
+**场景 1：收到 `ErrRoamingNotReady`（100000030）**
+
+Link 尚未完成时就并发发送了消息，这是最容易踩的坑。
+
+```csharp
+// ❌ 错误写法：Link 和发送并发执行
+roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);  // 没有 await
+session.Call(new C2Chat_SendMessageRequest { });  // Link 还没完成就发了，返回 ErrRoamingNotReady
+
+// ✅ 正确写法：等待 Link 完成后再发送
+var errorCode = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+if (errorCode == 0)
+{
+    var response = await session.Call(new C2Chat_SendMessageRequest { });
+}
+```
+
+**场景 2：收到 `ErrNotFoundRoaming`（100000011）**
+
+指定的 roamingType 从未建立过漫游连接，或已被断开。检查是否遗漏了 `Link` 调用，或漫游是否已被 `UnLink`/`Remove`。
+
+**场景 3：收到 `ErrRoamingDisposed`（100000032）**
+
+漫游组件已被销毁（Session 断开、主动 `Remove` 等）。检查 Session 是否仍然有效，或是否有其他逻辑提前销毁了漫游。
+
+**场景 4：收到 `ErrTerminusNotLinked`（100000034）**
+
+通过 Entity 扩展方法（如 `entity.Send()`）发送消息，但该 Entity 没有通过 `LinkTerminusEntity` 关联到 Terminus。确保在 `OnCreateTerminus` 事件中调用了 `LinkTerminusEntity`。
+
+---
+
 ## 常见问题
 
 ### Q1: 什么时候使用 Roaming？什么时候使用 Address？

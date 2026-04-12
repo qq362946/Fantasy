@@ -24,7 +24,7 @@ public static class TerminusHelper
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Terminus GetLinkTerminus(this Entity entity)
     {
-        return entity.GetComponent<TerminusFlagComponent>().Terminus;
+        return entity.GetComponent<TerminusFlagComponent>()!.Terminus;
     }
 
     /// <summary>
@@ -170,7 +170,7 @@ public static class TerminusHelper
         if (terminusFlagComponent == null)
         {
             Log.Error($"Entity {entity.Id} has no linked Terminus, cannot call message");
-            return FTask<IResponse>.FromResult(entity.Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming));
+            return FTask<IResponse>.FromResult(entity.Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrTerminusNotLinked));
         }
 
         Terminus terminus = terminusFlagComponent.Terminus;
@@ -178,7 +178,7 @@ public static class TerminusHelper
         if (terminus == null)
         {
             Log.Error($"Entity {entity.Id} TerminusFlagComponent.Terminus is null, cannot call message");
-            return FTask<IResponse>.FromResult(entity.Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming));
+            return FTask<IResponse>.FromResult(entity.Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrTerminusNotLinked));
         }
 
         return terminus.Call(roamingType, request);
@@ -203,7 +203,7 @@ public static class TerminusHelper
         if (terminusFlagComponent == null)
         {
             Log.Error($"Entity {entity.Id} has no linked Terminus, cannot start transfer");
-            return FTask<uint>.FromResult(InnerErrorCode.ErrNotFoundRoaming);
+            return FTask<uint>.FromResult(InnerErrorCode.ErrTerminusNotLinked);
         }
 
         Terminus terminus = terminusFlagComponent.Terminus;
@@ -211,7 +211,7 @@ public static class TerminusHelper
         if (terminus == null)
         {
             Log.Error($"Entity {entity.Id} TerminusFlagComponent.Terminus is null, cannot start transfer");
-            return FTask<uint>.FromResult(InnerErrorCode.ErrNotFoundRoaming);
+            return FTask<uint>.FromResult(InnerErrorCode.ErrTerminusNotLinked);
         }
 
         return terminus.StartTransfer(targetSceneAddress);

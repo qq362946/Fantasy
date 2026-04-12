@@ -284,10 +284,35 @@ public sealed class TerminusComponent : Entity
     /// <summary>
     /// 根据 roamingId 移除漫游终端。
     /// </summary>
+    /// <param name="roamingId">漫游唯一标识</param>
+    /// <param name="isDispose">是否同时销毁 Terminus 实例。如果为 true，会调用 Terminus.Dispose()。</param>
+    internal void Remove(long roamingId, bool isDispose)
+    {
+        if (!_terminals.Remove(roamingId, out var terminus))
+        {
+            return;
+        }
+
+        if (!isDispose || terminus.IsDisposeTerminus)
+        {
+            return;
+        }
+        
+        if (terminus.IsDisposed)
+        {
+            return;
+        }
+
+        terminus.Dispose();
+    }
+
+    /// <summary>
+    /// 根据 roamingId 移除漫游终端。
+    /// </summary>
     /// <param name="disposeTerminusType">漫游终端的销毁类型。</param>
     /// <param name="roamingId">漫游唯一标识。</param>
-    /// <param name="isDispose">是否同时销毁 Terminus 实例。如果为 true，会调用 Terminus.Dispose()。</param>
-    internal async FTask RemoveTerminusAsync(DisposeTerminusType disposeTerminusType,long roamingId, bool isDispose)
+    /// <param name="isDispose">是否同时销毁 Terminus 实例。如果为 true，会调用 Terminus.DisposeAsync()。</param>
+    internal async FTask RemoveTerminusAsync(DisposeTerminusType disposeTerminusType, long roamingId, bool isDispose)
     {
         if (!_terminals.Remove(roamingId, out var terminus))
         {
@@ -298,7 +323,7 @@ public sealed class TerminusComponent : Entity
 
         if (isDispose && !terminus.IsDisposeTerminus)
         {
-            if (terminus.IsDisposed || terminus.IsDisposeTerminus)
+            if (terminus.IsDisposed)
             {
                 return;
             }

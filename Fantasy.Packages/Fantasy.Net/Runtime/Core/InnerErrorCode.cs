@@ -110,5 +110,28 @@ namespace Fantasy.Network
         /// 表示传送过程中发生错误的错误代码。
         /// </summary>
         public const uint ErrTransfer = 100000029;
+        /// <summary>
+        /// 表示漫游正在连接中，TerminusId 尚未就绪的错误代码。
+        /// 通常发生在 Link 尚未完成时就并发发送消息的场景。
+        /// </summary>
+        public const uint ErrRoamingNotReady = 100000030;
+        /// <summary>
+        /// 表示漫游消息重试次数超限的错误代码。
+        /// </summary>
+        public const uint ErrRoamingRetryExhausted = 100000031;
+        /// <summary>
+        /// 表示漫游组件已销毁的错误代码。
+        /// </summary>
+        public const uint ErrRoamingDisposed = 100000032;
+        /// <summary>
+        /// 表示 ReLink 时找不到已有的漫游连接的错误代码。
+        /// 需要先调用 Link 建立连接后才能使用 ReLink。
+        /// </summary>
+        public const uint ErrReLinkNotFoundRoaming = 100000033;
+        /// <summary>
+        /// 表示 Entity 未关联 Terminus 的错误代码。
+        /// 需要先通过 LinkTerminusEntity 关联实体后才能使用。
+        /// </summary>
+        public const uint ErrTerminusNotLinked = 100000034;
     }
 }
