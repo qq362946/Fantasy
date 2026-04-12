@@ -16,8 +16,17 @@ internal sealed class I_TransferTerminusRequestHandler : AddressRPC<Scene, I_Tra
     {
         // 添加Terminus到当前Scene下。
         scene.TerminusComponent.AddTerminus(request.Terminus);
-        // 执行Terminus的传送完成逻辑。
-        await request.Terminus.TransferComplete(scene);
+        
+        try
+        {
+            // 执行Terminus的传送完成逻辑。
+            await request.Terminus.TransferComplete(scene);
+        }
+        catch (Exception e)
+        {
+            Log.Error(e);
+            scene.TerminusComponent.Remove(request.Terminus.Id, true);
+        }
     }
 }
 #endif

@@ -77,14 +77,13 @@ public sealed partial class Terminus : Entity
             return;
         }
         
-        IsDisposeTerminus = true;
-        DisposeAsync().Coroutine();
+        DisposeAsync(DisposeTerminusType.UnLink).Coroutine();
     }
 
-    private async FTask DisposeAsync()
+    internal async FTask DisposeAsync(DisposeTerminusType disposeTerminusType)
     {
-        Scene.TerminusComponent.RemoveTerminus(Id, false);
-        await Scene.EventComponent.PublishAsync(new OnDisposeTerminus(Scene, this));
+        IsDisposeTerminus = true;
+        await Scene.TerminusComponent.RemoveTerminusAsync(disposeTerminusType, Id, false);
         
         TerminusId = 0;
         RoamingType = 0;
@@ -329,7 +328,7 @@ public sealed partial class Terminus : Entity
                 return response.ErrorCode;
             }
             // 在当前Scene下移除漫游终端。
-            Scene.TerminusComponent.RemoveTerminus(Id, true);
+            await Scene.TerminusComponent.RemoveTerminusAsync(DisposeTerminusType.Transfer, Id, true);
         }
         catch (Exception e)
         {
@@ -480,7 +479,7 @@ public sealed partial class Terminus : Entity
     {
         if (IsDisposed)
         {
-            return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
+            return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrRoamingDisposed);
         }
 
         if (roamingType == RoamingType)
@@ -508,7 +507,7 @@ public sealed partial class Terminus : Entity
                     }
                     else
                     {
-                        return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
+                        return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrRoamingNotReady);
                     }
                 }
 
@@ -529,17 +528,17 @@ public sealed partial class Terminus : Entity
                     case InnerErrorCode.ErrNotFoundRoute:
                     case InnerErrorCode.ErrNotFoundRoaming:
                     {
-                        if (++failCount > 20)
+                        if (++failCount > RoamingConstants.MaxRetryCount)
                         {
-                            Log.Error($"Terminus.Call failCount > 20 route send message fail, TerminusId: {address}");
+                            Log.Error($"Terminus.Call failCount > {RoamingConstants.MaxRetryCount} route send message fail, TerminusId: {address}");
                             return iRouteResponse;
                         }
 
-                        await Scene.TimerComponent.Net.WaitAsync(100);
+                        await Scene.TimerComponent.Net.WaitAsync(RoamingConstants.RetryIntervalMs);
 
                         if (runtimeId != RuntimeId)
                         {
-                            iRouteResponse.ErrorCode = InnerErrorCode.ErrNotFoundRoaming;
+                            iRouteResponse.ErrorCode = InnerErrorCode.ErrRoamingDisposed;
                         }
 
                         address = 0;

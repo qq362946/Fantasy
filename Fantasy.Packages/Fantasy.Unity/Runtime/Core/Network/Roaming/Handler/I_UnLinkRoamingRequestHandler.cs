@@ -3,6 +3,7 @@ using System;
 using Fantasy.Async;
 using Fantasy.InnerMessage;
 using Fantasy.Network.Interface;
+using Fantasy.Network.Roaming;
 
 namespace Fantasy.Roaming.Handler;
 
@@ -10,8 +11,8 @@ internal sealed class I_UnLinkRoamingRequestHandler : AddressRPC<Scene, I_UnLink
 {
     protected override async FTask Run(Scene scene, I_UnLinkRoamingRequest request, I_UnLinkRoamingResponse response, Action reply)
     {
-        scene.TerminusComponent.RemoveTerminus(request.RoamingId, request.DisposeRoaming);
-        await FTask.CompletedTask;
+        await scene.TerminusComponent.RemoveTerminusAsync(
+            DisposeTerminusType.UnLink, request.RoamingId, request.DisposeRoaming);
     }
 }
 #endif

@@ -31,6 +31,29 @@ public enum CreateTerminusType
 }
 
 /// <summary>
+/// 漫游终端销毁类型枚举。
+/// </summary>
+public enum DisposeTerminusType
+{
+    /// <summary>
+    /// 未指定类型。
+    /// </summary>
+    None = 0,
+    /// <summary>
+    /// 断开漫游终端。
+    /// 当客户端完全断开连接此终端时使用此类型。
+    /// 用于当前 Scene 进行下线处理的操作。
+    /// </summary>
+    UnLink = 1,
+    /// <summary>
+    /// 漫游终端进行传送。
+    /// 漫游终端进行传送后使用此类型。
+    /// 用于回收清理当前 Scene 下的数据。
+    /// </summary>
+    Transfer = 2,
+}
+
+/// <summary>
 /// 漫游终端创建完成时发送的事件参数。
 /// 当 Terminus 首次创建（Link）或重新连接（ReLink）时，会发布此事件。
 /// 业务层可以订阅此事件来执行玩家实体的创建或恢复逻辑。
@@ -82,11 +105,22 @@ public struct OnDisposeTerminus
     /// 获取与事件关联的漫游终端实例。
     /// </summary>
     public readonly Terminus Terminus;
-
-    public OnDisposeTerminus(Scene scene, Terminus terminus)
+    /// <summary>
+    /// 获取漫游终端的销毁类型。
+    /// 用于区分是断开漫游终端（UnLink）还是漫游终端进行传送（Transfer）。
+    /// </summary>
+    public readonly DisposeTerminusType Type;
+    /// <summary>
+    /// 初始化一个新的 <see cref="OnDisposeTerminus"/> 实例。
+    /// </summary>
+    /// <param name="scene">与事件关联的场景实体。</param>
+    /// <param name="disposeTerminusType">漫游终端的销毁类型。</param>
+    /// <param name="terminus">漫游终端实例。</param>
+    public OnDisposeTerminus(Scene scene, DisposeTerminusType disposeTerminusType, Terminus terminus)
     {
         Scene = scene;
         Terminus = terminus;
+        Type = disposeTerminusType;
     }
 }
 
@@ -250,18 +284,51 @@ public sealed class TerminusComponent : Entity
     /// <summary>
     /// 根据 roamingId 移除漫游终端。
     /// </summary>
-    /// <param name="roamingId">漫游唯一标识。</param>
+    /// <param name="roamingId">漫游唯一标识</param>
     /// <param name="isDispose">是否同时销毁 Terminus 实例。如果为 true，会调用 Terminus.Dispose()。</param>
-    internal void RemoveTerminus(long roamingId, bool isDispose)
+    internal void Remove(long roamingId, bool isDispose)
     {
         if (!_terminals.Remove(roamingId, out var terminus))
         {
             return;
         }
 
-        if (isDispose)
+        if (!isDispose || terminus.IsDisposeTerminus)
         {
-            terminus.Dispose();
+            return;
+        }
+        
+        if (terminus.IsDisposed)
+        {
+            return;
+        }
+
+        terminus.Dispose();
+    }
+
+    /// <summary>
+    /// 根据 roamingId 移除漫游终端。
+    /// </summary>
+    /// <param name="disposeTerminusType">漫游终端的销毁类型。</param>
+    /// <param name="roamingId">漫游唯一标识。</param>
+    /// <param name="isDispose">是否同时销毁 Terminus 实例。如果为 true，会调用 Terminus.DisposeAsync()。</param>
+    internal async FTask RemoveTerminusAsync(DisposeTerminusType disposeTerminusType, long roamingId, bool isDispose)
+    {
+        if (!_terminals.Remove(roamingId, out var terminus))
+        {
+            return;
+        }
+
+        await Scene.EventComponent.PublishAsync(new OnDisposeTerminus(Scene, disposeTerminusType, terminus));
+
+        if (isDispose && !terminus.IsDisposeTerminus)
+        {
+            if (terminus.IsDisposed)
+            {
+                return;
+            }
+            
+            await terminus.DisposeAsync(disposeTerminusType);
         }
     }
 }

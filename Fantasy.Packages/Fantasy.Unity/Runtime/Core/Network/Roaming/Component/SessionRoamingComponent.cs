@@ -2,6 +2,7 @@
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas;
+using Fantasy.IdFactory;
 using Fantasy.InnerMessage;
 using Fantasy.Network.Interface;
 using Fantasy.PacketParser.Interface;
@@ -17,6 +18,13 @@ using Fantasy.Timer;
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 
 namespace Fantasy.Network.Roaming;
+
+internal static class RoamingConstants
+{
+    public const int MaxRetryCount = 20;
+    public const int RetryIntervalMs = 100;
+    public const int DefaultDelayRemoveMs = 180_000;
+}
 
 /// <summary>
 /// Session的漫游组件。
@@ -97,14 +105,14 @@ public sealed class SessionRoamingComponent : Entity
 
     #region Remove
 
-    internal void Remove(int roamingType, bool isDisponse)
+    internal void Remove(int roamingType, bool isDispose)
     {
         if (!_roaming.Remove(roamingType, out var roaming))
         {
             return;
         }
 
-        if (isDisponse)
+        if (isDispose)
         {
             roaming.Dispose();
         }
@@ -263,7 +271,7 @@ public sealed class SessionRoamingComponent : Entity
         
         if (!_roaming.TryGetValue(roamingType, out var roaming))
         {
-            return InnerErrorCode.ErrNotFoundRoaming;
+            return InnerErrorCode.ErrReLinkNotFoundRoaming;
         }
         
         roaming.TerminusId = 0;
@@ -293,6 +301,14 @@ public sealed class SessionRoamingComponent : Entity
     #endregion
 
     #region UnLink
+    
+    /// <summary>
+    /// 断开当前 Roaming 并且销毁
+    /// </summary>
+    public async FTask Disconnect()
+    {
+        await Scene.RoamingComponent.Remove(Id, 0, 0);
+    }
 
     /// <summary>
     /// 断开当前的所有漫游关系。
@@ -324,7 +340,8 @@ public sealed class SessionRoamingComponent : Entity
     /// <param name="removeRoamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
     /// <param name="disposeIfEmpty">如果断开后没有任何漫游连接，是否销毁整个组件</param>
     /// </summary>
-    public async FTask UnLink(int removeRoamingType, bool disposeIfEmpty)
+    /// <returns>返回 true 为当前 Roaming没有其他roamingType 的连接，反之为 false。</returns>
+    public async FTask<bool> UnLink(int removeRoamingType, bool disposeIfEmpty)
     {
         if (removeRoamingType == 0)
         {
@@ -333,7 +350,7 @@ public sealed class SessionRoamingComponent : Entity
         
         if (!_roaming.Remove(removeRoamingType, out var roaming))
         {
-            return;
+            return _roaming.Count == 0;
         }
 
         var errorCode = await roaming.Disconnect();
@@ -345,10 +362,14 @@ public sealed class SessionRoamingComponent : Entity
 
         roaming.Dispose();
         
-        if(disposeIfEmpty && _roaming.Count == 0)
+        var isEmpty = _roaming.Count == 0; 
+        
+        if(disposeIfEmpty && isEmpty)
         {
             Dispose();
         }
+        
+        return isEmpty;
     }
 
     #endregion
@@ -356,7 +377,7 @@ public sealed class SessionRoamingComponent : Entity
     #region OuterMessage
 
     /// <summary>
-    /// 发送一个消息给漫游终
+    /// 发送一个消息给漫游终端
     /// </summary>
     /// <param name="message"></param>
     public void Send<T>(T message) where T : IRoamingMessage
@@ -414,7 +435,7 @@ public sealed class SessionRoamingComponent : Entity
 
                 if (address == 0)
                 {
-                    return _messageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
+                    return _messageDispatcherComponent.CreateResponse(message.OpCode(), InnerErrorCode.ErrRoamingNotReady);
                 }
 
                 iRouteResponse = await _networkMessagingComponent.Call(address, message);
@@ -434,17 +455,17 @@ public sealed class SessionRoamingComponent : Entity
                     case InnerErrorCode.ErrNotFoundRoute:
                     case InnerErrorCode.ErrNotFoundRoaming:
                     {
-                        if (++failCount > 20)
+                        if (++failCount > RoamingConstants.MaxRetryCount)
                         {
-                            Log.Error($"RoamingComponent.Call failCount > 20 route send message fail, LinkRoamingId: {address}");
+                            Log.Error($"RoamingComponent.Call failCount > {RoamingConstants.MaxRetryCount} route send message fail, LinkRoamingId: {address}");
                             return iRouteResponse;
                         }
 
-                        await _timerComponent.Net.WaitAsync(100);
+                        await _timerComponent.Net.WaitAsync(RoamingConstants.RetryIntervalMs);
 
                         if (runtimeId != RuntimeId)
                         {
-                            iRouteResponse.ErrorCode = InnerErrorCode.ErrNotFoundRoaming;
+                            iRouteResponse.ErrorCode = InnerErrorCode.ErrRoamingDisposed;
                         }
 
                         address = 0;
@@ -474,7 +495,7 @@ public sealed class SessionRoamingComponent : Entity
     {
         if (IsDisposed)
         {
-            return _messageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
+            return _messageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrRoamingDisposed);
         }
 
         packInfo.IsDisposed = true;
@@ -502,7 +523,7 @@ public sealed class SessionRoamingComponent : Entity
 
                     if (address == 0)
                     {
-                        return _messageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrNotFoundRoaming);
+                        return _messageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, InnerErrorCode.ErrRoamingNotReady);
                     }
 
                     iRouteResponse = await _networkMessagingComponent.Call(address, requestType, packInfo);
@@ -522,17 +543,17 @@ public sealed class SessionRoamingComponent : Entity
                         case InnerErrorCode.ErrNotFoundRoute:
                         case InnerErrorCode.ErrNotFoundRoaming:
                         {
-                            if (++failCount > 20)
+                            if (++failCount > RoamingConstants.MaxRetryCount)
                             {
-                                Log.Error($"RoamingComponent.Call failCount > 20 route send message fail, LinkRoamingId: {address}");
+                                Log.Error($"RoamingComponent.Call failCount > {RoamingConstants.MaxRetryCount} route send message fail, LinkRoamingId: {address}");
                                 return iRouteResponse;
                             }
 
-                            await _timerComponent.Net.WaitAsync(100);
+                            await _timerComponent.Net.WaitAsync(RoamingConstants.RetryIntervalMs);
 
                             if (runtimeId != RuntimeId)
                             {
-                                iRouteResponse.ErrorCode = InnerErrorCode.ErrNotFoundRoaming;
+                                iRouteResponse.ErrorCode = InnerErrorCode.ErrRoamingDisposed;
                             }
                             address = 0;
                             continue;
