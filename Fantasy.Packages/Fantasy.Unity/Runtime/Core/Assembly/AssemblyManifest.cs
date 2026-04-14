@@ -103,7 +103,7 @@ namespace Fantasy.Assembly
         /// 程序集清单集合（WebGL 单线程版本）
         /// Key: 程序集唯一标识, Value: 程序集清单对象
         /// </summary>
-        private static readonly Dictionary<long, AssemblyManifest> Manifests = new Dictionary<long, AssemblyManifest>();
+        internal static readonly Dictionary<long, AssemblyManifest> Manifests = new Dictionary<long, AssemblyManifest>();
 #else
         /// <summary>
         /// 程序集清单集合（线程安全版本）
@@ -273,7 +273,7 @@ namespace Fantasy.Assembly
             {
                 AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
                 Manifests.Remove(assemblyManifestId);
-                manifest.CustomInterfaceRegistrar.UnRegister(manifest.CustomInterfaces);
+                manifest.CustomInterfaceRegistrar.UnRegister(manifest._customInterfaces);
             }
 #else
             if (Manifests.TryRemove(assemblyManifestId, out var manifest))

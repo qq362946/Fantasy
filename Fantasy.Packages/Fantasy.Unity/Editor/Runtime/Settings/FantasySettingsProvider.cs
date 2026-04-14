@@ -87,11 +87,11 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// 绘制 csc.rsp 安装状态区域
+        /// 绘制 FANTASY_UNITY 安装状态区域
         /// </summary>
         private void DrawCscRspInstallationSection()
         {
-            bool isInstalled = CheckCscRspStatus(out bool fileExists, out bool hasDefine);
+            bool isInstalled = CheckFantasyUnityDefineStatus();
             
             // 状态框
             if (isInstalled)
@@ -175,96 +175,32 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// 检测 csc.rsp 文件状态
+        /// 检测当前激活平台的 Scripting Define Symbols 是否包含 FANTASY_UNITY
         /// </summary>
-        /// <param name="fileExists">文件是否存在</param>
-        /// <param name="hasDefine">是否包含 FANTASY_UNITY 定义</param>
         /// <returns>是否已正确安装</returns>
-        private bool CheckCscRspStatus(out bool fileExists, out bool hasDefine)
+        private bool CheckFantasyUnityDefineStatus()
         {
-            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
-            fileExists = File.Exists(cscRspPath);
-            hasDefine = false;
-
-            if (fileExists)
-            {
-                string content = File.ReadAllText(cscRspPath);
-                // 使用正则表达式精确匹配 FANTASY_UNITY（确保是完整的单词，不是其他定义的一部分）
-                // 匹配条件：FANTASY_UNITY 后面是分号、空白字符、换行或文件结束
-                hasDefine = System.Text.RegularExpressions.Regex.IsMatch(
-                    content,
-                    @"\bFANTASY_UNITY\b"
-                );
-            }
-
-            return fileExists && hasDefine;
+            return HasScriptingDefineSymbol("FANTASY_UNITY");
         }
 
         /// <summary>
-        /// 安装 FANTASY_UNITY 定义到 csc.rsp 文件
+        /// 安装 FANTASY_UNITY 定义到当前激活平台的 Scripting Define Symbols
         /// </summary>
         private void InstallFantasyUnityDefine()
         {
-            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
-
             try
             {
-                if (!File.Exists(cscRspPath))
+                bool changed = AddScriptingDefineSymbol("FANTASY_UNITY");
+                string activeGroup = GetActiveBuildTargetGroup().ToString();
+
+                if (changed)
                 {
-                    // 创建新文件
-                    File.WriteAllText(cscRspPath, "-define:FANTASY_UNITY\n");
+                    EditorUtility.DisplayDialog("成功", $"FANTASY_UNITY 已安装到 {activeGroup} 的 Scripting Define Symbols。\n\nUnity 将自动重新编译。", "确定");
                 }
                 else
                 {
-                    // 读取现有内容
-                    string content = File.ReadAllText(cscRspPath);
-
-                    // 使用正则表达式精确检测，避免误判（例如 FANTASY_UNITY123）
-                    bool hasFantasyUnity = System.Text.RegularExpressions.Regex.IsMatch(
-                        content,
-                        @"\bFANTASY_UNITY\b"
-                    );
-
-                    if (!hasFantasyUnity)
-                    {
-                        // 查找是否已有 -define: 行
-                        string[] lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                        bool defineLineFound = false;
-
-                        for (int i = 0; i < lines.Length; i++)
-                        {
-                            if (lines[i].TrimStart().StartsWith("-define:"))
-                            {
-                                // 添加到现有的 define 行
-                                if (lines[i].EndsWith(";"))
-                                {
-                                    lines[i] = lines[i] + "FANTASY_UNITY";
-                                }
-                                else
-                                {
-                                    lines[i] = lines[i] + ";FANTASY_UNITY";
-                                }
-                                defineLineFound = true;
-                                break;
-                            }
-                        }
-
-                        if (defineLineFound)
-                        {
-                            content = string.Join("\n", lines) + "\n";
-                        }
-                        else
-                        {
-                            // 添加新的 define 行到文件开头
-                            content = "-define:FANTASY_UNITY\n" + content;
-                        }
-
-                        File.WriteAllText(cscRspPath, content);
-                    }
+                    EditorUtility.DisplayDialog("提示", $"{activeGroup} 的 Scripting Define Symbols 中已存在 FANTASY_UNITY。", "确定");
                 }
-
-                AssetDatabase.Refresh();
-                EditorUtility.DisplayDialog("成功", "FANTASY_UNITY 已经安装成功。\n\n重新编译后生效。", "确定");
             }
             catch (Exception ex)
             {
@@ -274,61 +210,23 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// 卸载 FANTASY_UNITY 定义从 csc.rsp 文件
+        /// 从当前激活平台的 Scripting Define Symbols 卸载 FANTASY_UNITY
         /// </summary>
         private void UninstallFantasyUnityDefine()
         {
-            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
-
             try
             {
-                if (!File.Exists(cscRspPath))
+                bool changed = RemoveScriptingDefineSymbol("FANTASY_UNITY");
+                string activeGroup = GetActiveBuildTargetGroup().ToString();
+
+                if (changed)
                 {
-                    EditorUtility.DisplayDialog("提示", "csc.rsp 文件不存在，无需卸载。", "确定");
-                    return;
+                    EditorUtility.DisplayDialog("成功", $"FANTASY_UNITY 已从 {activeGroup} 的 Scripting Define Symbols 中卸载。\n\nUnity 将自动重新编译。", "确定");
                 }
-
-                // 读取现有内容
-                string content = File.ReadAllText(cscRspPath);
-
-                // 使用正则表达式移除 FANTASY_UNITY
-                string newContent = System.Text.RegularExpressions.Regex.Replace(
-                    content,
-                    @";?\s*FANTASY_UNITY\b",
-                    ""
-                );
-
-                // 清理可能出现的连续分号
-                newContent = System.Text.RegularExpressions.Regex.Replace(
-                    newContent,
-                    @";;+",
-                    ";"
-                );
-
-                // 清理 -define: 后面紧跟分号的情况
-                newContent = System.Text.RegularExpressions.Regex.Replace(
-                    newContent,
-                    @"-define:;",
-                    "-define:"
-                );
-
-                // 移除空的 -define: 行
-                string[] lines = newContent.Split(new[] { '\r', '\n' }, StringSplitOptions.None);
-                List<string> newLines = new List<string>();
-                foreach (var line in lines)
+                else
                 {
-                    string trimmed = line.Trim();
-                    if (trimmed != "-define:" && trimmed != "-define:;")
-                    {
-                        newLines.Add(line);
-                    }
+                    EditorUtility.DisplayDialog("提示", $"{activeGroup} 的 Scripting Define Symbols 中不存在 FANTASY_UNITY。", "确定");
                 }
-
-                newContent = string.Join("\n", newLines);
-
-                File.WriteAllText(cscRspPath, newContent);
-                AssetDatabase.Refresh();
-                EditorUtility.DisplayDialog("成功", "FANTASY_UNITY 已经卸载成功。\n\n重新编译后生效。", "确定");
             }
             catch (Exception ex)
             {
@@ -426,96 +324,34 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// 检测 csc.rsp 文件中的 FANTASY_WEBGL 定义状态
+        /// 检测当前激活平台的 Scripting Define Symbols 是否包含 FANTASY_WEBGL
         /// </summary>
-        /// <param name="fileExists">文件是否存在</param>
-        /// <param name="hasDefine">是否包含 FANTASY_WEBGL 定义</param>
         /// <returns>是否已正确安装</returns>
         private bool CheckWebGLDefineStatus(out bool fileExists, out bool hasDefine)
         {
-            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
-            fileExists = File.Exists(cscRspPath);
-            hasDefine = false;
-
-            if (fileExists)
-            {
-                string content = File.ReadAllText(cscRspPath);
-                // 使用正则表达式精确匹配 FANTASY_WEBGL（确保是完整的单词，不是其他定义的一部分）
-                // 匹配条件：FANTASY_WEBGL 后面是分号、空白字符、换行或文件结束
-                hasDefine = System.Text.RegularExpressions.Regex.IsMatch(
-                    content,
-                    @"\bFANTASY_WEBGL\b"
-                );
-            }
-
-            return fileExists && hasDefine;
+            fileExists = true;
+            hasDefine = HasScriptingDefineSymbol("FANTASY_WEBGL");
+            return hasDefine;
         }
 
         /// <summary>
-        /// 安装 FANTASY_WEBGL 定义到 csc.rsp 文件
+        /// 安装 FANTASY_WEBGL 定义到当前激活平台的 Scripting Define Symbols
         /// </summary>
         private void InstallFantasyWebGLDefine()
         {
-            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
-
             try
             {
-                if (!File.Exists(cscRspPath))
+                bool changed = AddScriptingDefineSymbol("FANTASY_WEBGL");
+                string activeGroup = GetActiveBuildTargetGroup().ToString();
+
+                if (changed)
                 {
-                    // 创建新文件
-                    File.WriteAllText(cscRspPath, "-define:FANTASY_WEBGL\n");
+                    EditorUtility.DisplayDialog("成功", $"FANTASY_WEBGL 已安装到 {activeGroup} 的 Scripting Define Symbols。\n\nUnity 将自动重新编译。", "确定");
                 }
                 else
                 {
-                    // 读取现有内容
-                    string content = File.ReadAllText(cscRspPath);
-
-                    // 使用正则表达式精确检测，避免误判（例如 FANTASY_WEBGL123）
-                    bool hasFantasyWebGL = System.Text.RegularExpressions.Regex.IsMatch(
-                        content,
-                        @"\bFANTASY_WEBGL\b"
-                    );
-
-                    if (!hasFantasyWebGL)
-                    {
-                        // 查找是否已有 -define: 行
-                        string[] lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-                        bool defineLineFound = false;
-
-                        for (int i = 0; i < lines.Length; i++)
-                        {
-                            if (lines[i].TrimStart().StartsWith("-define:"))
-                            {
-                                // 添加到现有的 define 行
-                                if (lines[i].EndsWith(";"))
-                                {
-                                    lines[i] = lines[i] + "FANTASY_WEBGL";
-                                }
-                                else
-                                {
-                                    lines[i] = lines[i] + ";FANTASY_WEBGL";
-                                }
-                                defineLineFound = true;
-                                break;
-                            }
-                        }
-
-                        if (defineLineFound)
-                        {
-                            content = string.Join("\n", lines) + "\n";
-                        }
-                        else
-                        {
-                            // 添加新的 define 行到文件开头
-                            content = "-define:FANTASY_WEBGL\n" + content;
-                        }
-
-                        File.WriteAllText(cscRspPath, content);
-                    }
+                    EditorUtility.DisplayDialog("提示", $"{activeGroup} 的 Scripting Define Symbols 中已存在 FANTASY_WEBGL。", "确定");
                 }
-
-                AssetDatabase.Refresh();
-                EditorUtility.DisplayDialog("成功", "FANTASY_WEBGL 已经安装成功。\n\n重新编译后生效。", "确定");
             }
             catch (Exception ex)
             {
@@ -525,61 +361,23 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// 卸载 FANTASY_WEBGL 定义从 csc.rsp 文件
+        /// 从当前激活平台的 Scripting Define Symbols 卸载 FANTASY_WEBGL
         /// </summary>
         private void UninstallFantasyWebGLDefine()
         {
-            string cscRspPath = Path.Combine(Application.dataPath, "csc.rsp");
-
             try
             {
-                if (!File.Exists(cscRspPath))
+                bool changed = RemoveScriptingDefineSymbol("FANTASY_WEBGL");
+                string activeGroup = GetActiveBuildTargetGroup().ToString();
+
+                if (changed)
                 {
-                    EditorUtility.DisplayDialog("提示", "csc.rsp 文件不存在，无需卸载。", "确定");
-                    return;
+                    EditorUtility.DisplayDialog("成功", $"FANTASY_WEBGL 已从 {activeGroup} 的 Scripting Define Symbols 中卸载。\n\nUnity 将自动重新编译。", "确定");
                 }
-
-                // 读取现有内容
-                string content = File.ReadAllText(cscRspPath);
-
-                // 使用正则表达式移除 FANTASY_WEBGL
-                string newContent = System.Text.RegularExpressions.Regex.Replace(
-                    content,
-                    @";?\s*FANTASY_WEBGL\b",
-                    ""
-                );
-
-                // 清理可能出现的连续分号
-                newContent = System.Text.RegularExpressions.Regex.Replace(
-                    newContent,
-                    @";;+",
-                    ";"
-                );
-
-                // 清理 -define: 后面紧跟分号的情况
-                newContent = System.Text.RegularExpressions.Regex.Replace(
-                    newContent,
-                    @"-define:;",
-                    "-define:"
-                );
-
-                // 移除空的 -define: 行
-                string[] lines = newContent.Split(new[] { '\r', '\n' }, StringSplitOptions.None);
-                List<string> newLines = new List<string>();
-                foreach (var line in lines)
+                else
                 {
-                    string trimmed = line.Trim();
-                    if (trimmed != "-define:" && trimmed != "-define:;")
-                    {
-                        newLines.Add(line);
-                    }
+                    EditorUtility.DisplayDialog("提示", $"{activeGroup} 的 Scripting Define Symbols 中不存在 FANTASY_WEBGL。", "确定");
                 }
-
-                newContent = string.Join("\n", newLines);
-
-                File.WriteAllText(cscRspPath, newContent);
-                AssetDatabase.Refresh();
-                EditorUtility.DisplayDialog("成功", "FANTASY_WEBGL 已经卸载成功。\n\n重新编译后生效。", "确定");
             }
             catch (Exception ex)
             {
@@ -1046,5 +844,87 @@ namespace Fantasy
             }
             return _provider;
         }
+
+        #region Scripting Define Symbols Helpers
+
+        /// <summary>
+        /// 获取当前激活平台的 BuildTargetGroup
+        /// </summary>
+        private static BuildTargetGroup GetActiveBuildTargetGroup()
+        {
+            return EditorUserBuildSettings.selectedBuildTargetGroup;
+        }
+
+        /// <summary>
+        /// 获取当前激活平台的 Scripting Define Symbols 列表
+        /// </summary>
+        private static HashSet<string> GetCurrentDefineSymbols(out string rawDefines)
+        {
+            var group = GetActiveBuildTargetGroup();
+            rawDefines = PlayerSettings.GetScriptingDefineSymbolsForGroup(group);
+            var set = new HashSet<string>(StringComparer.Ordinal);
+
+            if (!string.IsNullOrEmpty(rawDefines))
+            {
+                foreach (var symbol in rawDefines.Split(';'))
+                {
+                    var trimmed = symbol.Trim();
+                    if (!string.IsNullOrEmpty(trimmed))
+                    {
+                        set.Add(trimmed);
+                    }
+                }
+            }
+
+            return set;
+        }
+
+        /// <summary>
+        /// 检测当前激活平台的 Scripting Define Symbols 是否包含指定符号
+        /// </summary>
+        private static bool HasScriptingDefineSymbol(string symbol)
+        {
+            var defines = GetCurrentDefineSymbols(out _);
+            return defines.Contains(symbol);
+        }
+
+        /// <summary>
+        /// 向当前激活平台的 Scripting Define Symbols 添加指定符号
+        /// </summary>
+        /// <returns>true 表示实际添加了新符号，false 表示已存在</returns>
+        private static bool AddScriptingDefineSymbol(string symbol)
+        {
+            var defines = GetCurrentDefineSymbols(out _);
+
+            if (defines.Contains(symbol))
+            {
+                return false;
+            }
+
+            defines.Add(symbol);
+            var group = GetActiveBuildTargetGroup();
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(group, string.Join(";", defines));
+            return true;
+        }
+
+        /// <summary>
+        /// 从当前激活平台的 Scripting Define Symbols 移除指定符号
+        /// </summary>
+        /// <returns>true 表示实际移除了符号，false 表示不存在</returns>
+        private static bool RemoveScriptingDefineSymbol(string symbol)
+        {
+            var defines = GetCurrentDefineSymbols(out _);
+
+            if (!defines.Remove(symbol))
+            {
+                return false;
+            }
+
+            var group = GetActiveBuildTargetGroup();
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(group, string.Join(";", defines));
+            return true;
+        }
+
+        #endregion
     }
 }
