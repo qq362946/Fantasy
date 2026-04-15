@@ -319,7 +319,8 @@ public sealed class TerminusComponent : Entity
             return;
         }
 
-        await Scene.EventComponent.PublishAsync(new OnDisposeTerminus(Scene, disposeTerminusType, terminus));
+        var scene = terminus.Scene;
+        await scene.EventComponent.PublishAsync(new OnDisposeTerminus(scene, disposeTerminusType, terminus));
 
         if (isDispose && !terminus.IsDisposeTerminus)
         {

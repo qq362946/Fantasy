@@ -1241,6 +1241,7 @@ GameObject:
   - component: {fileID: 1855060133}
   - component: {fileID: 1855060132}
   - component: {fileID: 1855060135}
+  - component: {fileID: 1855060136}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1366,6 +1367,39 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1855060136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855060131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744ea2ac262d44f478bcd3c9adacca57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runtimeName: FantasyRuntime
+  remoteIP: 127.0.0.1
+  remotePort: 20000
+  protocol: 0
+  enableHttps: 0
+  connectTimeout: 5000
+  enableHeartbeat: 1
+  heartbeatInterval: 2000
+  heartbeatTimeOut: 30000
+  heartbeatTimeOutInterval: 5000
+  maxPingSamples: 4
+  isRuntimeInstance: 0
+  onConnectComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  onConnectFail:
+    m_PersistentCalls:
+      m_Calls: []
+  onConnectDisconnect:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1924079176
 GameObject:
   m_ObjectHideFlags: 0
