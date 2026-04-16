@@ -160,6 +160,18 @@ Unity 客户端开发的完整指南。
 
 ---
 
+### 🤖 [05-AI](05-AI/) - AI 赋能与 Skill 使用
+
+面向 Claude、Codex、OpenCode、OpenClaw 等 AI Agent 的 Fantasy 开发支持说明。
+
+- ✅ [01-FantasySkill.md](05-AI/01-FantasySkill.md) - Fantasy AI Skill 与 Vibe Coding 指南
+  - Fantasy 的 AI 赋能介绍
+  - 为什么 Fantasy 适合 Vibe Coding
+  - 常见 AI 使用场景和示例提问方式
+  - Skill 安装说明入口
+
+---
+
 ### 全栈开发路径 🌐
 
 如果你需要**同时开发服务器端和客户端**，建议：

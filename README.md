@@ -17,7 +17,7 @@
 
 Fantasy 是一个**零反射、高性能的 C# 游戏服务器框架**，专为大型多人在线游戏打造。
 
-**核心特点：** ⚡ 零反射架构 | 🚀 Native AOT 支持 | 🌐 多协议支持 | 🔥 分布式架构 | 🎮 ECS 设计
+**核心特点：** ⚡ 零反射架构 | 🚀 Native AOT 支持 | 🌐 多协议支持 | 🔥 分布式架构 | 🎮 ECS 设计｜🤖 AI 赋能开发
 
 ## 🤖 AI 赋能开发
 
@@ -32,6 +32,14 @@ Fantasy 已提供专用 `fantasy-net` Skill，可配合 Claude、Codex、OpenCod
 
 这让 Fantasy 不只是“可以配合 AI 使用”，而是已经具备面向 AI 的知识组织和开发支持能力，显著降低上手门槛，也非常适合 Vibe Coding。
 
+你可以直接这样问 AI：
+
+- `帮我在 Fantasy 里创建一个 Player 实体和对应的 AwakeSystem`
+- `帮我写一个 EventAwaiter 版本的玩家确认流程`
+- `帮我检查这段 Roaming 代码有没有问题，是否符合 Fantasy 规范`
+- `帮我写一个包含 Gate、Map、MapControl、MongoDB 的 Fantasy.config`
+
+👉 **[AI 赋能与 Skill 使用指南](Docs/05-AI/01-FantasySkill.md)**
 👉 **[AI Skill 安装说明与功能介绍](Skills/README.md)**
 
 ## 适用场景
