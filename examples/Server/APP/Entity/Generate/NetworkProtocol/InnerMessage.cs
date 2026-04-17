@@ -225,9 +225,9 @@ namespace Fantasy
             MessageObjectPool<M2G_ResponseAddressableId>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.M2G_ResponseAddressableId; } 
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+        [ProtoMember(1)]
         public long AddressableId { get; set; }
     }
     /// <summary>
@@ -315,9 +315,9 @@ namespace Fantasy
             MessageObjectPool<Chat2G_CreateRouteResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.Chat2G_CreateRouteResponse; } 
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+        [ProtoMember(1)]
         public long ChatAddress { get; set; }
     }
     /// <summary>
@@ -530,9 +530,9 @@ namespace Fantasy
             MessageObjectPool<M2G_CreateSubSceneResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.M2G_CreateSubSceneResponse; } 
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+        [ProtoMember(1)]
         public long SubSceneAddress { get; set; }
     }
     [Serializable]
@@ -658,9 +658,9 @@ namespace Fantasy
             MessageObjectPool<SubScene2G_AddressableIdResponse>.Return(this);
         }
         public uint OpCode() { return InnerOpcode.SubScene2G_AddressableIdResponse; } 
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+        [ProtoMember(1)]
         public long AddressableId { get; set; }
     }
     /// <summary>

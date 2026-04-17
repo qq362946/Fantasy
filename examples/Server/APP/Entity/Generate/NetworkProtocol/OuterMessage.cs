@@ -247,11 +247,11 @@ namespace Fantasy
             MessageObjectPool<G2C_TestResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_TestResponse; } 
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
-        [ProtoMember(2)]
-        public string Tag { get; set; }
         [ProtoMember(3)]
+        public uint ErrorCode { get; set; }
+        [ProtoMember(1)]
+        public string Tag { get; set; }
+        [ProtoMember(2)]
         public byte[] Data { get; set; }
     }
     [Serializable]
@@ -543,9 +543,9 @@ namespace Fantasy
             MessageObjectPool<M2C_TestResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.M2C_TestResponse; } 
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+        [ProtoMember(1)]
         public string Tag { get; set; }
     }
     /// <summary>
@@ -765,9 +765,9 @@ namespace Fantasy
             MessageObjectPool<Chat2C_TestMessageResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.Chat2C_TestMessageResponse; } 
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+        [ProtoMember(1)]
         public string Tag { get; set; }
     }
     /// <summary>
@@ -2441,9 +2441,9 @@ namespace Fantasy
             MessageObjectPool<G2C_TestMemoryPackResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_TestMemoryPackResponse; } 
-        [MemoryPackOrder(1)]
-        public uint ErrorCode { get; set; }
         [MemoryPackOrder(2)]
+        public uint ErrorCode { get; set; }
+        [MemoryPackOrder(1)]
         public TestMemoryPackInfo Info { get; set; }
     }
     /// <summary>
@@ -2823,9 +2823,9 @@ namespace Fantasy
             MessageObjectPool<M2C_MoveResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.M2C_MoveResponse; } 
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
         [ProtoMember(2)]
+        public uint ErrorCode { get; set; }
+        [ProtoMember(1)]
         public List<Position> Data { get; set; } = new List<Position>();
     }
     /// <summary>

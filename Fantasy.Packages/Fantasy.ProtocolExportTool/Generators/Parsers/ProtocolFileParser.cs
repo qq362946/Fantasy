@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using Fantasy.Network;
 using Fantasy.ProtocolExportTool.Models;
 using Spectre.Console;
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS0414 // Field is assigned but its value is never used
 
 namespace Fantasy.ProtocolExportTool.Generators.Parsers;
@@ -32,14 +33,14 @@ public struct ParseResult
 /// </summary>
 public sealed partial class ProtocolFileParser(string filePath)
 {
-    private readonly List<string> _errors = new();
-
+    private int _currentEnumValue = 0;
+    
     private ParserState _state = ParserState.WaitingForMessage;
     private EnumDefinition? _currentEnum;
     private MessageDefinition? _currentMessage;
-    private int _currentEnumValue = 0;
     private ProtocolSettings _currentProtocolSettings = ProtocolSettings.CreateProtoBuf();
-    private int _currentKeyIndex = 1;
+    
+    private readonly List<string> _errors = new();
     private readonly List<string> _pendingComments = new();
     private readonly List<string> _defineConstants = new();
 
@@ -131,8 +132,6 @@ public sealed partial class ProtocolFileParser(string filePath)
                 {
                     _currentMessage = message;
                     _state = ParserState.ParsingMessageHeader;
-                    // Response 类型的 ErrorCode 占用了索引1，所以字段从2开始
-                    _currentKeyIndex = IsResponseType(message.MessageType) ? 2 : 1;
                 }
                 continue;
             }
@@ -198,6 +197,12 @@ public sealed partial class ProtocolFileParser(string filePath)
                     // 消息解析完成
                     if (_currentMessage != null)
                     {
+                        // 如果是 Response 类型，计算 ErrorCode 的可用编号
+                        if (IsResponseType(_currentMessage.MessageType))
+                        {
+                            _currentMessage.ErrorCodeIndex = CalculateErrorCodeIndex(_currentMessage);
+                        }
+                        
                         messages.Add(_currentMessage.Name, _currentMessage);
                         _currentMessage = null;
                     }
@@ -415,11 +420,11 @@ public sealed partial class ProtocolFileParser(string filePath)
             EndField(field, new List<string>(_pendingComments));
         }
 
-        void EndField(FieldDefinition field, List<string> documentationComments = null)
+        void EndField(FieldDefinition fieldDefinition, List<string> documentationComments = null)
         {
-            field.KeyIndex = _currentKeyIndex++;
-            field.DocumentationComments = documentationComments;
-            _currentMessage.Fields.Add(field);
+            fieldDefinition.KeyIndex = fieldDefinition.FieldNumber;
+            fieldDefinition.DocumentationComments = documentationComments;
+            _currentMessage.Fields.Add(fieldDefinition);
             _pendingComments.Clear();
         }
     }
@@ -698,6 +703,32 @@ public sealed partial class ProtocolFileParser(string filePath)
     /// </summary>
     private static bool IsResponseType(MessageType type) =>
         type is MessageType.Response or MessageType.RouteTypeResponse or MessageType.RoamingResponse;
+
+    /// <summary>
+    /// 计算 Response 类型消息的 ErrorCode 字段编号
+    /// 优先使用 1，如果被占用则递增查找第一个可用编号
+    /// </summary>
+    private static int CalculateErrorCodeIndex(MessageDefinition message)
+    {
+        // 收集所有已使用的字段编号
+        var usedNumbers = new HashSet<int>();
+        foreach (var field in message.Fields)
+        {
+            // 跳过自定义文本行
+            if (!string.IsNullOrEmpty(field.CustomTextLine))
+                continue;
+            usedNumbers.Add(field.FieldNumber);
+        }
+    
+        // 从 1 开始查找第一个可用的编号
+        var candidate = 1;
+        while (usedNumbers.Contains(candidate))
+        {
+            candidate++;
+        }
+    
+        return candidate;
+    }
 }
 
 /// <summary>

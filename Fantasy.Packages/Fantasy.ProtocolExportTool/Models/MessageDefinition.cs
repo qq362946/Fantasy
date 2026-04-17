@@ -59,6 +59,13 @@ public sealed class MessageDefinition
     /// OpCode 信息
     /// </summary>
     public OpcodeInfo? OpCode { get; set; }
+    
+    /// <summary>
+    /// Response 类型消息的 ErrorCode 字段编号
+    /// 在解析阶段自动计算，优先使用 1，如果被占用则递增查找第一个可用编号
+    /// 仅对 Response/RouteTypeResponse/RoamingResponse 类型有效
+    /// </summary>
+    public int ErrorCodeIndex { get; set; }
 
     /// <summary>
     /// XML 注释文档

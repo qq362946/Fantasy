@@ -410,7 +410,7 @@ public sealed class CSharpExporter(
             {
                 if (memberAttribute != null)
                 {
-                    members.Add($"        [{memberAttribute}(1)]");
+                    members.Add($"        [{memberAttribute}({messageDefinition.ErrorCodeIndex})]");
                 }
 
                 disposeCode.AppendLine("            ErrorCode = 0;");
