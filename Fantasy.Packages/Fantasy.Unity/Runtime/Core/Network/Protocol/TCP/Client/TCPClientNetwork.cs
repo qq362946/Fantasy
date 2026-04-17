@@ -6,6 +6,7 @@ using System.IO;
 using System.IO.Pipelines;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 using Fantasy.Async;
@@ -349,33 +350,57 @@ namespace Fantasy.Network.TCP
             
             _isSending = true;
             
-            while (_sendBuffers.Count > 0)
+            while (_sendBuffers.TryDequeue(out var memoryStreamBuffer))
             {
-                var memoryStreamBuffer = _sendBuffers.Dequeue();
-                _sendArgs.UserToken = memoryStreamBuffer;
-                _sendArgs.SetBuffer(new ArraySegment<byte>(memoryStreamBuffer.GetBuffer(), 0, (int)memoryStreamBuffer.Position));
+                var offset = 0;
+                var totalLength = (int)memoryStreamBuffer.Position;
+                var buffer = memoryStreamBuffer.GetBuffer();
 
-                try
+                while (offset < totalLength)
                 {
-                    if (_socket.SendAsync(_sendArgs))
+                    _sendArgs.UserToken = memoryStreamBuffer;
+                    _sendArgs.SetBuffer(buffer, offset, totalLength - offset);
+
+                    try
                     {
+                        if (_socket.SendAsync(_sendArgs))
+                        {
+                            return;
+                        }
+                        
+                        if (_sendArgs.SocketError != SocketError.Success)
+                        {
+                            ReturnMemoryStream(memoryStreamBuffer);
+                            _isSending = false;
+                            return;
+                        }
+                        
+                        var sent = _sendArgs.BytesTransferred;
+                        if (sent == 0)
+                        {
+                            ReturnMemoryStream(memoryStreamBuffer);
+                            _isSending = false;
+                            return;
+                        }
+                        
+                        offset += sent;
+                    }
+                    catch
+                    {
+                        ReturnMemoryStream(memoryStreamBuffer);
+                        _isSending = false;
                         return;
                     }
                 }
-                catch
-                {
-                    _isSending = false;
-                    return;
-                }
-                finally
-                {
-                    ReturnMemoryStream(memoryStreamBuffer);
-                }
+                
+                // 同步发送完整后归还 buffer
+                ReturnMemoryStream(memoryStreamBuffer);
             }
             
             _isSending = false;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ReturnMemoryStream(MemoryStreamBuffer memoryStream)
         {
             if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
@@ -386,26 +411,190 @@ namespace Fantasy.Network.TCP
 
         private void OnSendCompleted(object sender, SocketAsyncEventArgs asyncEventArgs)
         {
-            if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
+            var memoryStreamBuffer = (MemoryStreamBuffer)asyncEventArgs.UserToken;
+            // 限制最大重试次数，防止死循环
+            // 理论上一个包不应该需要超过 10000 次 partial send
+            const int maxRetries = 10000;
+
+            for (var i = 0; i < maxRetries; i++)
             {
-                _isSending = false;
+                if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
+                {
+                    Scene.ThreadSynchronizationContext.Post(() =>
+                    {
+                        _isSending = false;
+                        ReturnMemoryStream(memoryStreamBuffer);
+                    });
+                
+                    return;
+                }
+                
+                var sent = asyncEventArgs.BytesTransferred;
+                var total = asyncEventArgs.Count;
+                
+                if (sent < total)
+                {
+                    // 部分发送，更新 offset 继续发送剩余部分
+                    var newOffset = asyncEventArgs.Offset + sent;
+                    var remaining = total - sent;
+                    asyncEventArgs.SetBuffer(newOffset, remaining);
+                
+                    try
+                    {
+                        if (_socket.SendAsync(asyncEventArgs))
+                        {
+                            return;  // 继续异步发送，等待下次回调
+                        }
+            
+                        continue;
+                    }
+                    catch
+                    {
+                        Scene.ThreadSynchronizationContext.Post(() =>
+                        {
+                            _isSending = false;
+                            ReturnMemoryStream(memoryStreamBuffer);
+                        });
+                        return;
+                    }
+                }
+                
+                // 当前 buffer 发送完整，归还并继续下一个
+                Scene.ThreadSynchronizationContext.Post(() =>
+                {
+                    ReturnMemoryStream(memoryStreamBuffer);
+                
+                    if (_sendBuffers.Count > 0)
+                    {
+                        Send();
+                    }
+                    else
+                    {
+                        _isSending = false;
+                    }
+                });
+                
                 return;
             }
-
-            var memoryStreamBuffer = (MemoryStreamBuffer)asyncEventArgs.UserToken;
+            
+            // 如果达到最大重试次数，记录错误并断开连接
+            Log.Error($"OnSendCompleted exceeded max retries ({maxRetries}), possible infinite loop. Disconnecting.");
             Scene.ThreadSynchronizationContext.Post(() =>
             {
                 ReturnMemoryStream(memoryStreamBuffer);
-                
-                if (_sendBuffers.Count > 0)
-                {
-                    Send();
-                }
-                else
-                {
-                    _isSending = false;
-                }
+                _isSending = false;
+                Dispose();
             });
+        }
+        
+        /// <summary>
+        /// 判断是否为致命错误（备用暂时没有任何地方使用）
+        /// </summary>
+        /// <param name="error">Socket 错误类型</param>
+        /// <returns>true=致命错误需断开连接，false=暂时性错误可继续</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private bool IsFatalError(SocketError error)
+        {
+            switch (error)
+            {
+                case SocketError.ConnectionAborted:
+                case SocketError.ConnectionReset:
+                case SocketError.NotConnected:
+                {
+                    return true;
+                }
+                default:
+                {
+                    // 其他错误都容忍，丢弃消息但保持连接
+                    return false;
+                }
+
+                #region 错误类型，可以根据项目的容忍度自行增加
+
+                // WouldBlock: 非阻塞 Socket 操作会阻塞
+                // 发生场景：非阻塞模式下，发送缓冲区满，无法立即完成操作
+                // 处理：丢弃当前消息，继续处理队列
+                // TryAgain: 资源暂时不可用，建议重试
+                // 发生场景：系统资源暂时耗尽（如临时端口不足）
+                // 处理：丢弃当前消息，继续处理队列
+                // --- 连接相关错误 ---
+                // ConnectionAborted: 连接被软件中止（本地系统中止）
+                // 发生场景：本地应用程序或系统强制关闭连接
+                // ConnectionReset: 连接被远程主机重置
+                // 发生场景：远程主机强制关闭连接（如进程崩溃、网络设备重启）
+                // ConnectionRefused: 连接被拒绝
+                // 发生场景：目标端口没有监听，或防火墙拒绝连接
+                // NotConnected: Socket 未连接
+                // 发生场景：在未连接的 Socket 上执行需要连接的操作
+                // Shutdown: Socket 已关闭
+                // 发生场景：在已调用 Shutdown 的 Socket 上执行操作
+                // Disconnecting: Socket 正在断开连接
+                // 发生场景：在正在断开的 Socket 上执行操作
+                // --- 网络相关错误 ---
+                // NetworkDown: 网络已关闭
+                // 发生场景：本地网络接口被禁用或网络驱动故障
+                // NetworkReset: 网络连接被重置
+                // 发生场景：网络设备重启或网络配置变更
+                // NetworkUnreachable: 网络不可达
+                // 发生场景：路由表中没有到达目标网络的路由
+                // HostDown: 主机已关闭
+                // 发生场景：目标主机关机或网络接口禁用
+                // HostUnreachable: 主机不可达
+                // 发生场景：路由表中没有到达目标主机的路由
+                // HostNotFound: 主机未找到
+                // 发生场景：DNS 解析失败或主机名不存在
+                // --- 资源相关错误 ---
+                // NoBufferSpaceAvailable: 没有可用的缓冲区空间
+                // 发生场景：系统缓冲区耗尽（内存不足或连接过多）
+                // TooManyOpenSockets: 打开的 Socket 过多
+                // 发生场景：进程或系统达到 Socket 数量限制
+                // SystemNotReady: 网络子系统未就绪
+                // 发生场景：网络驱动未加载或网络栈初始化失败
+                // --- 超时错误 ---
+                // TimedOut: 操作超时
+                // 发生场景：发送操作超过设定的超时时间（网络延迟过高）
+                // --- 协议相关错误 ---
+                // ProtocolNotSupported: 协议不支持
+                // 发生场景：尝试使用系统不支持的协议
+                // ProtocolType: 协议类型错误
+                // 发生场景：协议类型与 Socket 类型不匹配
+                // ProtocolOption: 协议选项错误
+                // 发生场景：设置了无效的协议选项
+                // ProtocolFamilyNotSupported: 协议族不支持
+                // 发生场景：尝试使用系统不支持的协议族（如 IPv6 未启用）
+                // --- 参数错误（代码 bug）---
+                // InvalidArgument: 参数无效
+                // 发生场景：传递了无效的参数（代码错误）
+                // MessageSize: 消息大小错误
+                // 发生场景：消息超过协议允许的最大大小
+                // Fault: 指针参数无效
+                // 发生场景：传递了无效的内存地址（代码错误）
+                // --- 权限错误 ---
+                // AccessDenied: 访问被拒绝
+                // 发生场景：没有权限执行操作（如绑定特权端口）
+                // --- 其他错误 ---
+                // Success: 操作成功（不应该出现在错误处理中）
+                // SocketError: Socket 错误（通用错误）
+                // OperationAborted: 操作被中止
+                // IOPending: I/O 操作挂起
+                // Interrupted: 阻塞调用被中断
+                // InProgress: 操作正在进行
+                // AlreadyInProgress: 操作已在进行
+                // NotSocket: 描述符不是 Socket
+                // DestinationAddressRequired: 需要目标地址
+                // MessageTooLong: 消息过长
+                // SocketNotSupported: Socket 类型不支持
+                // OperationNotSupported: 操作不支持
+                // AddressFamilyNotSupported: 地址族不支持
+                // AddressAlreadyInUse: 地址已被使用
+                // AddressNotAvailable: 地址不可用
+                // IsConnected: Socket 已连接
+                // NotInitialized: Socket 未初始化
+                // ProcessLimit: 进程限制
+                // VersionNotSupported: 版本不支持
+
+                #endregion
+            }
         }
 
         #endregion
