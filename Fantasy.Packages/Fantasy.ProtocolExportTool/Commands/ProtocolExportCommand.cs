@@ -79,7 +79,7 @@ public class ProtocolExportCommand : Command
 
             if (!string.IsNullOrEmpty(config.ServerDir) && !Directory.Exists(config.ServerDir))
             {
-                if (isSilent || await AnsiConsole.ConfirmAsync("[/] 导出到服务器的目录不存在是否要创建?"))
+                if (isSilent || await AnsiConsole.ConfirmAsync("[yellow]提示:[/] 导出到服务器的目录不存在是否要创建?"))
                 {
                     Directory.CreateDirectory(config.ServerDir);
                 }
@@ -92,7 +92,7 @@ public class ProtocolExportCommand : Command
 
             if (!string.IsNullOrEmpty(config.ClientDir) && !Directory.Exists(config.ClientDir))
             {
-                if (isSilent || await AnsiConsole.ConfirmAsync("[/] 导出到客户端的目录不存在是否要创建?"))
+                if (isSilent || await AnsiConsole.ConfirmAsync("[yellow]提示:[/] 导出到客户端的目录不存在是否要创建?"))
                 {
                     Directory.CreateDirectory(config.ClientDir);
                 }
