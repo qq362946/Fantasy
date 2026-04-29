@@ -1,11 +1,10 @@
 using System;
 using System.CommandLine;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
-using Fantasy.ProtocolExportTool.Generators;
 using Fantasy.ProtocolExportTool.Interactive;
 using Fantasy.ProtocolExportTool.Models;
+using Fantasy.ProtocolExportTool.Services;
 using Spectre.Console;
 
 namespace Fantasy.ProtocolExportTool.Commands;
@@ -58,7 +57,7 @@ public class ProtocolExportCommand : Command
             if (isSilent)
             {
                 // 静默模式：从 ExporterSettings.json 加载配置
-                var loadedConfig = await LoadConfigFromFileAsync();
+                var loadedConfig = await ProtocolExportService.LoadConfigFromFileAsync("ExporterSettings.json", null);
                 if (loadedConfig == null)
                 {
                     return 1;
@@ -71,6 +70,7 @@ public class ProtocolExportCommand : Command
                 config = await new ProtocolExportWizard().RunAsync(protocolDir, serverDir, clientDir, exportType);
             }
 
+            // 验证目录
             if (!isSilent && !Directory.Exists(config.ProtocolDir))
             {
                 AnsiConsole.MarkupLine($"[red]错误:[/] 网络协议所在的位置的目录 '{config.ProtocolDir}' 不已存在。");
@@ -109,76 +109,11 @@ public class ProtocolExportCommand : Command
                 return 1;
             }
 
-            try
-            {
-                await new ProtocolGenerator().GenerateAsync(config);
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                AnsiConsole.MarkupLine($"[red]错误:[/] {ex.Message}");
-                if (AnsiConsole.Confirm("显示堆栈跟踪？", false))
-                {
-                    AnsiConsole.WriteException(ex);
-                }
+            // 执行导出
+            var exportService = new ProtocolExportService();
+            var result = await exportService.ExportAsync(config, silent: isSilent);
 
-                return 1;
-            }
+            return result.Success ? 0 : 1;
         });
-    }
-
-    private static async Task<ProtocolExportConfig?> LoadConfigFromFileAsync()
-    {
-        const string settingsFileName = "ExporterSettings.json";
-
-        try
-        {
-            if (!File.Exists(settingsFileName))
-            {
-                AnsiConsole.MarkupLine($"[red]错误:[/] 找不到配置文件 '{settingsFileName}'。");
-                AnsiConsole.MarkupLine("[yellow]提示:[/] 请在当前目录下创建 ExporterSettings.json 文件。");
-                return null;
-            }
-
-            var jsonContent = await File.ReadAllTextAsync(settingsFileName);
-            var settings = JsonSerializer.Deserialize<ExporterSettings>(jsonContent, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                ReadCommentHandling = JsonCommentHandling.Skip,
-                AllowTrailingCommas = true
-            });
-
-            if (settings?.Export == null)
-            {
-                AnsiConsole.MarkupLine($"[red]错误:[/] 配置文件 '{settingsFileName}' 格式不正确。");
-                return null;
-            }
-
-            var config = new ProtocolExportConfig
-            {
-                ProtocolDir = settings.Export.NetworkProtocolDirectory.Value,
-                ServerDir = settings.Export.NetworkProtocolServerDirectory.Value,
-                ClientDir = settings.Export.NetworkProtocolClientDirectory.Value,
-                ExportType = ProtocolExportType.All
-            };
-
-            AnsiConsole.MarkupLine("[green]成功:[/] 已从 ExporterSettings.json 加载配置。");
-            // AnsiConsole.MarkupLine($"  协议目录: {config.ProtocolDir}");
-            // AnsiConsole.MarkupLine($"  服务器目录: {config.ServerDir}");
-            // AnsiConsole.MarkupLine($"  客户端目录: {config.ClientDir}");
-            // AnsiConsole.WriteLine();
-
-            return config;
-        }
-        catch (JsonException ex)
-        {
-            AnsiConsole.MarkupLine($"[red]错误:[/] 解析配置文件失败: {ex.Message}");
-            return null;
-        }
-        catch (Exception ex)
-        {
-            AnsiConsole.MarkupLine($"[red]错误:[/] 读取配置文件失败: {ex.Message}");
-            return null;
-        }
     }
 }
