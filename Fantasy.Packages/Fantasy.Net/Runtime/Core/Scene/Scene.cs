@@ -104,6 +104,10 @@ namespace Fantasy
         internal ANetwork InnerNetwork { get; private set; }
         internal ANetwork OuterNetwork { get; private set; }
         /// <summary>
+        /// Log
+        /// </summary>
+        public string LogSceneName { get; private set; }
+        /// <summary>
         /// 获取Scene对应的SceneConfig
         /// </summary>
         public SceneConfig SceneConfig => SceneConfigData.Instance.Get(SceneConfigId);
@@ -117,6 +121,7 @@ namespace Fantasy
         /// 当前Scene的下创建的Entity
         /// </summary>
         private readonly Dictionary<long, Entity> _entities = new Dictionary<long, Entity>();
+        
         #endregion
 
         #region IdFactory
@@ -441,6 +446,7 @@ namespace Fantasy
             scene.SceneType = sceneConfig.SceneType;
             scene.SceneConfigId = sceneConfig.Id;
             await SetScheduler(scene, sceneConfig.SceneRuntimeMode);
+            scene.LogSceneName = $"{sceneConfig.SceneTypeString}_{sceneConfig.Id}";
             
             if (sceneConfig.WorldConfigId != 0)
             {

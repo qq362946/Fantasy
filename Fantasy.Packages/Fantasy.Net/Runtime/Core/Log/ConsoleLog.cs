@@ -13,8 +13,9 @@ public sealed class ConsoleLog : ILog
     /// <summary>
     /// 初始化方法
     /// </summary>
+    /// <param name="appId"></param>
     /// <param name="processMode"></param>
-    public void Initialize(ProcessMode processMode) { }
+    public void Initialize(string appId, ProcessMode processMode) { }
 
     /// <summary>
     /// 记录跟踪级别的日志消息。
@@ -64,6 +65,31 @@ public sealed class ConsoleLog : ILog
     {
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.WriteLine(message);
+    }
+    
+    public void Trace(string sceneName, string message)
+    {
+        Trace(message);
+    }
+    
+    public void Warning(string sceneName, string message)
+    {
+        Warning(message);
+    }
+    
+    public void Info(string sceneName, string message)
+    {
+        Info(message);
+    }
+    
+    public void Debug(string sceneName, string message)
+    {
+        Debug(message);
+    }
+    
+    public void Error(string sceneName, string message)
+    {
+        Error(message);
     }
 
     /// <summary>
@@ -129,6 +155,31 @@ public sealed class ConsoleLog : ILog
     {
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.WriteLine(message, args);
+    }
+    
+    public void Trace(string sceneName, string message, params object[] args)
+    {
+        Trace(message, args);
+    }
+    
+    public void Warning(string sceneName, string message, params object[] args)
+    {
+        Warning(message, args);
+    }
+    
+    public void Info(string sceneName, string message, params object[] args)
+    {
+        Info(message, args);
+    }
+    
+    public void Debug(string sceneName, string message, params object[] args)
+    {
+        Debug(message, args);
+    }
+    
+    public void Error(string sceneName, string message, params object[] args)
+    {
+        Error(message, args);
     }
 
     /// <summary>

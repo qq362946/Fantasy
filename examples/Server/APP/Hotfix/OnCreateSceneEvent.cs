@@ -39,6 +39,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
         var scene = self.Scene;
 
         await FTask.CompletedTask;
+        scene.LogDebug("OnCreateSceneEvent");
 
         switch (scene.SceneType)
         {

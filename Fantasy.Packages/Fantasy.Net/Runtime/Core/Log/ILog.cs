@@ -12,8 +12,9 @@ namespace Fantasy
         /// <summary>
         /// 初始化
         /// </summary>
+        /// <param name="appId"></param>
         /// <param name="processMode"></param>
-        void Initialize(ProcessMode processMode);
+        void Initialize(string appId, ProcessMode processMode);
 #endif
         /// <summary>
         /// 记录跟踪级别的日志消息。
@@ -40,6 +41,36 @@ namespace Fantasy
         /// </summary>
         /// <param name="message">日志消息。</param>
         void Error(string message);
+        /// <summary>
+        /// 记录指定Scene的跟踪级别日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息。</param>
+        void Trace(string sceneName, string message);
+        /// <summary>
+        /// 记录指定Scene的警告级别日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息。</param>
+        void Warning(string sceneName, string message);
+        /// <summary>
+        /// 记录指定Scene的信息级别日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息。</param>
+        void Info(string sceneName, string message);
+        /// <summary>
+        /// 记录指定Scene的调试级别日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息。</param>
+        void Debug(string sceneName, string message);
+        /// <summary>
+        /// 记录指定Scene的错误级别日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息。</param>
+        void Error(string sceneName, string message);
         /// <summary>
         /// 记录跟踪级别的格式化日志消息。
         /// </summary>
@@ -70,5 +101,40 @@ namespace Fantasy
         /// <param name="message">日志消息模板。</param>
         /// <param name="args">格式化参数。</param>
         void Error(string message, params object[] args);
+        /// <summary>
+        /// 记录指定Scene的跟踪级别格式化日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息模板。</param>
+        /// <param name="args">格式化参数。</param>
+        void Trace(string sceneName, string message, params object[] args);
+        /// <summary>
+        /// 记录指定Scene的警告级别格式化日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息模板。</param>
+        /// <param name="args">格式化参数。</param>
+        void Warning(string sceneName, string message, params object[] args);
+        /// <summary>
+        /// 记录指定Scene的信息级别格式化日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息模板。</param>
+        /// <param name="args">格式化参数。</param>
+        void Info(string sceneName, string message, params object[] args);
+        /// <summary>
+        /// 记录指定Scene的调试级别格式化日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息模板。</param>
+        /// <param name="args">格式化参数。</param>
+        void Debug(string sceneName, string message, params object[] args);
+        /// <summary>
+        /// 记录指定Scene的错误级别格式化日志消息。
+        /// </summary>
+        /// <param name="sceneName">Scene日志名称。</param>
+        /// <param name="message">日志消息模板。</param>
+        /// <param name="args">格式化参数。</param>
+        void Error(string sceneName, string message, params object[] args);
     }
 }
