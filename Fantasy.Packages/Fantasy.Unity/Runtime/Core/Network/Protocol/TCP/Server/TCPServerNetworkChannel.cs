@@ -74,7 +74,7 @@ namespace Fantasy.Network.TCP
                 _socket.Close();
             }
 
-            _sendBuffers.Clear();
+            ClearSendBuffers();
             _packetParser.Dispose();
             _isSending = false;
             base.Dispose();
@@ -293,6 +293,14 @@ namespace Fantasy.Network.TCP
             }
         }
         
+        private void ClearSendBuffers()
+        {
+            while (_sendBuffers.TryDequeue(out var memoryStreamBuffer))
+            {
+                ReturnMemoryStream(memoryStreamBuffer);
+            }
+        }
+        
         private void OnSendCompletedHandler(object sender, SocketAsyncEventArgs asyncEventArgs)
         {
             var memoryStreamBuffer = (MemoryStreamBuffer)asyncEventArgs.UserToken;
@@ -350,6 +358,7 @@ namespace Fantasy.Network.TCP
                 
                     if (_sendBuffers.Count > 0)
                     {
+                        _isSending = false;
                         Send();
                     }
                     else

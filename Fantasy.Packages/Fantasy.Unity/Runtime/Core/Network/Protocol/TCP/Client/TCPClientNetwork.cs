@@ -87,7 +87,7 @@ namespace Fantasy.Network.TCP
                     _socket = null;
                 }
 
-                _sendBuffers.Clear();
+                ClearSendBuffers();
                 _packetParser?.Dispose();
                 ChannelId = 0;
                 _sendArgs = null;
@@ -408,6 +408,14 @@ namespace Fantasy.Network.TCP
                 MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
             }
         }
+        
+        private void ClearSendBuffers()
+        {
+            while (_sendBuffers.TryDequeue(out var memoryStreamBuffer))
+            {
+                ReturnMemoryStream(memoryStreamBuffer);
+            }
+        }
 
         private void OnSendCompleted(object sender, SocketAsyncEventArgs asyncEventArgs)
         {
@@ -466,6 +474,7 @@ namespace Fantasy.Network.TCP
                 
                     if (_sendBuffers.Count > 0)
                     {
+                        _isSending = false;
                         Send();
                     }
                     else
