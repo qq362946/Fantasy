@@ -9,6 +9,7 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
+        "FANTASY_UNITY",
         "FANTASY_UNITY"
     ],
     "versionDefines": [],
