@@ -20,11 +20,23 @@ namespace Fantasy.Assembly
         /// 
         /// </summary>
         /// <param name="customRegistrar"></param>
-        void Register(OneToManyList<RuntimeTypeHandle, Type> customRegistrar);
+        void Register(OneToManyList<RuntimeTypeHandle, CustomInterfaceInfo> customRegistrar);
         /// <summary>
         /// 
         /// </summary>
         /// <param name="customRegistrar"></param>
-        void UnRegister(OneToManyList<RuntimeTypeHandle, Type> customRegistrar);
+        void UnRegister(OneToManyList<RuntimeTypeHandle, CustomInterfaceInfo> customRegistrar);
+    }
+
+    public sealed class CustomInterfaceInfo
+    {
+        public readonly Type Type;
+        public readonly Func<ICustomInterface> CustomInterfaceFunc;
+        
+        public CustomInterfaceInfo(Type type, Func<ICustomInterface> customInterfaceFunc)
+        {
+            Type = type;
+            CustomInterfaceFunc = customInterfaceFunc;
+        }
     }
 }

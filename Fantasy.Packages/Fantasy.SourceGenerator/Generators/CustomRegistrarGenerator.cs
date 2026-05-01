@@ -65,31 +65,37 @@ namespace Fantasy.SourceGenerator.Generators
             );
             builder.AppendLine();
             // 开始命名空间
-             builder.BeginDefaultNamespace();
-            // 开始类定义（实现 ISphereEventRegistrar 接口）
+            builder.BeginDefaultNamespace();
+            // 开始类定义（实现 ICustomInterfaceRegistrar 接口）
             builder.AddXmlComment($"Auto-generated CustomInterface registration class for {assemblyName}");
             builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.ICustomInterfaceRegistrar");
             // 生成注册方法
-            builder.AddXmlComment("Register all CustomInterface to the containers");
-            builder.BeginMethod("public void Register(global::Fantasy.DataStructure.Collection.OneToManyList<global::System.RuntimeTypeHandle, Type> customRegistrar)");
+            var registrations = new List<(string InterfaceFullName, string FieldName, string TypeFullName)>();
             foreach (var customRegistrarType in customRegistrarTypeInfos)
             {
+                var customInterfaceInfo = $"_{customRegistrarType.TypeName.ToCamelCase()}";
+
+                builder.AppendLine($"private global::Fantasy.Assembly.CustomInterfaceInfo {customInterfaceInfo} = new global::Fantasy.Assembly.CustomInterfaceInfo(typeof({customRegistrarType.TypeFullName}), () => new {customRegistrarType.TypeFullName}());");
+
                 foreach (var interfaceInfo in customRegistrarType.AllInterfaces)
                 {
-                    builder.AppendLine($"customRegistrar.Add(typeof({interfaceInfo.FullName}).TypeHandle,typeof({customRegistrarType.TypeFullName}));");
+                    registrations.Add((interfaceInfo.FullName, customInterfaceInfo, customRegistrarType.TypeFullName));
                 }
+            }
+            builder.AddXmlComment("Register all CustomInterface to the containers");
+            builder.BeginMethod("public void Register(global::Fantasy.DataStructure.Collection.OneToManyList<global::System.RuntimeTypeHandle, global::Fantasy.Assembly.CustomInterfaceInfo> customRegistrar)");
+            foreach (var registration in registrations)
+            {
+                builder.AppendLine($"customRegistrar.Add(typeof({registration.InterfaceFullName}).TypeHandle, {registration.FieldName});");
             }
             builder.EndMethod();
             builder.AppendLine();
             // 生成取消注册方法
             builder.AddXmlComment("Unregister all Event Systems from the containers (called on hot reload)");
-            builder.BeginMethod("public void UnRegister(global::Fantasy.DataStructure.Collection.OneToManyList<global::System.RuntimeTypeHandle, Type> customRegistrar)");
-            foreach (var customRegistrarType in customRegistrarTypeInfos)
+            builder.BeginMethod("public void UnRegister(global::Fantasy.DataStructure.Collection.OneToManyList<global::System.RuntimeTypeHandle, global::Fantasy.Assembly.CustomInterfaceInfo> customRegistrar)");
+            foreach (var registration in registrations)
             {
-                foreach (var interfaceInfo in customRegistrarType.AllInterfaces)
-                {
-                    builder.AppendLine($"customRegistrar.RemoveValue(typeof({interfaceInfo.FullName}).TypeHandle,typeof({customRegistrarType.TypeFullName}));");
-                }
+                builder.AppendLine($"customRegistrar.RemoveValue(typeof({registration.InterfaceFullName}).TypeHandle,{registration.FieldName});");
             }
             builder.EndMethod();
             // 结束类和命名空间

@@ -234,6 +234,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("Fantasy.Assembly.AssemblyManifest.Register(");
             builder.Indent();
             builder.AppendLine("_assemblyManifestId,");
+            builder.AppendLine($"\"{replaceAssemblyName}\",");
             builder.AppendLine("assembly,");
             builder.AppendLine("networkProtocolRegistrar,");
             builder.AppendLine("eventSystemRegistrar,");
@@ -255,6 +256,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AppendLine("Fantasy.Assembly.AssemblyManifest.Register(");
             builder.Indent();
             builder.AppendLine("_assemblyManifestId,");
+            builder.AppendLine($"\"{replaceAssemblyName}\",");
             builder.AppendLine("assembly,");
             builder.AppendLine("networkProtocolRegistrar,");
             builder.AppendLine("eventSystemRegistrar,");

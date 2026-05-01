@@ -30,6 +30,11 @@ namespace Fantasy.Assembly
         /// 通过程序集名称的哈希值生成
         /// </summary>
         public long AssemblyManifestId { get; private set; }
+        
+        /// <summary>
+        /// 程序集名称
+        /// </summary>
+        public string AssemblyName { get; private set; }
 
         /// <summary>
         /// 程序集实例
@@ -97,7 +102,7 @@ namespace Fantasy.Assembly
         internal ISeparateTableRegistrar SeparateTableRegistrar { get; private set; }
         internal ISphereEventRegistrar SphereEventRegistrar { get; private set; }
 #endif
-        private readonly OneToManyList<RuntimeTypeHandle, Type> _customInterfaces = new();
+        private readonly OneToManyList<RuntimeTypeHandle, CustomInterfaceInfo> _customInterfaces = new();
 #if FANTASY_WEBGL
         /// <summary>
         /// 程序集清单集合（WebGL 单线程版本）
@@ -139,6 +144,7 @@ namespace Fantasy.Assembly
         /// 直接创建并缓存完整的 AssemblyManifest
         /// </summary>
         /// <param name="assemblyManifestId">程序集唯一标识（通过程序集名称哈希生成）</param>
+        /// <param name="assemblyName">程序集名字</param>
         /// <param name="assembly">程序集实例</param>
         /// <param name="networkProtocolRegistrar">网络协议注册器</param>
         /// <param name="eventSystemRegistrar">事件系统注册器</param>
@@ -156,6 +162,7 @@ namespace Fantasy.Assembly
         /// <param name="memoryPackEntityGenerator">memoryPack生成器</param>
         public static void Register(
             long assemblyManifestId,
+            string assemblyName,
             System.Reflection.Assembly assembly,
             INetworkProtocolRegistrar networkProtocolRegistrar,
             IEventSystemRegistrar eventSystemRegistrar,
@@ -175,6 +182,7 @@ namespace Fantasy.Assembly
             var manifest = new AssemblyManifest
             {
                 Assembly = assembly,
+                AssemblyName = assemblyName,
                 AssemblyManifestId = assemblyManifestId,
                 NetworkProtocolRegistrar = networkProtocolRegistrar,
                 EventSystemRegistrar = eventSystemRegistrar,
@@ -210,6 +218,7 @@ namespace Fantasy.Assembly
         /// 直接创建并缓存完整的 AssemblyManifest
         /// </summary>
         /// <param name="assemblyManifestId">程序集唯一标识（通过程序集名称哈希生成）</param>
+        /// <param name="assemblyName">程序集名字</param>
         /// <param name="assembly">程序集实例</param>
         /// <param name="networkProtocolRegistrar">网络协议注册器</param>
         /// <param name="eventSystemRegistrar">事件系统注册器</param>
@@ -224,6 +233,7 @@ namespace Fantasy.Assembly
         /// <param name="memoryPackEntityGenerator">memoryPack生成器</param>
         public static void Register(
             long assemblyManifestId,
+            string assemblyName,
             System.Reflection.Assembly assembly,
             INetworkProtocolRegistrar networkProtocolRegistrar,
             IEventSystemRegistrar eventSystemRegistrar,
@@ -240,6 +250,7 @@ namespace Fantasy.Assembly
             var manifest = new AssemblyManifest
             {
                 Assembly = assembly,
+                AssemblyName = assemblyName,
                 AssemblyManifestId = assemblyManifestId,
                 NetworkProtocolRegistrar = networkProtocolRegistrar,
                 EventSystemRegistrar = eventSystemRegistrar,
@@ -315,17 +326,57 @@ namespace Fantasy.Assembly
 
                 foreach (var customRegistrar in customRegistrars)
                 {
+                    yield return customRegistrar.Type;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 获取所有程序集中实现ICustomRegistrar接口中指定类型的CustomInterfaceInfo。
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <returns></returns>
+        public static IEnumerable<CustomInterfaceInfo> ForEachCustomInterfaceInfo(Type type)
+        {
+            foreach (var (_, assemblyManifest) in Manifests)
+            {
+                if (!assemblyManifest._customInterfaces.TryGetValue(type.TypeHandle, out var customRegistrars))
+                {
+                    continue;
+                }
+
+                foreach (var customRegistrar in customRegistrars)
+                {
                     yield return customRegistrar;
                 }
             }
         }
         
-
         /// <summary>
         /// 获取所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。
         /// </summary>
         /// <returns>所有程序集中实现ICustomRegistrar接口中指定类型的所有类型。</returns>
         public static IEnumerable<Type> ForEach<T>()
+        {
+            foreach (var (_, assemblyManifest) in Manifests)
+            {
+                if (!assemblyManifest._customInterfaces.TryGetValue(typeof(T).TypeHandle, out var customRegistrars))
+                {
+                    continue;
+                }
+
+                foreach (var customRegistrar in customRegistrars)
+                {
+                    yield return customRegistrar.Type;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// 获取所有程序集中实现ICustomRegistrar接口中指定类型的CustomInterfaceInfo。
+        /// </summary>
+        /// <returns>所有程序集中实现ICustomRegistrar接口中指定类型的CustomInterfaceInfo。</returns>
+        public static IEnumerable<CustomInterfaceInfo> ForEachCustomInterfaceInfo<T>()
         {
             foreach (var (_, assemblyManifest) in Manifests)
             {
@@ -356,6 +407,25 @@ namespace Fantasy.Assembly
             
             foreach (var customType in customRegistrars)
             {
+                yield return customType.Type;
+            }
+        }
+        
+        /// <summary>
+        /// 获取指定程序集中实现指定类型的CustomInterfaceInfo。
+        /// </summary>
+        /// <param name="assemblyManifest">程序集清单。</param>
+        /// <param name="type">类型</param>
+        /// <returns></returns>
+        public static IEnumerable<CustomInterfaceInfo> ForEachCustomInterfaceInfo(AssemblyManifest assemblyManifest, Type type)
+        {
+            if (!assemblyManifest._customInterfaces.TryGetValue(type.TypeHandle, out var customRegistrars))
+            {
+                yield break;
+            }
+            
+            foreach (var customType in customRegistrars)
+            {
                 yield return customType;
             }
         }
@@ -366,6 +436,24 @@ namespace Fantasy.Assembly
         /// <param name="assemblyManifest">程序集清单。</param>
         /// <returns>指定程序集中实现指定类型的类型。</returns>
         public static IEnumerable<Type> ForEach<T>(AssemblyManifest assemblyManifest)
+        {
+            if (!assemblyManifest._customInterfaces.TryGetValue(typeof(T).TypeHandle, out var customRegistrars))
+            {
+                yield break;
+            }
+            
+            foreach (var type in customRegistrars)
+            {
+                yield return type.Type;
+            }
+        }
+        
+        /// <summary>
+        /// 获取指定程序集中实现指定类型的CustomInterfaceInfo。
+        /// </summary>
+        /// <param name="assemblyManifest">程序集清单。</param>
+        /// <returns>指定程序集中实现指定类型的类型。</returns>
+        public static IEnumerable<CustomInterfaceInfo> ForEachCustomInterfaceInfo<T>(AssemblyManifest assemblyManifest)
         {
             if (!assemblyManifest._customInterfaces.TryGetValue(typeof(T).TypeHandle, out var customRegistrars))
             {
