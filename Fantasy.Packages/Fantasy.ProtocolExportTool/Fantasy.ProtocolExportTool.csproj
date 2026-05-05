@@ -12,7 +12,7 @@
     <ItemGroup>
       <PackageReference Include="Spectre.Console" Version="0.54.0" />
       <PackageReference Include="System.CommandLine" Version="2.0.0" />
-      <PackageReference Include="System.Text.Json" Version="9.0.0" />
+      <PackageReference Include="System.Text.Json" Version="9.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -39,6 +39,12 @@
       </None>
       <None Update="quick-build.sh">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="协议导出_MCP_使用说明.md">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="publish.bat">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 
