@@ -325,18 +325,23 @@ namespace Fantasy.Entitas
         /// <param name="component">要添加的实体实例</param>
         public void AddComponent(Entity component)
         {
-            if (this == component)
-            {
-                Log.Error("Cannot add oneself to one's own components");
-                return;
-            }
-
             if (component.IsDisposed)
             {
                 Log.Error($"component is Disposed {component.Type.FullName}");
                 return;
             }
 
+            InnerAddComponent(component);   
+        }
+
+        internal void InnerAddComponent(Entity component)
+        {
+            if (this == component)
+            {
+                Log.Error("Cannot add oneself to one's own components");
+                return;
+            }
+            
             var type = component.Type;
             component.Parent?.RemoveComponent(component, false);
 

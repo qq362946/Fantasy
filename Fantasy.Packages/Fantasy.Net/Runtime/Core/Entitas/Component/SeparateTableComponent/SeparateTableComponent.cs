@@ -211,7 +211,7 @@ namespace Fantasy.SeparateTable
             }
 
             // 从数据库加载分表实体
-            var separateTableEntity = await database.Query<T>(entity.Id, true, separateTable.TableName);
+            var separateTableEntity = await database.Query<T>(entity.Id, false, separateTable.TableName);
 
             if (separateTableEntity == null)
             {
@@ -219,7 +219,9 @@ namespace Fantasy.SeparateTable
             }
 
             // 将加载的分表实体作为组件添加到父实体上
-            entity.AddComponent(separateTableEntity);
+            entity.InnerAddComponent(separateTableEntity);
+            // 执行反序列化
+            separateTableEntity.Deserialize(Scene);
             return true;
         }
 
@@ -271,7 +273,7 @@ namespace Fantasy.SeparateTable
             foreach (var (_, (_, tableName)) in separateTables)
             {
                 // 使用实体 ID 作为查询条件，加载分表实体
-                var separateTableEntity = await database.QueryNotLock<Entity>(entityId, true, tableName);
+                var separateTableEntity = await database.QueryNotLock<Entity>(entityId, false, tableName);
 
                 if (separateTableEntity == null)
                 {
@@ -279,7 +281,9 @@ namespace Fantasy.SeparateTable
                 }
 
                 // 将加载的分表实体作为组件添加到父实体上
-                entity.AddComponent(separateTableEntity);
+                entity.InnerAddComponent(separateTableEntity);
+                // 执行反序列化
+                separateTableEntity.Deserialize(Scene);
             }
         }
         
