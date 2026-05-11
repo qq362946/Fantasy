@@ -46,6 +46,6 @@ public sealed class EntityMultiCollectionSerializer : IBsonSerializer
         bsonWriter.WriteEndArray();
     }
 
-    public Type ValueType { get; }
+    public Type ValueType => typeof(EntityMultiCollection);
 }
 #endif
