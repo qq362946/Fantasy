@@ -82,7 +82,7 @@ namespace Fantasy.Assembly
         /// 移除后该回调将不再接收程序集的加载、卸载、重载事件
         /// </summary>
         /// <param name="assemblyLifecycle">要移除的生命周期回调对象</param>
-        internal static void Remove(IAssemblyLifecycle assemblyLifecycle)
+        public static void Remove(IAssemblyLifecycle assemblyLifecycle)
         {
             AssemblyLifecycles.Remove(assemblyLifecycle);
         }

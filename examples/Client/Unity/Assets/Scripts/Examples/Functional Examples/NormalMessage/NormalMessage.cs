@@ -155,7 +155,7 @@ public class NormalMessage : MonoBehaviour
         // 发送一个RPC消息
         // C2G_TestRequest:服务器接收的协议
         // G2C_TestResponse:客户端接收到服务器发送的返回消息
-        var bytes = new List<byte>(new byte[ProgramDefine.MaxMessageSize -1000]);
+        var bytes = new List<byte>();
         var response = await _session.C2G_TestRequest("Hello C2G_TestRequest", bytes);
         Text.text = $"收到G2C_TestResponse Tag = {response.Tag}";
         SendRPCMessageButton.interactable = true;
