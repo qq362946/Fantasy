@@ -33,6 +33,7 @@ message G2C_TestResponse // IResponse
 {
 	string Tag = 1;
 	bytes Data = 2;
+	repeatedList int32 Lists = 3;
 }
 message C2G_TestRequestPushMessage // IMessage
 {

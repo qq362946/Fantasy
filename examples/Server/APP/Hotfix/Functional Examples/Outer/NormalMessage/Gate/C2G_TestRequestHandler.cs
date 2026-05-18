@@ -12,6 +12,7 @@ public sealed class C2G_TestRequestHandler : MessageRPC<C2G_TestRequest, G2C_Tes
     {
         Log.Debug($"Receive C2G_TestRequest Tag = {request.Tag} {request.Data}");
         response.Tag = "Hello G2C_TestResponse";
+        response.Lists = new List<int>();
         await FTask.CompletedTask;
     }
 }

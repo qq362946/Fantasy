@@ -221,7 +221,7 @@ namespace Fantasy.SeparateTable
             // 将加载的分表实体作为组件添加到父实体上
             entity.InnerAddComponent(separateTableEntity);
             // 执行反序列化
-            separateTableEntity.Deserialize(Scene);
+            separateTableEntity.Deserialize(entity.Scene);
             return true;
         }
 
@@ -283,7 +283,7 @@ namespace Fantasy.SeparateTable
                 // 将加载的分表实体作为组件添加到父实体上
                 entity.InnerAddComponent(separateTableEntity);
                 // 执行反序列化
-                separateTableEntity.Deserialize(Scene);
+                separateTableEntity.Deserialize(entity.Scene);
             }
         }
         

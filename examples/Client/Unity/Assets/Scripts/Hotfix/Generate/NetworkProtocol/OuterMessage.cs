@@ -244,15 +244,18 @@ namespace Fantasy
             ErrorCode = 0;
             Tag = default;
             Data = null;
+            Lists = null;
             MessageObjectPool<G2C_TestResponse>.Return(this);
         }
         public uint OpCode() { return OuterOpcode.G2C_TestResponse; } 
-        [ProtoMember(3)]
+        [ProtoMember(4)]
         public uint ErrorCode { get; set; }
         [ProtoMember(1)]
         public string Tag { get; set; }
         [ProtoMember(2)]
         public byte[] Data { get; set; }
+        [ProtoMember(3)]
+        public List<int> Lists { get; set; }
     }
     [Serializable]
     [ProtoContract]
