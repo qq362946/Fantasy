@@ -35,3 +35,4 @@ Packages.Unity/**/*.meta
 examples/**/Unity/.vscode
 CLAUDE.md
 .claude
+Fantasy.Packages/Fantasy.Cil/Resources
