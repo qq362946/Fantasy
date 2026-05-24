@@ -179,10 +179,10 @@ message Map2G_GetPlayerResponse // IRoamingResponse
 
 ```csharp
 // 1. 创建 Roaming 组件（简单版本，直接返回组件）
-SessionRoamingComponent session.CreateRoaming(long roamingId, bool isAutoDispose, int delayRemove);
+SessionRoamingComponent session.CreateRoaming(long roamingId, int delayRemove);
 
 // 2. 创建 Roaming 组件（详细版本，返回状态信息）
-CreateRoamingResult session.TryCreateRoaming(long roamingId, bool isAutoDispose, int delayRemove);
+CreateRoamingResult session.TryCreateRoaming(long roamingId, int delayRemove);
 
 // 3. 链接到后端服务器（自动判断首次连接或断线重连）
 uint roaming.Link(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
@@ -228,11 +228,9 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
     {
         // 步骤 1：创建 Roaming 组件
         // roamingId: 漫游的唯一标识，通常使用玩家 ID
-        // isAutoDispose: Session 断开时是否自动断开漫游功能
         // delayRemove: 延迟多久执行断开（毫秒）
         var roaming = await session.CreateRoaming(
             roamingId: request.PlayerId,
-            isAutoDispose: true,
             delayRemove: 1000
         );
 
