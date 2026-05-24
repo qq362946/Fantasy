@@ -45,18 +45,7 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         
         _isInnerDispose = true;
         
-        if (_webSocket.State == WebSocketState.Open || _webSocket.State == WebSocketState.CloseReceived)
-        {
-            try
-            {
-                _webSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure",
-                    CancellationToken.None).GetAwaiter().GetResult();
-            }
-            catch (Exception)
-            {
-                // 关闭过程中的异常可以忽略
-            }
-        }
+        _network.RemoveChannel(Id);
         
         if (!_cancellationTokenSource.IsCancellationRequested)
         {
@@ -70,11 +59,43 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
             }
         }
         
-        _sendBuffers.Clear();
-        _network.RemoveChannel(Id);
-        _webSocket.Dispose();
         _isSending = false;
-        base.Dispose();
+        CloseAndDisposeAsync().Coroutine();
+    }
+
+    private async FTask CloseAndDisposeAsync()
+    {
+        try
+        {
+            if (_webSocket.State == WebSocketState.Open || _webSocket.State == WebSocketState.CloseReceived)
+            {
+                using var closeTimeout = new CancellationTokenSource(TimeSpan.FromMilliseconds(2000));
+
+                await _webSocket.CloseOutputAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "Normal Closure",
+                    closeTimeout.Token);
+            }
+        }
+        catch (Exception)
+        {
+            try
+            {
+                _webSocket.Abort();
+            }
+            catch
+            {
+                // 关闭过程中的异常可以忽略
+            }
+        }
+        finally
+        {
+            _sendBuffers.Clear();
+            _webSocket.Dispose();
+            
+            base.Dispose();
+        }
+        
     }
     
     #region ReceiveSocket

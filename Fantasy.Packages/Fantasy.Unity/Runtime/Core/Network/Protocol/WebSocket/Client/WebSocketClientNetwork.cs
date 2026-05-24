@@ -45,49 +45,74 @@ namespace Fantasy.Network.WebSocket
             {
                 return;
             }
+            
+            _isInnerDispose = true;
+            _isSending = false;
+            
+            if (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                try
+                {
+                    _cancellationTokenSource.Cancel();
+                }
+                catch (OperationCanceledException)
+                {
+                    // 通常情况下，此处的异常可以忽略
+                }
+            }
+            
+            ClearConnectTimeout();
+            CloseAndDisposeAsync().Coroutine();
+        }
 
+        private async FTask CloseAndDisposeAsync()
+        {
             try
             {
-                _isInnerDispose = true;
-
-                if (_clientWebSocket.State == WebSocketState.Open || _clientWebSocket.State == WebSocketState.CloseReceived)
+                if (_clientWebSocket.State == WebSocketState.Open ||
+                    _clientWebSocket.State == WebSocketState.CloseReceived)
                 {
-                    _clientWebSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Client Closing", CancellationToken.None).GetAwaiter().GetResult();
+                    using var closeTimeout = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
+                    await _clientWebSocket.CloseOutputAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        "Client Closing", closeTimeout.Token);
                 }
-
-                if (!_cancellationTokenSource.IsCancellationRequested)
-                {
-                    try
-                    {
-                        _cancellationTokenSource.Cancel();
-                    }
-                    catch (OperationCanceledException)
-                    {
-                        // 通常情况下，此处的异常可以忽略
-                    }
-                }
-
-                ClearConnectTimeout();
-                
-                if (_connectDisconnectEvent)
-                {
-                    _onConnectDisconnect?.Invoke();
-                }
-                
-                _packetParser.Dispose();
-                _packetParser = null;
-                _isSending = false;
-                
-                _clientWebSocket.Dispose();
-                _clientWebSocket = null;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Log.Error(e);
+                try
+                {
+                    _clientWebSocket.Abort();
+                }
+                catch
+                {
+                    // 关闭过程中的异常可以忽略
+                }
             }
             finally
             {
-                base.Dispose();
+                try
+                {
+                    if (_connectDisconnectEvent)
+                    {
+                        _onConnectDisconnect?.Invoke();
+                    }
+
+                    _packetParser.Dispose();
+                    _packetParser = null;
+                    _isSending = false;
+
+                    _clientWebSocket.Dispose();
+                    _clientWebSocket = null;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+                finally
+                {
+                    base.Dispose();
+                }
             }
         }
 
