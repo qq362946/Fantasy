@@ -130,7 +130,7 @@ namespace Fantasy.Network.KCP
             }
             finally
             {
-                if (MemoryStreamBufferSource.Return.HasFlag(buffer.MemoryStreamBufferSource))
+                if (buffer != null && MemoryStreamBufferSource.Return.HasFlag(buffer.MemoryStreamBufferSource))
                 {
                     _kcpServerNetwork.MemoryStreamBufferPool.ReturnMemoryStream(buffer);
                 }
@@ -139,7 +139,7 @@ namespace Fantasy.Network.KCP
 
         private const byte KcpHeaderReceiveData = (byte)KcpHeader.ReceiveData;
 
-        private unsafe void KcpSpanCallback(byte[] buffer, int count)
+        private void KcpSpanCallback(byte[] buffer, int count)
         {
             if (IsDisposed)
             {

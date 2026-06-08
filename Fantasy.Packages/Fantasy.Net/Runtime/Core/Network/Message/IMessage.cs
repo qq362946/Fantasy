@@ -114,7 +114,7 @@ namespace Fantasy.Network.Interface
     /// <summary>
     /// 表示漫游协议的普通路由消息接口，继承自普通路由消息接口。
     /// </summary>
-    public interface IRoamingMessage : IAddressMessage, ICustomRoute { }
+    public interface IRoamingMessage : IAddressRequest, ICustomRoute { }
     /// <summary>
     /// 漫游协议的普通路由请求接口，继承自自定义Route协议的普通路由消息接口。
     /// </summary>

@@ -21,7 +21,7 @@ public class WebSocketServerNetwork : ANetwork
 
     public void Initialize(NetworkTarget networkTarget, int port)
     {
-        base.Initialize(NetworkType.Server, NetworkProtocolType.WebSocket, networkTarget);
+        base.Initialize(NetworkType.Server, NetworkProtocolType.WebSocket, networkTarget, false);
         
         try
         {

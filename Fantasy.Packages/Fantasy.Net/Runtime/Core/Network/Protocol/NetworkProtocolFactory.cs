@@ -56,7 +56,7 @@ namespace Fantasy.Network
             }
         }
 #endif
-        public static AClientNetwork CreateClient(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget)
+        public static AClientNetwork CreateClient(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
         {
 #if !FANTASY_WEBGL
             switch (protocolType)
@@ -64,19 +64,19 @@ namespace Fantasy.Network
                 case NetworkProtocolType.TCP:
                 {
                     var network = Entity.Create<TCPClientNetwork>(scene, false, false);
-                    network.Initialize(networkTarget);
+                    network.Initialize(networkTarget, enableReceiveMessageJsonLog);
                     return network;
                 }
                 case NetworkProtocolType.KCP:
                 {
                     var network = Entity.Create<KCPClientNetwork>(scene, false, true);
-                    network.Initialize(networkTarget);
+                    network.Initialize(networkTarget, enableReceiveMessageJsonLog);
                     return network;
                 }
                 case NetworkProtocolType.WebSocket:
                 {
                     var network = Entity.Create<WebSocketClientNetwork>(scene, false, true);
-                    network.Initialize(networkTarget);
+                    network.Initialize(networkTarget, enableReceiveMessageJsonLog);
                     return network;
                 }
                 default:
@@ -87,7 +87,7 @@ namespace Fantasy.Network
 #else
             // Webgl平台只能用这个协议。
             var network = Entity.Create<WebSocketClientNetwork>(scene, false, true);
-            network.Initialize(networkTarget);
+            network.Initialize(networkTarget, enableReceiveMessageJsonLog);
             return network;
 #endif
         }

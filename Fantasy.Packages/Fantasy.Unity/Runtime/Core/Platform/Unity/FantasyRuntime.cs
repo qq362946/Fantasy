@@ -199,6 +199,7 @@ namespace Fantasy
         /// <param name="onConnectComplete">连接成功时的回调函数</param>
         /// <param name="onConnectFail">连接失败时的回调函数</param>
         /// <param name="onConnectDisconnect">连接断开时的回调函数</param>
+        /// <param name="enableReceiveMessageJsonLog">是否启用接收消息JSON日志</param>
         /// <returns>返回创建的Session实例</returns>
         /// <remarks>
         /// 此方法会自动处理旧连接的断开，并根据配置启用心跳组件
@@ -216,7 +217,8 @@ namespace Fantasy
             int maxPingSamples,
             [CanBeNull] Action onConnectComplete = null,
             [CanBeNull] Action onConnectFail = null,
-            [CanBeNull] Action onConnectDisconnect = null
+            [CanBeNull] Action onConnectDisconnect = null,
+            bool enableReceiveMessageJsonLog = false
         )
         {
             if (_fantasyRuntime != null)
@@ -243,7 +245,7 @@ namespace Fantasy
             }
 
             Session = CreateSession(Scene, remoteIP, remotePort, protocol, isHttps, connectTimeout, OnConnectComplete,
-                OnConnectFail, OnConnectDisconnect);
+                OnConnectFail, OnConnectDisconnect, enableReceiveMessageJsonLog);
 
             return Session;
         }
@@ -260,6 +262,7 @@ namespace Fantasy
         /// <param name="onConnectComplete">连接成功时的回调函数</param>
         /// <param name="onConnectFail">连接失败时的回调函数</param>
         /// <param name="onConnectDisconnect">连接断开时的回调函数</param>
+        /// <param name="enableReceiveMessageJsonLog">是否启用接收消息JSON日志</param>
         /// <returns>返回创建的Session实例</returns>
         /// <exception cref="ArgumentException">当协议类型不支持时抛出异常</exception>
         public static Session CreateSession(
@@ -271,7 +274,8 @@ namespace Fantasy
             int connectTimeout,
             [CanBeNull] Action onConnectComplete = null,
             [CanBeNull] Action onConnectFail = null,
-            [CanBeNull] Action onConnectDisconnect = null)
+            [CanBeNull] Action onConnectDisconnect = null,
+            bool enableReceiveMessageJsonLog = false)
         {
             NetworkProtocolType networkProtocolType;
 
@@ -306,7 +310,7 @@ namespace Fantasy
                 onConnectComplete,
                 onConnectFail,
                 onConnectDisconnect,
-                isHttps, connectTimeout);
+                isHttps, connectTimeout, enableReceiveMessageJsonLog);
         }
 
         /// <summary>
@@ -438,6 +442,9 @@ namespace Fantasy
         [Tooltip("Connection timeout in milliseconds")]
         public int connectTimeout = 5000;
 
+        [Tooltip("Print received client messages as JSON")]
+        public bool enableReceiveMessageJsonLog;
+
         [Header("Heartbeat Settings")]
         [Tooltip("Enable heartbeat component to keep connection alive")]
         public bool enableHeartbeat = true;
@@ -554,7 +561,8 @@ namespace Fantasy
                 enableHttps, connectTimeout,
                 OnConnectComplete,
                 OnConnectFail,
-                OnConnectDisconnect);
+                OnConnectDisconnect,
+                enableReceiveMessageJsonLog);
             
             if (isRuntimeInstance)
             {

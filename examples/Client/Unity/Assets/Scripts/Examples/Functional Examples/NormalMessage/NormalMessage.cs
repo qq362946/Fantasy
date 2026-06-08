@@ -100,7 +100,7 @@ public class NormalMessage : MonoBehaviour
             OnConnectComplete,
             OnConnectFail,
             OnConnectDisconnect,
-            false, 5000);
+            false, 5000,true);
     }
 
     private void OnConnectComplete()

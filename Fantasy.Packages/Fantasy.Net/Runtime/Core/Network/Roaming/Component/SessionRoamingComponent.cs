@@ -386,16 +386,6 @@ public sealed class SessionRoamingComponent : Entity
     }
 
     /// <summary>
-    /// 发送一个消息给漫游终端
-    /// </summary>
-    /// <param name="roamingType"></param>
-    /// <param name="message"></param>
-    public void Send<T>(int roamingType, T message) where T : IAddressMessage
-    {
-        Call(roamingType, message).Coroutine();
-    }
-
-    /// <summary>
     /// 发送一个RPC消息给漫游终端
     /// </summary>
     /// <param name="message"></param>
@@ -411,7 +401,7 @@ public sealed class SessionRoamingComponent : Entity
     /// <param name="roamingType"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public async FTask<IResponse> Call<T>(int roamingType, T message) where T : IAddressMessage
+    public async FTask<IResponse> Call<T>(int roamingType, T message) where T : IAddressRequest
     {
         if (!_roaming.TryGetValue(roamingType, out var roaming))
         {

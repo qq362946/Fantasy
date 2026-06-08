@@ -12,6 +12,7 @@ namespace Fantasy
         private SerializedProperty protocolProperty;
         private SerializedProperty enableHttpsProperty;
         private SerializedProperty connectTimeoutProperty;
+        private SerializedProperty enableReceiveMessageJsonLogProperty;
         private SerializedProperty enableHeartbeatProperty;
         private SerializedProperty heartbeatIntervalProperty;
         private SerializedProperty heartbeatTimeOutProperty;
@@ -34,6 +35,7 @@ namespace Fantasy
             protocolProperty = serializedObject.FindProperty("protocol");
             enableHttpsProperty = serializedObject.FindProperty("enableHttps");
             connectTimeoutProperty = serializedObject.FindProperty("connectTimeout");
+            enableReceiveMessageJsonLogProperty = serializedObject.FindProperty("enableReceiveMessageJsonLog");
             enableHeartbeatProperty = serializedObject.FindProperty("enableHeartbeat");
             heartbeatIntervalProperty = serializedObject.FindProperty("heartbeatInterval");
             heartbeatTimeOutProperty = serializedObject.FindProperty("heartbeatTimeOut");
@@ -285,6 +287,20 @@ namespace Fantasy
                 wordWrap = true
             };
             EditorGUILayout.LabelField("Default: 5000ms (5 seconds)", hintStyle);
+
+            EditorGUILayout.Space(8);
+            DrawSeparator();
+            EditorGUILayout.Space(8);
+
+            // Receive Message JSON Log
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField(new GUIContent("🧾 Receive JSON Log", "Print received client messages as JSON"),
+                GUILayout.Width(EditorGUIUtility.labelWidth - 20));
+            enableReceiveMessageJsonLogProperty.boolValue = EditorGUILayout.Toggle(enableReceiveMessageJsonLogProperty.boolValue);
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUILayout.Space(3);
+            EditorGUILayout.LabelField("Debug only: disable this in production builds to avoid noisy logs.", hintStyle);
 
             EditorGUILayout.Space(5);
             EditorGUILayout.EndVertical();

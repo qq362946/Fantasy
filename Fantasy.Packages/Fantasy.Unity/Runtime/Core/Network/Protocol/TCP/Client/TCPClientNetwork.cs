@@ -46,11 +46,11 @@ namespace Fantasy.Network.TCP
         
         public uint ChannelId { get; private set; }
 
-        public void Initialize(NetworkTarget networkTarget)
+        public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
         {
-            base.Initialize(NetworkType.Client, NetworkProtocolType.TCP, networkTarget);
+            base.Initialize(NetworkType.Client, NetworkProtocolType.TCP, networkTarget, enableReceiveMessageJsonLog);
         }
-        
+
         public override void Dispose()
         {
             if (IsDisposed || _isInnerDispose)

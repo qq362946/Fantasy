@@ -1,16 +1,13 @@
 #if !FANTASY_WEBGL
 using System;
-using System.Buffers;
+using System.Buffers.Binary;
 using System.Collections.Generic;
-using System.IO;
-using System.IO.Pipelines;
 using System.Net;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Threading;
-using Fantasy.Async;
 using Fantasy.Entitas.Interface;
 using Fantasy.Helper;
 using Fantasy.Network.Interface;
@@ -19,6 +16,8 @@ using Fantasy.Serialize;
 using KCP;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable PossibleNullReferenceException
+// ReSharper disable InconsistentNaming
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
@@ -42,6 +41,7 @@ namespace Fantasy.Network.KCP
         private long _startTime;
         private bool _isConnected;
         private bool _isDisconnect;
+        private bool _receiveStarted;
         private uint _updateMinTime;
         private bool _isInnerDispose;
         private long _connectTimeoutId;
@@ -49,7 +49,8 @@ namespace Fantasy.Network.KCP
         private bool _connectDisconnectEvent = true;
         private IPEndPoint _remoteAddress;
         private BufferPacketParser _packetParser;
-        private readonly Pipe _pipe = new Pipe();
+        
+        private const int MaxReceiveCountPerUpdate = 2048;
         private readonly byte[] _sendBuff = new byte[5];
         private readonly byte[] _receiveBuffer = new byte[ProgramDefine.MaxMessageSize + 20];
         private readonly List<uint> _updateTimeOutTime = new List<uint>();
@@ -57,18 +58,16 @@ namespace Fantasy.Network.KCP
         private readonly SocketAsyncEventArgs _connectEventArgs = new SocketAsyncEventArgs();
         private readonly Queue<MemoryStreamBuffer> _messageCache = new Queue<MemoryStreamBuffer>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-#if FANTASY_UNITY
-        private readonly EndPoint _ipEndPoint = new IPEndPoint(IPAddress.Any, 0);
-#endif
+
         private event Action OnConnectFail;
         private event Action OnConnectComplete;
         private event Action OnConnectDisconnect;
         public uint ChannelId { get; private set; }
         private uint TimeNow => (uint) (TimeHelper.Now - _startTime);
         
-        public void Initialize(NetworkTarget networkTarget)
+        public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
         {
-            base.Initialize(NetworkType.Client, NetworkProtocolType.KCP, networkTarget);
+            base.Initialize(NetworkType.Client, NetworkProtocolType.KCP, networkTarget, enableReceiveMessageJsonLog);
             _packetParser = PacketParserFactory.CreateBufferPacketParser(this);
         }
         
@@ -107,16 +106,18 @@ namespace Fantasy.Network.KCP
                     OnConnectDisconnect?.Invoke();
                 }
                 
-                _kcp.Dispose();
+                _kcp?.Dispose();
 
-                if (_socket.Connected)
+                if (_socket != null)
                 {
                     _socket.Close();
+                    _socket = null;
                 }
 
-                _packetParser.Dispose();
+                _packetParser?.Dispose();
                 ChannelId = 0;
                 _isConnected = false;
+                _receiveStarted = false;
                 _connectDisconnectEvent = true;
                 _messageCache.Clear();
             }
@@ -207,32 +208,62 @@ namespace Fantasy.Network.KCP
 
         private void OnReceiveSocketComplete()
         {
+            _receiveStarted = true;
             SendRequestConnection();
-            ReadPipeDataAsync().Coroutine();
-            ReceiveSocketAsync().Coroutine();
         }
 
         #endregion
 
         #region ReceiveSocket
 
-        private async FTask ReceiveSocketAsync()
+        private void ReceiveSocket()
         {
-            while (!_cancellationTokenSource.IsCancellationRequested)
+            if (!_receiveStarted || _cancellationTokenSource.IsCancellationRequested)
+            {
+                return;
+            }
+            
+            var socket = _socket;
+
+            if (socket == null)
+            {
+                return;
+            }
+
+            for (var i = 0; i < MaxReceiveCountPerUpdate; i++)
             {
                 try
                 {
-                    var memory = _pipe.Writer.GetMemory(8192);
-#if FANTASY_UNITY
-                    MemoryMarshal.TryGetArray(memory, out ArraySegment<byte> arraySegment);
-                    var result = await _socket.ReceiveFromAsync(arraySegment, SocketFlags.None, _ipEndPoint);
-                    _pipe.Writer.Advance(result.ReceivedBytes);
-                    await _pipe.Writer.FlushAsync();
-#else
-                    var result = await _socket.ReceiveAsync(memory, SocketFlags.None, _cancellationTokenSource.Token);
-                    _pipe.Writer.Advance(result);
-                    await _pipe.Writer.FlushAsync();
-#endif
+                    if (socket.Available <= 0)
+                    {
+                        return;
+                    }
+                    
+                    var receivedBytes = socket.Receive(_receiveBuffer, SocketFlags.None);
+
+                    if (receivedBytes < 5)
+                    {
+                        continue;
+                    }
+                    
+                    var memory = _receiveBuffer.AsMemory(0, receivedBytes);
+                    var span = memory.Span;
+                    var header = (KcpHeader)span[0];
+                    var channelId = BinaryPrimitives.ReadUInt32LittleEndian(span.Slice(1, 4));
+                    var payload = memory.Slice(5);
+                    
+                    ReceiveData(header, channelId, payload);
+                }
+                catch (SocketException ex) when (
+                    ex.SocketErrorCode == SocketError.WouldBlock ||
+                    ex.SocketErrorCode == SocketError.IOPending ||
+                    ex.SocketErrorCode == SocketError.NoBufferSpaceAvailable)
+                {
+                    return;
+                }
+                catch (ObjectDisposedException)
+                {
+                    return;
                 }
                 catch (SocketException)
                 {
@@ -243,106 +274,38 @@ namespace Fantasy.Network.KCP
                     }
                     
                     Dispose();
-                    break;
-                }
-                catch (OperationCanceledException)
-                {
-                    break;
-                }
-                catch (ObjectDisposedException)
-                {
-                    Dispose();
-                    break;
+                    return;
                 }
                 catch (Exception ex)
                 {
-                    Log.Error($"Unexpected exception: {ex.Message}");
+                    Log.Error(ex);
                 }
             }
-
-            await _pipe.Writer.CompleteAsync();
         }
         
         #endregion
 
-        #region ReceivePipeData
+        #region ReceiveData
 
-        private async FTask ReadPipeDataAsync()
+        private void ReceiveData(KcpHeader header, uint channelId, ReadOnlyMemory<byte> buffer)
         {
-            var pipeReader = _pipe.Reader;
-            while (!_cancellationTokenSource.IsCancellationRequested)
+            if (header == KcpHeader.ReceiveData)
             {
-                ReadResult result = default;
-                
-                try
+                if (buffer.Length == 0)
                 {
-                    result = await pipeReader.ReadAsync(_cancellationTokenSource.Token);
+                    Log.Warning($"KCP Server KcpHeader.Data  buffer.Length == 0");
+                    return;
                 }
-                catch (OperationCanceledException)
+                    
+                if (channelId != ChannelId)
                 {
-                    // 出现这个异常表示取消了_cancellationTokenSource。一般Channel断开会取消。
-                    break;
+                    return;
                 }
-                
-                var buffer = result.Buffer;
-                var consumed = buffer.Start;
-                var examined = buffer.End;
-            
-                while (TryReadMessage(ref buffer, out var header, out var channelId, out var message))
-                {
-                    ReceiveData(ref header, ref channelId, ref message);
-                    consumed = buffer.Start;
-                }
-            
-                if (result.IsCompleted)
-                {
-                    break;
-                }
-            
-                pipeReader.AdvanceTo(consumed, examined);
-            }
-        }
-        
-        private unsafe bool TryReadMessage(ref ReadOnlySequence<byte> buffer, out KcpHeader header, out uint channelId, out ReadOnlyMemory<byte> message)
-        {
-            if (buffer.Length < 5)
-            {
-                channelId = 0;
-                message = default;
-                header = KcpHeader.None;
-                if (buffer.Length > 0)
-                {
-                    buffer = buffer.Slice(buffer.Length);
-                }
-                return false;
-            }
-        
-            var readOnlyMemory = buffer.First;
-        
-            if (MemoryMarshal.TryGetArray(readOnlyMemory, out var arraySegment))
-            {
-                fixed (byte* bytePointer = &arraySegment.Array[arraySegment.Offset])
-                {
-                    header = (KcpHeader)bytePointer[0];
-                    channelId = Unsafe.ReadUnaligned<uint>(ref bytePointer[1]);
-                }
-            }
-            else
-            {
-                // 如果无法获取数组段，回退到安全代码来执行。这种情况几乎不会发生、为了保险还是写一下了。
-                var firstSpan = readOnlyMemory.Span;
-                header = (KcpHeader)firstSpan[0];
-                channelId = MemoryMarshal.Read<uint>(firstSpan.Slice(1, 4));
-               
+                    
+                Input(buffer);
+                return;
             }
             
-            message = readOnlyMemory.Slice(5);
-            buffer = buffer.Slice(readOnlyMemory.Length);
-            return true;
-        }
-
-        private void ReceiveData(ref KcpHeader header, ref uint channelId, ref ReadOnlyMemory<byte> buffer)
-        {
             switch (header)
             {
                 // 发送握手给服务器
@@ -369,23 +332,6 @@ namespace Fantasy.Network.KCP
                     {
                         SendMemoryStream(memoryStream);
                     }
-                    break;
-                }
-                // 收到服务器发送的消息
-                case KcpHeader.ReceiveData:
-                {
-                    if (buffer.Length == 5)
-                    {
-                        Log.Warning($"KCP Server KcpHeader.Data  buffer.Length == 5");
-                        break;
-                    }
-                    
-                    if (channelId != ChannelId)
-                    {
-                        break;
-                    }
-                    
-                    Input(buffer);
                     break;
                 }
                 // 接收到服务器的断开连接消息
@@ -451,6 +397,8 @@ namespace Fantasy.Network.KCP
         
         public void CheckUpdate()
         {
+            ReceiveSocket();
+            
             var nowTime = TimeNow;
             _allowWraparound = nowTime < _updateMinTime;
 
@@ -576,17 +524,19 @@ namespace Fantasy.Network.KCP
                 }
             }
         }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void WriteSendHeader(byte header)
+        {
+            _sendBuff[0] = header;
+            BinaryPrimitives.WriteUInt32LittleEndian(_sendBuff.AsSpan(1, 4), ChannelId);
+        }
 
-        private unsafe void SendRequestConnection()
+        private void SendRequestConnection()
         {
             try
             {
-                fixed (byte* p = _sendBuff)
-                {
-                    p[0] = KcpHeaderRequestConnection;
-                    *(uint*)(p + 1) = ChannelId;
-                }
-                
+                WriteSendHeader(KcpHeaderRequestConnection);
                 SendAsync(_sendBuff, 0, 5);
             }
             catch (Exception e)
@@ -595,16 +545,11 @@ namespace Fantasy.Network.KCP
             }
         }
 
-        private unsafe void SendConfirmConnection()
+        private void SendConfirmConnection()
         {
             try
             {
-                fixed (byte* p = _sendBuff)
-                {
-                    p[0] = KcpHeaderConfirmConnection;
-                    *(uint*)(p + 1) = ChannelId;
-                }
-                
+                WriteSendHeader(KcpHeaderConfirmConnection);
                 SendAsync(_sendBuff, 0, 5);
             }
             catch (Exception e)
@@ -613,16 +558,11 @@ namespace Fantasy.Network.KCP
             }
         }
         
-        private unsafe void SendDisconnect()
+        private void SendDisconnect()
         {
             try
             {
-                fixed (byte* p = _sendBuff)
-                {
-                    p[0] = KcpHeaderDisconnect;
-                    *(uint*)(p + 1) = ChannelId;
-                }
-                
+                WriteSendHeader(KcpHeaderDisconnect);
                 SendAsync(_sendBuff, 0, 5);
             }
             catch (Exception e)
@@ -636,33 +576,37 @@ namespace Fantasy.Network.KCP
         {
             try
             {
-                _socket.Send(new ArraySegment<byte>(buffer, offset, count), SocketFlags.None);
+                var socket = _socket;
+
+                if (socket == null)
+                {
+                    return;
+                }
+                
+                socket.Send(new ArraySegment<byte>(buffer, offset, count), SocketFlags.None);
             }
-            catch (ArgumentException ex)
+            catch (SocketException ex) when (
+                ex.SocketErrorCode == SocketError.WouldBlock ||
+                ex.SocketErrorCode == SocketError.IOPending ||
+                ex.SocketErrorCode == SocketError.NoBufferSpaceAvailable ||
+                ex.SocketErrorCode == SocketError.Interrupted ||
+                ex.SocketErrorCode == SocketError.OperationAborted)
             {
-                Log.Error($"ArgumentException: {ex.Message}"); // 处理参数错误
             }
-            catch (SocketException)
+            catch (SocketException ex)
             {
-                //Log.Error($"SocketException: {ex.Message}"); // 处理网络错误
-                Dispose();
+                Log.Error($"KCP SendTo SocketException:{ex.SocketErrorCode} {ex.Message}");
             }
-            catch (ObjectDisposedException ex)
+            catch (ObjectDisposedException)
             {
-                Log.Error($"ObjectDisposedException: {ex.Message}"); // 处理套接字已关闭的情况
-                Dispose();
-            }
-            catch (InvalidOperationException ex)
-            {
-                Log.Error($"InvalidOperationException: {ex.Message}"); // 处理无效操作
             }
             catch (Exception ex)
             {
-                Log.Error($"Exception: {ex.Message}"); // 捕获其他异常
+                Log.Error(ex);
             }
         }
         
-        private unsafe void KcpSpanCallback(byte[] buffer, int count)
+        private void KcpSpanCallback(byte[] buffer, int count)
         {
             if (IsDisposed)
             {
@@ -674,11 +618,8 @@ namespace Fantasy.Network.KCP
                 throw new Exception("KcpOutput count 0");
             }
             
-            fixed (byte* p = buffer)
-            {
-                p[0] = KcpHeaderReceiveData;
-                *(uint*)(p + 1) = ChannelId;
-            }
+            buffer[0] = KcpHeaderReceiveData;
+            BinaryPrimitives.WriteUInt32LittleEndian(buffer.AsSpan(1, 4), ChannelId);
             
             SendAsync(buffer, 0, count + 5);
         }
@@ -701,11 +642,12 @@ namespace Fantasy.Network.KCP
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe uint CreateChannelId()
+        private static uint CreateChannelId()
         {
-            uint value;
-            RandomNumberGenerator.Fill(MemoryMarshal.CreateSpan(ref *(byte*)&value, 4));
-            return 0xC0000000 | (value & int.MaxValue);
+            Span<byte> bytes = stackalloc byte[4];
+            RandomNumberGenerator.Fill(bytes);
+            var value = BinaryPrimitives.ReadUInt32LittleEndian(bytes);
+            return 0xC0000000u | (value & 0x7FFFFFFFu);
         }
     }
 }

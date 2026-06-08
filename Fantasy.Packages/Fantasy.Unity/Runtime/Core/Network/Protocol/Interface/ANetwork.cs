@@ -26,7 +26,7 @@ namespace Fantasy.Network.Interface
         public NetworkProtocolType NetworkProtocolType { get; private set; }
         public ANetworkMessageScheduler NetworkMessageScheduler { get; private set; }
 
-        protected void Initialize(NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget)
+        protected void Initialize(NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
         {
             NetworkType = networkType;
             NetworkTarget = networkTarget;
@@ -48,7 +48,7 @@ namespace Fantasy.Network.Interface
                 case NetworkType.Client:
                 {
                     _outerPackInfoPool = new Queue<OuterPackInfo>();
-                    NetworkMessageScheduler = new ClientMessageScheduler(Scene);
+                    NetworkMessageScheduler = enableReceiveMessageJsonLog ? new DebugClientMessageScheduler(Scene) :new ClientMessageScheduler(Scene);
                     break;
                 }
 #if FANTASY_NET

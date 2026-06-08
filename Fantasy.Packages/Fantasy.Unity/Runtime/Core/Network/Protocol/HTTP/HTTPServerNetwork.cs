@@ -88,7 +88,7 @@ namespace Fantasy.Network.HTTP
         /// <param name="port"></param>
         public void Initialize(NetworkTarget networkTarget, string bindIp, int port)
         {
-            base.Initialize(NetworkType.Server, NetworkProtocolType.HTTP, networkTarget);
+            base.Initialize(NetworkType.Server, NetworkProtocolType.HTTP, networkTarget, false);
 
             try
             {

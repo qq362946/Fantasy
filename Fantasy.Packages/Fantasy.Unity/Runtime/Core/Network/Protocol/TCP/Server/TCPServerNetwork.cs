@@ -24,7 +24,7 @@ namespace Fantasy.Network.TCP
 
         public void Initialize(NetworkTarget networkTarget, IPEndPoint address)
         {
-            base.Initialize(NetworkType.Server, NetworkProtocolType.TCP, networkTarget);
+            base.Initialize(NetworkType.Server, NetworkProtocolType.TCP, networkTarget, false);
             _random = new Random();
             _acceptAsync = new SocketAsyncEventArgs();
             _socket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);

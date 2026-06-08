@@ -408,10 +408,10 @@ namespace Fantasy
             });
             return scene;
         }
-        public Session Connect(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000)
+        public Session Connect(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000, bool enableReceiveMessageJsonLog = false)
         {
             UnityNetwork?.Dispose();
-            UnityNetwork = NetworkProtocolFactory.CreateClient(this, networkProtocolType, NetworkTarget.Outer);
+            UnityNetwork = NetworkProtocolFactory.CreateClient(this, networkProtocolType, NetworkTarget.Outer, enableReceiveMessageJsonLog);
             Session = UnityNetwork.Connect(remoteAddress, onConnectComplete, onConnectFail, onConnectDisconnect, isHttps, connectTimeout);
             return Session;
         }
@@ -742,7 +742,7 @@ namespace Fantasy
             }
             
             var remoteAddress = $"{machineConfig.InnerBindIP}:{sceneConfig.InnerPort}";
-            var client = NetworkProtocolFactory.CreateClient(Scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner);
+            var client = NetworkProtocolFactory.CreateClient(Scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner, false);
             var session = client.Connect(remoteAddress, null, () =>
             {
                 Log.Error($"Unable to connect to the target server sourceServerId:{Scene.Process.Id} targetServerId:{sceneConfig.ProcessConfigId}");

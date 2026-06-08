@@ -103,7 +103,8 @@
    └─ Protocol: TCP
 
    Connection Settings:
-   └─ Connect Timeout: 5000 (ms)
+   ├─ Connect Timeout: 5000 (ms)
+   └─ Receive JSON Log: ✗  (仅调试时启用)
 
    Heartbeat Settings:
    ├─ Enable Heartbeat: ✓
@@ -181,7 +182,8 @@ public class NetworkManager : MonoBehaviour
                 maxPingSamples: 4,
                 onConnectComplete: OnConnectComplete,
                 onConnectFail: OnConnectFail,
-                onConnectDisconnect: OnConnectDisconnect
+                onConnectDisconnect: OnConnectDisconnect,
+                enableReceiveMessageJsonLog: false
             );
 
             Log.Info("连接成功!");
@@ -248,6 +250,7 @@ public class NetworkManager : MonoBehaviour
 | 参数 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
 | **Connect Timeout** | int | 5000 | 连接超时时间 (单位: 毫秒) |
+| **Receive JSON Log** | bool | false | 是否在客户端收到消息后打印消息 JSON,仅建议调试时启用 |
 
 #### Heartbeat Settings
 
@@ -466,7 +469,8 @@ public static async FTask<Session> Connect(
     int maxPingSamples,
     Action onConnectComplete = null,
     Action onConnectFail = null,
-    Action onConnectDisconnect = null
+    Action onConnectDisconnect = null,
+    bool enableReceiveMessageJsonLog = false
 )
 ```
 
@@ -487,6 +491,7 @@ public static async FTask<Session> Connect(
 | **onConnectComplete** | Action | 连接成功回调 |
 | **onConnectFail** | Action | 连接失败回调 |
 | **onConnectDisconnect** | Action | 连接断开回调 |
+| **enableReceiveMessageJsonLog** | bool | 是否在客户端收到消息后打印消息 JSON,默认 `false` |
 
 #### 返回值
 
@@ -518,7 +523,8 @@ public class SimpleConnection : MonoBehaviour
             heartbeatInterval: 2000,
             heartbeatTimeOut: 30000,
             heartbeatTimeOutInterval: 5000,
-            maxPingSamples: 4
+            maxPingSamples: 4,
+            enableReceiveMessageJsonLog: false
         );
 
         // 连接成功后,通过 Runtime 静态类访问
@@ -572,7 +578,8 @@ public class NetworkController : MonoBehaviour
                 maxPingSamples: 4,
                 onConnectComplete: OnConnected,
                 onConnectFail: OnConnectionFailed,
-                onConnectDisconnect: OnDisconnected
+                onConnectDisconnect: OnDisconnected,
+                enableReceiveMessageJsonLog: false
             );
 
             Log.Info($"连接成功: {session.RemoteEndPoint}");
@@ -905,7 +912,8 @@ public class ServerSelector : MonoBehaviour
             heartbeatInterval: 2000,
             heartbeatTimeOut: 30000,
             heartbeatTimeOutInterval: 5000,
-            maxPingSamples: 4
+            maxPingSamples: 4,
+            enableReceiveMessageJsonLog: false
         );
 
         Log.Info($"已切换到服务器: {serverIP}:{serverPort}");
@@ -1000,7 +1008,8 @@ public class PureCodeClient : MonoBehaviour
             maxPingSamples: 4,
             onConnectComplete: OnConnected,
             onConnectFail: OnConnectionFailed,
-            onConnectDisconnect: OnDisconnected
+            onConnectDisconnect: OnDisconnected,
+            enableReceiveMessageJsonLog: config.EnableReceiveMessageJsonLog
         );
     }
 
@@ -1046,6 +1055,7 @@ public class ServerConfig
     public FantasyRuntime.NetworkProtocolType Protocol { get; set; }
     public bool IsHttps { get; set; }
     public int ConnectTimeout { get; set; }
+    public bool EnableReceiveMessageJsonLog { get; set; }
 }
 ```
 
@@ -1073,6 +1083,12 @@ chatServerRuntime.Session.Send(new ChatMessage());
 enableHeartbeat: true,
 heartbeatInterval: 2000,    // 2 秒发送一次
 heartbeatTimeOut: 30000,    // 30 秒超时
+```
+
+✅ **仅在调试时启用接收消息 JSON 日志**
+```csharp
+// 开发调试时可启用,上线保持默认 false
+enableReceiveMessageJsonLog: true,
 ```
 
 ✅ **使用 UnityEvent 回调处理连接状态**

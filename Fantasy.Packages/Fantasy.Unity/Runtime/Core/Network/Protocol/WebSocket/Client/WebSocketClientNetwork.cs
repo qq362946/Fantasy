@@ -33,9 +33,9 @@ namespace Fantasy.Network.WebSocket
         private Action _onConnectComplete;
         private Action _onConnectDisconnect;
 
-        public void Initialize(NetworkTarget networkTarget)
+        public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
         {
-            base.Initialize(NetworkType.Client, NetworkProtocolType.WebSocket, networkTarget);
+            base.Initialize(NetworkType.Client, NetworkProtocolType.WebSocket, networkTarget, enableReceiveMessageJsonLog);
             _packetParser = (ReadOnlyMemoryPacketParser)PacketParserFactory.CreateWebglBufferPacketParser(this);
         }
 

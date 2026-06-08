@@ -364,17 +364,26 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
         {
             await Unsubscribe(address, typeHashCode, true);
         }
+        
         _sphereEvents = null;
-        _remoteSphereEventLock.Dispose();
-        _remoteSphereEventLock = null;
+        
         // Remote
+        var remoteSubscribersList = new List<(long typeHashCode, long address)>();
         foreach (var (typeHashCode, addressList) in _remoteSubscribers)
         {
             foreach (var address in addressList)
             {
-                await RevokeRemoteSubscriber(address, typeHashCode);
+                remoteSubscribersList.Add((typeHashCode, address));
             }
         }
+
+        foreach (var (typeHashCode, address) in remoteSubscribersList)
+        {
+            await RevokeRemoteSubscriber(address, typeHashCode);
+        }
+        
+        _remoteSphereEventLock.Dispose();
+        _remoteSphereEventLock = null;
         _localSphereEventLock.Dispose();
         _localSphereEventLock = null;
     }

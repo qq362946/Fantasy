@@ -1,10 +1,12 @@
 # 编写启动代码 - Unity 客户端
 
-本指南将介绍如何在 Unity 项目中编写 Fantasy 框架的启动代码,包括:
+本指南介绍如何在 Unity 项目中手动初始化 Fantasy 框架、创建 Scene,以及可选地通过 `Scene.Connect()` 手动连接服务器,包括:
 - **基础 Unity 启动流程**与 `[RuntimeInitializeOnLoadMethod]` 的使用
 - **手动加载程序集** (`Assembly.Load`) 后如何触发 Fantasy 注册
 - **HybridCLR 热更新**环境下的使用方法
 - **与 .NET 服务器端的差异**说明
+
+> **📌 说明:** 如果你已经使用 [FantasyRuntime 组件使用指南](02-FantasyRuntime.md) 中的 `FantasyRuntime` 组件或 `Runtime.Connect()` 静态方法,通常不需要再手动编写本篇初始化流程。`FantasyRuntime` 会自动执行 `Entry.Initialize()`、创建 `Scene` 并处理连接流程。只有当你希望一步一步手动控制初始化、手动加载程序集、接入 HybridCLR 热更新,或自己控制 `Scene.Connect()` 连接过程时,才需要参考本文。
 
 ---
 
@@ -13,9 +15,12 @@
 - [前置步骤](#前置步骤)
 - [Unity 与 .NET 的差异](#unity-与-net-的差异)
 - [基础 Unity 启动流程](#基础-unity-启动流程)
+  - [项目结构示例](#项目结构示例)
+- [快速入门示例](#快速入门示例)
+  - [初始化框架并创建场景](#初始化框架并创建场景)
+  - [可选: 手动连接服务器](#可选-手动连接服务器)
   - [基础启动代码示例](#基础启动代码示例)
   - [启动流程详解](#启动流程详解)
-  - [连接服务器示例](#连接服务器示例)
 - [手动加载程序集 (Assembly.Load)](#手动加载程序集-assemblyload)
   - [为什么需要手动触发注册?](#为什么需要手动触发注册)
   - [手动触发注册](#手动触发注册)
@@ -83,7 +88,7 @@ Unity Project/
 ├── Assets/
 │   └── Scripts/               # 你的游戏脚本
 │       ├── GameEntry.cs       # 游戏入口脚本
-│       ├── NetworkManager.cs  # 网络管理器
+│       ├── AssemblyLoader.cs  # 可选: 程序集加载器
 │       └── Entities/          # 实体和组件
 │
 └── Packages/
@@ -105,20 +110,18 @@ Unity Project/
 
 ## 快速入门示例
 
-下面通过一个简单的示例演示如何使用 Fantasy.Unity 连接服务器并发送消息。
+下面通过一个简单的示例演示如何使用 Fantasy.Unity 手动初始化框架并创建客户端 Scene。
 
-### 1. 初始化框架并创建场景
+### 初始化框架并创建场景
 
 ```csharp
 using Fantasy;
 using Fantasy.Async;
-using Fantasy.Network;
 using UnityEngine;
 
 public class QuickStart : MonoBehaviour
 {
     private Scene _scene;
-    private Session _session;
 
     private void Start()
     {
@@ -152,7 +155,99 @@ public class QuickStart : MonoBehaviour
 |------|------|------|
 | 1 | `Entry.Initialize()` | 初始化 Fantasy 框架,加载必要的配置 |
 | 2 | `Scene.Create()` | 创建客户端场景,返回 Scene 实例 |
-| 3 | `scene.Dispose()` | 销毁场景,释放网络连接和所有资源 |
+| 3 | `scene.Dispose()` | 销毁场景,释放 Scene 以及其下所有资源 |
+
+### 可选: 手动连接服务器
+
+如果你没有使用 `FantasyRuntime` 或 `Runtime.Connect()`,可以在手动创建 `Scene` 后调用 `Scene.Connect()` 连接服务器。
+
+#### 方法签名
+
+```csharp
+public Session Connect(
+    string remoteAddress,
+    NetworkProtocolType networkProtocolType,
+    Action onConnectComplete,
+    Action onConnectFail,
+    Action onConnectDisconnect,
+    bool isHttps,
+    int connectTimeout = 5000,
+    bool enableReceiveMessageJsonLog = false
+)
+```
+
+#### 参数说明
+
+| 参数 | 类型 | 说明 |
+|------|------|------|
+| **remoteAddress** | string | 服务器地址,格式如 `"127.0.0.1:20000"` |
+| **networkProtocolType** | NetworkProtocolType | 网络协议类型: TCP、KCP、WebSocket |
+| **onConnectComplete** | Action | 连接成功回调 |
+| **onConnectFail** | Action | 连接失败回调 |
+| **onConnectDisconnect** | Action | 连接断开回调 |
+| **isHttps** | bool | 是否启用 HTTPS,仅 WebSocket 有效 |
+| **connectTimeout** | int | 连接超时时间,单位毫秒,默认 `5000` |
+| **enableReceiveMessageJsonLog** | bool | 是否打印接收消息 JSON,仅建议调试时启用 |
+
+#### 使用示例
+
+```csharp
+using Fantasy;
+using Fantasy.Async;
+using Fantasy.Network;
+using UnityEngine;
+
+public class ManualConnectExample : MonoBehaviour
+{
+    private Scene _scene;
+    private Session _session;
+
+    private void Start()
+    {
+        StartAsync().Coroutine();
+    }
+
+    private async FTask StartAsync()
+    {
+        await Fantasy.Platform.Unity.Entry.Initialize();
+
+        _scene = await Scene.Create(SceneRuntimeMode.MainThread);
+
+        _session = _scene.Connect(
+            remoteAddress: "127.0.0.1:20000",
+            networkProtocolType: NetworkProtocolType.TCP,
+            onConnectComplete: OnConnectComplete,
+            onConnectFail: OnConnectFail,
+            onConnectDisconnect: OnConnectDisconnect,
+            isHttps: false,
+            connectTimeout: 5000,
+            enableReceiveMessageJsonLog: false
+        );
+    }
+
+    private void OnConnectComplete()
+    {
+        Log.Info("连接成功");
+    }
+
+    private void OnConnectFail()
+    {
+        Log.Error("连接失败");
+    }
+
+    private void OnConnectDisconnect()
+    {
+        Log.Warning("连接断开");
+    }
+
+    private void OnDestroy()
+    {
+        _scene?.Dispose();
+    }
+}
+```
+
+> **📌 WebGL 注意:** WebGL 平台只能使用 `NetworkProtocolType.WebSocket`,不能使用 TCP 或 KCP。使用 WebSocket 时,地址仍填写 `"host:port"` 格式,由框架根据 `isHttps` 处理 `ws/wss`。
 
 #### Fantasy.Unity 支持三种场景运行模式:
 
@@ -183,7 +278,6 @@ _scene = await Scene.Create(SceneRuntimeMode.MainThread);
 ```csharp
 using Fantasy;
 using Fantasy.Async;
-using Fantasy.Network;
 using UnityEngine;
 
 public class GameEntry : MonoBehaviour
@@ -197,7 +291,7 @@ public class GameEntry : MonoBehaviour
 
     private void OnDestroy()
     {
-        // 销毁 Scene,清理所有网络和 Fantasy 相关资源
+        // 销毁 Scene,清理所有 Fantasy 相关资源
         _scene?.Dispose();
     }
 
@@ -213,7 +307,7 @@ public class GameEntry : MonoBehaviour
         await Fantasy.Platform.Unity.Entry.Initialize();
 
         // 2. 创建客户端 Scene
-        // Scene 是客户端的核心容器,管理所有实体、组件和网络连接
+        // Scene 是客户端的核心容器,管理所有实体、组件和事件
         // 参数 arg: 传递给 OnSceneCreate 事件的自定义参数
         // 参数 sceneRuntimeMode: 场景运行模式(MainThread/MultiThread/ThreadPool)
         _scene = await Fantasy.Platform.Unity.Entry.CreateScene(
@@ -269,7 +363,7 @@ Unity 启动流程:
 
 3. **Scene 管理**
    - Unity 客户端通常只需要一个 Scene 实例
-   - Scene 管理网络连接、实体、组件和事件
+   - Scene 管理实体、组件、事件以及后续需要挂载到 Scene 上的功能
    - 在 `OnDestroy` 中正确释放 Scene 资源
 
 ---
@@ -745,33 +839,7 @@ _scene = await Fantasy.Platform.Unity.Entry.CreateScene();
 
 ---
 
-### Q4: WebGL 平台连接失败
-
-**可能原因:**
-
-1. **协议类型错误**
-   - WebGL 只支持 `NetworkProtocolType.WebSocket`
-   - 不支持 KCP 和 TCP
-
-2. **服务器地址格式错误**
-   ```csharp
-   // 正确: 框架会自动转换为 ws:// 或 wss://
-   _scene.Connect("127.0.0.1:20000", NetworkProtocolType.WebSocket, ...);
-
-   // 错误: 不要手动添加协议前缀
-   // _scene.Connect("ws://127.0.0.1:20000", ...);
-   ```
-
-3. **HTTPS 参数设置错误**
-   ```csharp
-   // 服务器是 HTTPS 时,必须设置 isHttps: true
-   _scene.Connect("example.com:443", NetworkProtocolType.WebSocket,
-       ..., isHttps: true, ...);
-   ```
-
----
-
-### Q5: Source Generator 没有生成代码
+### Q4: Source Generator 没有生成代码
 
 **错误信息:**
 ```
