@@ -20,17 +20,19 @@ namespace Fantasy.Network.Interface
         private long _outerPackInfoId;
         private Queue<OuterPackInfo> _outerPackInfoPool;
         public readonly MemoryStreamBufferPool MemoryStreamBufferPool = new MemoryStreamBufferPool();
-        
+
+        public bool EnableMessageJsonLog { get; private set; }
         public NetworkType NetworkType { get; private set; }
         public NetworkTarget NetworkTarget { get; private set; }
         public NetworkProtocolType NetworkProtocolType { get; private set; }
         public ANetworkMessageScheduler NetworkMessageScheduler { get; private set; }
 
-        protected void Initialize(NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
+        protected void Initialize(NetworkType networkType, NetworkProtocolType networkProtocolType, NetworkTarget networkTarget, bool enableMessageJsonLog)
         {
             NetworkType = networkType;
             NetworkTarget = networkTarget;
             NetworkProtocolType = networkProtocolType;
+            EnableMessageJsonLog = enableMessageJsonLog;
 #if FANTASY_NET
             if (networkProtocolType == NetworkProtocolType.HTTP)
             {
@@ -48,7 +50,7 @@ namespace Fantasy.Network.Interface
                 case NetworkType.Client:
                 {
                     _outerPackInfoPool = new Queue<OuterPackInfo>();
-                    NetworkMessageScheduler = enableReceiveMessageJsonLog ? new DebugClientMessageScheduler(Scene) :new ClientMessageScheduler(Scene);
+                    NetworkMessageScheduler = enableMessageJsonLog ? new DebugClientMessageScheduler(Scene) :new ClientMessageScheduler(Scene);
                     break;
                 }
 #if FANTASY_NET

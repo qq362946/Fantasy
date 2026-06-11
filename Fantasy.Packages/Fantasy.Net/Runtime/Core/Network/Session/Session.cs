@@ -83,6 +83,19 @@ namespace Fantasy.Network
             session.LastReceiveTime = TimeHelper.Now;
             return session;
         }
+#if FANTASY_UNITY || FANTASY_CONSOLE
+        internal static Session CreateDebugClientSession(AClientNetwork network, IPEndPoint remoteEndPoint)
+        {
+            // 创建会话实例
+            var session = Entity.Create<DebugClientSession>(network.Scene, false, true);
+            session.Channel = network;
+            session.RemoteEndPoint = remoteEndPoint;
+            session.OnDispose = network.Dispose;
+            session.NetworkMessageScheduler = network.NetworkMessageScheduler;
+            session.LastReceiveTime = TimeHelper.Now;
+            return session;
+        }
+#endif
 #if FANTASY_NET
         internal static ProcessSession CreateInnerSession(Scene scene)
         {

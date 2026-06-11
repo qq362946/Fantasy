@@ -46,9 +46,9 @@ namespace Fantasy.Network.TCP
         
         public uint ChannelId { get; private set; }
 
-        public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
+        public void Initialize(NetworkTarget networkTarget, bool enableMessageJsonLog)
         {
-            base.Initialize(NetworkType.Client, NetworkProtocolType.TCP, networkTarget, enableReceiveMessageJsonLog);
+            base.Initialize(NetworkType.Client, NetworkProtocolType.TCP, networkTarget, enableMessageJsonLog);
         }
 
         public override void Dispose()
@@ -151,8 +151,13 @@ namespace Fantasy.Network.TCP
             {
                 OnReceiveSocketComplete();
             }
-            
+#if FANTASY_UNITY || FANTASY_CONSOLE
+            Session = EnableMessageJsonLog
+                ? Session.CreateDebugClientSession(this, _remoteEndPoint)
+                : Session.Create(this, _remoteEndPoint);
+#else
             Session = Session.Create(this, _remoteEndPoint);
+#endif
             return Session;
         }
 

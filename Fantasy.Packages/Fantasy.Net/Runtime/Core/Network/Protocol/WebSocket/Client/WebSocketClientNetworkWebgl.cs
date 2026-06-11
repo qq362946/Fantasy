@@ -96,7 +96,13 @@ namespace Fantasy.Network.WebSocket
                 Dispose();
             };
             _webSocket.ConnectAsync();
+#if FANTASY_UNITY || FANTASY_CONSOLE
+            Session = EnableMessageJsonLog
+                ? Session.CreateDebugClientSession(this, null)
+                : Session.Create(this, null);
+#else
             Session = Session.Create(this, null);
+#endif
             return Session;
         }
 

@@ -105,9 +105,13 @@ namespace Fantasy.Network.KCP
                 {
                     OnConnectDisconnect?.Invoke();
                 }
-                
-                _kcp?.Dispose();
 
+                if (_kcp != null)
+                {
+                    _kcp.Dispose();
+                    _kcp = null;
+                }
+                
                 if (_socket != null)
                 {
                     _socket.Close();
@@ -177,7 +181,13 @@ namespace Fantasy.Network.KCP
                 }
             }
             
+#if FANTASY_UNITY || FANTASY_CONSOLE
+            Session = EnableMessageJsonLog
+                ? Session.CreateDebugClientSession(this, _remoteAddress)
+                : Session.Create(this, _remoteAddress);
+#else
             Session = Session.Create(this, _remoteAddress);
+#endif
             return Session;
         }
 
@@ -445,6 +455,11 @@ namespace Fantasy.Network.KCP
         
         private void KcpUpdate()
         {
+            if (_kcp == null)
+            {
+                return;
+            }
+            
             var nowTime = TimeNow;
             
             try
