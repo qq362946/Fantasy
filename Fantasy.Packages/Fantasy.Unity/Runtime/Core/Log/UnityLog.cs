@@ -131,12 +131,12 @@ namespace Fantasy
 
         private static string Format(string level, string color, string message)
         {
-            return $"<b><color={color}>[{level}]</color></b> <color={MessageColor}>{message}</color>";
+            return $"<color={color}>[{level}]</color> {message}";
         }
 
         private static string Format(string level, string color, string sceneName, string message)
         {
-            return $"<b><color={color}>[{level}]</color></b> <color={SceneColor}>[{sceneName}]</color> <color={MessageColor}>{message}</color>";
+            return $"<color={color}>[{level}]</color> <color={SceneColor}>[{sceneName}]</color> {message}";
         }
     }
 }

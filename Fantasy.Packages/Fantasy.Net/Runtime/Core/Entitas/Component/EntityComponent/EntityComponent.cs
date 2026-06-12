@@ -430,8 +430,11 @@ namespace Fantasy.Entitas
                 // 如果实体已销毁，自动清理
                 if (entity == null || entity.IsDisposed)
                 {
-                    _updateQueue.Remove(node);
-                    _updateNodes.Remove(data.RunTimeId);
+                    // 只有当节点还在字典中时才从链表删除，避免重复删除
+                    if (_updateNodes.Remove(data.RunTimeId))
+                    {
+                        _updateQueue.Remove(node);
+                    }
                 }
                 else
                 {
@@ -524,8 +527,11 @@ namespace Fantasy.Entitas
                 // 如果实体已销毁，自动清理
                 if (entity == null || entity.IsDisposed)
                 {
-                    _lateUpdateQueue.Remove(node);
-                    _lateUpdateNodes.Remove(data.RunTimeId);
+                    // 只有当节点还在字典中时才从链表删除，避免重复删除
+                    if(_lateUpdateNodes.Remove(data.RunTimeId))
+                    {
+                        _lateUpdateQueue.Remove(node);  
+                    }
                 }
                 else
                 {
