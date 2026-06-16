@@ -116,14 +116,16 @@ namespace Fantasy
                         {
                             try
                             {
-                                var mongoDataBase = new MongoDatabase();
-                                mongoDataBase.Initialize(scene, dataBaseConfig.DbConnection, dataBaseConfig.DbName);
+                                var mongoDataBase = new MongoDatabase().Initialize(scene, dataBaseConfig.DbConnection,
+                                    dataBaseConfig.DbName);
                                 AllDatabase.TryAdd(dataBaseConfig.DbName, mongoDataBase);
                             }
                             catch (Exception e)
                             {
-                                Log.Error($"WorldId:{Id} DbName:{dataBaseConfig.DbName} DbConnection:{dataBaseConfig.DbConnection} Initialization failed. Please check if the target database server can be connected normally.\n{e.Message}");
+                                Log.Error(
+                                    $"WorldId:{Id} DbName:{dataBaseConfig.DbName} DbConnection:{dataBaseConfig.DbConnection} Initialization failed. Please check if the target database server can be connected normally.\n{e.Message}");
                             }
+
                             break;
                         }
                     }
@@ -167,7 +169,13 @@ namespace Fantasy
         /// </summary>
         public void Dispose()
         {
+            foreach (var database in AllDatabase.Values)
+            {
+                database.Dispose();
+            }
+            
             AllDatabase.Clear();
+            Database = null;
         }
     }
 }

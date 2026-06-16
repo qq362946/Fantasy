@@ -73,6 +73,7 @@ namespace Fantasy.Serialize
                 ThreadScheduler.MainScheduler.ThreadSynchronizationContext.Post(() =>
                 {
                     InnerOnLoad(assemblyManifestId, protoBufDispatcherRegistrar);
+                    tcs.SetResult();
                 });
                 await tcs;
                 return;
@@ -271,6 +272,7 @@ namespace Fantasy.Serialize
             }
 
             _serializes[type.TypeHandle](_cachedStream, @object);
+            _cachedStream.Position = 0;
             return _deserializes[type.TypeHandle](_cachedStream);
         }
 

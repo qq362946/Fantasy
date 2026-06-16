@@ -17,6 +17,7 @@ using KCP;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable PossibleNullReferenceException
 // ReSharper disable InconsistentNaming
+#pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -169,16 +170,15 @@ namespace Fantasy.Network.KCP
             
             if (!_socket.ConnectAsync(_connectEventArgs))
             {
-                try
+                if (_connectEventArgs.SocketError != SocketError.Success)
                 {
-                    OnReceiveSocketComplete();
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
                     _connectDisconnectEvent = false;
                     OnConnectFail?.Invoke();
+                    Dispose();
+                    return null;
                 }
+                
+                OnReceiveSocketComplete();
             }
             
 #if FANTASY_UNITY || FANTASY_CONSOLE

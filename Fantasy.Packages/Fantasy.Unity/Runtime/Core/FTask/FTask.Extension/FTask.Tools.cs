@@ -315,6 +315,7 @@ namespace Fantasy.Async
                 return;
             }
             
+            Exception exception = null;
             var count = tasks.Count;
             var sTaskCompletionSource = Create();
             
@@ -327,11 +328,28 @@ namespace Fantasy.Async
             
             async FVoid RunSTask(FTask task)
             {
-                await task;
-                count--;
-                if (count <= 0)
+                try
                 {
-                    sTaskCompletionSource.SetResult();
+                    await task;
+                }
+                catch (Exception e)
+                {
+                    exception ??= e;
+                }
+                finally
+                {
+                    count--;
+                    if (count <= 0)
+                    {
+                        if (exception != null)
+                        {
+                            sTaskCompletionSource.SetException(exception);
+                        }
+                        else
+                        {
+                            sTaskCompletionSource.SetResult();
+                        }
+                    }
                 }
             }
         }
@@ -347,8 +365,11 @@ namespace Fantasy.Async
                 return;
             }
             
-            var count = 1;
+            var count = tasks.Count;
+            var isCompleted = false;
             var sTaskCompletionSource = Create();
+            
+            Exception exception = null;
             
             foreach (var task in tasks)
             {
@@ -359,11 +380,37 @@ namespace Fantasy.Async
             
             async FVoid RunSTask(FTask task)
             {
-                await task;
-                count--;
-                if (count == 0)
+                try
                 {
-                    sTaskCompletionSource.SetResult();
+                    await task;
+
+                    if (!isCompleted)
+                    {
+                        isCompleted = true;
+                        sTaskCompletionSource.SetResult();
+                    }
+                }
+                catch (Exception e)
+                {
+                    exception ??= e;
+                }
+                finally
+                {
+                    count--;
+
+                    if (count <= 0 && !isCompleted)
+                    {
+                        isCompleted = true;
+
+                        if (exception != null)
+                        {
+                            sTaskCompletionSource.SetException(exception);
+                        }
+                        else
+                        {
+                            sTaskCompletionSource.SetResult();
+                        }
+                    }
                 }
             }
         }

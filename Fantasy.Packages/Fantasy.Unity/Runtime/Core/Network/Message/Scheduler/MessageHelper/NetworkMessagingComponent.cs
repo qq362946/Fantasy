@@ -228,7 +228,7 @@ namespace Fantasy.Scheduler
         {
             if (!RequestCallback.Remove(rpcId, out var routeMessageSender))
             {
-                throw new Exception($"not found rpc, response.RpcId:{rpcId} response message: {response.GetType().Name} Process:{Scene.Process.Id} Scene:{Scene.SceneConfigId}");
+                Log.Error($"not found rpc, response.RpcId:{rpcId} response message: {response.GetType().Name} Process:{Scene.Process.Id} Scene:{Scene.SceneConfigId}");
             }
 
             ResponseHandler(routeMessageSender, response);

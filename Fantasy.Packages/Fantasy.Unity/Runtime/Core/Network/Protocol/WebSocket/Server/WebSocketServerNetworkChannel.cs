@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Net;
 using System.Net.WebSockets;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using Fantasy.Async;
 using Fantasy.Network.Interface;
@@ -90,7 +91,7 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
         finally
         {
-            _sendBuffers.Clear();
+            ClearSendBuffers();
             _webSocket.Dispose();
             
             base.Dispose();
@@ -263,6 +264,24 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
     }
     
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void ReturnMemoryStream(MemoryStreamBuffer memoryStream)
+    {
+        if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
+        {
+            _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private void ClearSendBuffers()
+    {
+        while (_sendBuffers.TryDequeue(out var memoryStream))
+        {
+            ReturnMemoryStream(memoryStream);
+        }
+    }
+    
     private async FTask Send()
     {
         if (_isSending || IsDisposed)
@@ -271,21 +290,47 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
             
         _isSending = true;
-            
-        while (_isSending)
+
+        try
         {
-            if (!_sendBuffers.TryDequeue(out var memoryStream))
+            while (_isSending)
             {
-                _isSending = false;
-                return;
-            }
+                if (!_sendBuffers.TryDequeue(out var memoryStream))
+                {
+                    _isSending = false;
+                    return;
+                }
 
-            await _webSocket.SendAsync(new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position), WebSocketMessageType.Binary, true, _cancellationTokenSource.Token);
-
-            if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
-            {
-                _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                try
+                {
+                    await _webSocket.SendAsync(
+                        new ArraySegment<byte>(memoryStream.GetBuffer(), 0, (int)memoryStream.Position),
+                        WebSocketMessageType.Binary, 
+                        true, 
+                        _cancellationTokenSource.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    return;
+                }
+                catch (ObjectDisposedException)
+                {
+                    return;
+                }
+                catch (Exception)
+                {
+                    Dispose();
+                    return;
+                }
+                finally
+                {
+                    ReturnMemoryStream(memoryStream);
+                }
             }
+        }
+        finally
+        {
+            _isSending = false;
         }
     }
 

@@ -15,6 +15,7 @@ using Fantasy.Network.Interface;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+#pragma warning disable CS8603 // Possible null reference return.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
@@ -146,11 +147,20 @@ namespace Fantasy.Network.TCP
                 RemoteEndPoint = _remoteEndPoint
             };
             outArgs.Completed += OnConnectSocketCompleted;
-           
+            
             if (!_socket.ConnectAsync(outArgs))
             {
+                if (outArgs.SocketError != SocketError.Success)
+                {
+                    _connectDisconnectEvent = false;
+                    _onConnectFail?.Invoke();
+                    Dispose();
+                    return null;
+                }
+                
                 OnReceiveSocketComplete();
             }
+            
 #if FANTASY_UNITY || FANTASY_CONSOLE
             Session = EnableMessageJsonLog
                 ? Session.CreateDebugClientSession(this, _remoteEndPoint)

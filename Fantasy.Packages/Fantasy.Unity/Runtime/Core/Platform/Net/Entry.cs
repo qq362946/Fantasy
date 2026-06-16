@@ -29,10 +29,15 @@ public static class Entry
         // 初始化
         await Initialize(log);
         // 启动Process
-        StartProcess().Coroutine();
+        var startProcessTask = StartProcess();
+        while (!startProcessTask.IsCompleted)
+        {
+            ThreadScheduler.Update();
+            Thread.Sleep(1);
+        }
+        await startProcessTask;
         // 设置当前程序已经在运行中
         ProgramDefine.IsAppRunning = true;
-        await FTask.CompletedTask;
         while (true)
         {
             ThreadScheduler.Update();

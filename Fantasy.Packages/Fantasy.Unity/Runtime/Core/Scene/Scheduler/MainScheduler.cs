@@ -41,11 +41,6 @@ namespace Fantasy
         {
             ThreadSynchronizationContext.Post(() =>
             {
-                if (scene.IsDisposed)
-                {
-                    return;
-                }
-                
                 var initialCount = _queue.Count;
                 for (var i = 0; i < initialCount; i++)
                 {

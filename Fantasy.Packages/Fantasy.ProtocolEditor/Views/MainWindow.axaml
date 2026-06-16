@@ -10,7 +10,7 @@
         x:Class="Fantasy.ProtocolEditor.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/app-icon.ico"
-        Title="Fantasy Protocol Editor 2026.0.1017"
+        Title="Fantasy Protocol Editor 2026.0.1023"
         Background="#2B2B2B"
         Width="1200" Height="800">
 
@@ -53,6 +53,8 @@
                     <MenuItem Header="文件">
                         <Separator/>
                         <MenuItem Header="打开目录..." Click="OnOpenFolderMenuClick" InputGesture="Ctrl+O"/>
+                        <MenuItem Header="选择配置文件..." Click="OnSelectConfigFileMenuClick"/>
+                        <MenuItem Header="配置另存为..." Click="OnSaveConfigAsMenuClick"/>
                         <Separator/>
                         <MenuItem Header="保存" Click="OnSaveMenuClick" InputGesture="Ctrl+S"/>
                         <MenuItem Header="导出设置" Command="{Binding OpenExportSettingsCommand}"/>

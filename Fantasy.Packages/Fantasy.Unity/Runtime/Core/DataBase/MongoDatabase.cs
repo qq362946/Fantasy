@@ -67,11 +67,12 @@ namespace Fantasy.Database
                 // 记录所有集合名
                 _collections.UnionWith(_mongoDatabase.ListCollectionNames().ToList());
                 _serializer = SerializerManager.BsonPack;
-                // Log.Info($"dbName:{dbName} Database connection successful.");
+                Log.Info($"dbName:{dbName} Database connection successful.");
             }
             catch (Exception e)
             {
                 Log.Error($"dbName:{dbName} cannot connect to the database. Please check if the connectionString is correct or the network conditions.\n{e.Message}");
+                throw;
             }
             
             return this;
@@ -257,7 +258,7 @@ namespace Fantasy.Database
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
-                var count = await Count(filter);
+                var count = await Count(filter, collection);
                 var dates = await QueryByPage(filter, pageIndex, pageSize, isDeserialize, collection, scene);
                 return ((int)count, dates);
             }
@@ -279,7 +280,7 @@ namespace Fantasy.Database
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
-                var count = await Count(filter);
+                var count = await Count(filter, collection);
                 var dates = await QueryByPage(filter, pageIndex, pageSize, cols, isDeserialize, collection, scene);
                 return ((int)count, dates);
             }

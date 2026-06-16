@@ -78,7 +78,7 @@ namespace Fantasy.PacketParser
             
             MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
 
-            if (MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
+            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
             {
                 // 检查消息体长度是否超出限制
                 throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
@@ -164,7 +164,7 @@ namespace Fantasy.PacketParser
                 packetBodyCount = -1;
             }
             
-            if (packetBodyCount > ProgramDefine.MaxMessageSize)
+            if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
@@ -215,7 +215,7 @@ namespace Fantasy.PacketParser
             
             MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
 
-            if (MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
+            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
             {
                 // 检查消息体长度是否超出限制
                 throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
@@ -283,7 +283,7 @@ namespace Fantasy.PacketParser
                 packetBodyCount = -1;
             }
             
-            if (packetBodyCount > ProgramDefine.MaxMessageSize)
+            if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
@@ -334,7 +334,7 @@ namespace Fantasy.PacketParser
             
             MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
             
-            if (MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
+            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
             {
                 // 检查消息体长度是否超出限制
                 throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
@@ -401,7 +401,7 @@ namespace Fantasy.PacketParser
                 packetBodyCount = -1;
             }
             
-            if (packetBodyCount > ProgramDefine.MaxMessageSize)
+            if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");

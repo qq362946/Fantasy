@@ -500,7 +500,7 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
         }
 
         // 2. 为所有需要 OpCode 的消息生成 OpCode
-        foreach (var (_, messageDefinition) in allMessages)
+        foreach (var messageDefinition in allMessages.Values.OrderBy(message => message.Name, StringComparer.Ordinal))
         {
             if (!messageDefinition.HasOpCode)
             {
@@ -534,7 +534,8 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
             yield break;
         }
 
-        var files = Directory.GetFiles(protocolPath, "*.proto", SearchOption.AllDirectories);
+        var files = Directory.GetFiles(protocolPath, "*.proto", SearchOption.AllDirectories)
+            .OrderBy(f => Path.GetRelativePath(protocolPath, f), StringComparer.Ordinal);
 
         foreach (var file in files)
         {

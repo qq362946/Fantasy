@@ -135,7 +135,15 @@ namespace Fantasy.Async
 
             _status = STaskStatus.Faulted;
             _exception = ExceptionDispatchInfo.Capture(exception);
-            _callBack?.Invoke();
+            
+            if (_callBack == null)
+            {
+                return;
+            }
+            
+            var callBack = _callBack;
+            _callBack = null;
+            callBack.Invoke();
         }
     }
 
@@ -257,7 +265,15 @@ namespace Fantasy.Async
 
             _status = STaskStatus.Faulted;
             _exception = ExceptionDispatchInfo.Capture(exception);
-            _callBack?.Invoke();
+            
+            if (_callBack == null)
+            {
+                return;
+            }
+
+            var callBack = _callBack;
+            _callBack = null;
+            callBack.Invoke();
         }
     }
 }

@@ -1,4 +1,5 @@
 #if FANTASY_NET
+using System;
 using System.Threading.Tasks;
 using Fantasy.Async;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -44,10 +45,11 @@ public sealed class SceneContextFilter : IAsyncActionFilter
             try
             {
                 await next();
-            }
-            finally
-            {
                 tcs.SetResult();
+            }
+            catch (Exception e)
+            {
+                tcs.SetException(e);
             }
         }
     }

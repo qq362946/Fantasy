@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
+using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas.Interface;
 using Fantasy.IdFactory;
 using Fantasy.Pool;
@@ -97,6 +98,16 @@ namespace Fantasy.Entitas
 
         [BsonElement("t")] [BsonIgnoreIfNull] [MemoryPackInclude] protected EntityTreeCollection Tree;
         [BsonElement("m")] [BsonIgnoreIfNull] [MemoryPackInclude] protected EntityMultiCollection Multi;
+        
+        /// <summary>
+        /// 表示当前 Entity 是否从对象池创建，也决定这个 Entity 再销毁的时候是否回到对象池
+        /// </summary>
+        [BsonIgnore]
+        [JsonIgnore]
+        [IgnoreDataMember]
+        [ProtoIgnore]
+        [MemoryPackIgnore]
+        private bool _isPool;
         
         /// <summary>
         /// 获得父Entity
@@ -291,7 +302,13 @@ namespace Fantasy.Entitas
         {
             var id = EntitySupportedChecker<T>.IsMulti ? Scene.EntityIdFactory.Create : Id;
             var entity = Create<T>(Scene, id, isPool, false);
-            AddComponent(entity);
+            
+            if (!AddComponent(entity))
+            {
+                entity.Dispose();
+                return null;
+            }
+            
             Scene.EntityComponent.Awake(entity);
             Scene.EntityComponent.RegisterUpdate(entity);
 #if FANTASY_UNITY
@@ -310,7 +327,13 @@ namespace Fantasy.Entitas
         public T AddComponent<T>(long id, bool isPool = true) where T : Entity, new()
         {
             var entity = Create<T>(Scene, id, isPool, false);
-            AddComponent(entity);
+            
+            if (!AddComponent(entity))
+            {
+                entity.Dispose();
+                return null;
+            }
+            
             Scene.EntityComponent.Awake(entity);
             Scene.EntityComponent.RegisterUpdate(entity);
 #if FANTASY_UNITY
@@ -323,23 +346,23 @@ namespace Fantasy.Entitas
         /// 添加一个组件到当前实体上
         /// </summary>
         /// <param name="component">要添加的实体实例</param>
-        public void AddComponent(Entity component)
+        public bool AddComponent(Entity component)
         {
             if (component.IsDisposed)
             {
                 Log.Error($"component is Disposed {component.Type.FullName}");
-                return;
+                return false;
             }
 
-            InnerAddComponent(component);   
+            return InnerAddComponent(component);   
         }
 
-        internal void InnerAddComponent(Entity component)
+        internal bool InnerAddComponent(Entity component)
         {
             if (this == component)
             {
                 Log.Error("Cannot add oneself to one's own components");
-                return;
+                return false;
             }
             
             var type = component.Type;
@@ -361,7 +384,7 @@ namespace Fantasy.Entitas
                 else if (Tree.ContainsKey(typeHashCode))
                 {
                     Log.Error($"type:{type.FullName} If you want to add multiple components of the same type, please implement IMultiEntity");
-                    return;
+                    return false;
                 }
                 
                 Tree.Add(typeHashCode, component);
@@ -369,6 +392,7 @@ namespace Fantasy.Entitas
             
             component.Parent = this;
             component.Scene = Scene;
+            return true;
         }
 
         /// <summary>
@@ -376,18 +400,18 @@ namespace Fantasy.Entitas
         /// </summary>
         /// <param name="component">要添加的实体实例</param>
         /// <typeparam name="T">要添加组件的泛型类型</typeparam>
-        public void AddComponent<T>(T component) where T : Entity
+        public bool AddComponent<T>(T component) where T : Entity
         {
             if (this == component)
             {
                 Log.Error("Cannot add oneself to one's own components");
-                return;
+                return false;
             }
 
             if (component.IsDisposed)
             {
                 Log.Error($"component is Disposed {typeof(T).FullName}");
-                return;
+                return false;
             }
             
             component.Parent?.RemoveComponent(component, false);
@@ -408,7 +432,7 @@ namespace Fantasy.Entitas
                 else if (Tree.ContainsKey(typeHashCode))
                 {
                     Log.Error($"type:{typeof(T).FullName} If you want to add multiple components of the same type, please implement IMultiEntity");
-                    return;
+                    return false;
                 }
                 
                 Tree.Add(typeHashCode, component);
@@ -416,6 +440,7 @@ namespace Fantasy.Entitas
             
             component.Parent = this;
             component.Scene = Scene;
+            return true;
         }
 
         /// <summary>
@@ -428,7 +453,13 @@ namespace Fantasy.Entitas
         {
             var id = typeof(ISupportedMultiEntity).IsAssignableFrom(type) ? Scene.EntityIdFactory.Create : Id;
             var entity = Entity.Create(Scene, type, id, isPool, false);
-            AddComponent(entity);
+            
+            if (!AddComponent(entity))
+            {
+                entity.Dispose();
+                return null;
+            }
+            
             Scene.EntityComponent.Awake(entity);
             Scene.EntityComponent.RegisterUpdate(entity);
 #if FANTASY_UNITY
@@ -580,6 +611,8 @@ namespace Fantasy.Entitas
                 return false;
             }
 
+            component.Parent = null;
+            
             if (Tree.Count != 0)
             {
                 return true;
@@ -609,6 +642,8 @@ namespace Fantasy.Entitas
             {
                 return false;
             }
+            
+            component.Parent = null;
 
             if (Multi.Count != 0)
             {
@@ -656,6 +691,10 @@ namespace Fantasy.Entitas
             {
                 component.Dispose();
             }
+            else if (component.Parent == this)
+            {
+                component.Parent = null;
+            }
         }
 
         /// <summary>
@@ -685,6 +724,10 @@ namespace Fantasy.Entitas
             if (isDispose)
             {
                 component.Dispose();
+            }
+            else if (component.Parent == this)
+            {
+                component.Parent = null;
             }
         }
 
@@ -718,7 +761,9 @@ namespace Fantasy.Entitas
             {
                 var typeHashCode = component.TypeHashCode;
 
-                if (Tree.Remove(typeHashCode))
+                if (Tree.TryGetValue(typeHashCode, out var current) &&
+                    ReferenceEquals(current, component) &&
+                    Tree.Remove(typeHashCode))
                 {
                     if (Tree.Count == 0)
                     {
@@ -727,10 +772,14 @@ namespace Fantasy.Entitas
                     }
                 }
             }
-
-            if (isDispose && component != null)
+            
+            if (isDispose)
             {
                 component.Dispose();
+            }
+            else if (component.Parent == this)
+            {
+                component.Parent = null;
             }
         }
 
@@ -765,7 +814,9 @@ namespace Fantasy.Entitas
             {
                 var typeHashCode = TypeHashCache<T>.HashCode;
 
-                if (Tree.Remove(typeHashCode))
+                if (Tree.TryGetValue(typeHashCode, out var current) &&
+                    ReferenceEquals(current, component) &&
+                    Tree.Remove(typeHashCode))
                 {
                     if (Tree.Count == 0)
                     {
@@ -778,6 +829,10 @@ namespace Fantasy.Entitas
             if (isDispose)
             {
                 component.Dispose();
+            }
+            else if (component.Parent == this)
+            {
+                component.Parent = null;
             }
         }
 
@@ -804,6 +859,7 @@ namespace Fantasy.Entitas
                 Type ??= GetType();
                 TypeHashCode = TypeHashCache.GetHashCode(Type);
                 RuntimeId = Scene.RuntimeIdFactory.Create(false);
+                
                 if (resetId)
                 {
                     Id = RuntimeId;
@@ -821,10 +877,31 @@ namespace Fantasy.Entitas
 
                 if (Multi != null && Multi.Count > 0)
                 {
-                    foreach (var (_, entity) in Multi)
+                    if (resetId)
                     {
-                        entity.Parent = this;
-                        entity.Deserialize(scene, resetId);
+                        using var entities = ListPool<Entity>.Create();
+
+                        foreach (var (_, entity) in Multi)
+                        {
+                            entity.Parent = this;
+                            entity.Deserialize(scene, resetId);
+                            entities.Add(entity);
+                        }
+                        
+                        Multi.Clear();
+                        
+                        foreach (var entity in entities)
+                        {
+                            Multi.Add(entity.Id, entity);
+                        }
+                    }
+                    else
+                    {
+                        foreach (var (_, entity) in Multi)
+                        {
+                            entity.Parent = this;
+                            entity.Deserialize(scene, resetId);
+                        }
                     }
                 }
 
@@ -963,7 +1040,7 @@ namespace Fantasy.Entitas
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsPool()
         {
-            return IdFactoryHelper.RuntimeIdTool.GetIsPool(RuntimeId); 
+            return _isPool; 
         }
 
         /// <summary>
@@ -971,7 +1048,10 @@ namespace Fantasy.Entitas
         /// </summary>
         /// <param name="isPool"></param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetIsPool(bool isPool) { }
+        public void SetIsPool(bool isPool)
+        {
+            _isPool = isPool;
+        }
 
         #endregion
     }

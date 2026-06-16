@@ -18,7 +18,8 @@ namespace Fantasy
         public void Dispose()
         {
             Cts.Cancel();
-            if (Thread.IsAlive)
+            // 避免在 Scene 自己的调度线程内 Remove 时 Join 自身导致死锁。
+            if (Thread.IsAlive && Thread != Thread.CurrentThread)
             {
                 Thread.Join();
             }
@@ -52,7 +53,10 @@ namespace Fantasy
         public void Add(Scene scene)
         {
             var cts = new CancellationTokenSource();
-            var thread = new Thread(() => Loop(scene, cts.Token));
+            var thread = new Thread(() => Loop(scene, cts.Token))
+            {
+                IsBackground = true
+            };
             _threads.TryAdd(scene.RuntimeId, new MultiThreadStruct(thread, cts));
             thread.Start();
         }

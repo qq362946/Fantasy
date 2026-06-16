@@ -67,6 +67,7 @@ namespace Fantasy.Platform.Net
 		{
 			foreach (var config in Instance.List)
 			{
+				config.InitializeSceneType();
 				config.Initialize();
 				Instance._configs.TryAdd(config.Id, config);
 				Instance._sceneConfigByProcess.Add(config.ProcessConfigId, config);
@@ -212,6 +213,21 @@ namespace Fantasy.Platform.Net
 	    public void Initialize()
 	    {
 		    Address = IdFactoryHelper.RuntimeId(false, 0, Id, (byte)WorldConfigId, 0);
+	    }
+		
+	    internal void InitializeSceneType()
+	    {
+		    if (string.IsNullOrWhiteSpace(SceneTypeString))
+		    {
+			    throw new InvalidOperationException($"Scene {Id}: SceneTypeString cannot be null or empty");
+		    }
+
+		    if (!Scene.SceneTypeDictionary.TryGetValue(SceneTypeString, out var sceneType))
+		    {
+			    throw new InvalidOperationException($"Scene {Id}: SceneTypeString '{SceneTypeString}' is not defined in SceneTypeDictionary");
+		    }
+
+		    SceneType = sceneType;
 	    }
     }
 }

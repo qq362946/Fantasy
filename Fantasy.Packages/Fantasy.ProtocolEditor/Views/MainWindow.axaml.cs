@@ -19,8 +19,10 @@ using Fantasy.ProtocolEditor.ViewModels;
 using Fantasy.ProtocolEditor.Services;
 using Avalonia.Media;
 using Fantasy.ProtocolEditor.Models;
+using Avalonia.Platform.Storage;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Fantasy.ProtocolEditor.Views;
 
@@ -84,15 +86,110 @@ public partial class MainWindow : Window
     private void OnWindowLoaded(object? sender, RoutedEventArgs e)
     {
         // 在窗口和所有控件完全加载后，再加载配置
-        Dispatcher.UIThread.Post(() =>
+        Dispatcher.UIThread.Post(async () =>
         {
             if (DataContext is MainWindowViewModel vm)
             {
+                await InitializeConfigFileAsync(vm);
                 vm.LoadWorkspaceConfig();
                 // 设置 TreeView 的容器准备事件，用于同步 IsExpanded 状态
                 SetupTreeViewItemBinding();
             }
         }, DispatcherPriority.Loaded);
+    }
+
+    /// <summary>
+    /// 初始化当前配置文件。优先使用进程当前目录的 workspace.json，不存在则提示选择。
+    /// </summary>
+    private async Task InitializeConfigFileAsync(MainWindowViewModel vm)
+    {
+        try
+        {
+            ConfigService.SetConfigFilePath(ConfigService.DefaultConfigFilePath);
+
+            if (File.Exists(ConfigService.CurrentConfigFilePath))
+            {
+                ConfigService.SaveLastConfigFilePath();
+                vm.OutputText += $"使用配置文件：{ConfigService.CurrentConfigFilePath}\n";
+                return;
+            }
+
+            if (ConfigService.TryUseLastConfigFile(out var lastConfigErrorMessage))
+            {
+                vm.OutputText += $"使用上次配置文件：{ConfigService.CurrentConfigFilePath}\n";
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(lastConfigErrorMessage))
+            {
+                vm.OutputText += $"上次配置文件不可用：{lastConfigErrorMessage}\n";
+            }
+
+            var selectedConfigPath = await SelectWorkspaceConfigFileAsync("选择工作区配置文件");
+            if (!string.IsNullOrEmpty(selectedConfigPath))
+            {
+                ConfigService.SetConfigFilePath(selectedConfigPath);
+                ConfigService.SaveLastConfigFilePath();
+                vm.OutputText += $"使用配置文件：{ConfigService.CurrentConfigFilePath}\n";
+                return;
+            }
+
+            ConfigService.EnsureConfigFile();
+            ConfigService.SaveLastConfigFilePath();
+            vm.OutputText += $"已创建默认配置文件：{ConfigService.CurrentConfigFilePath}\n";
+        }
+        catch (Exception ex)
+        {
+            ConfigService.SetConfigFilePath(ConfigService.DefaultConfigFilePath);
+            ConfigService.EnsureConfigFile();
+            ConfigService.SaveLastConfigFilePath();
+            vm.OutputText += $"初始化配置文件失败，已创建默认配置：{ex.Message}\n";
+        }
+    }
+
+    /// <summary>
+    /// 选择工作区配置文件。
+    /// </summary>
+    private async Task<string?> SelectWorkspaceConfigFileAsync(string title)
+    {
+        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        {
+            Title = title,
+            AllowMultiple = false
+        });
+
+        if (files.Count == 0)
+        {
+            return null;
+        }
+
+        var filePath = files[0].Path.LocalPath;
+        if (ConfigService.TryValidateConfigFile(filePath, out var errorMessage))
+        {
+            return filePath;
+        }
+
+        if (DataContext is MainWindowViewModel vm)
+        {
+            vm.OutputText += $"配置文件无效：{errorMessage}\n";
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// 选择配置另存为路径。
+    /// </summary>
+    private async Task<string?> SelectConfigSavePathAsync()
+    {
+        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        {
+            Title = "配置另存为",
+            SuggestedFileName = Path.GetFileName(ConfigService.CurrentConfigFilePath),
+            DefaultExtension = "json"
+        });
+
+        return file?.Path.LocalPath;
     }
 
     /// <summary>
@@ -494,6 +591,112 @@ public partial class MainWindow : Window
                 viewModel.OutputText += $"打开文件夹时出错：{ex.Message}\n";
             }
         }
+    }
+
+    /// <summary>
+    /// 菜单选择配置文件点击事件。
+    /// </summary>
+    private async void OnSelectConfigFileMenuClick(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is not MainWindowViewModel viewModel)
+        {
+            return;
+        }
+
+        try
+        {
+            var configPath = await SelectWorkspaceConfigFileAsync("选择工作区配置文件");
+            if (string.IsNullOrEmpty(configPath))
+            {
+                return;
+            }
+
+            SaveCurrentWorkspaceState(viewModel);
+
+            ConfigService.SetConfigFilePath(configPath);
+            ConfigService.SaveLastConfigFilePath();
+            viewModel.ResetWorkspaceState();
+            viewModel.OutputText += $"已切换配置文件：{ConfigService.CurrentConfigFilePath}\n";
+            viewModel.LoadWorkspaceConfig();
+        }
+        catch (Exception ex)
+        {
+            viewModel.OutputText += $"切换配置文件时出错：{ex.Message}\n";
+        }
+    }
+
+    /// <summary>
+    /// 菜单配置另存为点击事件。
+    /// </summary>
+    private async void OnSaveConfigAsMenuClick(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is not MainWindowViewModel viewModel)
+        {
+            return;
+        }
+
+        try
+        {
+            var savePath = await SelectConfigSavePathAsync();
+            if (string.IsNullOrEmpty(savePath))
+            {
+                return;
+            }
+
+            if (viewModel.ActiveTab != null && TextEditor != null)
+            {
+                viewModel.ActiveTab.CaretOffset = TextEditor.CaretOffset;
+            }
+
+            SaveCurrentWorkspaceState(viewModel);
+
+            var config = ConfigService.LoadConfig() ?? new WorkspaceConfig();
+            config.WorkspacePath = viewModel.WorkspacePath;
+            config.OpenedTabs.Clear();
+            foreach (var tab in viewModel.OpenedTabs)
+            {
+                config.OpenedTabs.Add(new TabConfig
+                {
+                    FilePath = tab.FilePath,
+                    CaretOffset = tab.CaretOffset,
+                    EditorType = tab.EditorType
+                });
+            }
+
+            config.ActiveTabFilePath = viewModel.ActiveTab?.FilePath ?? string.Empty;
+            if (viewModel.OpenedTabs.Any(t => t.EditorType == EditorType.ExportSettings))
+            {
+                config.ServerOutputDirectory = viewModel.ExportSettingsViewModel.ServerOutputDirectory;
+                config.ClientOutputDirectory = viewModel.ExportSettingsViewModel.ClientOutputDirectory;
+                config.ExportToServer = viewModel.ExportSettingsViewModel.ExportToServer;
+                config.ExportToClient = viewModel.ExportSettingsViewModel.ExportToClient;
+            }
+
+            ConfigService.SaveConfigAs(savePath, config);
+            viewModel.OutputText += $"配置已另存为：{savePath}\n";
+        }
+        catch (Exception ex)
+        {
+            viewModel.OutputText += $"配置另存为失败：{ex.Message}\n";
+        }
+    }
+
+    /// <summary>
+    /// 保存当前配置对应的工作区状态。
+    /// </summary>
+    private void SaveCurrentWorkspaceState(MainWindowViewModel viewModel)
+    {
+        if (viewModel.ActiveTab != null && TextEditor != null)
+        {
+            viewModel.ActiveTab.CaretOffset = TextEditor.CaretOffset;
+        }
+
+        if (viewModel.OpenedTabs.Count > 0)
+        {
+            SaveAllOpened(string.Empty);
+        }
+
+        viewModel.SaveWorkspaceConfig();
     }
 
     /// <summary>

@@ -21,7 +21,6 @@ namespace Fantasy.Network.WebSocket
     {
         private bool _isSending;
         private bool _isInnerDispose;
-        private long _connectTimeoutId;
         private bool _connectDisconnectEvent = true;
         private ClientWebSocket _clientWebSocket;
         private ReadOnlyMemoryPacketParser _packetParser;
@@ -61,7 +60,6 @@ namespace Fantasy.Network.WebSocket
                 }
             }
             
-            ClearConnectTimeout();
             CloseAndDisposeAsync().Coroutine();
         }
 
@@ -128,25 +126,34 @@ namespace Fantasy.Network.WebSocket
             _onConnectFail = onConnectFail;
             _onConnectComplete = onConnectComplete;
             _onConnectDisconnect = onConnectDisconnect;
-            // 设置连接超时定时器
-            _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
-            {
-                _connectDisconnectEvent = false;
-                _onConnectFail?.Invoke();
-                Dispose();
-            });
 
             _clientWebSocket = new ClientWebSocket();
             var webSocketAddress = WebSocketHelper.GetWebSocketAddress(remoteAddress, isHttps);
 
             try
             {
-                _clientWebSocket.ConnectAsync(new Uri(webSocketAddress), _cancellationTokenSource.Token).Wait();
+                var connectTask = _clientWebSocket.ConnectAsync(new Uri(webSocketAddress), _cancellationTokenSource.Token);
 
+                if (!connectTask.Wait(connectTimeout))
+                {
+                    _connectDisconnectEvent = false;
+                    _onConnectFail?.Invoke();
+                    Dispose();
+                    return null;
+                }
+                
                 if (_cancellationTokenSource.IsCancellationRequested)
                 {
                     return null;
                 }
+            }
+            catch (AggregateException ae) when (ae.InnerException is WebSocketException wse)
+            {
+                Log.Error($"WebSocket error: {wse.Message}");
+                _connectDisconnectEvent = false;
+                _onConnectFail?.Invoke();
+                Dispose();
+                return null;
             }
             catch (WebSocketException wse)
             {
@@ -164,8 +171,7 @@ namespace Fantasy.Network.WebSocket
                 Dispose();
                 return null;
             }
-
-            ClearConnectTimeout();
+            
             ReadPipeDataAsync().Coroutine();
             ReceiveSocketAsync().Coroutine();
             _onConnectComplete?.Invoke();
@@ -376,16 +382,6 @@ namespace Fantasy.Network.WebSocket
         public override void RemoveChannel(uint channelId)
         {
             Dispose();
-        }
-
-        private void ClearConnectTimeout()
-        {
-            if (_connectTimeoutId == 0)
-            {
-                return;
-            }
-
-            Scene?.TimerComponent?.Net?.Remove(ref _connectTimeoutId);
         }
     }
 }

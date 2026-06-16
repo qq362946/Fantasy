@@ -348,6 +348,21 @@ public partial class MainWindowViewModel : ViewModelBase
         OpenFile(filePath);
     }
 
+    /// <summary>
+    /// 重置工作区 UI 状态，用于切换配置文件。
+    /// </summary>
+    public void ResetWorkspaceState()
+    {
+        OpenedTabs.Clear();
+        ActiveTab = null;
+        CurrentFilePath = string.Empty;
+        WorkspacePath = string.Empty;
+        RoamingConfigViewModel = new RoamingConfigViewModel();
+        RouteConfigViewModel = new RouteConfigViewModel();
+        ExportSettingsViewModel = new ExportSettingsViewModel();
+        InitializeDefaultFileTree();
+    }
+
     [RelayCommand]
     private void NewFile()
     {
@@ -518,7 +533,10 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             var config = ConfigService.LoadConfig();
             if (config == null)
+            {
+                ResetWorkspaceState();
                 return;
+            }
 
             // 恢复工作区路径
             if (!string.IsNullOrEmpty(config.WorkspacePath) && Directory.Exists(config.WorkspacePath))
@@ -564,6 +582,11 @@ public partial class MainWindowViewModel : ViewModelBase
                 }
 
                 OutputText += "工作区配置加载成功。\n";
+            }
+            else
+            {
+                ResetWorkspaceState();
+                OutputText += "未配置有效工作区，已加载空工作区状态。\n";
             }
         }
         catch (Exception ex)

@@ -77,7 +77,7 @@ namespace Fantasy.PacketParser
                     ref var messageRef = ref MemoryMarshal.GetArrayDataReference(MessageHead);
                     MessagePacketLength = Unsafe.ReadUnaligned<int>(ref messageRef);
                     // 检查消息体长度是否超出限制
-                    if (MessagePacketLength > ProgramDefine.MaxMessageSize)
+                    if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize)
                     {
                         throw new ScanException(
                             $"The received information exceeds the maximum limit = {MessagePacketLength}");
@@ -212,7 +212,7 @@ namespace Fantasy.PacketParser
                 packetBodyCount = -1;
             }
             
-            if (packetBodyCount > ProgramDefine.MaxMessageSize)
+            if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
@@ -266,7 +266,7 @@ namespace Fantasy.PacketParser
 #endif
                     MessagePacketLength = Unsafe.ReadUnaligned<int>(ref messageRef);
                     // 检查消息体长度是否超出限制
-                    if (MessagePacketLength > ProgramDefine.MaxMessageSize)
+                    if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize)
                     {
                         throw new ScanException(
                             $"The received information exceeds the maximum limit = {MessagePacketLength}");
@@ -380,7 +380,7 @@ namespace Fantasy.PacketParser
                 packetBodyCount = -1;
             }
             
-            if (packetBodyCount > ProgramDefine.MaxMessageSize)
+            if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
                 throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
