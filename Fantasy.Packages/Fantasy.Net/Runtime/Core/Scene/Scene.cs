@@ -281,6 +281,11 @@ namespace Fantasy
 #if FANTASY_NET
                     Process.RemoveScene(this, false);
                     Process.RemoveSceneToProcess(this);
+                    if (World != null)
+                    {
+                        World.Dispose();
+                        World = null;
+                    }
 #endif
                     EntityComponent.Dispose();
                     EntityPool.Dispose();
@@ -311,11 +316,6 @@ namespace Fantasy
             MessageDispatcherComponent = null;
             PoolGeneratorComponent = null;
 #if FANTASY_NET
-            if (World != null)
-            {
-                World.Dispose();
-                World = null;
-            }
             Process = null;
             SceneType = 0;
             SceneConfigId = 0;
