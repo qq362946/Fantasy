@@ -76,23 +76,19 @@ namespace Fantasy.PacketParser
                     // 通过现代API直接读取协议编号、messagePacketLength protocolCode rpcId address
                     ref var messageRef = ref MemoryMarshal.GetArrayDataReference(MessageHead);
                     MessagePacketLength = Unsafe.ReadUnaligned<int>(ref messageRef);
+                    
                     // 检查消息体长度是否超出限制
                     if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize)
                     {
-                        throw new ScanException(
-                            $"The received information exceeds the maximum limit = {MessagePacketLength}");
+                        throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
                     }
 
                     PackInfo = InnerPackInfo.Create(Network);
-                    var memoryStream = PackInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack,
-                        Packet.InnerPacketHeadLength + MessagePacketLength);
-                    PackInfo.RpcId =
-                        Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref messageRef, Packet.InnerPacketRpcIdLocation));
-                    PackInfo.ProtocolCode =
-                        Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref messageRef, Packet.PacketLength));
-                    PackInfo.Address =
-                        Unsafe.ReadUnaligned<long>(ref Unsafe.Add(ref messageRef,
-                            Packet.InnerPacketRouteAddressLocation));
+                    var messagePacketLength = MessagePacketLength == -1 ? 0 : MessagePacketLength;
+                    var memoryStream = PackInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack, Packet.InnerPacketHeadLength + messagePacketLength);
+                    PackInfo.RpcId = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref messageRef, Packet.InnerPacketRpcIdLocation));
+                    PackInfo.ProtocolCode = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref messageRef, Packet.PacketLength));
+                    PackInfo.Address = Unsafe.ReadUnaligned<long>(ref Unsafe.Add(ref messageRef, Packet.InnerPacketRouteAddressLocation));
                     memoryStream.Write(MessageHead);
                     IsUnPackHead = false;
                     bufferLength -= copyLength;
@@ -277,8 +273,9 @@ namespace Fantasy.PacketParser
                         Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref messageRef, Packet.PacketLength));
                     PackInfo.RpcId =
                         Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref messageRef, Packet.OuterPacketRpcIdLocation));
+                    var messagePacketLength = MessagePacketLength == -1 ? 0 : MessagePacketLength;
                     var memoryStream = PackInfo.RentMemoryStream(MemoryStreamBufferSource.UnPack,
-                        Packet.OuterPacketHeadLength + MessagePacketLength);
+                        Packet.OuterPacketHeadLength + messagePacketLength);
                     memoryStream.Write(MessageHead);
                     IsUnPackHead = false;
                     bufferLength -= copyLength;

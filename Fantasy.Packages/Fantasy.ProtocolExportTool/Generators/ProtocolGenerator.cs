@@ -57,7 +57,7 @@ public class ProtocolGenerator
                 
                 if (protocolExporter.IsErrors())
                 {
-                    return;
+                    throw new InvalidOperationException("协议导出失败：存在格式/校验错误。请查看上方错误列表。");
                 }
                 
                 var generateTask1 = ctx.AddTask("[green]生成RouteType代码...[/]");

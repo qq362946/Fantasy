@@ -78,12 +78,21 @@ namespace Fantasy.PacketParser
             
             MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
 
-            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
+            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize)
             {
-                // 检查消息体长度是否超出限制
+                // 检查消息体长度是否超出限制。
                 throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
             }
             
+            var bodyLength = count - Packet.InnerPacketHeadLength;
+            var messagePacketLength = MessagePacketLength == -1 ? 0 : MessagePacketLength;
+            
+            if (bodyLength != messagePacketLength)
+            {
+                // 如果执行到这里消息肯定是被人恶意篡改了。
+                throw new ScanException($"The packet body length is invalid. bodyLength={bodyLength} messagePacketLength={MessagePacketLength}");
+            }
+
             ProtocolCode = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.PacketLength));
             RpcId = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation));
             Address = Unsafe.ReadUnaligned<long>(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation));
@@ -215,10 +224,19 @@ namespace Fantasy.PacketParser
             
             MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
 
-            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
+            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
                 throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
+            }
+            
+            var bodyLength = count - Packet.OuterPacketHeadLength;
+            var messagePacketLength = MessagePacketLength == -1 ? 0 : MessagePacketLength;
+            
+            if (bodyLength != messagePacketLength)
+            {
+                // 如果执行到这里消息肯定是被人恶意篡改了。
+                throw new ScanException($"The packet body length is invalid. bodyLength={bodyLength} messagePacketLength={MessagePacketLength}");
             }
 
             ProtocolCode = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.PacketLength));
@@ -334,10 +352,19 @@ namespace Fantasy.PacketParser
             
             MessagePacketLength = Unsafe.ReadUnaligned<int>(ref bufferRef);
             
-            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize || count < MessagePacketLength)
+            if (MessagePacketLength < -1 || MessagePacketLength > ProgramDefine.MaxMessageSize)
             {
                 // 检查消息体长度是否超出限制
                 throw new ScanException($"The received information exceeds the maximum limit = {MessagePacketLength}");
+            }
+            
+            var bodyLength = count - Packet.OuterPacketHeadLength;
+            var messagePacketLength = MessagePacketLength == -1 ? 0 : MessagePacketLength;
+            
+            if (bodyLength != messagePacketLength)
+            {
+                // 如果执行到这里消息肯定是被人恶意篡改了。
+                throw new ScanException($"The packet body length is invalid. bodyLength={bodyLength} messagePacketLength={MessagePacketLength}");
             }
             
             ProtocolCode = Unsafe.ReadUnaligned<uint>(ref Unsafe.Add(ref bufferRef, Packet.PacketLength));

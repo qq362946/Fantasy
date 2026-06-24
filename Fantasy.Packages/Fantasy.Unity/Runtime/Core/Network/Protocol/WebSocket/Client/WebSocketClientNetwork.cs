@@ -172,10 +172,6 @@ namespace Fantasy.Network.WebSocket
                 return null;
             }
             
-            ReadPipeDataAsync().Coroutine();
-            ReceiveSocketAsync().Coroutine();
-            _onConnectComplete?.Invoke();
-            
 #if FANTASY_UNITY || FANTASY_CONSOLE
             Session = EnableMessageJsonLog
                 ? Session.CreateDebugClientSession(this, null)
@@ -183,6 +179,10 @@ namespace Fantasy.Network.WebSocket
 #else
             Session = Session.Create(this, null);
 #endif
+            ReadPipeDataAsync().Coroutine();
+            ReceiveSocketAsync().Coroutine();
+            _onConnectComplete?.Invoke();
+            
             return Session;
         }
 

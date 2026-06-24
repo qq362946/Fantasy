@@ -87,7 +87,7 @@ namespace Fantasy.Network
 #else
             // Webgl平台只能用这个协议。
             var network = Entity.Create<WebSocketClientNetwork>(scene, false, true);
-            network.Initialize(networkTarget, enableReceiveMessageJsonLog);
+            network.Initialize(networkTarget, enableMessageJsonLog);
             return network;
 #endif
         }

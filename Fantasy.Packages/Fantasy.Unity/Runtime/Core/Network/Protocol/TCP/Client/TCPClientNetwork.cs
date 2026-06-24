@@ -148,6 +148,13 @@ namespace Fantasy.Network.TCP
             };
             outArgs.Completed += OnConnectSocketCompleted;
             
+#if FANTASY_UNITY || FANTASY_CONSOLE
+            Session = EnableMessageJsonLog
+                ? Session.CreateDebugClientSession(this, _remoteEndPoint)
+                : Session.Create(this, _remoteEndPoint);
+#else
+            Session = Session.Create(this, _remoteEndPoint);
+#endif
             if (!_socket.ConnectAsync(outArgs))
             {
                 if (outArgs.SocketError != SocketError.Success)
@@ -161,13 +168,6 @@ namespace Fantasy.Network.TCP
                 OnReceiveSocketComplete();
             }
             
-#if FANTASY_UNITY || FANTASY_CONSOLE
-            Session = EnableMessageJsonLog
-                ? Session.CreateDebugClientSession(this, _remoteEndPoint)
-                : Session.Create(this, _remoteEndPoint);
-#else
-            Session = Session.Create(this, _remoteEndPoint);
-#endif
             return Session;
         }
 

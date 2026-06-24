@@ -67,17 +67,46 @@ namespace Fantasy.Network.TCP
                     // 通常情况下，此处的异常可以忽略
                 }
             }
-            
-            if (_socket != null)
-            {
-                _socket.Shutdown(SocketShutdown.Both);
-                _socket.Close();
-            }
 
-            ClearSendBuffers();
-            _packetParser.Dispose();
-            _isSending = false;
-            base.Dispose();
+            try
+            {
+                if (_socket != null)
+                {
+                    try
+                    {
+                        _socket.Shutdown(SocketShutdown.Both);
+                    }
+                    catch (SocketException)
+                    {
+                        // Socket 可能已被远端关闭或处于不可 shutdown 状态，释放流程继续
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                        // Socket 已被并发释放，释放流程继续
+                    }
+                    
+                    try
+                    {
+                        _socket.Close();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e);
+                    }
+                }
+                
+                ClearSendBuffers();
+                _packetParser.Dispose();
+                _isSending = false;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
 
         #region ReceiveSocket

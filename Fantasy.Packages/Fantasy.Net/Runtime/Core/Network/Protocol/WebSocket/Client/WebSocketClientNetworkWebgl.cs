@@ -95,7 +95,7 @@ namespace Fantasy.Network.WebSocket
             {
                 Dispose();
             };
-            _webSocket.ConnectAsync();
+           
 #if FANTASY_UNITY || FANTASY_CONSOLE
             Session = EnableMessageJsonLog
                 ? Session.CreateDebugClientSession(this, null)
@@ -103,6 +103,7 @@ namespace Fantasy.Network.WebSocket
 #else
             Session = Session.Create(this, null);
 #endif
+            _webSocket.ConnectAsync();
             return Session;
         }
 
