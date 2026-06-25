@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.CommandLine;
 using System.IO;
 using System.Text.Json;
@@ -71,41 +72,8 @@ public class ProtocolExportCommand : Command
                 config = await new ProtocolExportWizard().RunAsync(protocolDir, serverDir, clientDir, exportType);
             }
 
-            if (!isSilent && !Directory.Exists(config.ProtocolDir))
+            if (!ValidateTargetDirectories(config, isSilent))
             {
-                AnsiConsole.MarkupLine($"[red]错误:[/] 网络协议所在的位置的目录 '{config.ProtocolDir}' 不已存在。");
-                return 1;
-            }
-
-            if (!string.IsNullOrEmpty(config.ServerDir) && !Directory.Exists(config.ServerDir))
-            {
-                if (isSilent || await AnsiConsole.ConfirmAsync("[yellow]提示:[/] 导出到服务器的目录不存在是否要创建?"))
-                {
-                    Directory.CreateDirectory(config.ServerDir);
-                }
-                else
-                {
-                    AnsiConsole.MarkupLine($"[red]错误:[/] 导出到服务器的目录 '{config.ServerDir}' 不已存在。");
-                    return 1;
-                }
-            }
-
-            if (!string.IsNullOrEmpty(config.ClientDir) && !Directory.Exists(config.ClientDir))
-            {
-                if (isSilent || await AnsiConsole.ConfirmAsync("[yellow]提示:[/] 导出到客户端的目录不存在是否要创建?"))
-                {
-                    Directory.CreateDirectory(config.ClientDir);
-                }
-                else
-                {
-                    AnsiConsole.MarkupLine($"[red]错误:[/] 导出到客户端的目录 '{config.ClientDir}' 不已存在。");
-                    return 1;
-                }
-            }
-
-            if (string.IsNullOrEmpty(config.ServerDir) && string.IsNullOrEmpty(config.ClientDir))
-            {
-                AnsiConsole.MarkupLine($"[red]错误:[/] 导出到客户端和服务端的目录至少要指定一个。");
                 return 1;
             }
 
@@ -117,11 +85,6 @@ public class ProtocolExportCommand : Command
             catch (Exception ex)
             {
                 AnsiConsole.MarkupLine($"[red]错误:[/] {ex.Message}");
-                if (AnsiConsole.Confirm("显示堆栈跟踪？", false))
-                {
-                    AnsiConsole.WriteException(ex);
-                }
-
                 return 1;
             }
         });
@@ -159,7 +122,14 @@ public class ProtocolExportCommand : Command
                 ProtocolDir = settings.Export.NetworkProtocolDirectory.Value,
                 ServerDir = settings.Export.NetworkProtocolServerDirectory.Value,
                 ClientDir = settings.Export.NetworkProtocolClientDirectory.Value,
-                ExportType = ProtocolExportType.All
+                OpCodeCacheFile = settings.Export.SharedOpCodeCacheFile.Value,
+                ExportType = ProtocolExportType.All,
+                PackageExports = settings.Export.PackageExports.ConvertAll(package => new ProtocolExportTarget
+                {
+                    ProtocolDir = package.NetworkProtocolDirectory.Value,
+                    ServerDir = package.NetworkProtocolServerDirectory.Value,
+                    ClientDir = package.NetworkProtocolClientDirectory.Value
+                })
             };
 
             AnsiConsole.MarkupLine("[green]成功:[/] 已从 ExporterSettings.json 加载配置。");
@@ -180,5 +150,66 @@ public class ProtocolExportCommand : Command
             AnsiConsole.MarkupLine($"[red]错误:[/] 读取配置文件失败: {ex.Message}");
             return null;
         }
+    }
+
+    private static bool ValidateTargetDirectories(ProtocolExportConfig config, bool isSilent)
+    {
+        if (!ValidateSingleTarget(config.ProtocolDir, config.ServerDir, config.ClientDir, isSilent, "主协议"))
+        {
+            return false;
+        }
+
+        foreach (var packageExport in config.PackageExports)
+        {
+            if (!ValidateSingleTarget(packageExport.ProtocolDir, packageExport.ServerDir, packageExport.ClientDir, isSilent, "子包协议"))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static bool ValidateSingleTarget(string protocolDir, string serverDir, string clientDir, bool isSilent, string label)
+    {
+        if (!Directory.Exists(protocolDir))
+        {
+            AnsiConsole.MarkupLine($"[red]错误:[/] {label}目录 '{protocolDir}' 不已存在。");
+            return false;
+        }
+
+        if (!string.IsNullOrEmpty(serverDir) && !Directory.Exists(serverDir))
+        {
+            if (isSilent)
+            {
+                Directory.CreateDirectory(serverDir);
+            }
+            else
+            {
+                AnsiConsole.MarkupLine($"[red]错误:[/] 导出到服务器的目录 '{serverDir}' 不已存在。");
+                return false;
+            }
+        }
+
+        if (!string.IsNullOrEmpty(clientDir) && !Directory.Exists(clientDir))
+        {
+            if (isSilent)
+            {
+                Directory.CreateDirectory(clientDir);
+            }
+            else
+            {
+                AnsiConsole.MarkupLine($"[red]错误:[/] 导出到客户端的目录 '{clientDir}' 不已存在。");
+                return false;
+            }
+        }
+
+        if (string.IsNullOrEmpty(serverDir) && string.IsNullOrEmpty(clientDir))
+        {
+            AnsiConsole.MarkupLine($"[red]错误:[/] {label}的导出到客户端和服务端的目录至少要指定一个。");
+            return false;
+        }
+
+        return true;
     }
 }

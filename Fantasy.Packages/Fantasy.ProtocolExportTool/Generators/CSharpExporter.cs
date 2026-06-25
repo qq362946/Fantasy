@@ -12,8 +12,9 @@ public sealed class CSharpExporter(
     string protocolDirectory,
     string clientDirectory,
     string serverDirectory,
+    string opCodeCacheFile,
     ProtocolExportType protocolExportType)
-    : AProtocolExporter(protocolDirectory, clientDirectory, serverDirectory, protocolExportType)
+    : AProtocolExporter(protocolDirectory, clientDirectory, serverDirectory, opCodeCacheFile, protocolExportType)
 {
     protected override string GenerateRouteTypes(IReadOnlyDictionary<string, int> routeTypes)
     {
@@ -394,6 +395,7 @@ public sealed class CSharpExporter(
             var members = new List<string>();
             var memberAttribute = messageDefinition.Protocol.MemberAttribute;
             var ignoreAttribute = messageDefinition.Protocol.IgnoreAttribute;
+            var hasErrorCodeField = messageDefinition.Fields.Any(field => field.Name == "ErrorCode");
             
             if (messageDefinition.HasOpCode)
             {
@@ -408,13 +410,16 @@ public sealed class CSharpExporter(
             
             if (IsResponseType(messageDefinition.MessageType))
             {
-                if (memberAttribute != null)
+                if (!hasErrorCodeField && memberAttribute != null)
                 {
                     members.Add($"        [{memberAttribute}({messageDefinition.ErrorCodeIndex})]");
                 }
 
                 disposeCode.AppendLine("            ErrorCode = 0;");
-                members.Add("        public uint ErrorCode { get; set; }");
+                if (!hasErrorCodeField)
+                {
+                    members.Add("        public uint ErrorCode { get; set; }");
+                }
             }
             
             if (HasRouteType(messageDefinition.MessageType))
