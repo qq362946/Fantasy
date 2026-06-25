@@ -521,25 +521,8 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
         }
 
         // 获取 OpCode 方法的值
-        uint? opCodeValue = null;
         var opCodeMethod = symbol.GetMembers("OpCode").OfType<IMethodSymbol>().FirstOrDefault();
-        var opCodeSyntax = opCodeMethod?.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as MethodDeclarationSyntax;
-
-        if (opCodeSyntax?.Body != null)
-        {
-            var returnStatement = opCodeSyntax.Body.DescendantNodes()
-                .OfType<ReturnStatementSyntax>()
-                .FirstOrDefault();
-
-            if (returnStatement?.Expression != null)
-            {
-                var constantValue = context.SemanticModel.GetConstantValue(returnStatement.Expression);
-                if (constantValue.HasValue && constantValue.Value is uint uintValue)
-                {
-                    opCodeValue = uintValue;
-                }
-            }
-        }
+        uint? opCodeValue = TryGetUIntMethodReturnValue(context.SemanticModel.Compilation, opCodeMethod);
 
         // 获取 ResponseType 属性及其类型
         string? responseTypeName = null;
@@ -578,6 +561,57 @@ internal partial class NetworkProtocolGenerator : IIncrementalGenerator
             hasProtoContract,
             isDataClass
         );
+    }
+
+    private static uint? TryGetUIntMethodReturnValue(Compilation compilation, IMethodSymbol? methodSymbol)
+    {
+        if (methodSymbol == null)
+        {
+            return null;
+        }
+
+        foreach (var syntaxReference in methodSymbol.DeclaringSyntaxReferences)
+        {
+            if (syntaxReference.GetSyntax() is not MethodDeclarationSyntax methodSyntax)
+            {
+                continue;
+            }
+
+            ExpressionSyntax? expression = methodSyntax.ExpressionBody?.Expression;
+            if (expression == null && methodSyntax.Body != null)
+            {
+                expression = methodSyntax.Body.DescendantNodes()
+                    .OfType<ReturnStatementSyntax>()
+                    .Select(static statement => statement.Expression)
+                    .FirstOrDefault(static expressionNode => expressionNode != null);
+            }
+
+            if (expression == null)
+            {
+                continue;
+            }
+
+            var syntaxTree = methodSyntax.SyntaxTree;
+            if (!compilation.ContainsSyntaxTree(syntaxTree))
+            {
+                continue;
+            }
+
+            var semanticModel = compilation.GetSemanticModel(syntaxTree);
+            var symbolInfo = semanticModel.GetSymbolInfo(expression);
+            if (symbolInfo.Symbol is IFieldSymbol fieldSymbol && fieldSymbol.IsConst && fieldSymbol.ConstantValue is uint constValue)
+            {
+                return constValue;
+            }
+
+            var constantValue = semanticModel.GetConstantValue(expression);
+            if (constantValue.HasValue && constantValue.Value is uint uintValue)
+            {
+                return uintValue;
+            }
+        }
+
+        return null;
     }
 
     private static bool IsNetworkProtocolClass(SyntaxNode node)
