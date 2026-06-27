@@ -37,7 +37,12 @@ public class ProtocolExportCommand : Command
 
         var silentOption = new Option<bool>("-S", "--silent")
         {
-            Description = "静默模式，从 ExporterSettings.json 文件读取配置"
+            Description = "静默模式，从配置文件读取导出设置"
+        };
+
+        var configOption = new Option<string>("--config")
+        {
+            Description = "静默模式下指定配置文件路径，默认读取当前目录的 ExporterSettings.json"
         };
 
         Add(protocolDirectoryOption);
@@ -45,6 +50,7 @@ public class ProtocolExportCommand : Command
         Add(clientOption);
         Add(exportTypeOption);
         Add(silentOption);
+        Add(configOption);
 
         SetAction(async context =>
         {
@@ -53,13 +59,14 @@ public class ProtocolExportCommand : Command
             var clientDir = context.GetValue(clientOption);
             var exportType = context.GetValue(exportTypeOption);
             var isSilent = context.GetValue(silentOption);
+            var configPath = context.GetValue(configOption);
 
             ProtocolExportConfig config;
 
             if (isSilent)
             {
-                // 静默模式：从 ExporterSettings.json 加载配置
-                var loadedConfig = await LoadConfigFromFileAsync();
+                // 静默模式：从配置文件加载
+                var loadedConfig = await LoadConfigFromFileAsync(configPath);
                 if (loadedConfig == null)
                 {
                     return 1;
@@ -90,16 +97,18 @@ public class ProtocolExportCommand : Command
         });
     }
 
-    private static async Task<ProtocolExportConfig?> LoadConfigFromFileAsync()
+    private static async Task<ProtocolExportConfig?> LoadConfigFromFileAsync(string? configPath)
     {
-        const string settingsFileName = "ExporterSettings.json";
+        var settingsFileName = string.IsNullOrWhiteSpace(configPath)
+            ? "ExporterSettings.json"
+            : Path.GetFullPath(configPath);
 
         try
         {
             if (!File.Exists(settingsFileName))
             {
                 AnsiConsole.MarkupLine($"[red]错误:[/] 找不到配置文件 '{settingsFileName}'。");
-                AnsiConsole.MarkupLine("[yellow]提示:[/] 请在当前目录下创建 ExporterSettings.json 文件。");
+                AnsiConsole.MarkupLine("[yellow]提示:[/] 可通过 --config 指定配置文件路径，或在当前目录下创建 ExporterSettings.json 文件。");
                 return null;
             }
 
@@ -132,7 +141,7 @@ public class ProtocolExportCommand : Command
                 })
             };
 
-            AnsiConsole.MarkupLine("[green]成功:[/] 已从 ExporterSettings.json 加载配置。");
+            AnsiConsole.MarkupLine($"[green]成功:[/] 已从 '{settingsFileName}' 加载配置。");
             // AnsiConsole.MarkupLine($"  协议目录: {config.ProtocolDir}");
             // AnsiConsole.MarkupLine($"  服务器目录: {config.ServerDir}");
             // AnsiConsole.MarkupLine($"  客户端目录: {config.ClientDir}");
