@@ -137,7 +137,8 @@ public static class ConfigLoader
                 Id = uint.Parse(GetRequiredAttribute(machineNode, "id")),
                 OuterIP = GetRequiredAttribute(machineNode, "outerIP"),
                 OuterBindIP = GetRequiredAttribute(machineNode, "outerBindIP"),
-                InnerBindIP = GetRequiredAttribute(machineNode, "innerBindIP")
+                InnerBindIP = GetRequiredAttribute(machineNode, "innerBindIP"),
+                K8sInnerConnectIP = GetOptionalAttribute(machineNode, "k8sInnerConnectIP") ?? string.Empty
             };
             machineList.Add(machine);
         }

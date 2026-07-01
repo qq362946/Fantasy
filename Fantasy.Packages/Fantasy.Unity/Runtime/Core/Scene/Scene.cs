@@ -739,7 +739,7 @@ namespace Fantasy
                 throw new Exception($"The machine with machineId {processConfig.MachineId} was not found in the configuration file");
             }
             
-            var remoteAddress = $"{machineConfig.InnerBindIP}:{sceneConfig.InnerPort}";
+            var remoteAddress = $"{machineConfig.GetInnerConnectIP()}:{sceneConfig.InnerPort}";
             var client = NetworkProtocolFactory.CreateClient(Scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner, false);
             var session = client.Connect(remoteAddress, null, () =>
             {

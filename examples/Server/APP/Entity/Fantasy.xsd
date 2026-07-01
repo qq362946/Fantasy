@@ -119,6 +119,11 @@
         <xs:documentation>内网绑定IP地址</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="k8sInnerConnectIP" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation>Kubernetes内网连接IP或域名，为空时使用innerBindIP</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
 
   <!-- Processes types -->

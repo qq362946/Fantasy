@@ -66,18 +66,14 @@ namespace Fantasy.Helper
                     portSpan = span.Slice(lastColonIndex + 1);
                 }
                 
-                // 解析IP地址
-                if (!IPAddress.TryParse(ipSpan, out var ipAddress))
-                {
-                    throw new FormatException("Invalid IP address");
-                }
+                var host = ipSpan.ToString();
                 // 解析端口 
                 if (!int.TryParse(portSpan, out var port) || port < 0 || port > 65535)
                 {
                     throw new FormatException("Invalid port number");
                 }
                 
-                return new IPEndPoint(ipAddress, port);
+                return new IPEndPoint(ResolveHostAddress(host), port);
             }
             catch (Exception e)
             {
@@ -361,7 +357,36 @@ namespace Fantasy.Helper
         /// <returns><see cref="IPEndPoint"/> 实例。</returns>
         public static IPEndPoint ToIPEndPoint(string host, int port)
         {
-            return new IPEndPoint(IPAddress.Parse(host), port);
+            return new IPEndPoint(ResolveHostAddress(host), port);
+        }
+
+        /// <summary>
+        /// 将IP或DNS主机名解析为IPAddress。
+        /// </summary>
+        /// <param name="host"></param>
+        /// <returns></returns>
+        private static IPAddress ResolveHostAddress(string host)
+        {
+            if (IPAddress.TryParse(host, out var ipAddress))
+            {
+                return ipAddress;
+            }
+
+            var addresses = Dns.GetHostAddresses(host);
+            if (addresses.Length == 0)
+            {
+                throw new FormatException($"Host '{host}' could not be resolved");
+            }
+
+            foreach (var address in addresses)
+            {
+                if (address.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return address;
+                }
+            }
+
+            return addresses[0];
         }
 
         /// <summary>

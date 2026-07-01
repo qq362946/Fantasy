@@ -108,6 +108,18 @@ namespace Fantasy.Platform.Net
         /// 内网绑定IP
         /// </summary>
         public string InnerBindIP { get; set; }  
+        /// <summary>
+        /// Kubernetes内网连接IP或域名，为空时使用InnerBindIP。
+        /// </summary>
+        public string K8sInnerConnectIP { get; set; } = string.Empty;
+        /// <summary>
+        /// 获取远程进程连接该机器时使用的内网地址。
+        /// </summary>
+        /// <returns></returns>
+        public string GetInnerConnectIP()
+        {
+            return string.IsNullOrWhiteSpace(K8sInnerConnectIP) ? InnerBindIP : K8sInnerConnectIP;
+        }
     }
 }
 #endif
