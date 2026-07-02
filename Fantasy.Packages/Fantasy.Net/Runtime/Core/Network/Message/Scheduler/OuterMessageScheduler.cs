@@ -77,6 +77,11 @@ namespace Fantasy.Scheduler
                             throw new Exception($"可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
                         
+                        if (TryRejectByOuterMessageGuard(session, packInfo, messageType))
+                        {
+                            return;
+                        }
+
                         var message = packInfo.Deserialize(messageType);
                         MessageDispatcherComponent.MessageHandler(session, messageType, message, packInfo.RpcId, packInfo.ProtocolCode);
                     }
@@ -120,6 +125,11 @@ namespace Fantasy.Scheduler
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
 
+                        if (TryRejectByOuterMessageGuard(session, packInfo, messageType))
+                        {
+                            return;
+                        }
+
                         var addressableRouteComponent = session.AddressableRouteComponent;
 
                         if (addressableRouteComponent == null)
@@ -150,6 +160,11 @@ namespace Fantasy.Scheduler
                         if (messageType == null)
                         {
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
+                        }
+
+                        if (TryRejectByOuterMessageGuard(session, packInfo, messageType))
+                        {
+                            return;
                         }
 
                         var addressableRouteComponent = session.AddressableRouteComponent;
@@ -200,6 +215,11 @@ namespace Fantasy.Scheduler
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
                     
+                        if (TryRejectByOuterMessageGuard(session, packInfo, messageType))
+                        {
+                            return;
+                        }
+
                         var routeComponent = session.RouteComponent;
 
                         if (routeComponent == null)
@@ -245,6 +265,11 @@ namespace Fantasy.Scheduler
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
                     
+                        if (TryRejectByOuterMessageGuard(session, packInfo, messageType))
+                        {
+                            return;
+                        }
+
                         var routeComponent = session.RouteComponent;
 
                         if (routeComponent == null)
@@ -298,6 +323,11 @@ namespace Fantasy.Scheduler
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
                     
+                        if (TryRejectByOuterMessageGuard(session, packInfo, messageType))
+                        {
+                            return;
+                        }
+
                         var sessionRoamingComponent = session.SessionRoamingComponent;
 
                         if (sessionRoamingComponent == null)
@@ -338,6 +368,11 @@ namespace Fantasy.Scheduler
                             throw new Exception($"OuterMessageScheduler error 可能遭受到恶意发包或没有协议定义ProtocolCode ProtocolCode：{packInfo.ProtocolCode}");
                         }
                     
+                        if (TryRejectByOuterMessageGuard(session, packInfo, messageType))
+                        {
+                            return;
+                        }
+
                         var sessionRoamingComponent = session.SessionRoamingComponent;
 
                         if (sessionRoamingComponent == null)
@@ -372,6 +407,31 @@ namespace Fantasy.Scheduler
                     throw new NotSupportedException($"OuterMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}\n1、请检查该协议所在的程序集是否在框架初始化的时候添加到框架中。\n2、如果看到这个消息表示你有可能用的老版本的导出工具，请更换为最新的导出工具。\n IP地址:{ipAddress}");
                 }
             }
+        }
+
+        private bool TryRejectByOuterMessageGuard(Session session, APackInfo packInfo, Type messageType)
+        {
+            var outerMessageGuard = Scene.OuterMessageGuard;
+            if (outerMessageGuard == null || !outerMessageGuard.TryReject(session, packInfo.ProtocolCode, packInfo.RpcId, packInfo.OpCodeIdStruct.Protocol, messageType, out var errorCode))
+            {
+                return false;
+            }
+
+            switch (packInfo.OpCodeIdStruct.Protocol)
+            {
+                case OpCodeType.OuterRequest:
+                case OpCodeType.OuterAddressableRequest:
+                case OpCodeType.OuterCustomRouteRequest:
+                case OpCodeType.OuterRoamingRequest:
+                {
+                    var response = MessageDispatcherComponent.CreateResponse(packInfo.ProtocolCode, errorCode);
+                    var responseType = MessageDispatcherComponent.GetOpCodeType(response.OpCode()) ?? response.GetType();
+                    session.Send(response, responseType, packInfo.RpcId);
+                    break;
+                }
+            }
+
+            return true;
         }
     }
 #endif

@@ -196,6 +196,10 @@ namespace Fantasy
         /// Scene下的领域事件组件
         /// </summary>
         public SphereEventComponent SphereEventComponent  { get; internal set; }
+        /// <summary>
+        /// 外网消息进入业务派发或路由转发前的可选拦截器。
+        /// </summary>
+        public IOuterMessageGuard? OuterMessageGuard { get; set; }
 #endif
         #endregion
 

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <PackageId>Fantasy-Net</PackageId>
-        <PackageVersion>2026.0.1023</PackageVersion>
+        <PackageVersion>2026.0.1023-v2</PackageVersion>
         <Title>Fantasy-Net</Title>
         <Authors>qq362946</Authors>
         <owners>qq362946</owners>
@@ -91,3 +91,4 @@
     <Import Project="build\Fantasy-Net.props" />
     <Import Project="build\Fantasy-Net.targets" />
 </Project>
+
