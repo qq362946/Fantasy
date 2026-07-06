@@ -77,10 +77,10 @@ namespace Fantasy.Helper
             }
             catch (Exception e)
             {
-                Log.Error($"Error parsing IP and Port: '{address}'. " +
-                          $"Expected format: 'IP:Port' (e.g., '192.168.1.1:8080' or '[::1]:8080'). " +
+                Log.Error($"Error resolving endpoint: '{address}'. " +
+                          $"Expected format: 'Host:Port' (e.g., '192.168.1.1:8080', 'server.namespace.svc.cluster.local:8080' or '[::1]:8080'). " +
                           $"Error: {e.Message}");
-                return null;
+                throw;
             }
         }
 

@@ -136,7 +136,18 @@ namespace Fantasy.Network.TCP
                 Dispose();
             });
             _packetParser = PacketParserFactory.CreateReadOnlyMemoryPacketParser(this);
-            _remoteEndPoint = NetworkHelper.GetIPEndPoint(remoteAddress);
+            try
+            {
+                _remoteEndPoint = NetworkHelper.GetIPEndPoint(remoteAddress);
+            }
+            catch
+            {
+                _connectDisconnectEvent = false;
+                _onConnectFail?.Invoke();
+                Dispose();
+                throw;
+            }
+
             _socket = new Socket(_remoteEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             _socket.NoDelay = true;
             _socket.SetSocketBufferToOsLimit();

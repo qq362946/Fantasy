@@ -16,6 +16,7 @@ using Fantasy.Timer;
 using Fantasy.Database;
 using Fantasy.Platform.Net;
 using System.Collections.Frozen;
+using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using Fantasy.Network.Route;
 using Fantasy.Network.Roaming;
@@ -749,6 +750,12 @@ namespace Fantasy
             {
                 Log.Error($"Unable to connect to the target server sourceServerId:{Scene.Process.Id} targetServerId:{sceneConfig.ProcessConfigId}");
             }, null, false);
+            if (session == null || session.IsDisposed)
+            {
+                client.Dispose();
+                throw new SocketException((int)SocketError.NotConnected);
+            }
+
             _processSessionInfos.Add(sceneId, new ProcessSessionInfo(session, client));
             return session;
         }

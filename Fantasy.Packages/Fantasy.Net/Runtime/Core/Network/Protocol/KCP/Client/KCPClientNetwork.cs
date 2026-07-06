@@ -148,10 +148,21 @@ namespace Fantasy.Network.KCP
             IsInit = true;
             _startTime = TimeHelper.Now;
             ChannelId = CreateChannelId();
-            _remoteAddress = NetworkHelper.GetIPEndPoint(remoteAddress);
             OnConnectFail = onConnectFail;
             OnConnectComplete = onConnectComplete;
             OnConnectDisconnect = onConnectDisconnect;
+            try
+            {
+                _remoteAddress = NetworkHelper.GetIPEndPoint(remoteAddress);
+            }
+            catch
+            {
+                _connectDisconnectEvent = false;
+                OnConnectFail?.Invoke();
+                Dispose();
+                throw;
+            }
+
             _connectEventArgs.Completed += OnConnectSocketCompleted;
             _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
             {
