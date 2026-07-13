@@ -130,7 +130,7 @@ namespace Fantasy.SourceGenerator.Generators
                     builder.AppendLine($"var handlerArray = new global::System.Func<global::Fantasy.Network.Session, uint, object, global::Fantasy.Async.FTask>[{messageHandlers.Count}];");
                     for (var i = 0; i < messageHandlers.Count; i++)
                     {
-                        builder.AppendLine($"handlerArray[{i}] = new {messageHandlers[i].TypeFullName}().Handle;;");
+                        builder.AppendLine($"handlerArray[{i}] = new {messageHandlers[i].TypeFullName}().Handle;");
                     }
 
                     builder.AppendLine("return handlerArray;");
@@ -183,7 +183,7 @@ namespace Fantasy.SourceGenerator.Generators
                     builder.AppendLine($"var handlerArray = new global::System.Func<global::Fantasy.Network.Session, global::Fantasy.Entitas.Entity, uint, object, global::Fantasy.Async.FTask>[{routeMessageHandlers.Count}];");
                     for (var i = 0; i < routeMessageHandlers.Count; i++)
                     {
-                        builder.AppendLine($"handlerArray[{i}] = new {routeMessageHandlers[i].TypeFullName}().Handle;;");
+                        builder.AppendLine($"handlerArray[{i}] = new {routeMessageHandlers[i].TypeFullName}().Handle;");
                     }
 
                     builder.AppendLine("return handlerArray;");
@@ -298,14 +298,17 @@ namespace Fantasy.SourceGenerator.Generators
             }
 
             var messageType = (INamedTypeSymbol)baseType.TypeArguments[index];
-            var messageName = messageType.Name;
-            var compilation = context.SemanticModel.Compilation;
+            var opCodeMethod = messageType.GetMembers("OpCode").OfType<IMethodSymbol>().FirstOrDefault();
+            var opCodeValue = TryGetUIntMethodReturnValue(context.SemanticModel.Compilation, opCodeMethod);
+            if (opCodeValue.HasValue)
+            {
+                return opCodeValue.Value;
+            }
 
-            // 策略1：从消息类型所在程序集中搜索 OpCode 类
+            var messageName = messageType.Name;
             var messageAssembly = messageType.ContainingAssembly;
             var namespaceName = messageType.ContainingNamespace.ToDisplayString();
 
-            // 遍历程序集中的所有类型，查找 OuterOpcode 或 InnerOpcode
             var opCodeTypeNames = new[] { "OuterOpcode", "InnerOpcode" };
             foreach (var opCodeTypeName in opCodeTypeNames)
             {
@@ -320,40 +323,54 @@ namespace Fantasy.SourceGenerator.Generators
                 }
             }
 
-            // 策略2：如果策略1失败，尝试从 OpCode() 方法的语法树中解析（仅适用于同项目中的消息）
-            var opCodeMethod = messageType.GetMembers("OpCode").OfType<IMethodSymbol>().FirstOrDefault();
-            if (opCodeMethod != null)
+            return null;
+        }
+
+        private static uint? TryGetUIntMethodReturnValue(Compilation compilation, IMethodSymbol? methodSymbol)
+        {
+            if (methodSymbol == null)
             {
-                var opCodeSyntax = opCodeMethod.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() as MethodDeclarationSyntax;
-                if (opCodeSyntax?.Body != null)
+                return null;
+            }
+
+            foreach (var syntaxReference in methodSymbol.DeclaringSyntaxReferences)
+            {
+                if (syntaxReference.GetSyntax() is not MethodDeclarationSyntax methodSyntax)
                 {
-                    var returnStatement = opCodeSyntax.Body.DescendantNodes()
+                    continue;
+                }
+
+                ExpressionSyntax? expression = methodSyntax.ExpressionBody?.Expression;
+                if (expression == null && methodSyntax.Body != null)
+                {
+                    expression = methodSyntax.Body.DescendantNodes()
                         .OfType<ReturnStatementSyntax>()
-                        .FirstOrDefault();
+                        .Select(static statement => statement.Expression)
+                        .FirstOrDefault(static expressionNode => expressionNode != null);
+                }
 
-                    if (returnStatement?.Expression != null)
-                    {
-                        var syntaxTree = opCodeSyntax.SyntaxTree;
+                if (expression == null)
+                {
+                    continue;
+                }
 
-                        if (compilation.ContainsSyntaxTree(syntaxTree))
-                        {
-                            var semanticModel = compilation.GetSemanticModel(syntaxTree);
+                var syntaxTree = methodSyntax.SyntaxTree;
+                if (!compilation.ContainsSyntaxTree(syntaxTree))
+                {
+                    continue;
+                }
 
-                            // 尝试符号解析
-                            var symbolInfo = semanticModel.GetSymbolInfo(returnStatement.Expression);
-                            if (symbolInfo.Symbol is IFieldSymbol fieldSymbol && fieldSymbol.IsConst && fieldSymbol.ConstantValue is uint constValue2)
-                            {
-                                return constValue2;
-                            }
+                var semanticModel = compilation.GetSemanticModel(syntaxTree);
+                var symbolInfo = semanticModel.GetSymbolInfo(expression);
+                if (symbolInfo.Symbol is IFieldSymbol fieldSymbol && fieldSymbol.IsConst && fieldSymbol.ConstantValue is uint constValue)
+                {
+                    return constValue;
+                }
 
-                            // 尝试常量值解析
-                            var constantValue = semanticModel.GetConstantValue(returnStatement.Expression);
-                            if (constantValue.HasValue && constantValue.Value is uint uintValue)
-                            {
-                                return uintValue;
-                            }
-                        }
-                    }
+                var constantValue = semanticModel.GetConstantValue(expression);
+                if (constantValue.HasValue && constantValue.Value is uint uintValue)
+                {
+                    return uintValue;
                 }
             }
 

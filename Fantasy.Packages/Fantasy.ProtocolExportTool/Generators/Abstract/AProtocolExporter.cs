@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Fantasy.Network;
 using Fantasy.ProtocolExportTool.Generators;
 using Fantasy.ProtocolExportTool.Generators.Parsers;
 using Fantasy.ProtocolExportTool.Generators.Validators;
@@ -13,7 +15,8 @@ using Spectre.Console;
 
 namespace Fantasy.ProtocolExportTool.Abstract;
 
-public abstract partial class AProtocolExporter( string protocolDirectory, string clientDirectory, string serverDirectory, ProtocolExportType protocolExportType)
+public abstract partial class AProtocolExporter(string protocolDirectory, string clientDirectory, string serverDirectory,
+    string opCodeCacheFile, ProtocolExportType protocolExportType)
 {
     private readonly ConcurrentBag<string> _errors = new();
     private readonly Dictionary<string, int> _routeTypes = new();
@@ -30,14 +33,23 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     
     private readonly List<OpcodeInfo> _outerOpcode = [];
     private readonly List<OpcodeInfo> _innerOpcode = [];
+    private readonly Dictionary<string, uint> _opCodeCache = new(StringComparer.Ordinal);
+    private readonly Dictionary<uint, string> _opCodeOwners = [];
+    private bool _opCodeCacheLoaded;
     
     protected readonly string ProtocolDirectory = NormalizePath(protocolDirectory);
     protected readonly string ClientDirectory = NormalizePath(clientDirectory);
     protected readonly string ServerDirectory = NormalizePath(serverDirectory);
+    private readonly string _opCodeCacheFile = NormalizeOptionalPath(opCodeCacheFile);
     
     private static string NormalizePath(string path)
     {
         return string.IsNullOrWhiteSpace(path) ? throw new ArgumentException("Path cannot be null or empty", nameof(path)) : Path.GetFullPath(path.Trim());
+    }
+
+    private static string NormalizeOptionalPath(string path)
+    {
+        return string.IsNullOrWhiteSpace(path) ? string.Empty : Path.GetFullPath(path.Trim());
     }
     
     public bool IsErrors()
@@ -54,6 +66,82 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
         }
 
         return true;
+    }
+
+    private string GetOpCodeCachePath()
+    {
+        return string.IsNullOrWhiteSpace(_opCodeCacheFile)
+            ? Path.Combine(ProtocolDirectory, "OpCode.Cache")
+            : _opCodeCacheFile;
+    }
+
+    private void EnsureOpCodeCacheLoaded()
+    {
+        if (_opCodeCacheLoaded)
+        {
+            return;
+        }
+
+        _opCodeCacheLoaded = true;
+        var cachePath = GetOpCodeCachePath();
+        if (!File.Exists(cachePath))
+        {
+            return;
+        }
+
+        foreach (var rawLine in File.ReadAllLines(cachePath))
+        {
+            var line = rawLine.Trim();
+            if (string.IsNullOrWhiteSpace(line) || line.StartsWith("//", StringComparison.Ordinal) || line is "{" or "}")
+            {
+                continue;
+            }
+
+            var commentIndex = line.IndexOf("//", StringComparison.Ordinal);
+            if (commentIndex >= 0)
+            {
+                line = line[..commentIndex].Trim();
+            }
+
+            var separatorIndex = line.IndexOf('=');
+            if (separatorIndex <= 0)
+            {
+                continue;
+            }
+
+            var name = line[..separatorIndex].Trim();
+            var valueText = line[(separatorIndex + 1)..].Trim().TrimEnd(',');
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(valueText))
+            {
+                continue;
+            }
+
+            if (uint.TryParse(valueText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value))
+            {
+                if (_opCodeOwners.TryGetValue(value, out var existingOwner) && !string.Equals(existingOwner, name, StringComparison.Ordinal))
+                {
+                    continue;
+                }
+
+                _opCodeCache[name] = value;
+                _opCodeOwners[value] = name;
+            }
+        }
+    }
+
+    private void SaveOpCodeCache()
+    {
+        var cachePath = GetOpCodeCachePath();
+        var directory = Path.GetDirectoryName(cachePath);
+        if (!string.IsNullOrWhiteSpace(directory) && !Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        var lines = _opCodeCache
+            .OrderBy(pair => pair.Key, StringComparer.Ordinal)
+            .Select(pair => $"{pair.Key} = {pair.Value}");
+        File.WriteAllLines(cachePath, lines);
     }
 
     #region Generate
@@ -463,7 +551,8 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
     {
         var validator = new ProtocolValidator();
         var isOuter = protocol.Equals("Outer", StringComparison.OrdinalIgnoreCase);
-        var opCodeGenerator = new OpCodeGenerator(isOuter);
+        EnsureOpCodeCacheLoaded();
+        var opCodeGenerator = new OpCodeGenerator(isOuter, _opCodeCache, _opCodeOwners);
 
         // 1. 解析所有文件
         foreach (var (filePath, fileLines) in ReadProtocolFilesLinesWithPath(protocol))
@@ -522,6 +611,14 @@ public abstract partial class AProtocolExporter( string protocolDirectory, strin
         {
             _errors.Add(error);
         }
+
+        foreach (var pair in opCodeGenerator.AssignedCodes)
+        {
+            _opCodeCache[pair.Key] = pair.Value;
+            _opCodeOwners[pair.Value] = pair.Key;
+        }
+
+        SaveOpCodeCache();
     }
     
     private IEnumerable<(string FilePath, string[] Lines)> ReadProtocolFilesLinesWithPath(string protocolDir)
