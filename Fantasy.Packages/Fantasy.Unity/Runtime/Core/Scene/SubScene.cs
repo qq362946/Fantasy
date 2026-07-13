@@ -3,6 +3,16 @@ using System.Linq;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Network;
+
+#if !FANTASY_WEBGL
+using System.Threading;
+#endif
+#if FANTASY_WEBGL || UNITY_WEBGL
+using FCloseTask = Fantasy.Async.FTask;
+#else
+using FCloseTask = Fantasy.Async.FThreadTask;
+#endif
+// ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8601 // Possible null reference assignment.
 #pragma warning disable CS8603 // Possible null reference return.
@@ -52,41 +62,36 @@ namespace Fantasy
         /// <summary>
         /// Scene的关闭方法
         /// </summary>
-        public override async FTask Close()
+        public override async FCloseTask Close()
         {
-            Dispose();
-            await FTask.CompletedTask;
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            await SwitchToSceneThread();
+#endif
+            DisposeCore();
         }
 
         /// <summary>
         /// 当子Scene销毁时执行
         /// </summary>
-        public override void Dispose()
+        protected override void DisposeCore()
         {
             if (IsDisposed)
             {
                 return;
             }
             
-            ThreadSynchronizationContext.Post(() =>
+            foreach (var (runtimeId, entity) in _entities.ToList())
             {
-                if (IsDisposed)
+                if (runtimeId != entity.RuntimeId)
                 {
-                    return;
+                    continue;
                 }
                 
-                foreach (var (runtimeId, entity) in _entities.ToList())
-                {
-                    if (runtimeId != entity.RuntimeId)
-                    {
-                        continue;
-                    }
-                    entity.Dispose();
-                }
+                entity.Dispose();
+            }
                 
-                _entities.Clear();
-                base.Dispose();
-            });
+            _entities.Clear();
+            base.DisposeCore();
         }
 
         /// <summary>

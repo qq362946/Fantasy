@@ -8,6 +8,11 @@ using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.Serialize;
+#if FANTASY_WEBGL || UNITY_WEBGL
+using FCloseTask = Fantasy.Async.FTask;
+#else
+using FCloseTask = Fantasy.Async.FThreadTask;
+#endif
 // ReSharper disable FunctionNeverReturns
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 
@@ -20,6 +25,9 @@ namespace Fantasy.Platform.Net;
 /// <exception cref="NotSupportedException">不支持的 ProcessType 类型异常。</exception>
 public static class Entry
 {
+    private static bool _isClosed;
+    private static readonly SemaphoreSlim CloseSemaphore = new(1, 1);
+    
     private static readonly List<Process> ProcessList = new List<Process>();
     /// <summary>
     /// 启动Fantasy.Net
@@ -147,17 +155,33 @@ public static class Entry
     /// <summary>
     /// 关闭 Fantasy
     /// </summary>
-    public static async FTask Close()
+    public static async FCloseTask Close()
     {
-        foreach (var process in ProcessList)
+        await CloseSemaphore.WaitAsync();
+
+        try
         {
-            await process.Close();
+            if (_isClosed)
+            {
+                return;
+            }
+            
+            foreach (var process in ProcessList)
+            {
+                await process.Close();
+            }
+            
+            await AssemblyManifest.Dispose();
+            SerializerManager.Dispose();
+            
+            // 设置当前程序已经在停止中
+            ProgramDefine.IsAppRunning = false;
+            _isClosed = true;
         }
-        
-        await AssemblyManifest.Dispose();
-        SerializerManager.Dispose();
-        // 设置当前程序已经在停止中
-        ProgramDefine.IsAppRunning = false;
+        finally
+        {
+            CloseSemaphore.Release();
+        }
     }
 }
 #endif

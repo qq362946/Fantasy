@@ -46,7 +46,7 @@ namespace Fantasy
         {
             if (MultiThreadScheduler == null)
             {
-#if FANTASY_SINGLETHREAD || FANTASY_WEBGL
+#if FANTASY_SINGLETHREAD || FANTASY_WEBGL || UNITY_WEBGL
                 MultiThreadScheduler = MainScheduler;
 #else
                 MultiThreadScheduler = new MultiThreadScheduler();
@@ -60,7 +60,7 @@ namespace Fantasy
         {
             if (ThreadPoolScheduler == null)
             {
-#if FANTASY_SINGLETHREAD || FANTASY_WEBGL
+#if FANTASY_SINGLETHREAD || FANTASY_WEBGL || UNITY_WEBGL
                 ThreadPoolScheduler = MainScheduler;
 #else
                 ThreadPoolScheduler = new ThreadPoolScheduler();

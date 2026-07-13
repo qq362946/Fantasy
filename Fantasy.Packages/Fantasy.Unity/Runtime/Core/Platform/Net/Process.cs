@@ -3,7 +3,11 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Fantasy.Async;
 using Fantasy.IdFactory;
-
+#if FANTASY_WEBGL || UNITY_WEBGL
+using FCloseTask = Fantasy.Async.FTask;
+#else
+using FCloseTask = Fantasy.Async.FThreadTask;
+#endif
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 #pragma warning disable CS8601 // Possible null reference assignment.
 namespace Fantasy.Platform.Net;
@@ -65,7 +69,7 @@ public sealed class Process
     /// <summary>
     /// 关闭
     /// </summary>
-    public async FTask Close()
+    public async FCloseTask Close()
     {
         if (_processScenes.IsEmpty)
         {

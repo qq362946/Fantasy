@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Event;
@@ -12,15 +13,22 @@ using Fantasy.Network.Interface;
 using Fantasy.Pool;
 using Fantasy.Scheduler;
 using Fantasy.Timer;
+#if !FANTASY_WEBGL
+using System.Threading;
+#endif
 #if FANTASY_NET
 using Fantasy.Database;
 using Fantasy.Platform.Net;
 using System.Collections.Frozen;
-using System.Runtime.CompilerServices;
 using Fantasy.Network.Route;
 using Fantasy.Network.Roaming;
 using Fantasy.SeparateTable;
 using Fantasy.Sphere;
+#endif
+#if FANTASY_WEBGL || UNITY_WEBGL
+using FCloseTask = Fantasy.Async.FTask;
+#else
+using FCloseTask = Fantasy.Async.FThreadTask;
 #endif
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8601 // Possible null reference assignment.
@@ -223,23 +231,76 @@ namespace Fantasy
             SphereEventComponent = await Create<SphereEventComponent>(this, false, true).Initialize();
 #endif
         }
-        
+
         /// <summary>
         /// Scene的关闭方法
         /// </summary>
-        public virtual async FTask Close()
+        public virtual async FCloseTask Close()
         {
-#if FANTASY_NET
-            await SphereEventComponent?.Close();
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            // 所有关闭逻辑首先进入 Scene 的执行上下文。
+            await SwitchToSceneThread();
 #endif
-            await FTask.CompletedTask;
-            Dispose();
+            if (IsDisposed)
+            {
+                return;
+            }
+            
+            Exception closeException = null;
+            
+#if FANTASY_NET
+            try
+            {
+                if (SphereEventComponent != null || !SphereEventComponent.IsDisposed)
+                {
+                    await SphereEventComponent.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                closeException = e;
+            }
+#endif
+            
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            // FTask 不保证 await 后恢复到原同步上下文，
+            // 所以真正销毁前必须再次切回 Scene 线程。
+            await SwitchToSceneThread();
+#endif
+            try
+            {
+                DisposeCore();
+            }
+            catch (Exception e)
+            {
+                closeException = closeException == null
+                    ? e
+                    : new AggregateException(closeException, e);
+            }
+            
+            if (closeException != null)
+            {
+                Log.Error(closeException);
+            }
+        }
+        
+        /// <summary>
+        /// 对外销毁入口，统一走异步关闭流程。
+        /// </summary>
+        public override void Dispose()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            Close().Coroutine();
         }
 
         /// <summary>
         /// Scene销毁方法，执行了该方法会把当前Scene下的所有实体都销毁掉。
         /// </summary>
-        public override void Dispose()
+        protected virtual void DisposeCore()
         {
             if (IsDisposed)
             {
@@ -341,7 +402,15 @@ namespace Fantasy
         {
             try
             {
-                SceneUpdate.Update();
+                var sceneUpdate = SceneUpdate;
+                
+                // 最后一层防御，避免已销毁 Scene 继续更新。
+                if (IsDisposed || sceneUpdate == null)
+                {
+                    return;
+                }
+                
+                sceneUpdate.Update();
             }
             catch (Exception e)
             {
@@ -760,7 +829,7 @@ namespace Fantasy
         public static FrozenDictionary<string, int> SceneTypeDictionary { get; internal set; }
 
         /// <summary>
-        /// 
+        /// 发送一个消息
         /// </summary>
         /// <param name="address"></param>
         /// <param name="message"></param>
@@ -771,7 +840,7 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// 
+        /// 发送一个消息
         /// </summary>
         /// <param name="addressCollection"></param>
         /// <param name="message"></param>
@@ -782,7 +851,7 @@ namespace Fantasy
         }
 
         /// <summary>
-        /// 
+        /// 发送一个RPC消息
         /// </summary>
         /// <param name="address"></param>
         /// <param name="request"></param>
@@ -793,6 +862,33 @@ namespace Fantasy
             return NetworkMessagingComponent.Call<T>(address, request);
         }
 #endif
+        #endregion
+
+        #region Thread
+
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+        /// <summary>
+        /// 切换到当前 Scene 的线程同步上下文。
+        /// </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected FThreadTask SwitchToSceneThread()
+        {
+            var completion = FThreadTask.Create(false);
+            var context = ThreadSynchronizationContext;
+
+            // Scene 已销毁，或者当前已经位于 Scene 上下文。
+            if (context == null || ReferenceEquals(SynchronizationContext.Current, context))
+            {
+                completion.SetResult();
+                return completion;
+            }
+
+            // 从外部线程投递到 Scene 上下文。
+            context.Post(completion.SetResult);
+            return completion;
+        }
+#endif
+
         #endregion
     }
 }

@@ -17,7 +17,13 @@ namespace Fantasy.Platform.Unity
         
         public static void OnRuntimeMethodLoad()
         {
+            if (FantasyObjectGameObject != null)
+            {
+                return;
+            }
+            
             FantasyObjectGameObject = new GameObject("Fantasy.Net");
+            FantasyObjectGameObject.AddComponent<FantasyObject>();
             DontDestroyOnLoad(FantasyObjectGameObject);
         }
         private void OnApplicationQuit()
@@ -26,16 +32,9 @@ namespace Fantasy.Platform.Unity
         }
     }
     
-    public struct OnSceneCreate
-    {
-        public Scene Scene;
-        public object Arg;
-    }
-    
     public class Entry : MonoBehaviour
     {
         private static bool _isInit;
-        public static Scene Scene { get; private set; }
 
         /// <summary>
         /// 初始化框架
@@ -50,7 +49,6 @@ namespace Fantasy.Platform.Unity
 
             Log.Initialize(logger ?? new UnityLog());
             FantasyObject.OnRuntimeMethodLoad();
-            ProgramDefine.MaxMessageSize = ushort.MaxValue * 16;
             Log.Info($"Fantasy Version:{ProgramDefine.VERSION}");
             // 初始化序列化
             await SerializerManager.Initialize();
@@ -62,24 +60,6 @@ namespace Fantasy.Platform.Unity
             ProgramDefine.IsAppRunning = true;
             FantasyObject.FantasyObjectGameObject.AddComponent<Entry>();
             Log.Debug("Fantasy Initialize Complete!");
-        }
-
-        /// <summary>
-        /// 在Entry中创建一个Scene，如果Scene已经被创建过，将先销毁Scene再创建。
-        /// </summary>
-        /// <param name="arg"></param>
-        /// <param name="sceneRuntimeMode"></param>
-        /// <returns></returns>
-        public static async FTask<Scene> CreateScene(object arg = null, string sceneRuntimeMode = SceneRuntimeMode.MainThread)
-        {
-            Scene?.Dispose();
-            Scene = await Scene.Create(sceneRuntimeMode);
-            await Scene.EventComponent.PublishAsync(new OnSceneCreate()
-            {
-                Arg = arg,
-                Scene = Scene
-            });
-            return Scene;
         }
         
         private void Update()
@@ -94,18 +74,7 @@ namespace Fantasy.Platform.Unity
 
         private void OnDestroy()
         {
-            OnDestroyAsync().Coroutine();
-        }
-
-        private async FTask OnDestroyAsync()
-        {
-            if (Scene != null)
-            {
-                await Scene.Close();
-                Scene = null;
-            }
             SerializerManager.Dispose();
-            // await AssemblyManifest.Dispose();
             _isInit = false;
             // 设置当前程序已经在停止中
             ProgramDefine.IsAppRunning = false;

@@ -1,4 +1,4 @@
-#if !FANTASY_WEBGL || !FANTASY_SINGLETHREAD
+#if !FANTASY_WEBGL && !UNITY_WEBGL && !FANTASY_SINGLETHREAD
 using System;
 using System.Collections.Concurrent;
 using System.Threading;
@@ -90,6 +90,14 @@ namespace Fantasy
                     }
 
                     sceneThreadSynchronizationContext.Update();
+                    
+                    // 同步上下文中可能刚刚执行了 Scene.Close/Dispose。
+                    // 必须重新检查，不能继续调用已经销毁的 Scene。
+                    if (cancellationToken.IsCancellationRequested || scene.IsDisposed)
+                    {
+                        return;
+                    }
+                    
                     scene.Update();
                 }
                 catch (Exception e)

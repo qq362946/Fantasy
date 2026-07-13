@@ -22,7 +22,7 @@ namespace Fantasy.Sphere;
 /// </summary>
 public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
 {
-    private bool _isClosed;
+    public bool _isClosed;
     
     #region AssemblyManifest
     
