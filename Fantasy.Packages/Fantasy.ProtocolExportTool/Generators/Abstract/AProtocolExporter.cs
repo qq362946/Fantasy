@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -11,12 +10,13 @@ using Fantasy.ProtocolExportTool.Generators;
 using Fantasy.ProtocolExportTool.Generators.Parsers;
 using Fantasy.ProtocolExportTool.Generators.Validators;
 using Fantasy.ProtocolExportTool.Models;
+using Fantasy.ProtocolExportTool.Services;
 using Spectre.Console;
 
 namespace Fantasy.ProtocolExportTool.Abstract;
 
 public abstract partial class AProtocolExporter(string protocolDirectory, string clientDirectory, string serverDirectory,
-    string opCodeCacheFile, ProtocolExportType protocolExportType)
+    OpCodeCacheSession opCodeCache, ProtocolExportType protocolExportType)
 {
     private readonly ConcurrentBag<string> _errors = new();
     private readonly Dictionary<string, int> _routeTypes = new();
@@ -33,14 +33,11 @@ public abstract partial class AProtocolExporter(string protocolDirectory, string
     
     private readonly List<OpcodeInfo> _outerOpcode = [];
     private readonly List<OpcodeInfo> _innerOpcode = [];
-    private readonly Dictionary<string, uint> _opCodeCache = new(StringComparer.Ordinal);
-    private readonly Dictionary<uint, string> _opCodeOwners = [];
-    private bool _opCodeCacheLoaded;
+    private readonly OpCodeCacheSession _opCodeCache = opCodeCache ?? throw new ArgumentNullException(nameof(opCodeCache));
     
     protected readonly string ProtocolDirectory = NormalizePath(protocolDirectory);
-    protected readonly string ClientDirectory = NormalizePath(clientDirectory);
-    protected readonly string ServerDirectory = NormalizePath(serverDirectory);
-    private readonly string _opCodeCacheFile = NormalizeOptionalPath(opCodeCacheFile);
+    protected readonly string ClientDirectory = NormalizeOptionalPath(clientDirectory);
+    protected readonly string ServerDirectory = NormalizeOptionalPath(serverDirectory);
     
     private static string NormalizePath(string path)
     {
@@ -66,82 +63,6 @@ public abstract partial class AProtocolExporter(string protocolDirectory, string
         }
 
         return true;
-    }
-
-    private string GetOpCodeCachePath()
-    {
-        return string.IsNullOrWhiteSpace(_opCodeCacheFile)
-            ? Path.Combine(ProtocolDirectory, "OpCode.Cache")
-            : _opCodeCacheFile;
-    }
-
-    private void EnsureOpCodeCacheLoaded()
-    {
-        if (_opCodeCacheLoaded)
-        {
-            return;
-        }
-
-        _opCodeCacheLoaded = true;
-        var cachePath = GetOpCodeCachePath();
-        if (!File.Exists(cachePath))
-        {
-            return;
-        }
-
-        foreach (var rawLine in File.ReadAllLines(cachePath))
-        {
-            var line = rawLine.Trim();
-            if (string.IsNullOrWhiteSpace(line) || line.StartsWith("//", StringComparison.Ordinal) || line is "{" or "}")
-            {
-                continue;
-            }
-
-            var commentIndex = line.IndexOf("//", StringComparison.Ordinal);
-            if (commentIndex >= 0)
-            {
-                line = line[..commentIndex].Trim();
-            }
-
-            var separatorIndex = line.IndexOf('=');
-            if (separatorIndex <= 0)
-            {
-                continue;
-            }
-
-            var name = line[..separatorIndex].Trim();
-            var valueText = line[(separatorIndex + 1)..].Trim().TrimEnd(',');
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(valueText))
-            {
-                continue;
-            }
-
-            if (uint.TryParse(valueText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var value))
-            {
-                if (_opCodeOwners.TryGetValue(value, out var existingOwner) && !string.Equals(existingOwner, name, StringComparison.Ordinal))
-                {
-                    continue;
-                }
-
-                _opCodeCache[name] = value;
-                _opCodeOwners[value] = name;
-            }
-        }
-    }
-
-    private void SaveOpCodeCache()
-    {
-        var cachePath = GetOpCodeCachePath();
-        var directory = Path.GetDirectoryName(cachePath);
-        if (!string.IsNullOrWhiteSpace(directory) && !Directory.Exists(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-
-        var lines = _opCodeCache
-            .OrderBy(pair => pair.Key, StringComparer.Ordinal)
-            .Select(pair => $"{pair.Key} = {pair.Value}");
-        File.WriteAllLines(cachePath, lines);
     }
 
     #region Generate
@@ -325,13 +246,13 @@ public abstract partial class AProtocolExporter(string protocolDirectory, string
             return;
         }
         
-        if (!Directory.Exists(ServerDirectory))
-        {
-            Directory.CreateDirectory(ServerDirectory);
-        }
-
         if (protocolExportType.HasFlag(ProtocolExportType.Server))
         {
+            if (!Directory.Exists(ServerDirectory))
+            {
+                Directory.CreateDirectory(ServerDirectory);
+            }
+
             var filePath = Path.Combine(ServerDirectory, "InnerMessage.cs");
             await File.WriteAllTextAsync(filePath, template);
             // AnsiConsole.MarkupLine($"[green]Generated InnerMessage.cs at {filePath}[/]");
@@ -349,13 +270,13 @@ public abstract partial class AProtocolExporter(string protocolDirectory, string
             return;
         }
 
-        if (!Directory.Exists(ClientDirectory))
-        {
-            Directory.CreateDirectory(ClientDirectory);
-        }
-
         if (protocolExportType.HasFlag(ProtocolExportType.Client))
         {
+            if (!Directory.Exists(ClientDirectory))
+            {
+                Directory.CreateDirectory(ClientDirectory);
+            }
+
             var filePath = Path.Combine(ClientDirectory, "NetworkProtocolHelper.cs");
             await File.WriteAllTextAsync(filePath, template);
             // AnsiConsole.MarkupLine($"[green]Generated NetworkProtocolHelper.cs at {filePath}[/]");
@@ -409,13 +330,13 @@ public abstract partial class AProtocolExporter(string protocolDirectory, string
             return;
         }
 
-        if (!Directory.Exists(ServerDirectory))
-        {
-            Directory.CreateDirectory(ServerDirectory);
-        }
-
         if (protocolExportType.HasFlag(ProtocolExportType.Server))
         {
+            if (!Directory.Exists(ServerDirectory))
+            {
+                Directory.CreateDirectory(ServerDirectory);
+            }
+
             var filePath = Path.Combine(ServerDirectory, "InnerEnum.cs");
             await File.WriteAllTextAsync(filePath, template);
             // AnsiConsole.MarkupLine($"[green]Generated InnerEnum.cs at {filePath}[/]");
@@ -551,8 +472,7 @@ public abstract partial class AProtocolExporter(string protocolDirectory, string
     {
         var validator = new ProtocolValidator();
         var isOuter = protocol.Equals("Outer", StringComparison.OrdinalIgnoreCase);
-        EnsureOpCodeCacheLoaded();
-        var opCodeGenerator = new OpCodeGenerator(isOuter, _opCodeCache, _opCodeOwners);
+        var opCodeGenerator = new OpCodeGenerator(isOuter, _opCodeCache.Codes, _opCodeCache.CodeOwners);
 
         // 1. 解析所有文件
         foreach (var (filePath, fileLines) in ReadProtocolFilesLinesWithPath(protocol))
@@ -614,11 +534,8 @@ public abstract partial class AProtocolExporter(string protocolDirectory, string
 
         foreach (var pair in opCodeGenerator.AssignedCodes)
         {
-            _opCodeCache[pair.Key] = pair.Value;
-            _opCodeOwners[pair.Value] = pair.Key;
+            _opCodeCache.Assign(pair.Key, pair.Value);
         }
-
-        SaveOpCodeCache();
     }
     
     private IEnumerable<(string FilePath, string[] Lines)> ReadProtocolFilesLinesWithPath(string protocolDir)

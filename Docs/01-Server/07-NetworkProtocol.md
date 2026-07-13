@@ -211,7 +211,7 @@ message M2M_SendUnitResponse // IResponse
 
 ### 作用
 
-OpCode.Cache 是由 `Fantasy.Tools.NetworkProtocol` 工具**自动生成**的缓存文件,用于:
+OpCode.Cache 是由 `Fantasy.ProtocolExportTool` 工具**自动生成**的缓存文件,用于:
 
 1. **记录协议 OpCode**: 每个消息协议都有唯一的 OpCode(协议编号)
 2. **避免 ID 冲突**: 确保每次生成代码时 OpCode 保持一致
@@ -221,29 +221,33 @@ OpCode.Cache 是由 `Fantasy.Tools.NetworkProtocol` 工具**自动生成**的缓
 
 ```
 // OpCode.Cache 文件内容(示例)
-C2G_TestMessage = 10001
-C2G_TestRequest = 10002
-G2C_TestResponse = 10003
-G2A_TestMessage = 20001
-...
+C2G_TestMessage = 134227729
+C2G_TestRequest = 268445457
+G2C_TestResponse = 402663185
+
+// 协议类型变化后由工具生成的历史保留编号
+@reserved:134227730:C2G_OldMessage = 134227730
 ```
 
 ### 重要事项
 
 - **不要手动修改**: 此文件由工具自动维护
 - **版本控制**: 建议将此文件加入 Git,确保团队成员协议 ID 一致
-- **清理重置**: 如需重新生成所有 OpCode,删除此文件后重新运行工具
+- **不要删除历史保留项**: `@reserved:` 项确保旧客户端使用过的编号不会分配给新协议
+- **格式错误会停止导出**: 非法行、重复消息名或重复编号必须先处理,工具不会静默重写
+- **谨慎清理重置**: 删除缓存会重新分配所有 OpCode,可能破坏客户端与服务端的协议兼容性,只应在新项目或明确的破坏性升级中操作
 
 ### OpCode 分配规则
 
-框架会根据消息类型自动分配 OpCode 范围:
+OpCode 是一个 32 位无符号整数,并不是简单的连续数字区间。它由三部分组合而成:
 
-| OpCode 范围 | 消息类型 | 说明 |
-|-----------|---------|------|
-| 1-999 | 框架保留 | 不要使用 |
-| 1000-9999 | Outer 协议 | 客户端-服务器协议 |
-| 10000-19999 | Inner 协议 | 服务器间协议 |
-| 20000+ | 扩展协议 | 可自定义范围 |
+| 位段 | 宽度 | 说明 |
+|------|------|------|
+| `Index` | 23 位 | 同一消息类别中的递增索引,工具从 10001 开始分配 |
+| `OpCodeProtocolType` | 4 位 | 序列化方式,例如 ProtoBuf、Bson、MemoryPack |
+| `Protocol` | 5 位 | Outer/Inner 以及 Message、Request、Response 等消息类别 |
+
+最终值按照 `Index | (OpCodeProtocolType << 23) | (Protocol << 27)` 组合。不同消息类别和序列化方式拥有独立编号空间,具体数字应完全交给导出工具和 `OpCode.Cache` 管理。
 
 ---
 

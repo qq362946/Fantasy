@@ -98,7 +98,7 @@ public partial class MainWindowViewModel : ViewModelBase
         InitializeDefaultFileTree();
 
         // 注意：不在构造函数中加载配置，而是在 MainWindow 完全加载后调用
-        // LoadWorkspaceConfig 将由 MainWindow.Loaded 事件触发
+        // LoadEditorConfiguration 将由 MainWindow.Loaded 事件触发
     }
 
     /// <summary>
@@ -244,11 +244,10 @@ public partial class MainWindowViewModel : ViewModelBase
             else if (value.EditorType == EditorType.ExportSettings)
             {
                 // 切换到导出设置标签时，加载导出配置
-                var config = ConfigService.LoadConfig() ?? new WorkspaceConfig
+                if (ConfigService.HasCurrentWorkspace)
                 {
-                    WorkspacePath = WorkspacePath
-                };
-                ExportSettingsViewModel.LoadSettings(config);
+                    ExportSettingsViewModel.LoadSettings(ConfigService.LoadExporterSettings());
+                }
             }
         }
     }
@@ -349,7 +348,7 @@ public partial class MainWindowViewModel : ViewModelBase
     }
 
     /// <summary>
-    /// 重置工作区 UI 状态，用于切换配置文件。
+    /// 重置工作区 UI 状态，用于切换协议工作区。
     /// </summary>
     public void ResetWorkspaceState()
     {
@@ -375,7 +374,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void OpenFolder()
     {
-        OutputText += "正在打开文件夹对话框...\n";
+        OutputText += "正在选择协议工作区...\n";
     }
 
     [RelayCommand]
@@ -404,18 +403,12 @@ public partial class MainWindowViewModel : ViewModelBase
                 return;
             }
 
-            // 加载配置
-            var workspaceConfig = ConfigService.LoadConfig() ?? new WorkspaceConfig
-            {
-                WorkspacePath = WorkspacePath
-            };
-
-            // 验证服务器和客户端输出目录是否已配置
-            var exportToServer = workspaceConfig.ExportToServer;
-            var exportToClient = workspaceConfig.ExportToClient;
-
-            var hasServerConfig = !string.IsNullOrWhiteSpace(workspaceConfig.ServerOutputDirectory);
-            var hasClientConfig = !string.IsNullOrWhiteSpace(workspaceConfig.ClientOutputDirectory);
+            var exporterSettings = ConfigService.LoadExporterSettings();
+            var config = ConfigService.CreateProtocolExportConfig(exporterSettings);
+            var exportToServer = config.ExportType.HasFlag(Fantasy.ProtocolExportTool.Models.ProtocolExportType.Server);
+            var exportToClient = config.ExportType.HasFlag(Fantasy.ProtocolExportTool.Models.ProtocolExportType.Client);
+            var hasServerConfig = !string.IsNullOrWhiteSpace(config.ServerDir);
+            var hasClientConfig = !string.IsNullOrWhiteSpace(config.ClientDir);
 
             // 如果两个输出目录都没有配置，说明是第一次运行
             if (!hasServerConfig && !hasClientConfig)
@@ -449,24 +442,8 @@ public partial class MainWindowViewModel : ViewModelBase
                 return;
             }
 
-            // 构建导出配置
-            var exportType = Fantasy.ProtocolExportTool.Models.ProtocolExportType.All;
-            if (!exportToServer)
-            {
-                exportType = Fantasy.ProtocolExportTool.Models.ProtocolExportType.Client;
-            }
-            else if (!exportToClient)
-            {
-                exportType = Fantasy.ProtocolExportTool.Models.ProtocolExportType.Server;
-            }
-
-            var config = new Fantasy.ProtocolExportTool.Models.ProtocolExportConfig
-            {
-                ProtocolDir = WorkspacePath, // 使用工作区路径作为协议目录
-                ServerDir = ResolveOutputPath(WorkspacePath, workspaceConfig.ServerOutputDirectory),
-                ClientDir = ResolveOutputPath(WorkspacePath, workspaceConfig.ClientOutputDirectory),
-                ExportType = exportType
-            };
+            config.ExportType = (exportToServer ? Fantasy.ProtocolExportTool.Models.ProtocolExportType.Server : 0) |
+                                (exportToClient ? Fantasy.ProtocolExportTool.Models.ProtocolExportType.Client : 0);
 
             // 验证配置
             var (isValid, errorMsg) = _exportService.ValidateConfig(config);
@@ -497,6 +474,12 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void OpenExportSettings()
     {
+        if (!ConfigService.HasCurrentWorkspace)
+        {
+            OutputText += "请先打开协议工作区。\n";
+            return;
+        }
+
         // 检查是否已经打开了导出设置标签
         var existingTab = OpenedTabs.FirstOrDefault(t => t.EditorType == EditorType.ExportSettings);
         if (existingTab != null)
@@ -517,35 +500,28 @@ public partial class MainWindowViewModel : ViewModelBase
         ActiveTab = exportTab;
 
         // 加载导出配置
-        var config = ConfigService.LoadConfig() ?? new WorkspaceConfig
-        {
-            WorkspacePath = WorkspacePath
-        };
-        ExportSettingsViewModel.LoadSettings(config);
+        ExportSettingsViewModel.LoadSettings(ConfigService.LoadExporterSettings());
     }
 
     /// <summary>
-    /// 加载工作区配置
+    /// 加载 ExporterSettings.json 与 editor-state.json。
     /// </summary>
-    public void LoadWorkspaceConfig()
+    public void LoadEditorConfiguration()
     {
         try
         {
-            var config = ConfigService.LoadConfig();
-            if (config == null)
-            {
-                ResetWorkspaceState();
-                return;
-            }
+            var exporterSettings = ConfigService.LoadExporterSettings();
+            var exportConfig = ConfigService.CreateProtocolExportConfig(exporterSettings);
+            var editorState = ConfigService.LoadEditorState();
 
             // 恢复工作区路径
-            if (!string.IsNullOrEmpty(config.WorkspacePath) && Directory.Exists(config.WorkspacePath))
+            if (!string.IsNullOrEmpty(exportConfig.ProtocolDir) && Directory.Exists(exportConfig.ProtocolDir))
             {
-                LoadWorkspaceFolder(config.WorkspacePath);
+                LoadWorkspaceFolder(exportConfig.ProtocolDir);
 
                 // 先收集所有要恢复的标签页信息
                 var tabsToRestore = new List<(string FilePath, int CaretOffset)>();
-                foreach (var tabConfig in config.OpenedTabs)
+                foreach (var tabConfig in editorState.OpenedTabs)
                 {
                     if (File.Exists(tabConfig.FilePath))
                     {
@@ -567,9 +543,9 @@ public partial class MainWindowViewModel : ViewModelBase
                 }
 
                 // 恢复激活的标签页
-                if (!string.IsNullOrEmpty(config.ActiveTabFilePath))
+                if (!string.IsNullOrEmpty(editorState.ActiveTabFilePath))
                 {
-                    var activeTab = OpenedTabs.FirstOrDefault(t => t.FilePath == config.ActiveTabFilePath);
+                    var activeTab = OpenedTabs.FirstOrDefault(t => t.FilePath == editorState.ActiveTabFilePath);
                     if (activeTab != null)
                     {
                         ActiveTab = activeTab;
@@ -581,7 +557,7 @@ public partial class MainWindowViewModel : ViewModelBase
                     }
                 }
 
-                OutputText += "工作区配置加载成功。\n";
+                OutputText += $"配置加载成功：{ConfigService.CurrentExporterSettingsFilePath}\n";
             }
             else
             {
@@ -591,28 +567,29 @@ public partial class MainWindowViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            OutputText += $"加载工作区配置失败：{ex.Message}\n";
+            OutputText += $"加载编辑器配置失败：{ex.Message}\n";
         }
     }
 
     /// <summary>
-    /// 保存工作区配置
+    /// 保存 editor-state.json。导出配置由 ExportSettingsViewModel 单独保存。
     /// </summary>
-    public void SaveWorkspaceConfig()
+    public void SaveEditorState()
     {
         try
         {
-            // 先加载现有配置，保留导出设置
-            var config = ConfigService.LoadConfig() ?? new WorkspaceConfig();
+            if (!ConfigService.HasCurrentWorkspace)
+            {
+                return;
+            }
 
-            // 更新工作区路径
-            config.WorkspacePath = WorkspacePath;
+            var state = new EditorState();
 
             // 清空并重新保存打开的标签页
-            config.OpenedTabs.Clear();
+            state.OpenedTabs.Clear();
             foreach (var tab in OpenedTabs)
             {
-                config.OpenedTabs.Add(new TabConfig
+                state.OpenedTabs.Add(new TabConfig
                 {
                     FilePath = tab.FilePath,
                     CaretOffset = tab.CaretOffset,
@@ -623,34 +600,18 @@ public partial class MainWindowViewModel : ViewModelBase
             // 保存激活的标签页
             if (ActiveTab != null)
             {
-                config.ActiveTabFilePath = ActiveTab.FilePath;
+                state.ActiveTabFilePath = ActiveTab.FilePath;
+            }
+            else
+            {
+                state.ActiveTabFilePath = string.Empty;
             }
 
-            // 保存配置（会保留导出设置字段）
-            ConfigService.SaveConfig(config);
+            ConfigService.SaveEditorState(state);
         }
         catch (Exception ex)
         {
-            OutputText += $"保存工作区配置失败：{ex.Message}\n";
+            OutputText += $"保存编辑器状态失败：{ex.Message}\n";
         }
-    }
-
-    /// <summary>
-    /// 将输出路径解析为绝对路径。
-    /// 若 outputPath 是相对路径，则以 workspacePath 为基准进行解析。
-    /// </summary>
-    private static string ResolveOutputPath(string workspacePath, string outputPath)
-    {
-        if (string.IsNullOrWhiteSpace(outputPath))
-        {
-            return outputPath;
-        }
-
-        if (Path.IsPathRooted(outputPath))
-        {
-            return outputPath;
-        }
-
-        return Path.GetFullPath(Path.Combine(workspacePath, outputPath));
     }
 }

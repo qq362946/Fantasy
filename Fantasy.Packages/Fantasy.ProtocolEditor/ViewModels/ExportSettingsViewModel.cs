@@ -1,14 +1,20 @@
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Fantasy.ProtocolEditor.Models;
 using Fantasy.ProtocolEditor.Services;
+using Fantasy.ProtocolExportTool.Models;
+using Fantasy.ProtocolExportTool.Services;
 
 namespace Fantasy.ProtocolEditor.ViewModels;
 
 public partial class ExportSettingsViewModel : ViewModelBase
 {
+    private bool _isLoadingSettings;
+
     /// <summary>
     /// 工作区路径（协议目录）- 只读显示
     /// </summary>
@@ -40,6 +46,12 @@ public partial class ExportSettingsViewModel : ViewModelBase
     private bool _exportToClient = true;
 
     /// <summary>
+    /// 子包协议导出配置。
+    /// </summary>
+    [ObservableProperty]
+    private ObservableCollection<PackageExportItemViewModel> _packageExports = new();
+
+    /// <summary>
     /// 配置是否有效
     /// </summary>
     [ObservableProperty]
@@ -66,13 +78,37 @@ public partial class ExportSettingsViewModel : ViewModelBase
     /// <summary>
     /// 加载配置
     /// </summary>
-    public void LoadSettings(WorkspaceConfig config)
+    public void LoadSettings(ExporterSettings settings)
     {
-        WorkspacePath = config.WorkspacePath;
-        ServerOutputDirectory = config.ServerOutputDirectory;
-        ClientOutputDirectory = config.ClientOutputDirectory;
-        ExportToServer = config.ExportToServer;
-        ExportToClient = config.ExportToClient;
+        _isLoadingSettings = true;
+        try
+        {
+            var config = ConfigService.CreateProtocolExportConfig(settings);
+            WorkspacePath = config.ProtocolDir;
+            ServerOutputDirectory = settings.Export.NetworkProtocolServerDirectory.Value;
+            ClientOutputDirectory = settings.Export.NetworkProtocolClientDirectory.Value;
+            ExportToServer = settings.Export.ExportType.HasFlag(ProtocolExportType.Server);
+            ExportToClient = settings.Export.ExportType.HasFlag(ProtocolExportType.Client);
+
+            foreach (var package in PackageExports)
+            {
+                package.PropertyChanged -= OnPackageExportPropertyChanged;
+            }
+
+            PackageExports.Clear();
+            foreach (var packageSettings in settings.Export.PackageExports)
+            {
+                var package = new PackageExportItemViewModel(packageSettings);
+                package.PropertyChanged += OnPackageExportPropertyChanged;
+                PackageExports.Add(package);
+            }
+
+            RefreshPackageDisplayNames();
+        }
+        finally
+        {
+            _isLoadingSettings = false;
+        }
 
         IsModified = false;
         SaveMessage = string.Empty;
@@ -87,22 +123,18 @@ public partial class ExportSettingsViewModel : ViewModelBase
     {
         try
         {
-            var config = ConfigService.LoadConfig() ?? new WorkspaceConfig();
-
-            // 更新工作区路径（确保不丢失）
-            if (!string.IsNullOrEmpty(WorkspacePath))
-            {
-                config.WorkspacePath = WorkspacePath;
-            }
+            var settings = ConfigService.LoadExporterSettings();
 
             // 更新导出配置
-            config.ServerOutputDirectory = ServerOutputDirectory;
-            config.ClientOutputDirectory = ClientOutputDirectory;
-            config.ExportToServer = ExportToServer;
-            config.ExportToClient = ExportToClient;
+            settings.Export.NetworkProtocolServerDirectory.Value = ServerOutputDirectory;
+            settings.Export.NetworkProtocolClientDirectory.Value = ClientOutputDirectory;
+            settings.Export.ExportType = GetExportType();
+            settings.Export.PackageExports = PackageExports
+                .Select(package => package.ToSettings())
+                .ToList();
 
             // 保存配置
-            ConfigService.SaveConfig(config);
+            ConfigService.SaveExporterSettings(settings);
 
             IsModified = false;
             SaveMessage = "✅ 配置已保存";
@@ -154,14 +186,56 @@ public partial class ExportSettingsViewModel : ViewModelBase
             return;
         }
 
+        for (var i = 0; i < PackageExports.Count; i++)
+        {
+            var package = PackageExports[i];
+            var packageName = $"子包 {i + 1}";
+
+            if (string.IsNullOrWhiteSpace(package.ProtocolDirectory))
+            {
+                IsValid = false;
+                ValidationMessage = $"❌ {packageName}未配置协议目录";
+                return;
+            }
+
+            var resolvedProtocolDirectory = ResolveOutputPath(package.ProtocolDirectory);
+            if (!Directory.Exists(resolvedProtocolDirectory))
+            {
+                IsValid = false;
+                ValidationMessage = $"❌ {packageName}协议目录不存在: {resolvedProtocolDirectory}";
+                return;
+            }
+
+            if (!package.ExportToServer && !package.ExportToClient)
+            {
+                IsValid = false;
+                ValidationMessage = $"❌ {packageName}请至少选择一个导出目标";
+                return;
+            }
+
+            if (package.ExportToServer && string.IsNullOrWhiteSpace(package.ServerOutputDirectory))
+            {
+                IsValid = false;
+                ValidationMessage = $"❌ {packageName}已启用服务器导出，但未配置服务器输出目录";
+                return;
+            }
+
+            if (package.ExportToClient && string.IsNullOrWhiteSpace(package.ClientOutputDirectory))
+            {
+                IsValid = false;
+                ValidationMessage = $"❌ {packageName}已启用客户端导出，但未配置客户端输出目录";
+                return;
+            }
+        }
+
         IsValid = true;
         
         // 如果是相对路径，在提示中显示解析后的绝对路径，方便用户确认
         var serverHint = ExportToServer && !Path.IsPathRooted(ServerOutputDirectory)
-            ? $"（解析为: {ResolveOutputPath(WorkspacePath, ServerOutputDirectory)}）"
+            ? $"（解析为: {ResolveOutputPath(ServerOutputDirectory)}）"
             : string.Empty;
         var clientHint = ExportToClient && !Path.IsPathRooted(ClientOutputDirectory)
-            ? $"（解析为: {ResolveOutputPath(WorkspacePath, ClientOutputDirectory)}）"
+            ? $"（解析为: {ResolveOutputPath(ClientOutputDirectory)}）"
             : string.Empty;
         
         if (!string.IsNullOrEmpty(serverHint) || !string.IsNullOrEmpty(clientHint))
@@ -176,21 +250,85 @@ public partial class ExportSettingsViewModel : ViewModelBase
 
     /// <summary>
     /// 将输出路径解析为绝对路径。
-    /// 若 outputPath 是相对路径，则以 workspacePath 为基准进行解析。
+    /// 若 outputPath 是相对路径，则以 ExporterSettings.json 所在目录为基准进行解析。
     /// </summary>
-    private static string ResolveOutputPath(string workspacePath, string outputPath)
+    private static string ResolveOutputPath(string outputPath)
     {
-        if (string.IsNullOrWhiteSpace(outputPath) || string.IsNullOrWhiteSpace(workspacePath))
+        if (string.IsNullOrWhiteSpace(outputPath))
         {
             return outputPath;
         }
 
-        if (Path.IsPathRooted(outputPath))
+        return ExporterSettingsService.ResolvePath(outputPath, ConfigService.CurrentWorkspaceDirectory);
+    }
+
+    private ProtocolExportType GetExportType()
+    {
+        var exportType = (ProtocolExportType)0;
+        if (ExportToServer)
         {
-            return outputPath;
+            exportType |= ProtocolExportType.Server;
         }
 
-        return Path.GetFullPath(Path.Combine(workspacePath, outputPath));
+        if (ExportToClient)
+        {
+            exportType |= ProtocolExportType.Client;
+        }
+
+        return exportType;
+    }
+
+    [RelayCommand]
+    private void AddPackageExport()
+    {
+        var package = new PackageExportItemViewModel();
+        package.PropertyChanged += OnPackageExportPropertyChanged;
+        PackageExports.Add(package);
+        RefreshPackageDisplayNames();
+        MarkAsModified();
+    }
+
+    [RelayCommand]
+    private void RemovePackageExport(PackageExportItemViewModel package)
+    {
+        if (!PackageExports.Remove(package))
+        {
+            return;
+        }
+
+        package.PropertyChanged -= OnPackageExportPropertyChanged;
+        RefreshPackageDisplayNames();
+        MarkAsModified();
+    }
+
+    private void OnPackageExportPropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(PackageExportItemViewModel.DisplayName))
+        {
+            return;
+        }
+
+        MarkAsModified();
+    }
+
+    private void RefreshPackageDisplayNames()
+    {
+        for (var i = 0; i < PackageExports.Count; i++)
+        {
+            PackageExports[i].DisplayName = $"子包协议 {i + 1}";
+        }
+    }
+
+    private void MarkAsModified()
+    {
+        if (_isLoadingSettings)
+        {
+            return;
+        }
+
+        IsModified = true;
+        SaveMessage = string.Empty;
+        ValidateSettings();
     }
 
     /// <summary>
@@ -198,34 +336,101 @@ public partial class ExportSettingsViewModel : ViewModelBase
     /// </summary>
     partial void OnServerOutputDirectoryChanged(string value)
     {
-        IsModified = true;
-        SaveMessage = string.Empty;
-        ValidateSettings();
+        MarkAsModified();
     }
 
     partial void OnClientOutputDirectoryChanged(string value)
     {
-        IsModified = true;
-        SaveMessage = string.Empty;
-        ValidateSettings();
+        MarkAsModified();
     }
 
     partial void OnExportToServerChanged(bool value)
     {
-        IsModified = true;
-        SaveMessage = string.Empty;
-        ValidateSettings();
+        MarkAsModified();
     }
 
     partial void OnExportToClientChanged(bool value)
     {
-        IsModified = true;
-        SaveMessage = string.Empty;
-        ValidateSettings();
+        MarkAsModified();
     }
 
     partial void OnWorkspacePathChanged(string value)
     {
         ValidateSettings();
+    }
+}
+
+public partial class PackageExportItemViewModel : ViewModelBase
+{
+    private string _protocolDirectoryComment = "子包ProtoBuf文件所在的文件夹位置";
+    private string _serverDirectoryComment = "子包ProtoBuf生成到服务端的文件夹位置";
+    private string _clientDirectoryComment = "子包ProtoBuf生成到客户端的文件夹位置";
+
+    [ObservableProperty]
+    private string _displayName = "子包协议";
+
+    [ObservableProperty]
+    private string _protocolDirectory = string.Empty;
+
+    [ObservableProperty]
+    private string _serverOutputDirectory = string.Empty;
+
+    [ObservableProperty]
+    private string _clientOutputDirectory = string.Empty;
+
+    [ObservableProperty]
+    private bool _exportToServer = true;
+
+    [ObservableProperty]
+    private bool _exportToClient = true;
+
+    public PackageExportItemViewModel()
+    {
+    }
+
+    public PackageExportItemViewModel(PackageExportSettings settings)
+    {
+        ProtocolDirectory = settings.NetworkProtocolDirectory.Value;
+        ServerOutputDirectory = settings.NetworkProtocolServerDirectory.Value;
+        ClientOutputDirectory = settings.NetworkProtocolClientDirectory.Value;
+        ExportToServer = settings.ExportType.HasFlag(ProtocolExportType.Server);
+        ExportToClient = settings.ExportType.HasFlag(ProtocolExportType.Client);
+        _protocolDirectoryComment = settings.NetworkProtocolDirectory.Comment;
+        _serverDirectoryComment = settings.NetworkProtocolServerDirectory.Comment;
+        _clientDirectoryComment = settings.NetworkProtocolClientDirectory.Comment;
+    }
+
+    public PackageExportSettings ToSettings()
+    {
+        var exportType = (ProtocolExportType)0;
+        if (ExportToServer)
+        {
+            exportType |= ProtocolExportType.Server;
+        }
+
+        if (ExportToClient)
+        {
+            exportType |= ProtocolExportType.Client;
+        }
+
+        return new PackageExportSettings
+        {
+            NetworkProtocolDirectory = new SettingItem
+            {
+                Value = ProtocolDirectory,
+                Comment = _protocolDirectoryComment
+            },
+            NetworkProtocolServerDirectory = new SettingItem
+            {
+                Value = ServerOutputDirectory,
+                Comment = _serverDirectoryComment
+            },
+            NetworkProtocolClientDirectory = new SettingItem
+            {
+                Value = ClientOutputDirectory,
+                Comment = _clientDirectoryComment
+            },
+            ExportType = exportType
+        };
     }
 }

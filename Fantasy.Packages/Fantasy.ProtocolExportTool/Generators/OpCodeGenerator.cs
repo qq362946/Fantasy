@@ -10,6 +10,7 @@ namespace Fantasy.ProtocolExportTool.Generators;
 /// </summary>
 public sealed class OpCodeGenerator(bool isOuter, IReadOnlyDictionary<string, uint> existingCodes, IReadOnlyDictionary<uint, string> existingCodeOwners)
 {
+    private const uint MaxIndex = 0x7FFFFF;
     private readonly ProtocolOpCode _opCode = new();
     private readonly HashSet<uint> _usedCodes = new(existingCodeOwners.Keys);
     private readonly IReadOnlyDictionary<string, uint> _existingCodes = existingCodes;
@@ -59,6 +60,11 @@ public sealed class OpCodeGenerator(bool isOuter, IReadOnlyDictionary<string, ui
 
         while (true)
         {
+            if (counter > MaxIndex)
+            {
+                throw new InvalidOperationException($"协议类型 '{message.InterfaceType}' 的 OpCode 已超过 23 位索引上限 {MaxIndex}。");
+            }
+
             var code = OpCode.Create(message.Protocol.OpCodeType, protocolType, counter);
             counter++;
             if (_usedCodes.Add(code))

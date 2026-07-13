@@ -1,0 +1,114 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="620"
+        d:DesignHeight="520"
+        x:Class="Fantasy.ProtocolEditor.Views.WorkspaceGuideWindow"
+        Title="选择协议工作区"
+        Width="620"
+        Height="520"
+        MinWidth="560"
+        MinHeight="480"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False"
+        ShowInTaskbar="False"
+        Background="#1E1E1E"
+        Icon="/Assets/app-icon.ico">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Border Grid.Row="0"
+                Background="#252526"
+                BorderBrush="#3E3E42"
+                BorderThickness="0,0,0,1"
+                Padding="24,20">
+            <StackPanel Orientation="Horizontal" Spacing="14">
+                <TextBlock Text="📁"
+                           FontSize="36"
+                           VerticalAlignment="Center"/>
+                <StackPanel Spacing="4" VerticalAlignment="Center">
+                    <TextBlock Text="请选择协议工作区"
+                               FontSize="21"
+                               FontWeight="Bold"
+                               Foreground="#FFFFFF"/>
+                    <TextBlock Text="工作区就是存放网络协议文件的 NetworkProtocol 目录"
+                               FontSize="13"
+                               Foreground="#A0A0A0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="24,20" Spacing="16">
+                <TextBlock Text="应该选择什么目录？"
+                           FontSize="15"
+                           FontWeight="SemiBold"
+                           Foreground="#FFFFFF"/>
+                <TextBlock Text="请选择包含 Inner、Outer 协议文件夹的目录。不同项目的名称可能不同，但结构通常如下："
+                           TextWrapping="Wrap"
+                           Foreground="#CCCCCC"/>
+
+                <Border Background="#181818"
+                        BorderBrush="#3E3E42"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="16,12">
+                    <TextBlock Text="NetworkProtocol/&#x0a;├── Inner/&#x0a;├── Outer/&#x0a;├── RouteType.Config        （可选）&#x0a;└── RoamingType.Config      （可选）"
+                               FontFamily="Consolas,Menlo,Monaco,monospace"
+                               FontSize="13"
+                               LineHeight="21"
+                               Foreground="#D4D4D4"/>
+                </Border>
+
+                <Border Background="#1D3445"
+                        BorderBrush="#2878A8"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="14,12">
+                    <StackPanel Spacing="7">
+                        <TextBlock Text="选择后，工具会在该目录自动创建："
+                                   FontWeight="SemiBold"
+                                   Foreground="#FFFFFF"/>
+                        <TextBlock Text="• ExporterSettings.json  — 协议导出设置"
+                                   FontFamily="Consolas,Menlo,Monaco,monospace"
+                                   Foreground="#C8E7FA"/>
+                        <TextBlock Text="• editor-state.json       — 编辑器标签和光标状态"
+                                   FontFamily="Consolas,Menlo,Monaco,monospace"
+                                   Foreground="#C8E7FA"/>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="以后启动会自动恢复上次的工作区，不会重复询问。"
+                           FontSize="12"
+                           Foreground="#858585"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Border Grid.Row="2"
+                Background="#252526"
+                BorderBrush="#3E3E42"
+                BorderThickness="0,1,0,0"
+                Padding="20,14">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Spacing="10">
+                <Button Content="退出"
+                        Width="90"
+                        Padding="12,6"
+                        Background="#3A3D41"
+                        Foreground="#FFFFFF"
+                        Click="OnExitClick"/>
+                <Button Content="选择协议工作区"
+                        Width="150"
+                        Padding="12,6"
+                        Background="#007ACC"
+                        Foreground="#FFFFFF"
+                        FontWeight="SemiBold"
+                        Click="OnSelectWorkspaceClick"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

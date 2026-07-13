@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.CommandLine;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Fantasy.ProtocolExportTool.Generators;
 using Fantasy.ProtocolExportTool.Interactive;
 using Fantasy.ProtocolExportTool.Models;
+using Fantasy.ProtocolExportTool.Services;
 using Spectre.Console;
 
 namespace Fantasy.ProtocolExportTool.Commands;
@@ -112,34 +111,8 @@ public class ProtocolExportCommand : Command
                 return null;
             }
 
-            var jsonContent = await File.ReadAllTextAsync(settingsFileName);
-            var settings = JsonSerializer.Deserialize<ExporterSettings>(jsonContent, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                ReadCommentHandling = JsonCommentHandling.Skip,
-                AllowTrailingCommas = true
-            });
-
-            if (settings?.Export == null)
-            {
-                AnsiConsole.MarkupLine($"[red]错误:[/] 配置文件 '{settingsFileName}' 格式不正确。");
-                return null;
-            }
-
-            var config = new ProtocolExportConfig
-            {
-                ProtocolDir = settings.Export.NetworkProtocolDirectory.Value,
-                ServerDir = settings.Export.NetworkProtocolServerDirectory.Value,
-                ClientDir = settings.Export.NetworkProtocolClientDirectory.Value,
-                OpCodeCacheFile = settings.Export.SharedOpCodeCacheFile.Value,
-                ExportType = ProtocolExportType.All,
-                PackageExports = settings.Export.PackageExports.ConvertAll(package => new ProtocolExportTarget
-                {
-                    ProtocolDir = package.NetworkProtocolDirectory.Value,
-                    ServerDir = package.NetworkProtocolServerDirectory.Value,
-                    ClientDir = package.NetworkProtocolClientDirectory.Value
-                })
-            };
+            var settings = await ExporterSettingsService.LoadAsync(settingsFileName);
+            var config = ExporterSettingsService.CreateExportConfig(settings, settingsFileName);
 
             AnsiConsole.MarkupLine($"[green]成功:[/] 已从 '{settingsFileName}' 加载配置。");
             // AnsiConsole.MarkupLine($"  协议目录: {config.ProtocolDir}");
@@ -148,11 +121,6 @@ public class ProtocolExportCommand : Command
             // AnsiConsole.WriteLine();
 
             return config;
-        }
-        catch (JsonException ex)
-        {
-            AnsiConsole.MarkupLine($"[red]错误:[/] 解析配置文件失败: {ex.Message}");
-            return null;
         }
         catch (Exception ex)
         {
@@ -163,14 +131,14 @@ public class ProtocolExportCommand : Command
 
     private static bool ValidateTargetDirectories(ProtocolExportConfig config, bool isSilent)
     {
-        if (!ValidateSingleTarget(config.ProtocolDir, config.ServerDir, config.ClientDir, isSilent, "主协议"))
+        if (!ValidateSingleTarget(config.ProtocolDir, config.ServerDir, config.ClientDir, config.ExportType, isSilent, "主协议"))
         {
             return false;
         }
 
         foreach (var packageExport in config.PackageExports)
         {
-            if (!ValidateSingleTarget(packageExport.ProtocolDir, packageExport.ServerDir, packageExport.ClientDir, isSilent, "子包协议"))
+            if (!ValidateSingleTarget(packageExport.ProtocolDir, packageExport.ServerDir, packageExport.ClientDir, packageExport.ExportType, isSilent, "子包协议"))
             {
                 return false;
             }
@@ -179,7 +147,7 @@ public class ProtocolExportCommand : Command
         return true;
     }
 
-    private static bool ValidateSingleTarget(string protocolDir, string serverDir, string clientDir, bool isSilent, string label)
+    private static bool ValidateSingleTarget(string protocolDir, string serverDir, string clientDir, ProtocolExportType exportType, bool isSilent, string label)
     {
         if (!Directory.Exists(protocolDir))
         {
@@ -187,7 +155,19 @@ public class ProtocolExportCommand : Command
             return false;
         }
 
-        if (!string.IsNullOrEmpty(serverDir) && !Directory.Exists(serverDir))
+        if (exportType.HasFlag(ProtocolExportType.Server) && string.IsNullOrWhiteSpace(serverDir))
+        {
+            AnsiConsole.MarkupLine($"[red]错误:[/] {label}启用了服务端导出，但未配置服务端目录。");
+            return false;
+        }
+
+        if (exportType.HasFlag(ProtocolExportType.Client) && string.IsNullOrWhiteSpace(clientDir))
+        {
+            AnsiConsole.MarkupLine($"[red]错误:[/] {label}启用了客户端导出，但未配置客户端目录。");
+            return false;
+        }
+
+        if (exportType.HasFlag(ProtocolExportType.Server) && !Directory.Exists(serverDir))
         {
             if (isSilent)
             {
@@ -200,7 +180,7 @@ public class ProtocolExportCommand : Command
             }
         }
 
-        if (!string.IsNullOrEmpty(clientDir) && !Directory.Exists(clientDir))
+        if (exportType.HasFlag(ProtocolExportType.Client) && !Directory.Exists(clientDir))
         {
             if (isSilent)
             {
@@ -213,9 +193,9 @@ public class ProtocolExportCommand : Command
             }
         }
 
-        if (string.IsNullOrEmpty(serverDir) && string.IsNullOrEmpty(clientDir))
+        if (exportType == 0)
         {
-            AnsiConsole.MarkupLine($"[red]错误:[/] {label}的导出到客户端和服务端的目录至少要指定一个。");
+            AnsiConsole.MarkupLine($"[red]错误:[/] {label}至少要启用一个导出目标。");
             return false;
         }
 

@@ -1,0 +1,22 @@
+{
+  "Export": {
+    "NetworkProtocolDirectory": {
+      "Value": ".",
+      "Comment": "ProtoBuf文件所在的文件夹位置"
+    },
+    "NetworkProtocolServerDirectory": {
+      "Value": "/Users/fantasy/Code/Git/Fantasy/Examples/Server/APP/Entity/Generate/NetworkProtocol",
+      "Comment": "ProtoBuf生成到服务端的文件夹位置"
+    },
+    "NetworkProtocolClientDirectory": {
+      "Value": "/Users/fantasy/Code/Git/Fantasy/Examples/Client/Unity/Assets/Scripts/Hotfix/Generate/NetworkProtocol",
+      "Comment": "ProtoBuf生成到客户端的文件夹位置"
+    },
+    "SharedOpCodeCacheFile": {
+      "Value": "OpCode.Cache",
+      "Comment": "主协议与子包共享的OpCode缓存文件"
+    },
+    "ExportType": "All",
+    "PackageExports": []
+  }
+}

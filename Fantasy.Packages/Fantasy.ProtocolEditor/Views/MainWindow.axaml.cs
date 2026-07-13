@@ -81,115 +81,259 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 窗口加载完成事件，加载工作区配置
+    /// 窗口加载完成事件，加载共享导出配置与编辑器状态。
     /// </summary>
-    private void OnWindowLoaded(object? sender, RoutedEventArgs e)
-    {
-        // 在窗口和所有控件完全加载后，再加载配置
-        Dispatcher.UIThread.Post(async () =>
-        {
-            if (DataContext is MainWindowViewModel vm)
-            {
-                await InitializeConfigFileAsync(vm);
-                vm.LoadWorkspaceConfig();
-                // 设置 TreeView 的容器准备事件，用于同步 IsExpanded 状态
-                SetupTreeViewItemBinding();
-            }
-        }, DispatcherPriority.Loaded);
-    }
-
-    /// <summary>
-    /// 初始化当前配置文件。优先使用进程当前目录的 workspace.json，不存在则提示选择。
-    /// </summary>
-    private async Task InitializeConfigFileAsync(MainWindowViewModel vm)
+    private async void OnWindowLoaded(object? sender, RoutedEventArgs e)
     {
         try
         {
-            ConfigService.SetConfigFilePath(ConfigService.DefaultConfigFilePath);
-
-            if (File.Exists(ConfigService.CurrentConfigFilePath))
+            if (DataContext is MainWindowViewModel vm)
             {
-                ConfigService.SaveLastConfigFilePath();
-                vm.OutputText += $"使用配置文件：{ConfigService.CurrentConfigFilePath}\n";
-                return;
-            }
+                await InitializeWorkspaceAsync(vm);
+                if (ConfigService.HasCurrentWorkspace)
+                {
+                    vm.LoadEditorConfiguration();
+                }
 
-            if (ConfigService.TryUseLastConfigFile(out var lastConfigErrorMessage))
-            {
-                vm.OutputText += $"使用上次配置文件：{ConfigService.CurrentConfigFilePath}\n";
-                return;
+                // 设置 TreeView 的容器准备事件，用于同步 IsExpanded 状态
+                SetupTreeViewItemBinding();
             }
-
-            if (!string.IsNullOrEmpty(lastConfigErrorMessage))
-            {
-                vm.OutputText += $"上次配置文件不可用：{lastConfigErrorMessage}\n";
-            }
-
-            var selectedConfigPath = await SelectWorkspaceConfigFileAsync("选择工作区配置文件");
-            if (!string.IsNullOrEmpty(selectedConfigPath))
-            {
-                ConfigService.SetConfigFilePath(selectedConfigPath);
-                ConfigService.SaveLastConfigFilePath();
-                vm.OutputText += $"使用配置文件：{ConfigService.CurrentConfigFilePath}\n";
-                return;
-            }
-
-            ConfigService.EnsureConfigFile();
-            ConfigService.SaveLastConfigFilePath();
-            vm.OutputText += $"已创建默认配置文件：{ConfigService.CurrentConfigFilePath}\n";
         }
         catch (Exception ex)
         {
-            ConfigService.SetConfigFilePath(ConfigService.DefaultConfigFilePath);
-            ConfigService.EnsureConfigFile();
-            ConfigService.SaveLastConfigFilePath();
-            vm.OutputText += $"初始化配置文件失败，已创建默认配置：{ex.Message}\n";
+            if (DataContext is MainWindowViewModel vm)
+            {
+                vm.OutputText += $"编辑器初始化失败：{ex.Message}\n";
+            }
         }
     }
 
     /// <summary>
-    /// 选择工作区配置文件。
+    /// 初始化协议工作区。配置文件固定存放在工作区根目录。
     /// </summary>
-    private async Task<string?> SelectWorkspaceConfigFileAsync(string title)
+    private async Task InitializeWorkspaceAsync(MainWindowViewModel vm)
     {
-        var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+        try
+        {
+            if (!string.IsNullOrWhiteSpace(Program.StartupArgumentError))
+            {
+                vm.OutputText += $"启动参数错误：{Program.StartupArgumentError}\n";
+            }
+
+            if (!string.IsNullOrWhiteSpace(Program.StartupWorkspacePath))
+            {
+                if (TryActivateWorkspaceDirectory(
+                        Program.StartupWorkspacePath,
+                        createExporterSettingsIfMissing: true,
+                        remember: false,
+                        vm,
+                        out var startupConfigError))
+                {
+                    vm.OutputText += $"使用启动参数工作区：{ConfigService.CurrentWorkspaceDirectory}\n";
+                    return;
+                }
+
+                vm.OutputText += $"启动参数工作区不可用：{startupConfigError}\n";
+            }
+
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var currentDirectorySettings = Path.Combine(
+                currentDirectory,
+                Fantasy.ProtocolExportTool.Services.ExporterSettingsService.FileName);
+            if (File.Exists(currentDirectorySettings))
+            {
+                if (TryActivateWorkspaceDirectory(
+                        currentDirectory,
+                        createExporterSettingsIfMissing: false,
+                        remember: true,
+                        vm,
+                        out var currentDirectoryError))
+                {
+                    vm.OutputText += $"使用当前协议工作区：{ConfigService.CurrentWorkspaceDirectory}\n";
+                    return;
+                }
+
+                vm.OutputText += $"当前协议工作区不可用：{currentDirectoryError}\n";
+            }
+
+            if (ConfigService.TryUseLastWorkspaceDirectory(out var lastWorkspaceErrorMessage))
+            {
+                vm.OutputText += $"使用上次协议工作区：{ConfigService.CurrentWorkspaceDirectory}\n";
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(lastWorkspaceErrorMessage))
+            {
+                vm.OutputText += $"上次协议工作区不可用：{lastWorkspaceErrorMessage}\n";
+            }
+
+            var guideWindow = new WorkspaceGuideWindow();
+            var shouldSelectWorkspace = await guideWindow.ShowDialog<bool>(this);
+            if (!shouldSelectWorkspace)
+            {
+                vm.OutputText += "未选择协议工作区，编辑器即将退出。\n";
+                Close();
+                return;
+            }
+
+            var workspaceDirectory = await SelectWorkspaceDirectoryWithValidationAsync();
+            if (string.IsNullOrEmpty(workspaceDirectory))
+            {
+                vm.OutputText += "尚未选择协议工作区，可通过「文件 → 切换工作区」继续。\n";
+                return;
+            }
+
+            if (!TryActivateWorkspaceDirectory(
+                    workspaceDirectory,
+                    createExporterSettingsIfMissing: true,
+                    remember: true,
+                    vm,
+                    out var selectedWorkspaceError))
+            {
+                vm.OutputText += $"协议工作区不可用：{selectedWorkspaceError}\n";
+            }
+        }
+        catch (Exception ex)
+        {
+            // 初始化异常只显示在输出面板，不能再抛回 UI 线程导致进程退出。
+            vm.OutputText += $"初始化协议工作区失败：{ex.Message}\n";
+        }
+    }
+
+    private static bool TryActivateWorkspaceDirectory(
+        string path,
+        bool createExporterSettingsIfMissing,
+        bool remember,
+        MainWindowViewModel vm,
+        out string errorMessage)
+    {
+        if (!ConfigService.TryActivateWorkspaceDirectory(
+                path,
+                createExporterSettingsIfMissing,
+                out var exporterSettingsCreated,
+                out var editorStateCreated,
+                out errorMessage))
+        {
+            return false;
+        }
+
+        if (remember)
+        {
+            ConfigService.SaveLastWorkspaceDirectory();
+        }
+
+        if (exporterSettingsCreated)
+        {
+            vm.OutputText += $"已创建默认配置：{ConfigService.CurrentExporterSettingsFilePath}\n";
+        }
+
+        if (editorStateCreated)
+        {
+            vm.OutputText += $"已创建编辑器状态：{ConfigService.CurrentEditorStateFilePath}\n";
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// 选择包含 Inner/Outer 的协议工作区目录。
+    /// </summary>
+    private async Task<string?> SelectWorkspaceDirectoryAsync(string title)
+    {
+        var folders = await StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions
         {
             Title = title,
             AllowMultiple = false
         });
 
-        if (files.Count == 0)
-        {
-            return null;
-        }
-
-        var filePath = files[0].Path.LocalPath;
-        if (ConfigService.TryValidateConfigFile(filePath, out var errorMessage))
-        {
-            return filePath;
-        }
-
-        if (DataContext is MainWindowViewModel vm)
-        {
-            vm.OutputText += $"配置文件无效：{errorMessage}\n";
-        }
-
-        return null;
+        return folders.Count == 0 ? null : folders[0].Path.LocalPath;
     }
 
-    /// <summary>
-    /// 选择配置另存为路径。
-    /// </summary>
-    private async Task<string?> SelectConfigSavePathAsync()
+    private async Task<string?> SelectWorkspaceDirectoryWithValidationAsync()
     {
-        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        while (true)
         {
-            Title = "配置另存为",
-            SuggestedFileName = Path.GetFileName(ConfigService.CurrentConfigFilePath),
-            DefaultExtension = "json"
+            var workspaceDirectory = await SelectWorkspaceDirectoryAsync(
+                "选择协议工作区（包含 Inner 或 Outer 的目录）");
+            if (string.IsNullOrEmpty(workspaceDirectory))
+            {
+                return null;
+            }
+
+            if (Directory.Exists(Path.Combine(workspaceDirectory, "Inner")) ||
+                Directory.Exists(Path.Combine(workspaceDirectory, "Outer")))
+            {
+                return workspaceDirectory;
+            }
+
+            if (await ConfirmWorkspaceWithoutProtocolFoldersAsync(workspaceDirectory))
+            {
+                return workspaceDirectory;
+            }
+        }
+    }
+
+    private async Task<bool> ConfirmWorkspaceWithoutProtocolFoldersAsync(string workspaceDirectory)
+    {
+        var dialog = new Window
+        {
+            Title = "确认协议工作区",
+            Width = 520,
+            Height = 260,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner,
+            CanResize = false,
+            ShowInTaskbar = false,
+            Background = Brush.Parse("#252526")
+        };
+
+        var content = new StackPanel
+        {
+            Margin = new Thickness(24, 20),
+            Spacing = 14
+        };
+        content.Children.Add(new TextBlock
+        {
+            Text = "⚠ 未找到 Inner 或 Outer 文件夹",
+            FontSize = 17,
+            FontWeight = FontWeight.SemiBold,
+            Foreground = Brushes.White
+        });
+        content.Children.Add(new TextBlock
+        {
+            Text = $"所选目录看起来不像协议工作区：\n{workspaceDirectory}\n\n仍然使用时只会创建配置文件，不会自动创建 Inner/Outer。",
+            TextWrapping = TextWrapping.Wrap,
+            Foreground = Brushes.LightGray
         });
 
-        return file?.Path.LocalPath;
+        var buttons = new StackPanel
+        {
+            Orientation = Avalonia.Layout.Orientation.Horizontal,
+            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Right,
+            Spacing = 10,
+            Margin = new Thickness(0, 8, 0, 0)
+        };
+        var chooseAgainButton = new Button
+        {
+            Content = "重新选择",
+            Width = 100,
+            Padding = new Thickness(10, 5)
+        };
+        var useAnywayButton = new Button
+        {
+            Content = "仍然使用",
+            Width = 100,
+            Padding = new Thickness(10, 5),
+            Background = Brush.Parse("#007ACC"),
+            Foreground = Brushes.White
+        };
+        chooseAgainButton.Click += (_, _) => dialog.Close(false);
+        useAnywayButton.Click += (_, _) => dialog.Close(true);
+        buttons.Children.Add(chooseAgainButton);
+        buttons.Children.Add(useAnywayButton);
+        content.Children.Add(buttons);
+        dialog.Content = content;
+
+        return await dialog.ShowDialog<bool>(this);
     }
 
     /// <summary>
@@ -483,7 +627,7 @@ public partial class MainWindow : Window
     /// </summary>
     private void OnKeyDown(object? sender, KeyEventArgs e)
     {
-        // Ctrl+O 或 Cmd+O 打开文件夹
+        // Ctrl+O 或 Cmd+O 切换协议工作区
         if ((e.KeyModifiers == KeyModifiers.Control || e.KeyModifiers == KeyModifiers.Meta) && e.Key == Key.O)
         {
             OnOpenFolderMenuClick(null, new RoutedEventArgs());
@@ -566,126 +710,59 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 菜单打开文件夹点击事件
+    /// 打开协议工作区，并在工作区根目录创建或加载两份配置文件。
     /// </summary>
     private async void OnOpenFolderMenuClick(object? sender, RoutedEventArgs e)
     {
         try
         {
-            var folder = await StorageProvider.OpenFolderPickerAsync(new Avalonia.Platform.Storage.FolderPickerOpenOptions
+            if (DataContext is not MainWindowViewModel viewModel)
             {
-                Title = "Select Network Protocol Folder",
-                AllowMultiple = false
-            });
-
-            if (folder.Count > 0 && DataContext is MainWindowViewModel viewModel)
-            {
-                var folderPath = folder[0].Path.LocalPath;
-                viewModel.LoadWorkspaceFolder(folderPath);
+                return;
             }
+
+            var workspaceDirectory = await SelectWorkspaceDirectoryWithValidationAsync();
+            if (string.IsNullOrEmpty(workspaceDirectory))
+            {
+                return;
+            }
+
+            SaveCurrentEditorState(viewModel);
+
+            if (!TryActivateWorkspaceDirectory(
+                    workspaceDirectory,
+                    createExporterSettingsIfMissing: true,
+                    remember: true,
+                    viewModel,
+                    out var errorMessage))
+            {
+                viewModel.OutputText += $"打开协议工作区失败：{errorMessage}\n";
+                return;
+            }
+
+            viewModel.ResetWorkspaceState();
+            viewModel.OutputText += $"已打开协议工作区：{ConfigService.CurrentWorkspaceDirectory}\n";
+            viewModel.LoadEditorConfiguration();
         }
         catch (Exception ex)
         {
             if (DataContext is MainWindowViewModel viewModel)
             {
-                viewModel.OutputText += $"打开文件夹时出错：{ex.Message}\n";
+                viewModel.OutputText += $"打开协议工作区时出错：{ex.Message}\n";
             }
         }
     }
 
     /// <summary>
-    /// 菜单选择配置文件点击事件。
+    /// 保存当前协议工作区对应的编辑器状态。
     /// </summary>
-    private async void OnSelectConfigFileMenuClick(object? sender, RoutedEventArgs e)
+    private void SaveCurrentEditorState(MainWindowViewModel viewModel)
     {
-        if (DataContext is not MainWindowViewModel viewModel)
+        if (!ConfigService.HasCurrentWorkspace)
         {
             return;
         }
 
-        try
-        {
-            var configPath = await SelectWorkspaceConfigFileAsync("选择工作区配置文件");
-            if (string.IsNullOrEmpty(configPath))
-            {
-                return;
-            }
-
-            SaveCurrentWorkspaceState(viewModel);
-
-            ConfigService.SetConfigFilePath(configPath);
-            ConfigService.SaveLastConfigFilePath();
-            viewModel.ResetWorkspaceState();
-            viewModel.OutputText += $"已切换配置文件：{ConfigService.CurrentConfigFilePath}\n";
-            viewModel.LoadWorkspaceConfig();
-        }
-        catch (Exception ex)
-        {
-            viewModel.OutputText += $"切换配置文件时出错：{ex.Message}\n";
-        }
-    }
-
-    /// <summary>
-    /// 菜单配置另存为点击事件。
-    /// </summary>
-    private async void OnSaveConfigAsMenuClick(object? sender, RoutedEventArgs e)
-    {
-        if (DataContext is not MainWindowViewModel viewModel)
-        {
-            return;
-        }
-
-        try
-        {
-            var savePath = await SelectConfigSavePathAsync();
-            if (string.IsNullOrEmpty(savePath))
-            {
-                return;
-            }
-
-            if (viewModel.ActiveTab != null && TextEditor != null)
-            {
-                viewModel.ActiveTab.CaretOffset = TextEditor.CaretOffset;
-            }
-
-            SaveCurrentWorkspaceState(viewModel);
-
-            var config = ConfigService.LoadConfig() ?? new WorkspaceConfig();
-            config.WorkspacePath = viewModel.WorkspacePath;
-            config.OpenedTabs.Clear();
-            foreach (var tab in viewModel.OpenedTabs)
-            {
-                config.OpenedTabs.Add(new TabConfig
-                {
-                    FilePath = tab.FilePath,
-                    CaretOffset = tab.CaretOffset,
-                    EditorType = tab.EditorType
-                });
-            }
-
-            config.ActiveTabFilePath = viewModel.ActiveTab?.FilePath ?? string.Empty;
-            if (viewModel.OpenedTabs.Any(t => t.EditorType == EditorType.ExportSettings))
-            {
-                config.ServerOutputDirectory = viewModel.ExportSettingsViewModel.ServerOutputDirectory;
-                config.ClientOutputDirectory = viewModel.ExportSettingsViewModel.ClientOutputDirectory;
-                config.ExportToServer = viewModel.ExportSettingsViewModel.ExportToServer;
-                config.ExportToClient = viewModel.ExportSettingsViewModel.ExportToClient;
-            }
-
-            ConfigService.SaveConfigAs(savePath, config);
-            viewModel.OutputText += $"配置已另存为：{savePath}\n";
-        }
-        catch (Exception ex)
-        {
-            viewModel.OutputText += $"配置另存为失败：{ex.Message}\n";
-        }
-    }
-
-    /// <summary>
-    /// 保存当前配置对应的工作区状态。
-    /// </summary>
-    private void SaveCurrentWorkspaceState(MainWindowViewModel viewModel)
-    {
         if (viewModel.ActiveTab != null && TextEditor != null)
         {
             viewModel.ActiveTab.CaretOffset = TextEditor.CaretOffset;
@@ -696,7 +773,7 @@ public partial class MainWindow : Window
             SaveAllOpened(string.Empty);
         }
 
-        viewModel.SaveWorkspaceConfig();
+        viewModel.SaveEditorState();
     }
 
     /// <summary>
@@ -2235,7 +2312,7 @@ public partial class MainWindow : Window
     }
 
     /// <summary>
-    /// 窗口关闭事件，保存工作区配置
+    /// 窗口关闭事件，保存编辑器状态。
     /// </summary>
     private void OnWindowClosing(object? sender, WindowClosingEventArgs e)
     {
@@ -2247,8 +2324,10 @@ public partial class MainWindow : Window
                 vm.ActiveTab.CaretOffset = TextEditor.CaretOffset;
             }
 
-            // 保存工作区配置
-            vm.SaveWorkspaceConfig();
+            if (ConfigService.HasCurrentWorkspace)
+            {
+                vm.SaveEditorState();
+            }
             // 保存打开的文件
             SaveAllOpened();
         }

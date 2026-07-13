@@ -120,6 +120,104 @@
 
             <Separator Background="#3E3E42"/>
 
+            <!-- 子包协议配置 -->
+            <StackPanel Spacing="10">
+                <Grid ColumnDefinitions="*,Auto">
+                    <StackPanel Grid.Column="0" Spacing="3">
+                        <TextBlock Text="子包协议（PackageExports）"
+                                   FontWeight="SemiBold"
+                                   Foreground="#CCCCCC"/>
+                        <TextBlock Text="每个子包可以使用独立的协议目录、输出目录和导出目标"
+                                   FontSize="12"
+                                   Foreground="#858585"/>
+                    </StackPanel>
+                    <Button Grid.Column="1"
+                            Content="＋ 添加子包"
+                            Command="{Binding AddPackageExportCommand}"
+                            Background="#3A3D41"
+                            Foreground="#FFFFFF"
+                            Padding="12,5"
+                            VerticalAlignment="Center"/>
+                </Grid>
+
+                <ItemsControl ItemsSource="{Binding PackageExports}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:PackageExportItemViewModel">
+                            <Border Background="#252526"
+                                    BorderBrush="#3E3E42"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Padding="12"
+                                    Margin="0,0,0,10">
+                                <StackPanel Spacing="10">
+                                    <Grid ColumnDefinitions="*,Auto">
+                                        <TextBlock Grid.Column="0"
+                                                   Text="{Binding DisplayName}"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="#FFFFFF"
+                                                   VerticalAlignment="Center"/>
+                                        <Button Grid.Column="1"
+                                                Content="删除"
+                                                Command="{Binding $parent[ItemsControl].((vm:ExportSettingsViewModel)DataContext).RemovePackageExportCommand}"
+                                                CommandParameter="{Binding}"
+                                                Background="#5A2D2D"
+                                                Foreground="#FFFFFF"
+                                                Padding="10,4"/>
+                                    </Grid>
+
+                                    <StackPanel Spacing="5">
+                                        <TextBlock Text="子包协议目录"
+                                                   Foreground="#CCCCCC"/>
+                                        <TextBox Text="{Binding ProtocolDirectory}"
+                                                 Watermark="例如: ../Fantasy.Room/Protocol"
+                                                 FontFamily="Consolas,Menlo,Monaco,monospace"
+                                                 Background="#1E1E1E"
+                                                 Foreground="#CCCCCC"
+                                                 BorderBrush="#3E3E42"/>
+                                        <TextBlock Text="💡 相对路径以当前协议工作区为基准"
+                                                   FontSize="12"
+                                                   Foreground="#858585"/>
+                                    </StackPanel>
+
+                                    <StackPanel Orientation="Horizontal" Spacing="20">
+                                        <CheckBox IsChecked="{Binding ExportToServer}"
+                                                  Content="导出到服务器"
+                                                  Foreground="#CCCCCC"/>
+                                        <CheckBox IsChecked="{Binding ExportToClient}"
+                                                  Content="导出到客户端"
+                                                  Foreground="#CCCCCC"/>
+                                    </StackPanel>
+
+                                    <StackPanel Spacing="5" IsEnabled="{Binding ExportToServer}">
+                                        <TextBlock Text="子包服务器输出目录"
+                                                   Foreground="#CCCCCC"/>
+                                        <TextBox Text="{Binding ServerOutputDirectory}"
+                                                 Watermark="例如: ../Fantasy.Room/Runtime/Protocol"
+                                                 FontFamily="Consolas,Menlo,Monaco,monospace"
+                                                 Background="#1E1E1E"
+                                                 Foreground="#CCCCCC"
+                                                 BorderBrush="#3E3E42"/>
+                                    </StackPanel>
+
+                                    <StackPanel Spacing="5" IsEnabled="{Binding ExportToClient}">
+                                        <TextBlock Text="子包客户端输出目录"
+                                                   Foreground="#CCCCCC"/>
+                                        <TextBox Text="{Binding ClientOutputDirectory}"
+                                                 Watermark="例如: ../Fantasy.Room.Unity/Runtime/Protocol"
+                                                 FontFamily="Consolas,Menlo,Monaco,monospace"
+                                                 Background="#1E1E1E"
+                                                 Foreground="#CCCCCC"
+                                                 BorderBrush="#3E3E42"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <Separator Background="#3E3E42"/>
+
             <!-- 验证状态 -->
             <Border Background="{Binding IsValid, Converter={StaticResource BoolToValidationBackground}}"
                     BorderBrush="{Binding IsValid, Converter={StaticResource BoolToValidationBorder}}"
@@ -146,16 +244,19 @@
                         <TextBlock Text="1. 协议目录使用当前工作区路径，包含 Inner 和 Outer 子文件夹"
                                    TextWrapping="Wrap"
                                    Foreground="#858585"/>
-                        <TextBlock Text="2. 配置服务器和客户端的输出目录"
+                        <TextBlock Text="2. 配置主协议服务器和客户端的输出目录"
                                    TextWrapping="Wrap"
                                    Foreground="#858585"/>
-                        <TextBlock Text="3. 至少选择一个导出目标（服务器或客户端）"
+                        <TextBlock Text="3. 可在 PackageExports 区域新增、删除并配置子包协议"
                                    TextWrapping="Wrap"
                                    Foreground="#858585"/>
-                        <TextBlock Text="4. 配置会自动保存到工作区配置文件"
+                        <TextBlock Text="4. 主协议和每个子包都至少选择一个导出目标"
                                    TextWrapping="Wrap"
                                    Foreground="#858585"/>
-                        <TextBlock Text="5. 使用菜单「文件 → 执行导出」执行导出"
+                        <TextBlock Text="5. 点击保存后会写入协议工作区根目录的 ExporterSettings.json"
+                                   TextWrapping="Wrap"
+                                   Foreground="#858585"/>
+                        <TextBlock Text="6. 使用菜单「文件 → 执行导出」执行导出"
                                    TextWrapping="Wrap"
                                    Foreground="#858585"/>
                     </StackPanel>

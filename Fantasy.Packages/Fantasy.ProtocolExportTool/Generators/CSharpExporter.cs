@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Fantasy.ProtocolExportTool.Abstract;
 using Fantasy.ProtocolExportTool.Models;
+using Fantasy.ProtocolExportTool.Services;
 // ReSharper disable PossibleMultipleEnumeration
 
 namespace Fantasy.ProtocolExportTool.Generators;
@@ -12,9 +13,9 @@ public sealed class CSharpExporter(
     string protocolDirectory,
     string clientDirectory,
     string serverDirectory,
-    string opCodeCacheFile,
+    OpCodeCacheSession opCodeCache,
     ProtocolExportType protocolExportType)
-    : AProtocolExporter(protocolDirectory, clientDirectory, serverDirectory, opCodeCacheFile, protocolExportType)
+    : AProtocolExporter(protocolDirectory, clientDirectory, serverDirectory, opCodeCache, protocolExportType)
 {
     protected override string GenerateRouteTypes(IReadOnlyDictionary<string, int> routeTypes)
     {

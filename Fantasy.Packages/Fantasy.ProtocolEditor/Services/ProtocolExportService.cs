@@ -37,24 +37,28 @@ public class ProtocolExportService
 
             AnsiConsole.Console = console;
 
-            // 验证协议目录是否存在
-            if (!Directory.Exists(config.ProtocolDir))
+            var (isValid, validationError) = ValidateConfig(config);
+            if (!isValid)
             {
-                return (false, $"网络协议目录不存在: {config.ProtocolDir}");
+                return (false, validationError);
             }
 
-            // 创建服务器目录（如果不存在）
-            if (!Directory.Exists(config.ServerDir))
-            {
-                progressCallback?.Invoke($"创建服务器目录: {config.ServerDir}");
-                Directory.CreateDirectory(config.ServerDir);
-            }
+            EnsureOutputDirectories(
+                "主协议",
+                config.ServerDir,
+                config.ClientDir,
+                config.ExportType,
+                progressCallback);
 
-            // 创建客户端目录（如果不存在）
-            if (!Directory.Exists(config.ClientDir))
+            for (var i = 0; i < config.PackageExports.Count; i++)
             {
-                progressCallback?.Invoke($"创建客户端目录: {config.ClientDir}");
-                Directory.CreateDirectory(config.ClientDir);
+                var package = config.PackageExports[i];
+                EnsureOutputDirectories(
+                    $"子包 {i + 1}",
+                    package.ServerDir,
+                    package.ClientDir,
+                    package.ExportType,
+                    progressCallback);
             }
 
             progressCallback?.Invoke("========================================");
@@ -144,26 +148,87 @@ public class ProtocolExportService
     /// </summary>
     public (bool IsValid, string? ErrorMessage) ValidateConfig(ProtocolExportConfig config)
     {
-        if (string.IsNullOrWhiteSpace(config.ProtocolDir))
+        var mainResult = ValidateTarget(
+            "主协议",
+            config.ProtocolDir,
+            config.ServerDir,
+            config.ClientDir,
+            config.ExportType);
+        if (!mainResult.IsValid)
         {
-            return (false, "协议目录不能为空");
+            return mainResult;
         }
 
-        if (string.IsNullOrWhiteSpace(config.ServerDir))
+        for (var i = 0; i < config.PackageExports.Count; i++)
         {
-            return (false, "服务器输出目录不能为空");
-        }
-
-        if (string.IsNullOrWhiteSpace(config.ClientDir))
-        {
-            return (false, "客户端输出目录不能为空");
-        }
-
-        if (!Directory.Exists(config.ProtocolDir))
-        {
-            return (false, $"协议目录不存在: {config.ProtocolDir}");
+            var package = config.PackageExports[i];
+            var packageResult = ValidateTarget(
+                $"子包 {i + 1}",
+                package.ProtocolDir,
+                package.ServerDir,
+                package.ClientDir,
+                package.ExportType);
+            if (!packageResult.IsValid)
+            {
+                return packageResult;
+            }
         }
 
         return (true, null);
+    }
+
+    private static (bool IsValid, string? ErrorMessage) ValidateTarget(
+        string targetName,
+        string protocolDirectory,
+        string serverDirectory,
+        string clientDirectory,
+        ProtocolExportType exportType)
+    {
+        if ((exportType & ProtocolExportType.All) == 0)
+        {
+            return (false, $"{targetName}未启用任何导出目标");
+        }
+
+        if (string.IsNullOrWhiteSpace(protocolDirectory))
+        {
+            return (false, $"{targetName}协议目录不能为空");
+        }
+
+        if (!Directory.Exists(protocolDirectory))
+        {
+            return (false, $"{targetName}协议目录不存在: {protocolDirectory}");
+        }
+
+        if (exportType.HasFlag(ProtocolExportType.Server) && string.IsNullOrWhiteSpace(serverDirectory))
+        {
+            return (false, $"{targetName}已启用服务器导出，但服务器输出目录为空");
+        }
+
+        if (exportType.HasFlag(ProtocolExportType.Client) && string.IsNullOrWhiteSpace(clientDirectory))
+        {
+            return (false, $"{targetName}已启用客户端导出，但客户端输出目录为空");
+        }
+
+        return (true, null);
+    }
+
+    private static void EnsureOutputDirectories(
+        string targetName,
+        string serverDirectory,
+        string clientDirectory,
+        ProtocolExportType exportType,
+        Action<string>? progressCallback)
+    {
+        if (exportType.HasFlag(ProtocolExportType.Server) && !Directory.Exists(serverDirectory))
+        {
+            progressCallback?.Invoke($"创建{targetName}服务器目录: {serverDirectory}");
+            Directory.CreateDirectory(serverDirectory);
+        }
+
+        if (exportType.HasFlag(ProtocolExportType.Client) && !Directory.Exists(clientDirectory))
+        {
+            progressCallback?.Invoke($"创建{targetName}客户端目录: {clientDirectory}");
+            Directory.CreateDirectory(clientDirectory);
+        }
     }
 }

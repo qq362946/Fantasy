@@ -29,6 +29,7 @@ Packages.Unity/**/*.meta
 .vs
 .vscode
 *.DS_Store
+**/editor-state.json
 # 不排除示例项目的.vscode
 !examples/**/.vscode
 !Tools/**/.vscode

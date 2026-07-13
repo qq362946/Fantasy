@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Fantasy.ProtocolExportTool.Generators.Parsers;
 using Fantasy.ProtocolExportTool.Models;
+using Fantasy.ProtocolExportTool.Services;
 using Spectre.Console;
 
 namespace Fantasy.ProtocolExportTool.Generators;
@@ -16,11 +18,45 @@ public class ProtocolGenerator
     {
         var targets = CreateTargets(config);
         ValidateUniqueMessageNames(targets);
+        var cachePath = string.IsNullOrWhiteSpace(config.OpCodeCacheFile)
+            ? Path.Combine(Path.GetFullPath(config.ProtocolDir), "OpCode.Cache")
+            : Path.GetFullPath(config.OpCodeCacheFile);
 
-        foreach (var target in targets)
+        using var opCodeCache = OpCodeCacheSession.Open(cachePath);
+        var jobs = targets.ConvertAll(target => new ExportJob(
+            target,
+            new CSharpExporter(
+                target.ProtocolDir,
+                target.ClientDir,
+                target.ServerDir,
+                opCodeCache,
+                target.ExportType)));
+
+        foreach (var job in jobs)
         {
-            await GenerateTargetAsync(target, config.OpCodeCacheFile, config.ExportType, ct);
+            ct.ThrowIfCancellationRequested();
+            ParseTarget(job, ct);
         }
+
+        var validationFailed = false;
+        foreach (var job in jobs)
+        {
+            validationFailed |= job.Exporter.IsErrors();
+        }
+
+        if (validationFailed)
+        {
+            throw new InvalidOperationException("协议验证失败，未生成代码，也未更新 OpCode.Cache。");
+        }
+
+        foreach (var job in jobs)
+        {
+            ct.ThrowIfCancellationRequested();
+            await GenerateTargetAsync(job, ct);
+        }
+
+        ct.ThrowIfCancellationRequested();
+        opCodeCache.Commit();
     }
 
     private static List<ProtocolExportTarget> CreateTargets(ProtocolExportConfig config)
@@ -31,7 +67,8 @@ public class ProtocolGenerator
             {
                 ProtocolDir = config.ProtocolDir,
                 ServerDir = config.ServerDir,
-                ClientDir = config.ClientDir
+                ClientDir = config.ClientDir,
+                ExportType = config.ExportType
             }
         };
 
@@ -96,15 +133,44 @@ public class ProtocolGenerator
         throw new InvalidOperationException(builder.ToString().TrimEnd());
     }
 
-    private static async Task GenerateTargetAsync(ProtocolExportTarget target, string opCodeCacheFile, ProtocolExportType exportType, CancellationToken ct)
+    private static void ParseTarget(ExportJob job, CancellationToken ct)
     {
-        var createdSuccessfully = false;
-        var protocolExporter = new CSharpExporter(
-            target.ProtocolDir,
-            target.ClientDir,
-            target.ServerDir,
-            opCodeCacheFile,
-            exportType);
+        AnsiConsole.Progress()
+            .AutoClear(false)
+            .Columns(
+                new TaskDescriptionColumn(),
+                new ProgressBarColumn(),
+                new PercentageColumn(),
+                new SpinnerColumn()
+            )
+            .Start(ctx =>
+            {
+                var targetLabel = job.Target.ProtocolDir;
+                var loadTask1 = ctx.AddTask($"[green]解析RouteType配置 ({targetLabel})...[/]");
+                var loadTask2 = ctx.AddTask($"[green]解析RoamingType配置 ({targetLabel})...[/]");
+                var loadTask3 = ctx.AddTask($"[green]解析并验证Outer协议 ({targetLabel})...[/]");
+                var loadTask4 = ctx.AddTask($"[green]解析并验证Inner协议 ({targetLabel})...[/]");
+
+                ct.ThrowIfCancellationRequested();
+                job.Exporter.ParseRouteTypeConfig();
+                loadTask1.Increment(100);
+
+                ct.ThrowIfCancellationRequested();
+                job.Exporter.ParseRoamingTypeConfig();
+                loadTask2.Increment(100);
+
+                ct.ThrowIfCancellationRequested();
+                job.Exporter.ParseAndValidateOuterProtocols();
+                loadTask3.Increment(100);
+
+                ct.ThrowIfCancellationRequested();
+                job.Exporter.ParseAndValidateInnerProtocols();
+                loadTask4.Increment(100);
+            });
+    }
+
+    private static async Task GenerateTargetAsync(ExportJob job, CancellationToken ct)
+    {
         await AnsiConsole.Progress()
             .AutoClear(false)
             .Columns(
@@ -115,29 +181,7 @@ public class ProtocolGenerator
             )
             .StartAsync(async ctx =>
             {
-                var targetLabel = target.ProtocolDir;
-                var loadTask1 = ctx.AddTask($"[green]解析RouteType配置 ({targetLabel})...[/]");
-                var loadTask2 = ctx.AddTask($"[green]解析RoamingType配置 ({targetLabel})...[/]");
-                var loadTask3 = ctx.AddTask($"[green]解析并验证Outer协议 ({targetLabel})...[/]");
-                var loadTask4 = ctx.AddTask($"[green]解析并验证Inner协议 ({targetLabel})...[/]");
-
-                protocolExporter.ParseRouteTypeConfig();
-                loadTask1.Increment(100);
-
-                protocolExporter.ParseRoamingTypeConfig();
-                loadTask2.Increment(100);
-
-                protocolExporter.ParseAndValidateOuterProtocols();
-                loadTask3.Increment(100);
-
-                protocolExporter.ParseAndValidateInnerProtocols();
-                loadTask4.Increment(100);
-
-                if (protocolExporter.IsErrors())
-                {
-                    return;
-                }
-
+                var targetLabel = job.Target.ProtocolDir;
                 var generateTask1 = ctx.AddTask($"[green]生成RouteType代码 ({targetLabel})...[/]");
                 var generateTask2 = ctx.AddTask($"[green]生成RoamingType代码 ({targetLabel})...[/]");
                 var generateTask3 = ctx.AddTask($"[green]生成OuterOpcode代码 ({targetLabel})...[/]");
@@ -148,39 +192,43 @@ public class ProtocolGenerator
                 var generateTask8 = ctx.AddTask($"[green]生成OuterEnum代码 ({targetLabel})...[/]");
                 var generateTask9 = ctx.AddTask($"[green]生成InnerEnum代码 ({targetLabel})...[/]");
 
-                await protocolExporter.GenerateRouteTypeAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateRouteTypeAsync();
                 generateTask1.Increment(100);
 
-                await protocolExporter.GenerateRoamingTypeAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateRoamingTypeAsync();
                 generateTask2.Increment(100);
 
-                await protocolExporter.GenerateOuterOpcodeAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateOuterOpcodeAsync();
                 generateTask3.Increment(100);
 
-                await protocolExporter.GenerateInnerOpcodeAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateInnerOpcodeAsync();
                 generateTask4.Increment(100);
 
-                await protocolExporter.GenerateOuterMessageAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateOuterMessageAsync();
                 generateTask5.Increment(100);
 
-                await protocolExporter.GenerateInnerMessageAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateInnerMessageAsync();
                 generateTask6.Increment(100);
 
-                await protocolExporter.GenerateOuterMessageHelperAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateOuterMessageHelperAsync();
                 generateTask7.Increment(100);
 
-                await protocolExporter.GenerateOuterEnumsAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateOuterEnumsAsync();
                 generateTask8.Increment(100);
 
-                await protocolExporter.GenerateInnerEnumsAsync();
+                ct.ThrowIfCancellationRequested();
+                await job.Exporter.GenerateInnerEnumsAsync();
                 generateTask9.Increment(100);
-
-                createdSuccessfully = true;
             });
-
-        if (createdSuccessfully)
-        {
-            // 输出已移至 ProtocolExportService 统一处理
-        }
     }
+
+    private sealed record ExportJob(ProtocolExportTarget Target, CSharpExporter Exporter);
 }

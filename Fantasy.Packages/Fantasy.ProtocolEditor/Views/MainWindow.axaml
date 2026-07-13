@@ -10,7 +10,7 @@
         x:Class="Fantasy.ProtocolEditor.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/app-icon.ico"
-        Title="Fantasy Protocol Editor 2026.0.1023"
+        Title="Fantasy Protocol Editor 2026.0.1025"
         Background="#2B2B2B"
         Width="1200" Height="800">
 
@@ -52,9 +52,7 @@
                 <Menu Grid.Column="0" Background="Transparent" Foreground="#CCCCCC" Height="30">
                     <MenuItem Header="文件">
                         <Separator/>
-                        <MenuItem Header="打开目录..." Click="OnOpenFolderMenuClick" InputGesture="Ctrl+O"/>
-                        <MenuItem Header="选择配置文件..." Click="OnSelectConfigFileMenuClick"/>
-                        <MenuItem Header="配置另存为..." Click="OnSaveConfigAsMenuClick"/>
+                        <MenuItem Header="切换工作区..." Click="OnOpenFolderMenuClick" InputGesture="Ctrl+O"/>
                         <Separator/>
                         <MenuItem Header="保存" Click="OnSaveMenuClick" InputGesture="Ctrl+S"/>
                         <MenuItem Header="导出设置" Command="{Binding OpenExportSettingsCommand}"/>
@@ -121,7 +119,7 @@
                     <Border Grid.Row="0" Background="#2B2B2B" Padding="10,8">
                         <Grid ColumnDefinitions="*,Auto,Auto,Auto">
                             <TextBlock Grid.Column="0"
-                                      Text="配置目录"
+                                      Text="协议工作区"
                                       Foreground="#CCCCCC"
                                       FontSize="11"
                                       FontWeight="Bold"
