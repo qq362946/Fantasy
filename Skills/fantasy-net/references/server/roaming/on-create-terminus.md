@@ -44,13 +44,13 @@ void terminus.SetForwarding(bool isStartForwarding);
 
 ## 实现规范
 
-每个后端服务器各自实现独立的 Handler，放在对应服务器的 Hotfix assembly 中，用 `if (RoamingType != ...) return;` 过滤无关类型，无需在一个 Handler 里 switch 所有类型。
+每个后端服务器各自实现独立的监听器，放在对应服务器的 Hotfix assembly 中，用 `if (RoamingType != ...) return;` 过滤无关类型，无需在一个监听器里 switch 所有类型。
 
 **Chat 服务器示例（含首次创建 + 断线重连 + 参数）：**
 
 ```csharp
 // Chat 服务器 Hotfix assembly
-public sealed class ChatOnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
+public sealed class OnCreateTerminus_CreateChatPlayer : AsyncEventSystem<OnCreateTerminus>
 {
     protected override async FTask Handler(OnCreateTerminus self)
     {
@@ -118,7 +118,7 @@ public sealed class ChatOnCreateTerminusHandler : AsyncEventSystem<OnCreateTermi
 
 ```csharp
 // Map 服务器 Hotfix assembly
-public sealed class MapOnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
+public sealed class OnCreateTerminus_CreateMapPlayer : AsyncEventSystem<OnCreateTerminus>
 {
     protected override async FTask Handler(OnCreateTerminus self)
     {

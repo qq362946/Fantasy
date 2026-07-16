@@ -23,16 +23,16 @@
 
 第 2 步：目标 Address 从哪里来？
 │
-│  【原理】Entity.Address（RuntimeId）是运行时动态生成的，远程服务器上的实体
-│  Address 本地无法预知。唯一的"已知入口"是 SceneConfig.Address——
-│  Scene 本身也是 Entity，其 Address 可从配置表静态获得。
+│  【原理】Entity.Address（RuntimeId）是运行时动态生成的，远程服务器上的业务实体
+│  Address 本地无法预知。第一次通信要先取得目标 Scene 的入口 Address：
+│  本地静态模式从 SceneConfig 获取；Control Center 模式从 ServiceDiscovery 获取。
 │
 ├─► 已知 Address（之前已获取并保存在本地某个 Entity/Component 上）
 │       → 直接使用，跳到第 3 步
 │
 └─► 不知道对方 Address（第一次通信）
-        → 问清楚目标 SceneType 及选择逻辑（见下方"选择目标 Scene"）
-        → 用 sceneConfig.Address 作入口向目标 Scene 发 RPC
+        → 问清楚配置来源、目标 SceneType、范围和选择逻辑（见下方"选择目标 Scene"）
+        → 取得目标 Scene Address 并向入口发 RPC
         → 目标 Scene 创建业务实体，将实体 Address 写入响应返回
         → 保存返回的 Address，后续直接使用，无需再走此流程
 
@@ -45,17 +45,19 @@
 
 ---
 
-## 选择目标 Scene
+## 获取并选择目标 Scene
 
-`GetSceneBySceneType` 返回同类型所有 Scene 的列表，**不要无脑取 `[0]`**，根据业务决定：
+先按配置模式选择入口来源：
 
-| 场景 | 写法 |
-|------|------|
-| 只有一个目标 | `GetSceneBySceneType(SceneType.Map)[0]` |
-| 按玩家存档记录 | `SceneConfigData.Instance.Get(player.MapSceneConfigId)` |
-| 随机负载均衡 | `list[Random.Shared.Next(list.Count)]` |
+| 模式 | 获取方式 |
+|---|---|
+| 未启用 Control Center，拓扑静态 | 从 `SceneConfigData` 获取 `SceneConfig.Address` |
+| 启用 Control Center，需要动态在线实例 | `ServiceDiscovery.DiscoverAddressAsync(...)` |
+| 启用 Control Center，需要稳定 Key 路由 | `ServiceDiscovery.DiscoverAddressByHashAsync(...)` |
+| 需要查看在线实例、自行选择或校验 SceneId | `ServiceDiscovery.DiscoverAsync(...)`；列表中的 Address 可以直接通信 |
+| 查询指定 Root Scene 下的动态 SubScene | `ServiceDiscovery.DiscoverSubScenesAsync(parentAddress, ...)` 或两个 SubScene Address 选择 API |
 
-> 先问清楚项目有几个同类 Scene、选择逻辑是什么，再决定写法。
+不要无脑取 `[0]`，也不要对动态实例数量取模。先问清楚目标范围是 Namespace 全部、World 还是 WorldGroup，以及需要随机、稳定哈希还是严格业务绑定。服务发现细节见 `references/service-discovery/index.md`。
 
 ---
 
@@ -63,7 +65,7 @@
 
 协议定义在 `Inner/InnerMessage.proto`，Handler 放在目标服务器的 Hotfix 层。
 
-### RPC：第一次通信，通过 SceneConfig.Address 作入口取得实体 Address
+### RPC：第一次通信，通过目标 Scene 入口取得实体 Address
 
 ```protobuf
 message G2M_CreatePlayerRequest // IAddressRequest,M2G_CreatePlayerResponse
@@ -78,10 +80,20 @@ message M2G_CreatePlayerResponse // IAddressResponse
 ```
 
 ```csharp
-// 发送方：用 SceneConfig.Address 作入口（唯一已知的远程地址）
-var mapConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0]; // 按业务选择
+// 发送方：Control Center 模式下先发现在线 Scene 入口
+using NetServiceDiscovery = Fantasy.Platform.Net.ServiceDiscovery;
+
+var mapAddress = await NetServiceDiscovery.DiscoverAddressAsync(
+    SceneType.Map,
+    worldId: scene.SceneConfig.WorldConfigId);
+
+if (mapAddress == 0)
+{
+    return;
+}
+
 var response = (M2G_CreatePlayerResponse)await scene.Call(
-    mapConfig.Address,
+    mapAddress,
     new G2M_CreatePlayerRequest { PlayerId = playerId, PlayerName = "Alice" }
 );
 if (response.ErrorCode != 0) return;
@@ -101,6 +113,15 @@ public sealed class G2M_CreatePlayerRequestHandler : AddressRPC<Scene, G2M_Creat
         await FTask.CompletedTask;
     }
 }
+```
+
+未启用 Control Center 时，入口可以继续从静态配置取得：
+
+```csharp
+var mapConfig =
+    SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
+
+var mapAddress = mapConfig.Address;
 ```
 
 ### 单向消息：已有 Address，直接发送
@@ -133,7 +154,7 @@ public sealed class G2M_NotifyPlayerMoveHandler : Address<Player, G2M_NotifyPlay
 }
 ```
 
-> **TEntity 选择：** 消息发给 Scene 本身用 `Address<Scene, ...>`；发给具体实体用对应类型（如 `Address<Player, ...>`）。  
+> **TEntity 选择：** 消息发给 Scene 本身用 `Address<Scene, ...>`；发给具体实体用对应类型（如 `Address<Player, ...>`）。
 > Handler 框架自动根据 Address 查找并注入实体，无需手动 `GetEntity()`。
 
 ---
@@ -144,3 +165,7 @@ public sealed class G2M_NotifyPlayerMoveHandler : Address<Player, G2M_NotifyPlay
 - 错误用 `response.ErrorCode` 返回，不抛异常
 - 避免 A→B RPC Handler 中再同步 RPC 回 A（死锁）
 - 默认超时 30 秒，超时返回 `InnerErrorCode.ErrRouteTimeout`
+- 服务发现 Address 查询返回 `0` 时不要继续发送
+- 服务发现只用于找到入口；拿到业务 Entity Address 后缓存并复用
+- 所有发现查询都会登记返回实例所属 Root Scene 的网络端点，列表中的 Address 可以直接发送
+- 已知 SubScene Address 时直接 `Scene.Send` / `Scene.Call`；框架会在路由缺失时解析其父 Root Scene

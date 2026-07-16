@@ -1,0 +1,148 @@
+@page "/"
+@inject ControlCenterStore Store
+
+<PageTitle>总览 · Fantasy Control Center</PageTitle>
+
+<div class="page-heading">
+    <div>
+        <span class="eyebrow">运行态概览</span>
+        <h1>服务控制中心</h1>
+        <p>集中管理 Fantasy 的服务器拓扑，并只向调用方返回租约有效的 Scene 实例。</p>
+    </div>
+    <button class="button secondary" type="button" @onclick="LoadAsync">刷新状态</button>
+</div>
+
+@if (_loading)
+{
+    <div class="loading-panel">正在读取本地控制面数据…</div>
+}
+else if (!string.IsNullOrWhiteSpace(_error))
+{
+    <div class="alert error">@_error</div>
+}
+else if (_summary is not null)
+{
+    <div class="metric-grid">
+        <article class="metric-card accent">
+            <span class="metric-label">在线实例</span>
+            <strong>@_summary.OnlineInstanceCount</strong>
+            <small>@_summary.OfflineInstanceCount 个实例离线或租约过期</small>
+        </article>
+        <article class="metric-card">
+            <span class="metric-label">Scene 定义</span>
+            <strong>@_summary.SceneCount</strong>
+            <small>分布在 @_summary.ProcessCount 个进程中</small>
+        </article>
+        <article class="metric-card">
+            <span class="metric-label">服务器</span>
+            <strong>@_summary.MachineCount</strong>
+            <small>@_summary.WorldCount 个 World</small>
+        </article>
+        <article class="metric-card">
+            <span class="metric-label">配置版本</span>
+            <strong>r@_summary.Revision</strong>
+            <small>每次拓扑变更自动递增</small>
+        </article>
+    </div>
+
+    <div class="dashboard-grid">
+        <section class="panel getting-started">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">开始使用</span>
+                    <h2>建立第一套运行拓扑</h2>
+                </div>
+                <span class="step-count">5 步</span>
+            </div>
+            <ol class="steps">
+                <li class="@StepClass(_summary.NamespaceCount > 0)">
+                    <span>1</span>
+                    <div><strong>添加 Namespace</strong><small>建立互相隔离的游戏或环境边界</small></div>
+                </li>
+                <li class="@StepClass(_summary.MachineCount > 0)">
+                    <span>2</span>
+                    <div><strong>添加服务器</strong><small>配置内外网地址和绑定地址</small></div>
+                </li>
+                <li class="@StepClass(_summary.ProcessCount > 0)">
+                    <span>3</span>
+                    <div><strong>添加进程</strong><small>关联 Namespace、服务器并设置启动分组</small></div>
+                </li>
+                <li class="@StepClass(_summary.WorldCount > 0)">
+                    <span>4</span>
+                    <div><strong>添加 World 分组、World 与数据库</strong><small>把分组放入 Namespace，再配置区服与数据库连接</small></div>
+                </li>
+                <li class="@StepClass(_summary.SceneCount > 0)">
+                    <span>5</span>
+                    <div><strong>添加 Scene</strong><small>配置类型、运行模式和监听端口</small></div>
+                </li>
+            </ol>
+            <a class="button primary" href="/topology">管理拓扑配置</a>
+        </section>
+
+        <section class="panel live-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">实例租约</span>
+                    <h2>最近注册的服务</h2>
+                </div>
+                <a class="text-link" href="/instances">查看服务实例</a>
+            </div>
+            @if (_instances.Count == 0)
+            {
+                <div class="compact-empty">
+                    <span>◎</span>
+                    <strong>还没有服务注册</strong>
+                    <small>Scene 启动后调用注册接口，它会出现在这里。</small>
+                </div>
+            }
+            else
+            {
+                <div class="recent-instance-list">
+                    @foreach (var instance in _instances.Take(6))
+                    {
+                        <div class="recent-instance-row">
+                            <span class="instance-state @instance.Status.ToLowerInvariant()"></span>
+                            <div>
+                                <strong><span class="recent-instance-kind @(instance.IsSubScene ? "sub" : "root")">@(instance.IsSubScene ? "Sub" : "Root")</span>@instance.SceneType · #@instance.SceneId</strong>
+                                <small>@(instance.IsSubScene ? $"Address {instance.Address} · Parent {instance.ParentAddress}" : $"{instance.Host}:{instance.InnerPort} · Address {instance.Address}")</small>
+                            </div>
+                            <span class="pill @(instance.Status == "Offline" ? "muted" : "success")">@instance.Status</span>
+                        </div>
+                    }
+                </div>
+            }
+        </section>
+    </div>
+}
+
+@code {
+    private ControlCenterSummary? _summary;
+    private IReadOnlyList<ServiceInstanceView> _instances = [];
+    private bool _loading = true;
+    private string? _error;
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        _error = null;
+        try
+        {
+            _summary = await Store.GetSummaryAsync();
+            _instances = (await Store.GetInstancesAsync())
+                .OrderByDescending(instance => instance.StartedAtUtc)
+                .ToArray();
+        }
+        catch (Exception exception)
+        {
+            _error = $"读取控制中心数据失败：{exception.Message}";
+        }
+        finally
+        {
+            _loading = false;
+        }
+    }
+
+    private static string StepClass(bool done) => done ? "done" : string.Empty;
+}

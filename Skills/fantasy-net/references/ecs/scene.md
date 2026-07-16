@@ -113,7 +113,7 @@ protected override async FTask Handler(OnCreateScene self)
 Scene 创建完成后会发布 `OnCreateScene` 事件，这是初始化 Scene 级组件的标准入口：
 
 ```csharp
-public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
+public sealed class OnCreateScene_InitializeComponents : AsyncEventSystem<OnCreateScene>
 {
     protected override async FTask Handler(OnCreateScene self)
     {

@@ -14,7 +14,7 @@
 using Fantasy.Event;
 
 // 监听现有 Entity 类型
-public class On{Entity名称} : EventSystem<{Entity名称}>
+public sealed class On{Entity名称}_{具体行为} : EventSystem<{Entity名称}>
 {
     protected override void Handler({Entity名称} self)
     {
@@ -34,7 +34,7 @@ public class On{Entity名称} : EventSystem<{Entity名称}>
 using Fantasy.Event;
 using Fantasy.Async;
 
-public class {业务逻辑}On{Entity名称} : AsyncEventSystem<{Entity名称}>
+public sealed class On{Entity名称}_{具体行为} : AsyncEventSystem<{Entity名称}>
 {
     protected override async FTask Handler({Entity名称} self)
     {
@@ -47,9 +47,10 @@ public class {业务逻辑}On{Entity名称} : AsyncEventSystem<{Entity名称}>
 
 **适用场景：** 数据库操作、网络请求、文件 IO。
 
-**注意：** 
+**注意：**
 - 一个事件可以有多个监听器，同步监听器顺序执行，异步监听器并行执行
 - 监听器之间不应有执行顺序依赖
+- 类名按 `On{Entity名称}_{具体行为}` 命名，不要以 `System` 或 `Async` 结尾
 
 ---
 
@@ -97,7 +98,7 @@ public sealed class Player : Entity
 }
 
 // 2. 创建监听器
-public class OnPlayerLevelUp : EventSystem<Player>
+public sealed class OnPlayer_UpdateLevelUi : EventSystem<Player>
 {
     protected override void Handler(Player self)
     {
@@ -107,7 +108,7 @@ public class OnPlayerLevelUp : EventSystem<Player>
 }
 
 // 3. 创建异步监听器
-public class SavePlayerOnLevelUp : AsyncEventSystem<Player>
+public sealed class OnPlayer_SaveLevelData : AsyncEventSystem<Player>
 {
     protected override async FTask Handler(Player self)
     {
@@ -122,7 +123,7 @@ public class Player : Entity
     public void LevelUp()
     {
         Level++;
-        
+
         // 发布自己（this）
         // isDisposed: false 因为 Player 还在使用中
         Scene.EventComponent.Publish(this, isDisposed: false);
@@ -135,7 +136,7 @@ public class Player : Entity
     public async FTask LevelUpAsync()
     {
         Level++;
-        
+
         // 等待所有异步监听器完成
         // isDisposed: false 因为 Player 还在使用中
         await Scene.EventComponent.PublishAsync(this, isDisposed: false);
@@ -148,6 +149,7 @@ public class Player : Entity
 ## 注意事项
 
 - 监听器必须是 `sealed class`，不能是泛型类
+- 监听器名称必须表达 Entity 类型和实际行为，例如 `OnPlayer_SaveLevelData`
 - 监听器应与 Entity 数据定义分离：多 assembly 项目放在逻辑层 assembly，单 assembly 项目按文件夹分离即可
 - 不要手动注册监听器，不要修改 `.g.cs` 生成文件
 - **`isDisposed` 参数非常重要**：如果 Entity 还在其他系统使用，必须传 `false`，否则会导致 Entity 被销毁

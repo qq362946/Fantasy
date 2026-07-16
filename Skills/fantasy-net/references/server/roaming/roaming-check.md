@@ -9,6 +9,7 @@
 3. 路由是否在正确阶段建立
 4. Terminus 生命周期处理是否完整
 5. 消息流转和传送逻辑是否混乱
+6. Control Center 模式下目标 Address 是否由服务发现取得并登记
 
 ## 常见问题
 
@@ -59,6 +60,14 @@
 
 这种写法会把 Roaming 链路中的不一致状态隐藏起来，后续问题会更难排查。
 
+### 错误 8：服务发现模式仍固定从 `SceneConfigData[0]` 取后端
+
+Release 按 Process 拉取配置时，本进程不一定包含远程 SceneConfig。应使用 `DiscoverAddressAsync` / `DiscoverAddressByHashAsync`，处理 Address 为 `0`，再调用 `Link(long targetSceneAddress, long forwardSessionAddress, ...)`。
+
+### 错误 9：把 Rendezvous Hash 当作永久 Roaming 归属
+
+Rendezvous Hash 在节点集合变化时会迁移少量玩家。如果重连必须回到原后端，业务层需要持久化玩家到 SceneId 的绑定，并验证目标实例仍在线。
+
 ## 审查时重点问自己
 
 1. 这段代码真的该用 Roaming 吗
@@ -66,6 +75,7 @@
 3. Handler 是否在正确服务器和正确实体类型上执行
 4. 传送成功后是否仍然引用旧实体
 5. 是否把异常状态吞掉并错误返回成功
+6. 动态目标是否使用正确的发现范围、路由策略，并处理无在线实例
 
 ## 相关文档
 
@@ -77,3 +87,5 @@
 - `handler.md`
 - `messaging.md`
 - `transfer.md`
+- `references/service-discovery/index.md`
+- `references/service-discovery/routing.md`

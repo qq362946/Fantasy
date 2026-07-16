@@ -9,6 +9,7 @@
 3. 是否遗漏关键生命周期 System
 4. 是否存在对象池复用风险
 5. 是否把 Scene / SubScene / Component 的职责混乱使用
+6. ComponentSystem 与 Helper 的命名和职责是否正确
 
 ## 常见问题
 
@@ -54,6 +55,14 @@
 - 检查是不是应该用 `SubScene`
 - 不要把所有动态隔离空间都硬塞到一个 Root Scene 里
 
+### 错误 7：ComponentSystem 命名错误或无条件生成 Helper
+
+- Component 的业务扩展类必须命名为 `{Component完整类名}System`，例如 `BuffComponentSystem`
+- 组件逻辑应放在 ComponentSystem 的扩展方法中
+- Helper 仅作为其他系统使用的业务入口；如果调用方已经持有 Component，直接调用扩展方法
+- 不要为每个 Component 自动生成 Helper，也不要机械包装 ComponentSystem 的全部方法
+- Helper 不应重复实现 ComponentSystem 已有的业务逻辑
+
 ## 审查时重点问自己
 
 1. 这个类真的该继承 `Entity` 吗
@@ -61,6 +70,7 @@
 3. 是否缺生命周期 System
 4. 是否有对象池复用风险
 5. 是否应该拆成 Component 而不是堆在主 Entity 上
+6. 其他系统是否确实需要一个 Helper 入口
 
 ## 相关文档
 

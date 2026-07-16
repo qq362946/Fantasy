@@ -38,22 +38,7 @@ namespace Fantasy.Platform.Net
 		/// 获得SceneConfigData的实例
 		/// </summary>
 		public static SceneConfigData Instance { get; private set; }
-		/// <summary>
-		/// 初始化SceneConfig
-		/// </summary>
-		/// <param name="sceneConfigJson"></param>
-		public static void InitializeFromJson(string sceneConfigJson)
-		{
-			try
-			{
-				Instance = sceneConfigJson.Deserialize<SceneConfigData>();
-				Initialize();
-			}
-			catch (Exception e)
-			{
-				throw new InvalidOperationException($"SceneConfigData.Json format error {e.Message}");
-			}
-		}
+		
 		/// <summary>
 		/// 初始化SceneConfig
 		/// </summary>

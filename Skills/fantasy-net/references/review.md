@@ -11,6 +11,7 @@
   Timer -> timer/index.md 和 best-practices.md
   Protocol / Handler -> protocol/index.md 和 protocol-check.md
   Address -> server/address.md 和 address-check.md
+  Control Center / 服务发现 -> service-discovery/index.md 和 service-discovery-check.md
   SphereEvent -> server/sphere-event/index.md 和 best-practices.md
   Roaming -> server/roaming/index.md 和 roaming-check.md
   HTTP -> http.md 和 http-check.md
@@ -32,7 +33,7 @@
 4. 是否把业务逻辑错误处理写成了异常抛出，而不是框架约定的返回模式
 5. 是否把 Entity、Component、Handler、System 混在不合适的层里
 6. 是否存在 Scene 生命周期、Dispose、Cancel、Close、RemoveTimer 之类清理遗漏
-7. 是否误用了相似机制，例如 Event / EventAwaiter / SphereEvent / Roaming / Address 边界混乱
+7. 是否误用了相似机制，例如 Event / EventAwaiter / SphereEvent / Roaming / Address / ServiceDiscovery 边界混乱
 
 ## 审查时的输出顺序
 
@@ -55,6 +56,8 @@
 - Entity / Component 是否 `sealed class`
 - 是否归属于正确的 `Scene`
 - 是否该配套 `AwakeSystem` / `DestroySystem` / `UpdateSystem`
+- Component 业务扩展类是否按 `{Component完整类名}System` 命名
+- Helper 是否确有跨系统调用价值，而不是无条件生成或重复 ComponentSystem 逻辑
 - 使用对象池时是否在 `DestroySystem` 里重置自定义字段
 - 是否把 SubScene、普通 Scene、Component 职责混用
 
@@ -74,6 +77,7 @@
 - 该场景到底该用 Event 还是 EventAwaiter
 - Struct Event 是否真的用了 `struct`
 - 监听器是否 `sealed`
+- 监听器是否按 `{事件名}_{具体行为}` 命名，而不是以 `System` / `Async` / `Handler` 结尾
 - `PublishAsync` 是否忘记 `await`
 - `EventAwaiter` 是否在同一个组件实例上等待和通知
 
@@ -135,6 +139,24 @@
 - `server/address.md`
 - `server/address-check.md`
 
+### Control Center / 服务发现
+
+重点检查：
+
+- `sceneTypes` 是否完整、稳定并与 Control Center 一致
+- Namespace / WorldGroup / World 查询范围是否正确
+- 是否处理空列表或 Address 为 `0`
+- 是否使用固定下标或对动态实例数量取模
+- 是否把 Rendezvous Hash 误当作严格永久绑定
+- 注册、批量心跳、租约和下线是否交给框架生命周期管理
+- 公网部署是否补齐 HTTPS、认证和网络访问控制
+
+读：
+
+- `service-discovery/index.md`
+- `service-discovery/routing.md`
+- `service-discovery/service-discovery-check.md`
+
 ### HTTP
 
 重点检查：
@@ -175,6 +197,8 @@
 - `config.md`
 - `config-check.md`
 - `config-scenarios.md`
+- `service-discovery/index.md`
+- `service-discovery/service-discovery-check.md`
 
 ### Unity
 
@@ -214,6 +238,8 @@
 
 - 日志初始化方式是否完整
 - NLog 配置和复制是否生效
+- 自定义 `ILog` 是否实现 appId 和 Scene 名称重载
+- Develop / Release 的文件刷新与控制台规则是否符合当前行为
 - 服务器项目接入 Fantasy 的 NuGet、宏、AssemblyHelper、Program 入口是否完整
 
 读：

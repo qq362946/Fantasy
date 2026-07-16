@@ -22,9 +22,10 @@
 1. 事件对象优先使用对象池：`SphereEventArgs.Create<T>(isFromPool: true)`
 2. 发布时优先 `isAutoDisposed: true`
 3. 事件对象只放必要字段，不要塞大对象和大数组
-4. 订阅关系优先在 Scene 初始化路径建立
+4. 静态配置可在 Scene 初始化路径订阅；Control Center 模式要等服务发现初始化完成
 5. Scene 销毁前调用 `SphereEventComponent.Close()` 清理订阅关系
 6. 需要热重载的跨服业务事件，SphereEvent 是合适选择
+7. Control Center 模式下先用 `ServiceDiscovery` 取得并登记远程 Scene Address
 
 ## 常见错误
 
@@ -62,6 +63,14 @@ await scene.SphereEventComponent.Close();
 
 如果当前代码是“我之前 `Subscribe<T>(remoteAddress)` 了，现在我要取消自己的订阅”，优先检查是否错误用了 `UnregisterRemoteSubscriber`。
 
+### 错误 6：服务发现模式仍固定从 `SceneConfigData[0]` 取远程入口
+
+Release 按 Process 拉取配置时，当前进程不一定持有远程 Scene 的静态配置。使用 `DiscoverAddressAsync` 或 `DiscoverAddressByHashAsync` 获取 Address，并处理返回 `0` 的情况。
+
+### 错误 7：在 `OnCreateScene` 中等待服务发现
+
+服务发现在所有 Process / Scene 创建完成后初始化。`OnCreateScene` 中同步查询会报告未启用，等待初始化还可能阻塞启动。改到项目的服务启动完成阶段，并处理目标实例尚未上线的情况。
+
 ## 常见问题
 
 ### 会不会重复订阅
@@ -93,6 +102,6 @@ await scene.SphereEventComponent.Close();
 2. 是否加了 `[MemoryPackable]` 和 `partial`
 3. 是否通过 `SphereEventArgs.Create<T>()` 创建对象
 4. 订阅是否真的在运行时建立成功
-5. 发布使用的 Address 是否是正确远程 Scene Address
+5. 发布使用的 Address 是否是正确远程 Scene Address；Control Center 模式下是否已通过 Address 查询登记端点
 6. 是否因为 Scene 销毁或 `Close()` 导致订阅关系已经清理
 7. 是否本来更适合用 Event / Roaming / Address 而不是 SphereEvent

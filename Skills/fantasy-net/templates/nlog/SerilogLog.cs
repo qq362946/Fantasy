@@ -1,6 +1,7 @@
 #if FANTASY_NET
 using Fantasy.Platform.Net;
 #endif
+using Fantasy;
 using Serilog;
 using Serilog.Events;
 
@@ -29,22 +30,47 @@ namespace MyGame
         }
 
 #if FANTASY_NET
-        public void Initialize(ProcessMode processMode)
+        public void Initialize(string appId, ProcessMode processMode)
         {
-            _logger.Information("Logger initialized, mode: {ProcessMode}", processMode);
+            _logger.Information(
+                "Logger initialized, appId: {AppId}, mode: {ProcessMode}",
+                appId,
+                processMode);
         }
 #endif
 
-        public void Trace(string message)   => _logger.Verbose(message);
-        public void Debug(string message)   => _logger.Debug(message);
-        public void Info(string message)    => _logger.Information(message);
-        public void Warning(string message) => _logger.Warning(message);
-        public void Error(string message)   => _logger.Error(message);
+        public void Trace(string message)   => Write(LogEventLevel.Verbose, message);
+        public void Debug(string message)   => Write(LogEventLevel.Debug, message);
+        public void Info(string message)    => Write(LogEventLevel.Information, message);
+        public void Warning(string message) => Write(LogEventLevel.Warning, message);
+        public void Error(string message)   => Write(LogEventLevel.Error, message);
 
-        public void Trace(string message, params object[] args)   => _logger.Verbose(message, args);
-        public void Debug(string message, params object[] args)   => _logger.Debug(message, args);
-        public void Info(string message, params object[] args)    => _logger.Information(message, args);
-        public void Warning(string message, params object[] args) => _logger.Warning(message, args);
-        public void Error(string message, params object[] args)   => _logger.Error(message, args);
+        public void Trace(string sceneName, string message)   => Write(LogEventLevel.Verbose, sceneName, message);
+        public void Debug(string sceneName, string message)   => Write(LogEventLevel.Debug, sceneName, message);
+        public void Info(string sceneName, string message)    => Write(LogEventLevel.Information, sceneName, message);
+        public void Warning(string sceneName, string message) => Write(LogEventLevel.Warning, sceneName, message);
+        public void Error(string sceneName, string message)   => Write(LogEventLevel.Error, sceneName, message);
+
+        public void Trace(string message, params object[] args)   => Write(LogEventLevel.Verbose, message, args);
+        public void Debug(string message, params object[] args)   => Write(LogEventLevel.Debug, message, args);
+        public void Info(string message, params object[] args)    => Write(LogEventLevel.Information, message, args);
+        public void Warning(string message, params object[] args) => Write(LogEventLevel.Warning, message, args);
+        public void Error(string message, params object[] args)   => Write(LogEventLevel.Error, message, args);
+
+        public void Trace(string sceneName, string message, params object[] args)   => Write(LogEventLevel.Verbose, sceneName, message, args);
+        public void Debug(string sceneName, string message, params object[] args)   => Write(LogEventLevel.Debug, sceneName, message, args);
+        public void Info(string sceneName, string message, params object[] args)    => Write(LogEventLevel.Information, sceneName, message, args);
+        public void Warning(string sceneName, string message, params object[] args) => Write(LogEventLevel.Warning, sceneName, message, args);
+        public void Error(string sceneName, string message, params object[] args)   => Write(LogEventLevel.Error, sceneName, message, args);
+
+        private void Write(LogEventLevel level, string message, params object[] args)
+        {
+            _logger.Write(level, message, args);
+        }
+
+        private void Write(LogEventLevel level, string sceneName, string message, params object[] args)
+        {
+            _logger.ForContext("SceneName", sceneName).Write(level, message, args);
+        }
     }
 }

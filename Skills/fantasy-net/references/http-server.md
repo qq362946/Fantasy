@@ -49,7 +49,7 @@ Fantasy 的 HTTP 服务由 `HTTPServerNetwork` 启动，底层使用 ASP.NET Cor
 ### 示例
 
 ```csharp
-public sealed class OnConfigureHttpServicesHandler : AsyncEventSystem<OnConfigureHttpServices>
+public sealed class OnConfigureHttpServices_RegisterGameServices : AsyncEventSystem<OnConfigureHttpServices>
 {
     protected override async FTask Handler(OnConfigureHttpServices self)
     {
@@ -93,7 +93,7 @@ public sealed class OnConfigureHttpServicesHandler : AsyncEventSystem<OnConfigur
 ### 示例
 
 ```csharp
-public sealed class OnConfigureHttpApplicationHandler : AsyncEventSystem<OnConfigureHttpApplication>
+public sealed class OnConfigureHttpApplication_ConfigureMiddleware : AsyncEventSystem<OnConfigureHttpApplication>
 {
     protected override async FTask Handler(OnConfigureHttpApplication self)
     {

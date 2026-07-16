@@ -1,0 +1,106 @@
+@page "/api-reference"
+
+<PageTitle>接口说明 · Fantasy Control Center</PageTitle>
+
+<div class="page-heading">
+    <div>
+        <span class="eyebrow">HTTP API · V1</span>
+        <h1>服务接入接口</h1>
+        <p>Fantasy 进程通过这组接口完成注册、心跳和服务发现。所有响应均使用 JSON。</p>
+    </div>
+    <a class="button secondary" href="/api/v1/health" target="_blank">检查健康状态</a>
+</div>
+
+<div class="api-layout">
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method post">POST</span><code>/api/v1/instances/register</code></div>
+        <p>Scene 启动完成后注册实例。只有已经启用的 Scene 定义才能注册。</p>
+        <pre><code>{
+  "instanceId": "machine-1-process-1-scene-1001",
+  "sceneId": 1001,
+  "address": 4294967297,
+  "host": "192.168.1.10",
+  "innerPort": 11001,
+  "outerPort": 0,
+  "version": "2026.1.0",
+  "leaseSeconds": 15
+}</code></pre>
+    </section>
+
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method post">POST</span><code>/api/v1/instances/sub-scenes/register</code></div>
+        <p>把 SubScene 注册到已经在线的父 Root Scene。SubScene 使用自己的 Address 路由消息，网络连接信息从父实例继承。</p>
+        <pre><code>{
+  "instanceId": "machine-1-process-1-scene-1001:sub:4294967397",
+  "parentInstanceId": "machine-1-process-1-scene-1001",
+  "address": 4294967397,
+  "sceneType": "Dungeon",
+  "leaseSeconds": 15
+}</code></pre>
+    </section>
+
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method post">POST</span><code>/api/v1/instances/heartbeat</code></div>
+        <p>单实例续约兼容接口。一个进程有多个 Scene 时优先使用下面的批量接口。</p>
+        <pre><code>{
+  "instanceId": "machine-1-process-1-scene-1001",
+  "leaseSeconds": 15
+}</code></pre>
+    </section>
+
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method post">POST</span><code>/api/v1/instances/heartbeat/batch</code></div>
+        <p>一次续约同一进程中的多个实例。响应只列出需要重新注册的实例 ID。</p>
+        <pre><code>{
+  "instanceIds": [
+    "machine-1-process-1-scene-1001",
+    "machine-1-process-1-scene-1002"
+  ],
+  "leaseSeconds": 15
+}</code></pre>
+    </section>
+
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method get">GET</span><code>/api/v1/discovery/scenes</code></div>
+        <p>按必填的 Namespace 和 SceneType 查询健康实例，也可限定 World 或 WorldGroup。worldId 与 worldGroupId 不能同时指定。</p>
+        <pre><code>GET /api/v1/discovery/scenes?sceneType=Map&amp;namespaceId=1
+GET /api/v1/discovery/scenes?sceneType=Map&amp;namespaceId=1&amp;worldId=1
+GET /api/v1/discovery/scenes?sceneType=Map&amp;namespaceId=1&amp;worldGroupId=10</code></pre>
+    </section>
+
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method get">GET</span><code>/api/v1/discovery/sub-scenes</code></div>
+        <p>按父 Root Scene 的 Address 和 SceneType 查询其在线 SubScene。响应中的 Address 是 SubScene 路由地址，连接仍建立到父 Root Scene。</p>
+        <pre><code>GET /api/v1/discovery/sub-scenes?parentAddress=4294967297&amp;sceneType=Dungeon</code></pre>
+    </section>
+
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method get">GET</span><code>/api/v1/topology</code></div>
+        <p>读取包含启用和停用项目的管理拓扑快照，供后台页面使用。</p>
+        <pre><code>GET /api/v1/topology</code></pre>
+    </section>
+
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method get">GET</span><code>/api/v1/runtime/config</code></div>
+        <p>读取 Fantasy.Net 启动所需的启用配置和 Revision。指定 processId 时只返回该 Process、Machine、Scene 和引用的 World。</p>
+        <pre><code>GET /api/v1/runtime/config
+GET /api/v1/runtime/config?processId=1</code></pre>
+    </section>
+
+    <section class="panel api-card">
+        <div class="endpoint-heading"><span class="method post">POST</span><code>/api/v1/worlds/{worldId}/databases</code></div>
+        <p>给指定 World 添加数据库。数据库名称在同一个 World 中必须唯一。</p>
+        <pre><code>{
+  "dbType": "MongoDB",
+  "dbName": "fantasy_main",
+  "dbConnection": "mongodb://localhost:27017/",
+  "isDefault": true
+}</code></pre>
+    </section>
+</div>
+
+<section class="panel integration-note">
+    <span class="eyebrow">安全边界</span>
+    <h2>当前版本默认只监听本机</h2>
+    <p>如果需要让其他机器上的 Fantasy 进程访问，请先增加访问令牌或双向认证，再修改监听地址。不要直接把管理 API 暴露到公网。</p>
+</section>

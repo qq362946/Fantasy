@@ -33,24 +33,24 @@ FTask.OnceTimer(scene, 5000, () =>
 ## 事件方式
 
 ```csharp
-public struct RefreshShopEvent { }
+public struct OnRefreshShop { }
 
-public sealed class OnRefreshShop : EventSystem<RefreshShopEvent>
+public sealed class OnRefreshShop_ReloadItems : EventSystem<OnRefreshShop>
 {
-    protected override void Handler(RefreshShopEvent self)
+    protected override void Handler(OnRefreshShop self)
     {
         RefreshShop();
     }
 }
 
-FTask.OnceTimer(scene, 5000, new RefreshShopEvent());
+FTask.OnceTimer(scene, 5000, new OnRefreshShop());
 ```
 
 ## 事件定时器常用接口
 
 ```csharp
 scene.TimerComponent.Net.OnceTimer(5000, new BattleStartEvent());
-scene.TimerComponent.Net.OnceTillTimer(targetTime, new RefreshShopEvent());
+scene.TimerComponent.Net.OnceTillTimer(targetTime, new OnRefreshShop());
 scene.TimerComponent.Net.RepeatedTimer(60000, new ServerHeartbeatEvent());
 ```
 

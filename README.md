@@ -19,7 +19,7 @@
 
 Fantasy 是一个**零反射、高性能的 C# 游戏服务器框架**，专为大型多人在线游戏打造。
 
-**核心特点：** ⚡ 零反射架构 | 🚀 Native AOT 支持 | 🌐 多协议支持 | 🔥 分布式架构 | 🎮 ECS 设计｜🤖 AI 赋能开发
+**核心特点：** ⚡ 零反射架构 | 🚀 Native AOT 支持 | 🧭 Control Center 与服务发现 | 🌐 多协议支持 | 🔥 分布式架构 | 🎮 ECS 设计 | 🤖 AI 赋能开发
 
 ## 🤖 AI 赋能开发
 
@@ -94,6 +94,33 @@ public class C2G_LoginHandler : Message<Session, C2G_Login, G2C_Login>
     }
 }
 ```
+
+### 🧭 内置 Control Center 与服务发现
+
+告别固定服务器列表和按数量取模。Fantasy 提供开箱即用的管理后台与高性能服务发现，让服务器拓扑可以随业务动态扩缩容。
+
+- ✅ **可视化拓扑管理** - 统一管理 Machine、Process、World、Database 和 Scene，并持久化到本地
+- ✅ **自动服务生命周期** - Scene 启动后自动注册，批量心跳续租，正常关闭主动下线，异常退出自动过期
+- ✅ **多游戏环境隔离** - 原生支持 Namespace、WorldGroup 和 World 范围查询
+- ✅ **稳定负载路由** - 支持随机选择与 Rendezvous Hash，增减节点时只迁移部分请求
+- ✅ **高性能调用链** - 热路径读取本地缓存，发现到的 Address 可直接用于 `Scene.Send` 和 `Scene.Call`
+
+```csharp
+using NetServiceDiscovery = Fantasy.Platform.Net.ServiceDiscovery;
+
+var mapAddress = await NetServiceDiscovery.DiscoverAddressByHashAsync(
+    SceneType.Map,
+    routingKey: accountId,
+    worldId: worldId);
+
+if (mapAddress == 0)
+    throw new InvalidOperationException("No online Map scene was discovered.");
+
+var response = await scene.Call(mapAddress, new G2A_TestRequest());
+```
+
+👉 **[服务发现使用指南](Docs/04-Advanced/NetworkDevelopment/11-ServiceDiscovery.md)**
+
 ### 🌉 Roaming 路由系统
 
 ```csharp

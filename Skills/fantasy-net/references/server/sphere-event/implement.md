@@ -44,9 +44,26 @@ Source Generator 会自动注册 `SphereEventSystem`，不需要手动注册。
 通过远程 Scene 的 Address 建立订阅：
 
 ```csharp
-var gateConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Gate)[0];
-await mapScene.SphereEventComponent.Subscribe<PlayerLevelChangedEvent>(gateConfig.Address);
+// 文件顶部：
+using NetServiceDiscovery = Fantasy.Platform.Net.ServiceDiscovery;
 ```
+
+```csharp
+var gateAddress =
+    await NetServiceDiscovery.DiscoverAddressAsync(
+        SceneType.Gate,
+        worldId: mapScene.SceneConfig.WorldConfigId);
+
+if (gateAddress == 0)
+{
+    return;
+}
+
+await mapScene.SphereEventComponent
+    .Subscribe<PlayerLevelChangedEvent>(gateAddress);
+```
+
+未启用 Control Center 时，也可以继续从 `SceneConfigData` 取得静态 `SceneConfig.Address`。启用服务发现后必须使用 Address 查询 API，确保动态网络端点已登记。
 
 如果要按类型码订阅，也可以：
 
@@ -89,20 +106,32 @@ await scene.SphereEventComponent.Close();
 
 ## 常见使用模式
 
-### 服务器启动时订阅
+### 在服务发现初始化后订阅
 
-适合在 `OnCreateScene` 或初始化路径建立订阅：
+未启用 Control Center 时，可以在 `OnCreateScene` 使用静态 SceneConfig 建立订阅。Control Center 模式下，服务发现是在所有 Process / Scene 创建完成后才初始化，不能在 `OnCreateScene` 中同步查询或等待。
+
+把订阅放进项目明确的“服务启动完成”阶段，并复用一个小方法：
 
 ```csharp
-public sealed class OnCreateMapSceneHandler : AsyncEventSystem<OnCreateScene>
+private static async FTask SubscribeGateAsync(Scene scene)
 {
-    protected override async FTask Handler(OnCreateScene self)
+    var gateAddress =
+        await NetServiceDiscovery.DiscoverAddressAsync(
+            SceneType.Gate,
+            worldId: scene.SceneConfig.WorldConfigId);
+
+    if (gateAddress == 0)
     {
-        var gateConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Gate)[0];
-        await self.Scene.SphereEventComponent.Subscribe<GuildBattleResultEvent>(gateConfig.Address);
+        // 记录日志，并由启动编排按项目策略进行有限重试。
+        return;
     }
+
+    await scene.SphereEventComponent
+        .Subscribe<GuildBattleResultEvent>(gateAddress);
 }
 ```
+
+不要做无间隔死循环。目标 Scene 可能比当前服务晚启动，查询为 `0` 时应记录状态，并在有界重试或服务就绪通知后重新订阅。
 
 ### 发布方只负责发布，不感知订阅方
 
@@ -119,5 +148,6 @@ await scene.SphereEventComponent.PublishToRemoteSubscribers(eventArgs, isAutoDis
 ## 相关文档
 
 - `best-practices.md` - 与 Event / Roaming / Address 的边界、热重载、排错
+- `references/service-discovery/index.md` - 动态 Scene 入口与查询范围
 - `references/server/roaming/index.md` - 客户端经 Gate 访问后端服务
 - `references/event/index.md` - 本地 Event 机制

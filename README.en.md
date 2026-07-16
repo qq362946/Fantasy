@@ -19,7 +19,7 @@
 
 Fantasy is a **zero-reflection, high-performance C# game server framework** built for large-scale multiplayer online games.
 
-**Highlights:** ⚡ Zero-reflection architecture | 🚀 Native AOT support | 🌐 Multi-protocol networking | 🔥 Distributed architecture | 🎮 ECS design | 🤖 AI-assisted development
+**Highlights:** ⚡ Zero-reflection architecture | 🚀 Native AOT support | 🧭 Control Center & Service Discovery | 🌐 Multi-protocol networking | 🔥 Distributed architecture | 🎮 ECS design | 🤖 AI-assisted development
 
 ## 🤖 AI-Assisted Development
 
@@ -95,6 +95,32 @@ public class C2G_LoginHandler : Message<Session, C2G_Login, G2C_Login>
     }
 }
 ```
+
+### 🧭 Built-in Control Center and Service Discovery
+
+Replace fixed server lists and modulo-based routing with a ready-to-use management UI and high-performance service discovery. Server topology can scale dynamically as your game grows.
+
+- ✅ **Visual topology management** - Manage Machines, Processes, Worlds, Databases, and Scenes with local persistence
+- ✅ **Automatic service lifecycle** - Scene registration, batched heartbeats, graceful offline reporting, and lease-based expiry
+- ✅ **Multi-environment isolation** - First-class Namespace, WorldGroup, and World-scoped discovery
+- ✅ **Stable load routing** - Random selection and Rendezvous Hash with minimal key movement when nodes change
+- ✅ **Fast routing path** - Hot-path queries use local snapshots, and discovered Addresses work directly with `Scene.Send` and `Scene.Call`
+
+```csharp
+using NetServiceDiscovery = Fantasy.Platform.Net.ServiceDiscovery;
+
+var mapAddress = await NetServiceDiscovery.DiscoverAddressByHashAsync(
+    SceneType.Map,
+    routingKey: accountId,
+    worldId: worldId);
+
+if (mapAddress == 0)
+    throw new InvalidOperationException("No online Map scene was discovered.");
+
+var response = await scene.Call(mapAddress, new G2A_TestRequest());
+```
+
+👉 **[Service Discovery Guide (Chinese)](Docs/04-Advanced/NetworkDevelopment/11-ServiceDiscovery.md)**
 
 ### 🌉 Roaming Routing System
 

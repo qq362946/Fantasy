@@ -14,7 +14,7 @@ public sealed class C2G_CreateSubSceneAddressableRequestHandler : MessageRPC<C2G
         // 1、向SubScene请求AddressableId
         var responseAddressableId = (SubScene2G_AddressableIdResponse)await scene.NetworkMessagingComponent.Call(subSceneAddressId, new G2SubScene_AddressableIdRequest());
         // 2、给session添加一个AddressableRouteComponent组件，这个组件很重要、能否转发Addressable协议主要是通过这个。
-        var addressableRouteComponent = session.AddComponent<AddressableRouteComponent>();
+        var addressableRouteComponent = session.GetOrAddComponent<AddressableRouteComponent>();
         // 3、拿到SubScene返回的AddressableId赋值给addressableRouteComponent.AddressableId。
         addressableRouteComponent.AddressableId = responseAddressableId.AddressableId;
     }

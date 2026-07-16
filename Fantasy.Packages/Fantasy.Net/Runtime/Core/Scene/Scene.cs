@@ -251,14 +251,28 @@ namespace Fantasy
 #if FANTASY_NET
             try
             {
-                if (SphereEventComponent != null || !SphereEventComponent.IsDisposed)
+                // 必须在 DisposeCore 清空 Address 之前通知下线。
+                await Entry.UnregisterServiceSceneAsync(this);
+            }
+            catch (Exception e)
+            {
+                closeException = e;
+            }
+#endif
+            
+#if FANTASY_NET
+            try
+            {
+                if (SphereEventComponent != null && !SphereEventComponent.IsDisposed)
                 {
                     await SphereEventComponent.Close();
                 }
             }
             catch (Exception e)
             {
-                closeException = e;
+                closeException = closeException == null
+                    ? e
+                    : new AggregateException(closeException, e);
             }
 #endif
             
@@ -564,6 +578,7 @@ namespace Fantasy
                     }
 
                     await scene.EventComponent.PublishAsync(new OnCreateScene(scene));
+                    await Entry.RegisterServiceSceneAsync(scene);
                 }
                 catch (Exception e)
                 {
@@ -615,11 +630,13 @@ namespace Fantasy
                     }
 
                     await scene.EventComponent.PublishAsync(new OnCreateScene(scene));
-
+                    
                     if (onSubSceneCreated != null)
                     {
                         await onSubSceneCreated(scene, parentScene);
                     }
+                    
+                    await Entry.RegisterServiceSceneAsync(scene);
                 }
                 catch (Exception e)
                 {
@@ -765,58 +782,242 @@ namespace Fantasy
         #region InnerSession
 
 #if FANTASY_NET
-        /// <summary>
-        /// 根据runTimeId获得Session
-        /// </summary>
-        /// <param name="address"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        internal virtual Session GetSession(long address)
-        {
-            var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref address);
 
+        /// <summary>
+        /// 尝试获取或创建目标 Address 所属 Scene 的 Session。
+        /// 当目标 Scene 尚未被服务发现解析，并且本地配置中也不存在时返回 false。
+        /// </summary>
+        /// <param name="address">目标实体的 RuntimeId Address。</param>
+        /// <param name="session">找到或创建的 Session。</param>
+        /// <param name="sceneId">根据Address计算出的sceneId</param>
+        /// <returns>成功取得 Session 时返回 true，否则返回 false。</returns>
+        internal virtual bool TryGetSession(long address, out Session session)
+        {
+            var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(address);
+            
+            // 高频路径：直接复用已经建立的 Session。
             if (_processSessionInfos.TryGetValue(sceneId, out var processSessionInfo))
             {
                 if (!processSessionInfo.Session.IsDisposed)
                 {
-                    return processSessionInfo.Session;
+                    session = processSessionInfo.Session;
+                    return true;
                 }
 
                 _processSessionInfos.Remove(sceneId);
             }
-
+            
+            // 目标 Scene 位于当前进程时，使用进程内 Session。
             if (Process.IsInAppliaction(ref sceneId))
             {
-                // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
-                var processSession = Session.CreateInnerSession(Scene);
-                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
-                return processSession;
-            }
-
-            if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
-            {
-                throw new Exception($"The scene with sceneId {sceneId} was not found in the configuration file");
-            }
-
-            if (!ProcessConfigData.Instance.TryGet(sceneConfig.ProcessConfigId, out var processConfig))
-            {
-                throw new Exception($"The process with processId {sceneConfig.ProcessConfigId} was not found in the configuration file");
-            }
-
-            if (!MachineConfigData.Instance.TryGet(processConfig.MachineId, out var machineConfig))
-            {
-                throw new Exception($"The machine with machineId {processConfig.MachineId} was not found in the configuration file");
+                session = Session.CreateInnerSession(Scene);
+                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(session, null));
+                return true;
             }
             
-            var remoteAddress = $"{machineConfig.InnerBindIP}:{sceneConfig.InnerPort}";
-            var client = NetworkProtocolFactory.CreateClient(Scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner, false);
-            var session = client.Connect(remoteAddress, null, () =>
+            string remoteAddress;
+            uint targetProcessId;
+            
+            // 优先使用服务发现已经缓存的端点。
+            if (ServiceDiscovery.TryGetEndpoint(sceneId, out var endpoint))
             {
-                Log.Error($"Unable to connect to the target server sourceServerId:{Scene.Process.Id} targetServerId:{sceneConfig.ProcessConfigId}");
-            }, null, false);
+                remoteAddress = $"{endpoint.Host}:{endpoint.InnerPort}";
+                targetProcessId = endpoint.ProcessId;
+            }
+            else
+            {
+                // 服务发现尚未解析该 Scene 时，尝试兼容原配置表模式。
+                if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
+                {
+                    session = null;
+                    return false;
+                }
+                
+                if (!ProcessConfigData.Instance.TryGet(sceneConfig.ProcessConfigId, out var processConfig))
+                {
+                    throw new Exception(
+                        $"The process with processId {sceneConfig.ProcessConfigId} was not found in the configuration file");
+                }
+                
+                if (!MachineConfigData.Instance.TryGet(processConfig.MachineId, out var machineConfig))
+                {
+                    throw new Exception(
+                        $"The machine with machineId {processConfig.MachineId} was not found in the configuration file");
+                }
+                
+                remoteAddress = $"{machineConfig.InnerBindIP}:{sceneConfig.InnerPort}";
+                targetProcessId = sceneConfig.ProcessConfigId;
+            }
+
+            var client = NetworkProtocolFactory.CreateClient(
+                Scene,
+                ProgramDefine.InnerNetwork,
+                NetworkTarget.Inner,
+                false);
+            session = client.Connect(remoteAddress, null,
+                () =>
+                {
+                    Log.Error(
+                        $"Unable to connect to the target server sourceServerId:{Scene.Process.Id} targetServerId:{targetProcessId}");
+                }, null, false);
+
             _processSessionInfos.Add(sceneId, new ProcessSessionInfo(session, client));
-            return session;
+            
+            return true;
         }
+
+        /// <summary>
+        /// 根据 RuntimeId Address 获取 Session。
+        /// 找不到目标 Scene 时抛出异常。
+        /// </summary>
+        /// <param name="address">目标 RuntimeId Address。</param>
+        /// <returns>目标 Session。</returns>
+        /// <exception cref="Exception">目标 Scene 不存在。</exception>
+        internal virtual Session GetSession(long address)
+        {
+            if (TryGetSession(address, out var session))
+            {
+                return session;
+            }
+            
+            var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(address);
+
+            throw new Exception($"The scene with sceneId {sceneId} was not found in the configuration file");
+        }
+
+        /// <summary>
+        /// 异步获取目标 Address 所属 Root Scene 的 Session。
+        /// 当本地没有目标端点时，通过 Control Center 精确解析。
+        /// </summary>
+        /// <param name="address">目标 RuntimeId Address。</param>
+        /// <returns>目标 Session。</returns>
+        internal virtual async FTask<Session> GetSessionAsync(long address)
+        {
+            // 高频路径：Session 已存在、同进程或者本地已经缓存了服务端点。
+            if (TryGetSession(address, out var session))
+            {
+                return session;
+            }
+            
+            // 未启用服务发现时，保持原来的异常行为。
+            if (!ServiceDiscovery.IsEnabled)
+            {
+                return GetSession(address);
+            }
+
+            var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(address);
+            // 仅在本地确实没有路由时访问 Control Center。
+            await ServiceDiscovery.ResolveAddressAsync(sceneId);
+            // 重新经过 TryGetSession，复用可能已经由其他调用创建的 Session。
+            return GetSession(address);
+        }
+        
+        // /// <summary>
+        // /// 根据runTimeId获得Session
+        // /// </summary>
+        // /// <param name="address"></param>
+        // /// <returns></returns>
+        // /// <exception cref="Exception"></exception>
+        // internal virtual Session GetSession(long address)
+        // {
+        //     var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(ref address);
+        //
+        //     if (_processSessionInfos.TryGetValue(sceneId, out var processSessionInfo))
+        //     {
+        //         if (!processSessionInfo.Session.IsDisposed)
+        //         {
+        //             return processSessionInfo.Session;
+        //         }
+        //
+        //         _processSessionInfos.Remove(sceneId);
+        //     }
+        //
+        //     if (Process.IsInAppliaction(ref sceneId))
+        //     {
+        //         // 如果在同一个Process下，不需要通过Socket发送了，直接通过Process下转发。
+        //         var processSession = Session.CreateInnerSession(Scene);
+        //         _processSessionInfos.Add(sceneId, new ProcessSessionInfo(processSession, null));
+        //         return processSession;
+        //     }
+        //     
+        //     string remoteAddress;
+        //     uint targetProcessId;
+        //     
+        //     // DiscoverAddressAsync已经把选中的端点按SceneId缓存。
+        //     if (ServiceDiscovery.TryGetEndpoint(sceneId, out var endpoint))
+        //     {
+        //         remoteAddress = $"{endpoint.Host}:{endpoint.InnerPort}";
+        //         targetProcessId = endpoint.ProcessId;
+        //     }
+        //     else
+        //     {
+        //         // 未开启服务发现或尚未发现该Scene时，
+        //         // 保持原来的配置表连接逻辑。
+        //         if (!SceneConfigData.Instance.TryGet(sceneId, out var sceneConfig))
+        //         {
+        //             throw new Exception($"The scene with sceneId {sceneId} was not found in the configuration file");
+        //         }
+        //         
+        //         if (!ProcessConfigData.Instance.TryGet(sceneConfig.ProcessConfigId, out var processConfig))
+        //         {
+        //             throw new Exception($"The process with processId {sceneConfig.ProcessConfigId} was not found in the configuration file");
+        //         }
+        //
+        //         if (!MachineConfigData.Instance.TryGet(processConfig.MachineId, out var machineConfig))
+        //         {
+        //             throw new Exception($"The machine with machineId {processConfig.MachineId} was not found in the configuration file");
+        //         }
+        //         
+        //         remoteAddress = $"{machineConfig.InnerBindIP}:{sceneConfig.InnerPort}";
+        //         targetProcessId = sceneConfig.ProcessConfigId;
+        //     }
+        //     
+        //     var client = NetworkProtocolFactory.CreateClient(Scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner, false);
+        //     
+        //     var session = client.Connect(remoteAddress, null, () =>
+        //     {
+        //         Log.Error($"Unable to connect to the target server sourceServerId:{Scene.Process.Id} targetServerId:{targetProcessId}");
+        //     }, null, false);
+        //     
+        //     _processSessionInfos.Add(sceneId, new ProcessSessionInfo(session, client));
+        //     
+        //     return session;
+        // }
+        
+        // /// <summary>
+        // /// 异步获取目标 Address 所属 Root Scene 的 Session。
+        // /// 当本地没有目标端点时，通过 Control Center 精确解析。
+        // /// </summary>
+        // internal virtual async FTask<Session> GetSessionAsync(long address)
+        // {
+        //     var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(address);
+        //
+        //     // 高频路径：连接已经存在时直接返回。
+        //     if (_processSessionInfos.TryGetValue(sceneId, out var processSessionInfo))
+        //     {
+        //         if (!processSessionInfo.Session.IsDisposed)
+        //         {
+        //             return processSessionInfo.Session;
+        //         }
+        //
+        //         _processSessionInfos.Remove(sceneId);
+        //     }
+        //
+        //     // 当前进程内的 Scene 不需要访问 Control Center。
+        //     if (Process.IsInAppliaction(ref sceneId))
+        //     {
+        //         return GetSession(address);
+        //     }
+        //
+        //     // 只有启用服务发现并且本地没有端点时才查询。
+        //     if (ServiceDiscovery.IsEnabled && !ServiceDiscovery.TryGetEndpoint(sceneId, out _))
+        //     {
+        //         await ServiceDiscovery.ResolveAddressAsync(sceneId);
+        //     }
+        //
+        //     // 复用原来的连接创建和缓存逻辑。
+        //     return GetSession(address);
+        // }
 #endif
         #endregion
 

@@ -1,0 +1,61 @@
+@inherits LayoutComponentBase
+
+<div class="app-shell">
+    <aside class="sidebar">
+        <a class="brand" href="/">
+            <span class="brand-mark">F</span>
+            <span>
+                <strong>Fantasy</strong>
+                <small>Control Center</small>
+            </span>
+        </a>
+
+        <nav class="primary-nav" aria-label="主导航">
+            <NavLink href="/" Match="NavLinkMatch.All">
+                <span class="nav-icon">⌂</span>
+                总览
+            </NavLink>
+            <NavLink href="/topology">
+                <span class="nav-icon">◇</span>
+                拓扑配置
+            </NavLink>
+            <NavLink href="/instances">
+                <span class="nav-icon">◉</span>
+                服务实例
+            </NavLink>
+            <NavLink href="/api-reference">
+                <span class="nav-icon">↔</span>
+                接口说明
+            </NavLink>
+        </nav>
+
+        <div class="sidebar-note">
+            <span class="status-dot"></span>
+            <div>
+                <strong>本地控制面</strong>
+                <small>仅监听 127.0.0.1</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <header class="topbar">
+            <div>
+                <span class="eyebrow">FANTASY SERVICE DISCOVERY</span>
+            </div>
+            <div class="topbar-meta">
+                <span class="pill success">运行中</span>
+                <span class="version">Preview 1</span>
+            </div>
+        </header>
+        <section class="page-content">
+            @Body
+        </section>
+    </main>
+</div>
+
+<div id="blazor-error-ui">
+    页面发生了未处理错误。
+    <a href="." class="reload">重新加载</a>
+    <button type="button" class="dismiss">×</button>
+</div>

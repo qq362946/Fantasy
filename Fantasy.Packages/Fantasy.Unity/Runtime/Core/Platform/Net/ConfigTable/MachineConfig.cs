@@ -56,6 +56,7 @@ namespace Fantasy.Platform.Net
             {
                 List = list
             };
+            
             foreach (var config in Instance.List)
             {
                 Instance._configs.TryAdd(config.Id, config);

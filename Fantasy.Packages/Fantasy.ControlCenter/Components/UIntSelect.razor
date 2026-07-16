@@ -1,0 +1,32 @@
+@using System.Globalization
+@inherits InputBase<uint>
+
+<select @attributes="AdditionalAttributes"
+        class="@CssClass"
+        value="@CurrentValueAsString"
+        @onchange="HandleChange">
+    @ChildContent
+</select>
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    protected override bool TryParseValueFromString(
+        string? value,
+        out uint result,
+        out string validationErrorMessage)
+    {
+        if (uint.TryParse(value, NumberStyles.None, CultureInfo.InvariantCulture, out result))
+        {
+            validationErrorMessage = string.Empty;
+            return true;
+        }
+
+        validationErrorMessage = $"请选择有效的 {FieldIdentifier.FieldName}。";
+        return false;
+    }
+
+    private void HandleChange(ChangeEventArgs eventArgs) =>
+        CurrentValueAsString = eventArgs.Value?.ToString() ?? string.Empty;
+}

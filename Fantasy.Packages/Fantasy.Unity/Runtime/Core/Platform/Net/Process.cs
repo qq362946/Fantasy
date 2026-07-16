@@ -22,15 +22,20 @@ public sealed class Process
     /// </summary>
     public readonly uint Id;
     /// <summary>
+    /// 进程所属的Namespace ID
+    /// </summary>
+    public readonly uint NamespaceId;
+    /// <summary>
     /// 进程关联的MachineId
     /// </summary>
     public readonly uint MachineId;
     private readonly ConcurrentDictionary<uint, Scene> _processScenes = new ConcurrentDictionary<uint, Scene>();
     private static readonly ConcurrentDictionary<uint, Scene> Scenes = new ConcurrentDictionary<uint, Scene>();
     private Process() {}
-    private Process(uint id, uint machineId)
+    private Process(uint id, uint namespaceId, uint machineId)
     {
         Id = id;
+        NamespaceId = namespaceId;
         MachineId = machineId;
     }
     
@@ -105,7 +110,7 @@ public sealed class Process
             return null;
         }
 
-        var process = new Process(processConfigId, processConfig.MachineId);
+        var process = new Process(processConfigId, processConfig.NamespaceId, processConfig.MachineId);
         var sceneConfigs = SceneConfigData.Instance.GetByProcess(processConfigId);
 
         foreach (var sceneConfig in sceneConfigs)

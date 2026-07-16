@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.ProtocolEditor", "F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.ProtocolExportTool", "Fantasy.Packages\Fantasy.ProtocolExportTool\Fantasy.ProtocolExportTool.csproj", "{2A5E83A1-CEE7-4DFF-B91F-CC84881BBA11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fantasy.ControlCenter", "Fantasy.Packages\Fantasy.ControlCenter\Fantasy.ControlCenter.csproj", "{A1C436BE-75A4-4CA2-AE28-1168F16916E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,7 @@ Global
 		{8BDFA905-DC83-4DAC-8B7A-123266545683} = {83FB151F-5881-4757-9505-8B70B8C38AA3}
 		{DE4A9C2B-304C-46C6-805F-583A8B165745} = {83FB151F-5881-4757-9505-8B70B8C38AA3}
 		{2A5E83A1-CEE7-4DFF-B91F-CC84881BBA11} = {83FB151F-5881-4757-9505-8B70B8C38AA3}
+		{A1C436BE-75A4-4CA2-AE28-1168F16916E1} = {83FB151F-5881-4757-9505-8B70B8C38AA3}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4782A7D1-2B43-48DD-AF50-EDC773436E20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -51,5 +54,9 @@ Global
 		{2A5E83A1-CEE7-4DFF-B91F-CC84881BBA11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A5E83A1-CEE7-4DFF-B91F-CC84881BBA11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A5E83A1-CEE7-4DFF-B91F-CC84881BBA11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1C436BE-75A4-4CA2-AE28-1168F16916E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1C436BE-75A4-4CA2-AE28-1168F16916E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C436BE-75A4-4CA2-AE28-1168F16916E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1C436BE-75A4-4CA2-AE28-1168F16916E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

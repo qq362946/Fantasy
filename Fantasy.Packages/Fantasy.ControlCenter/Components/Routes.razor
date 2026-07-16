@@ -1,0 +1,17 @@
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="typeof(MainLayout)">
+            <PageTitle>页面不存在 · Fantasy Control Center</PageTitle>
+            <div class="empty-state">
+                <span class="empty-code">404</span>
+                <h1>这里没有可用的管理页面</h1>
+                <p>返回控制中心总览继续操作。</p>
+                <a class="button primary" href="/">返回总览</a>
+            </div>
+        </LayoutView>
+    </NotFound>
+</Router>

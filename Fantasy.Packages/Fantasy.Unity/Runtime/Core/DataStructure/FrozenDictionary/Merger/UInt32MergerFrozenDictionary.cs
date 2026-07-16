@@ -129,6 +129,22 @@ namespace Fantasy.DataStructure.Dictionary
                 index += count;
             }
 
+            #if DEBUG
+            var seen = new HashSet<uint>();
+            var duplicateKeys = new List<uint>();
+            for (var i = 0; i < keys.Length; i++)
+            {
+                if (!seen.Add(keys[i]))
+                {
+                    duplicateKeys.Add(keys[i]);
+                }
+            }
+            if (duplicateKeys.Count > 0)
+            {
+                throw new InvalidOperationException($"Duplicate uint keys in UInt32MergerFrozenDictionary: {string.Join(",", duplicateKeys)}");
+            }
+            #endif
+
             _mergedDictionary = new UInt32FrozenDictionary<TValue>(keys, tValueArray);
         }
 

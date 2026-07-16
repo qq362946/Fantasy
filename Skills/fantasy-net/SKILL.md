@@ -1,6 +1,6 @@
 ---
 name: fantasy-net
-description: This guide applies to development and code review for Fantasy / Fantasy.Net / Fantasy.Unity written in C#. Use it when a task involves Fantasy server code or Unity client code using Fantasy, ECS entities/components/systems, scenes and subscenes, FTask, network handlers/messages/protocols, Address or Roaming routing, cross-server events and subscriptions, Fantasy.config, scene or database access, HTTP controllers/services, session or client connection logic, or distributed runtime architecture. It may also be used for Fantasy-related code review, troubleshooting, compliance checks, risk analysis, and best practices, even when the user does not explicitly mention Fantasy.
+description: This guide applies to development and code review for Fantasy / Fantasy.Net / Fantasy.Unity written in C#. Use it when a task involves Fantasy server code or Unity client code using Fantasy, ECS entities/components/systems, scenes and subscenes, FTask, network handlers/messages/protocols, Address or Roaming routing, Control Center and service discovery, Namespace/WorldGroup/World isolation, dynamic Scene registration or routing, cross-server events and subscriptions, Fantasy.config, scene or database access, HTTP controllers/services, session or client connection logic, or distributed runtime architecture. It may also be used for Fantasy-related code review, troubleshooting, compliance checks, risk analysis, and best practices, even when the user does not explicitly mention Fantasy.
 ---
 
 # Fantasy-net
@@ -13,11 +13,15 @@ Fantasy is a high-performance C# distributed game server framework based on ECS 
 
 - Use `FTask` for all async operations, not `Task`
 - Separate Entity data from logic (Handler/System); multi-assembly projects must separate to support hot reload
+- Name Component business extension classes `{ComponentFullName}System`; add a static `{Domain}Helper` only when other systems need a shared business entry point
 - All registration is done at compile-time by source generators; don't manually register, don't modify `.g.cs`
 - Entities, components, and Handlers use `sealed class`; all classes except structs must be created via Entity
 - Use file-scoped namespaces (`namespace Fantasy;`)
 - Use `Log.Debug/Info/Error()` for logging; return error codes via `response.ErrorCode`; business logic should not throw exceptions
 - Use Event system for module decoupling: publish events instead of direct calls; prefer Struct events (zero GC), use Entity events for complex logic; use EventSystem for sync, AsyncEventSystem for async
+- Name Event listeners `{EventName}_{BusinessAction}`, such as `OnHpChange_ExitGame`; never suffix them with `System`, `Async`, or `Handler`
+- When Control Center is enabled, use `ServiceDiscovery` for dynamic Root Scene and SubScene routing; keep strict account-to-node affinity in business storage rather than the service registry
+- Before planned Scene shutdown, call `ServiceDiscovery.SetSceneOfflineAsync`, reject new business allocations, wait one discovery cache cycle, then drain and close the Scene
 - Strictly follow SOLID principles
 
 ### Development Behavioral Guidelines
@@ -36,7 +40,7 @@ Before implementing:
 - If a simpler approach exists, say so. Push back when warranted.
 - If something is unclear, stop. Name what's confusing. Ask.
 
-**Fantasy Key Points:** Before implementing, clarify: architecture pattern (single-server/distributed), Entity ownership (which Scene), communication method (Roaming/Address/SphereEvent), configuration state (whether Fantasy.config has relevant nodes configured). When uncertain, ask; don't assume.
+**Fantasy Key Points:** Before implementing, clarify: architecture pattern (single-server/distributed), Entity ownership (which Scene), communication method (Roaming/Address/SphereEvent), configuration source (local `Fantasy.config` or Control Center), and whether dynamic discovery or strict persistent affinity is required. When uncertain, ask; don't assume.
 
 #### 2. Simplicity First
 
@@ -101,25 +105,26 @@ Read the corresponding file based on the requirement; for complex tasks, read mu
 | `references/guidelines-examples.md` | Development behavioral guidelines Fantasy scenario examples: Think Before Coding (clarify assumptions), Simplicity First (avoid over-engineering), Surgical Changes (precise modifications), Goal-Driven Execution (verifiable goals) with detailed comparison cases; **read when understanding guideline application in Fantasy, or when code review reveals guideline violations** |
 | `references/ecs/scene.md` | **Scene is the container and lifecycle boundary for all Entity/Component**: cascade destruction when Scene disposes, OnCreateScene event, access system components via `self.Scene` (TimerComponent/EventComponent/NetworkMessagingComponent etc.); **read when Scene concept, Scene initialization, OnCreateScene event, or Entity ownership is involved** |
 | `references/ecs/ecs-check.md` | ECS review checklist: Entity / Component / System / Scene / object pool / lifecycle common issues; **read when user wants to check ECS code for Fantasy compliance** |
+| `references/ecs/entity-definition.md` | Entity / Component definitions: fields, ComponentSystem naming, optional cross-system Helper, and lifecycle System selection; **read when creating Entity / Component types** |
 | `references/timer/index.md` | Timer entry: routes to async wait / callback timers / event integration / best practices; **read first when user needs delayed execution, repeated tasks, countdown, Wait, OnceTimer, RepeatedTimer** |
 | `references/timer/implement.md` | Timer implementation: `FTask.Wait`, `WaitTill`, `WaitFrame`, `OnceTimer`, `RepeatedTimer`, cancel timers; **read only when directly writing Timer code** |
 | `references/timer/event.md` | Timer and Event integration: event-based timers, hot reload differences, when to use events instead of Action; **read only when hot-reload-friendly Timer logic is needed** |
 | `references/timer/best-practices.md` | Timer best practices and troubleshooting: performance tips, common errors, Scene destruction, precision, cancel strategies; **read only when optimizing or troubleshooting Timer code** |
-| `references/ecs/subscene.md` | **SubScene dynamic child scenes**: lightweight isolated spaces created at runtime from parent Scene, sharing parent Scene core components but with independent entity lists; `Scene.CreateSubScene()` API details (params, callback execution order), sending Address messages to SubScene, using Addressable on SubScene, destroying SubScene; **read when needing instances, match rooms, instanced maps, dynamic battlefields, player private spaces, or on-demand scene creation/destruction** |
+| `references/ecs/subscene.md` | **SubScene dynamic child scenes**: lightweight isolated spaces created at runtime from parent Scene, sharing parent Scene core components but with independent entity lists; `Scene.CreateSubScene()` callback and registration order, Control Center discovery by parent Address, Address messaging, and active offline on `Close()`; **read when needing instances, match rooms, instanced maps, dynamic battlefields, player private spaces, or on-demand scene creation/destruction** |
 | `references/ecs/lifecycle.md` | ECS lifecycle Systems: AwakeSystem, UpdateSystem, DestroySystem, DeserializeSystem, TransferOutSystem/TransferInSystem (cross-server transfer only) and trigger order; **read when responding to Entity lifecycle events** |
 | `references/event/index.md` | Event entry: determine whether to use EventAwaiter or Event, then follow Workflow to corresponding doc; **read first when requirement involves "wait for result" or "publish event" mechanism selection** |
 | `references/event/event-awaiter.md` | EventAwaiter entry: routes to implementation / modeling / troubleshooting; **read first when user needs to wait for a condition, wait for player action, do request-response async flow, or explicitly mentions EventAwaiter/EventAwaiterComponent** |
 | `references/event/struct-event.md` | Struct event full workflow: Step 1 define event → Step 2 create listener → Step 3 publish event; **recommended for most scenarios, read when creating Struct events** |
 | `references/event/entity-event.md` | Entity event full workflow: Step 1 create listener → Step 2 publish existing Entity (note isDisposed param); **read only when passing existing Entity** |
-| `references/event/check-event.md` | Event system code review: Struct event checklist, Entity event checklist, listener checklist, common error comparisons; **read when checking existing event code** |
+| `references/event/check-event.md` | Event system code review: Struct event checklist, Entity event checklist, listener naming, common error comparisons; **read when checking existing event code** |
 | `references/server/setup-server.md` | Create new Fantasy server project, integrate Fantasy into existing project (.NET/NuGet), three-layer structure setup, logging system quick config |
 | `references/unity/index.md` | Unity client entry: routes to installation, connection, Session, receiving pushes; **read first when Fantasy Unity client is involved** |
 | `references/unity/unity-check.md` | Unity review checklist: version consistency, compile macros, connection methods, Session usage, push Handler common issues; **read when user wants to check Unity client code** |
 | `references/unity/setup-unity.md` | Unity client install Fantasy.Unity, configure compile symbols, import protocols; **read only during installation or initial integration** |
 | `references/unity/unity-connection.md` | Unity client connect to server: FantasyRuntime component, `scene.Connect`, `Runtime.Connect`, protocol selection; **read only during connection initialization** |
 | `references/unity/unity-session.md` | Unity client Session usage: send messages, RPC, connection holding, disconnect; **read only for how to send messages after connection** |
-| `references/logging.md` | Logging system details: Fantasy.NLog full config, Fantasy config or add logging, NLog.config explanation, custom ILog implementation (Serilog/file logging etc.) |
-| `references/logging-check.md` | Logging review checklist: logging initialization, NLog rules, config copy, mode switching, custom ILog common issues; **read when user wants to check logging integration** |
+| `references/logging.md` | Logging system details: Fantasy.NLog setup, appId and per-Scene files, Develop/Release flush behavior, NLog.config, custom ILog implementation (Serilog etc.) |
+| `references/logging-check.md` | Logging review checklist: initialization signature, NLog rules, config copy, mode switching, per-Scene output, custom ILog completeness; **read when user wants to check logging integration** |
 | `references/protocol/index.md` | Protocol entry: define `.proto`, export C#, install export tool routing; **read first when `.proto`, Outer/Inner, protocol export is involved** |
 | `references/protocol/protocol-check.md` | Protocol review checklist: Outer/Inner selection, interface matching, naming, export, Handler alignment; **read when user wants to check protocol or Handler definitions** |
 | `references/protocol/define.md` | Protocol definition entry: locate protocol root directory and route to Outer/Inner; **read when creating new protocol files or determining where to place protocols** |
@@ -131,8 +136,12 @@ Read the corresponding file based on the requirement; for complex tasks, read mu
 | `references/server/server-message-handler.md` | Server-side Handler for client messages, **only for messages implementing IMessage/IRequest/IResponse interfaces**; Message\<T\>/MessageRPC\<TReq,TRes\> templates, reply() usage, error code patterns, Session push; see respective files for Addressable/Roaming |
 | `references/server/server-message-handler-check.md` | Server message Handler review checklist: base class selection, error codes, reply(), Session lifecycle, duplicate Handler common issues; **read when user wants to check client message Handlers** |
 | `references/unity/unity-message-handler.md` | Unity client Handler for server push messages: `Message<Session,T>`, file location conventions, compile verification; **read when user needs to create a Handler in Unity to receive server messages** |
-| `references/server/address.md` | Server-to-server messaging based on Entity.Address (RuntimeId): **only for messages implementing IAddressMessage/IAddressRequest/IAddressResponse interfaces; read when defining Address message Handlers** |
-| `references/server/address-check.md` | Address review checklist: message patterns, entry address retrieval, Handler types, first communication and cached address common errors; **read when user wants to check Address code** |
+| `references/server/address.md` | Server-to-server messaging based on Entity.Address (RuntimeId), including dynamic Root Scene/SubScene endpoint discovery and transparent route resolution: **only for messages implementing IAddressMessage/IAddressRequest/IAddressResponse interfaces; read when defining Address message Handlers** |
+| `references/server/address-check.md` | Address review checklist: message patterns, dynamic entry retrieval, SubScene parent routing, Handler types, first communication and cached address common errors; **read when user wants to check Address code** |
+| `references/service-discovery/index.md` | Control Center and service discovery entry: mechanism boundary and routing to configuration, Root Scene/SubScene discovery, routing strategy, and troubleshooting; **read first when dynamic Scene registration, discovery, multi-machine deployment, Namespace, WorldGroup, parent-child Scene routing, or online instances are involved** |
+| `references/service-discovery/implement.md` | Service discovery integration: `controlCenter` and `sceneTypes`, topology creation order, Release/Develop startup, Root Scene/SubScene discovery APIs, transparent Address routing, automatic registration, heartbeat, planned drain, and offline lifecycle; **read when enabling or directly using service discovery** |
+| `references/service-discovery/routing.md` | Service discovery scope and routing: Namespace/WorldGroup/World filters, SubScene parent scope, random vs Rendezvous Hash vs persistent binding, local configuration compatibility, cache and performance semantics; **read when choosing a dynamic target or designing affinity** |
+| `references/service-discovery/service-discovery-check.md` | Service discovery review and troubleshooting checklist: configuration, Root Scene/SubScene APIs, empty results, registration timing, heartbeats, endpoint connectivity, recovery, public deployment security, and acceptance tests; **read when checking or diagnosing service discovery** |
 | `references/server/sphere-event/index.md` | SphereEvent entry: cross-server domain events, subscribe, publish, unsubscribe, choosing between Event/Roaming; **read first when cross-server event notifications, `SphereEventComponent`, `SphereEventArgs`, `SphereEventSystem` are involved** |
 | `references/server/sphere-event/implement.md` | SphereEvent implementation: define event class, implement handler, subscribe to remote events, publish events, unsubscribe; **read only when directly writing SphereEvent code** |
 | `references/server/sphere-event/best-practices.md` | SphereEvent best practices and troubleshooting: object pool, hot reload, event size, disconnect cleanup, differences from Event/Roaming; **read only when optimizing or troubleshooting SphereEvent logic** |

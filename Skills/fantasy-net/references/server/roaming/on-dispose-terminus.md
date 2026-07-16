@@ -28,13 +28,13 @@ public struct OnDisposeTerminus
 
 ## 实现规范
 
-每个后端服务器各自实现独立的 Handler，放在对应服务器的 Hotfix assembly 中。过滤条件推荐用 `scene.SceneType` 判断（与框架示例一致），而非 `RoamingType`。**必须区分 `UnLink` 和 `Transfer`**，否则玩家传送时会错误触发下线逻辑。
+每个后端服务器各自实现独立的监听器，放在对应服务器的 Hotfix assembly 中。过滤条件推荐用 `scene.SceneType` 判断（与框架示例一致），而非 `RoamingType`。**必须区分 `UnLink` 和 `Transfer`**，否则玩家传送时会错误触发下线逻辑。
 
 **Map 服务器示例：**
 
 ```csharp
 // Map 服务器 Hotfix assembly
-public sealed class OnDisposeTerminusEvent_Map : AsyncEventSystem<OnDisposeTerminus>
+public sealed class OnDisposeTerminus_ExitMap : AsyncEventSystem<OnDisposeTerminus>
 {
     protected override async FTask Handler(OnDisposeTerminus self)
     {
@@ -71,7 +71,7 @@ public sealed class OnDisposeTerminusEvent_Map : AsyncEventSystem<OnDisposeTermi
 
 ```csharp
 // Chat 服务器 Hotfix assembly
-public sealed class OnDisposeTerminusEvent_Chat : AsyncEventSystem<OnDisposeTerminus>
+public sealed class OnDisposeTerminus_SaveChatPlayer : AsyncEventSystem<OnDisposeTerminus>
 {
     protected override async FTask Handler(OnDisposeTerminus self)
     {

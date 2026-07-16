@@ -1,0 +1,278 @@
+@page "/instances"
+@inject ControlCenterStore Store
+
+<PageTitle>服务实例 · Fantasy Control Center</PageTitle>
+
+<div class="page-heading">
+    <div>
+        <span class="eyebrow">运行状态</span>
+        <h1>服务实例</h1>
+        <p>实例通过注册与心跳维持租约。发现接口不会返回已离线或租约过期的实例。</p>
+    </div>
+    <button class="button secondary" type="button" @onclick="LoadAsync">刷新实例</button>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(_message))
+{
+    <div class="alert @(_isError ? "error" : "success")">@_message</div>
+}
+
+<section class="panel table-panel full-width">
+    <div class="panel-heading">
+        <div><span class="eyebrow">Registry</span><h2>注册表</h2></div>
+        <div class="registry-toolbar">
+            <label class="toolbar-filter registry-search">
+                <span>查询</span>
+                <input type="search"
+                       placeholder="Scene、Address、实例或拓扑名称"
+                       @bind="_searchText"
+                       @bind:event="oninput" />
+            </label>
+            <div class="toolbar-filter">
+                <span>状态</span>
+                <div class="filter-group">
+                    <button class="@FilterClass("all")" type="button" @onclick="ShowAll">全部 @_instances.Count</button>
+                    <button class="@FilterClass("online")" type="button" @onclick="ShowOnline">在线 @_instances.Count(x => x.Status != "Offline")</button>
+                    <button class="@FilterClass("offline")" type="button" @onclick="ShowOffline">离线 @_instances.Count(x => x.Status == "Offline")</button>
+                </div>
+            </div>
+            <div class="toolbar-filter">
+                <span>分组</span>
+                <div class="filter-group">
+                    <button class="@GroupModeClass("all")" type="button" @onclick="ShowAllGroups">全部</button>
+                    <button class="@GroupModeClass("namespace")" type="button" @onclick="ShowNamespaceGroups">Namespace</button>
+                    <button class="@GroupModeClass("world-group")" type="button" @onclick="ShowWorldGroupGroups">World 分组</button>
+                    <button class="@GroupModeClass("world")" type="button" @onclick="ShowWorldGroups">World</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (_loading)
+    {
+        <div class="loading-panel">正在读取服务注册表…</div>
+    }
+    else if (!QueryInstances().Any())
+    {
+        <div class="compact-empty tall"><span>◎</span><strong>没有符合条件的服务实例</strong><small>运行 Scene 并调用注册接口后，实例会显示在这里。</small><a class="text-link" href="/api-reference">查看接入接口</a></div>
+    }
+    else
+    {
+        <div class="service-browser @(_groupMode == "all" ? "no-groups" : string.Empty)">
+            @if (_groupMode != "all")
+            {
+                <aside class="service-group-nav" aria-label="@GroupModeTitle()列表">
+                    <span>@GroupModeTitle()</span>
+                    <button class="@SelectedGroupClass(null)" type="button" @onclick="ClearGroupSelection">
+                        <span><strong>全部</strong><small>不限制当前分组</small></span>
+                        <b>@QueryInstances().Count()</b>
+                    </button>
+                    @foreach (var group in ScopeGroups())
+                    {
+                        <button class="@SelectedGroupClass(group.Key)" type="button" @onclick="() => SelectGroup(group.Key)">
+                            <span><strong>@ScopeGroupName(group.Key)</strong><small>#@group.Key</small></span>
+                            <b>@group.Count()</b>
+                        </button>
+                    }
+                </aside>
+            }
+
+            <div class="service-table-wrap">
+                <table class="service-table instance-management-table">
+                    <thead><tr><th></th><th>服务层级</th><th>Namespace / World</th><th>服务地址</th><th>心跳 / 租约</th><th>状态</th><th></th></tr></thead>
+                    <tbody>
+                    @foreach (var item in VisibleInstances())
+                    {
+                        <tr class="@(item.IsSubScene ? "sub-scene-row" : "root-scene-row")">
+                            <td class="service-state-cell"><span class="instance-state @item.Status.ToLowerInvariant()"></span></td>
+                            <td class="instance-service-cell">
+                                <div class="instance-service-title">
+                                    @if (item.IsSubScene)
+                                    {
+                                        <span class="sub-scene-branch">└</span>
+                                    }
+                                    <span class="instance-kind @(item.IsSubScene ? "sub" : "root")">@(item.IsSubScene ? "SubScene" : "Root Scene")</span>
+                                    <strong>@item.SceneType · Scene #@item.SceneId</strong>
+                                </div>
+                                <small>@item.InstanceId</small>
+                                <small class="instance-address">
+                                    Address @item.Address
+                                    @if (item.IsSubScene)
+                                    {
+                                        <span> · Parent @item.ParentAddress</span>
+                                    }
+                                </small>
+                            </td>
+                            <td><strong>@NamespaceName(item.NamespaceId)</strong><small>@WorldGroupName(item.WorldGroupId) · @WorldName(item.WorldId)</small></td>
+                            <td>
+                                <strong>@item.Host:@item.InnerPort</strong>
+                                <small>@(item.IsSubScene ? "通过父 Root Scene 连接" : item.OuterPort > 0 ? $"Outer {item.OuterPort}" : "仅内网")</small>
+                            </td>
+                            <td><strong>@HeartbeatText(item.LastHeartbeatUtc)</strong><small>租约至 @item.LeaseExpiresAtUtc.ToLocalTime().ToString("HH:mm:ss")</small></td>
+                            <td><span class="pill @(item.Status == "Offline" ? "muted" : "success")">@item.Status</span><small>@(string.IsNullOrWhiteSpace(item.Version) ? "未标记版本" : item.Version)</small></td>
+                            <td class="row-actions">@if (item.Status != "Offline") { <button class="danger" type="button" @onclick="() => OfflineAsync(item.InstanceId)">摘除</button> }</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</section>
+
+@code {
+    private IReadOnlyList<ServiceInstanceView> _instances = [];
+    private Dictionary<uint, string> _namespaceNames = [];
+    private Dictionary<uint, string> _worldGroupNames = [];
+    private Dictionary<uint, string> _worldNames = [];
+    private bool _loading = true;
+    private string _filter = "all";
+    private string _groupMode = "all";
+    private string _searchText = string.Empty;
+    private uint? _selectedGroupId;
+    private string? _message;
+    private bool _isError;
+
+    private IEnumerable<ServiceInstanceView> StatusInstances() => _filter switch
+    {
+        "online" => _instances.Where(static instance => instance.Status != "Offline"),
+        "offline" => _instances.Where(static instance => instance.Status == "Offline"),
+        _ => _instances
+    };
+
+    private IEnumerable<ServiceInstanceView> QueryInstances()
+    {
+        var instances = StatusInstances();
+        var query = _searchText.Trim();
+
+        return query.Length == 0
+            ? instances
+            : instances.Where(instance => MatchesSearch(instance, query));
+    }
+
+    protected override Task OnInitializedAsync() => LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        try
+        {
+            var topology = await Store.GetTopologyAsync();
+            _namespaceNames = topology.Namespaces.ToDictionary(item => item.Id, item => item.Name);
+            _worldGroupNames = topology.WorldGroups.ToDictionary(item => item.Id, item => item.Name);
+            _worldNames = topology.Worlds.ToDictionary(item => item.Id, item => item.Name);
+            _instances = (await Store.GetInstancesAsync())
+                .OrderByDescending(instance => instance.StartedAtUtc)
+                .ToArray();
+            if (_selectedGroupId.HasValue && !QueryInstances().Any(instance => ScopeId(instance) == _selectedGroupId.Value))
+            {
+                _selectedGroupId = null;
+            }
+            _message = null;
+        }
+        catch (Exception exception) { _message = exception.Message; _isError = true; }
+        finally { _loading = false; }
+    }
+
+    private async Task OfflineAsync(string instanceId)
+    {
+        try { await Store.SetInstanceOfflineAsync(instanceId); await LoadAsync(); _message = $"实例 {instanceId} 已从发现结果中摘除。"; _isError = false; }
+        catch (Exception exception) { _message = exception.Message; _isError = true; }
+    }
+
+    private IEnumerable<IGrouping<uint, ServiceInstanceView>> ScopeGroups() =>
+        (_groupMode switch
+        {
+            "namespace" => QueryInstances().GroupBy(static instance => instance.NamespaceId),
+            "world-group" => QueryInstances().GroupBy(static instance => instance.WorldGroupId),
+            "world" => QueryInstances().GroupBy(static instance => instance.WorldId),
+            _ => QueryInstances().GroupBy(static _ => 0U)
+        }).OrderBy(group => group.Key);
+
+    private IEnumerable<ServiceInstanceView> VisibleInstances()
+    {
+        var instances = QueryInstances();
+        if (_selectedGroupId.HasValue)
+        {
+            var selectedGroupId = _selectedGroupId.Value;
+            instances = instances.Where(instance => ScopeId(instance) == selectedGroupId);
+        }
+
+        return instances
+            .OrderBy(static instance => instance.IsSubScene ? instance.ParentAddress : instance.Address)
+            .ThenBy(static instance => instance.IsSubScene)
+            .ThenByDescending(static instance => instance.StartedAtUtc);
+    }
+
+    private bool MatchesSearch(ServiceInstanceView instance, string query)
+    {
+        return instance.SceneType.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+               instance.InstanceId.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+               instance.Host.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+               instance.SceneId.ToString().Contains(query, StringComparison.Ordinal) ||
+               instance.Address.ToString().Contains(query, StringComparison.Ordinal) ||
+               (instance.ParentAddress != 0 &&
+                instance.ParentAddress.ToString().Contains(query, StringComparison.Ordinal)) ||
+               ContainsName(_namespaceNames, instance.NamespaceId, query) ||
+               ContainsName(_worldGroupNames, instance.WorldGroupId, query) ||
+               ContainsName(_worldNames, instance.WorldId, query);
+    }
+
+    private static bool ContainsName(
+        IReadOnlyDictionary<uint, string> names,
+        uint id,
+        string query)
+    {
+        return names.TryGetValue(id, out var name) &&
+               name.Contains(query, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private uint ScopeId(ServiceInstanceView instance) => _groupMode switch
+    {
+        "namespace" => instance.NamespaceId,
+        "world-group" => instance.WorldGroupId,
+        "world" => instance.WorldId,
+        _ => 0
+    };
+
+    private string ScopeGroupName(uint id)
+    {
+        var names = _groupMode switch
+        {
+            "namespace" => _namespaceNames,
+            "world-group" => _worldGroupNames,
+            "world" => _worldNames,
+            _ => null
+        };
+        return names != null && names.TryGetValue(id, out var name) ? name : $"未命名 #{id}";
+    }
+
+    private string NamespaceName(uint id) => _namespaceNames.TryGetValue(id, out var name) ? $"Namespace #{id} · {name}" : $"Namespace #{id}";
+    private string WorldGroupName(uint id) => _worldGroupNames.TryGetValue(id, out var name) ? $"分组 #{id} · {name}" : $"分组 #{id}";
+    private string WorldName(uint id) => _worldNames.TryGetValue(id, out var name) ? $"World #{id} · {name}" : $"World #{id}";
+
+    private void SetStatusFilter(string filter) { _filter = filter; _selectedGroupId = null; }
+    private void ShowAll() => SetStatusFilter("all");
+    private void ShowOnline() => SetStatusFilter("online");
+    private void ShowOffline() => SetStatusFilter("offline");
+    private string FilterClass(string filter) => _filter == filter ? "active" : string.Empty;
+    private void SetGroupMode(string mode) { _groupMode = mode; _selectedGroupId = null; }
+    private void ShowAllGroups() => SetGroupMode("all");
+    private void ShowNamespaceGroups() => SetGroupMode("namespace");
+    private void ShowWorldGroupGroups() => SetGroupMode("world-group");
+    private void ShowWorldGroups() => SetGroupMode("world");
+    private string GroupModeClass(string mode) => _groupMode == mode ? "active" : string.Empty;
+    private string SelectedGroupClass(uint? id) => _selectedGroupId == id ? "active" : string.Empty;
+    private string GroupModeTitle() => _groupMode switch { "namespace" => "Namespace", "world-group" => "World 分组", "world" => "World", _ => "全部" };
+    private void SelectGroup(uint id) => _selectedGroupId = id;
+    private void ClearGroupSelection() => _selectedGroupId = null;
+
+    private static string HeartbeatText(DateTimeOffset heartbeat)
+    {
+        var elapsed = DateTimeOffset.UtcNow - heartbeat;
+        if (elapsed.TotalSeconds < 5) return "刚刚";
+        if (elapsed.TotalMinutes < 1) return $"{(int)elapsed.TotalSeconds} 秒前";
+        if (elapsed.TotalHours < 1) return $"{(int)elapsed.TotalMinutes} 分钟前";
+        return heartbeat.ToLocalTime().ToString("MM-dd HH:mm");
+    }
+}

@@ -11,11 +11,6 @@
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="configTable" type="configTableType" minOccurs="0" maxOccurs="1">
-          <xs:annotation>
-            <xs:documentation>配置表路径设置</xs:documentation>
-          </xs:annotation>
-        </xs:element>
         <xs:element name="idFactory" type="idFactoryType" minOccurs="0" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>ID生成器配置</xs:documentation>
@@ -31,6 +26,17 @@
             <xs:documentation>会话运行时配置</xs:documentation>
           </xs:annotation>
         </xs:element>
+        <xs:element
+                name="controlCenter"
+                type="controlCenterType"
+                minOccurs="0"
+                maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              Fantasy Control Center及服务发现配置
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
         <xs:element name="server" type="serverType" minOccurs="1" maxOccurs="1">
           <xs:annotation>
             <xs:documentation>服务器配置</xs:documentation>
@@ -40,11 +46,86 @@
     </xs:complexType>
   </xs:element>
 
-  <!-- ConfigTable type -->
-  <xs:complexType name="configTableType">
-    <xs:attribute name="path" type="xs:string" use="required">
+  <!-- ControlCenterType type -->
+  <xs:complexType name="controlCenterType">
+    <xs:sequence>
+      <!--
+        XSD 1.0 无法表达 enabled=true 时必须存在，
+        因此这里定义为可选，由源生成器进行条件检查。
+      -->
+      <xs:element
+              name="sceneTypes"
+              type="sceneTypesType"
+              minOccurs="0"
+              maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            服务发现模式下的编译期Scene类型声明
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+
+    <xs:attribute
+            name="enabled"
+            type="xs:boolean"
+            use="optional"
+            default="false">
       <xs:annotation>
-        <xs:documentation>配置表文件路径</xs:documentation>
+        <xs:documentation>是否启用Control Center</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+
+    <xs:attribute
+            name="url"
+            type="xs:anyURI"
+            use="required">
+      <xs:annotation>
+        <xs:documentation>Control Center的HTTP地址，不包含/api/v1路径</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+
+    <xs:attribute
+            name="heartbeatIntervalSeconds"
+            use="optional"
+            default="5">
+      <xs:annotation>
+        <xs:documentation>
+          批量心跳发送间隔，单位为秒，必须大于0并小于leaseSeconds
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="1"/>
+          <xs:maxInclusive value="299"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+
+    <xs:attribute
+            name="leaseSeconds"
+            use="optional"
+            default="15">
+      <xs:annotation>
+        <xs:documentation>
+          服务实例租约时长，单位为秒，范围为5到300秒
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="5"/>
+          <xs:maxInclusive value="300"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+
+    <xs:attribute
+            name="fallbackToLocal"
+            type="xs:boolean"
+            use="optional"
+            default="true">
+      <xs:annotation>
+        <xs:documentation>Control Center加载失败时是否回退到本地server配置</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:complexType>
@@ -60,6 +141,45 @@
           <xs:enumeration value="None"/>
           <xs:enumeration value="Default"/>
           <xs:enumeration value="World"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Compile-time Scene types -->
+  <xs:complexType name="sceneTypesType">
+    <xs:sequence>
+      <xs:element
+              name="sceneType"
+              type="sceneTypeDefinitionType"
+              minOccurs="1"
+              maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sceneTypeDefinitionType">
+    <xs:attribute name="id" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Scene类型的稳定数字ID，必须大于0且发布后不应修改或重复使用。
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:int">
+          <xs:minInclusive value="1"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+
+    <xs:attribute name="name" use="required">
+      <xs:annotation>
+        <xs:documentation>
+          Scene类型名称，同时作为生成的C#常量名称。
+        </xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[A-Z][A-Za-z0-9_]*"/>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -134,6 +254,11 @@
         <xs:documentation>进程ID</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="namespaceId" type="xs:unsignedInt" use="optional">
+      <xs:annotation>
+        <xs:documentation>所属Namespace ID；Control Center本地回退时必须大于0</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute name="machineId" type="xs:unsignedInt" use="required">
       <xs:annotation>
         <xs:documentation>所属机器ID</xs:documentation>
@@ -199,10 +324,20 @@
       <xs:element name="database" type="databaseType" minOccurs="1" maxOccurs="unbounded"/>
     </xs:sequence>
 
-    <!-- world需要id和worldName -->
+    <!-- world需要id和worldName；namespaceId和groupId用于Control Center本地回退 -->
     <xs:attribute name="id" type="xs:unsignedInt" use="required">
       <xs:annotation>
         <xs:documentation>世界ID</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="namespaceId" type="xs:unsignedInt" use="optional">
+      <xs:annotation>
+        <xs:documentation>所属Namespace ID；Control Center本地回退时必须大于0</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="groupId" type="xs:unsignedInt" use="optional">
+      <xs:annotation>
+        <xs:documentation>所属WorldGroup ID；Control Center本地回退时必须大于0</xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute name="worldName" type="xs:string" use="required">
@@ -310,6 +445,6 @@
         <xs:documentation>Session idle check interval (in milliseconds)</xs:documentation>
       </xs:annotation>
     </xs:attribute>
-  </xs:complexType> 
+  </xs:complexType>
 
 </xs:schema>

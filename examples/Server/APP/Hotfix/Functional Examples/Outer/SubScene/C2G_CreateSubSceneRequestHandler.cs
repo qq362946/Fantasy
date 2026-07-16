@@ -21,6 +21,6 @@ public sealed class C2G_CreateSubSceneRequestHandler : MessageRPC<C2G_CreateSubS
         }
         
         // 记录下这个AddressId，以便后续的消息转发。
-        session.AddComponent<GateSubSceneFlagComponent>().SubSceneAddressId = createSubSceneResponse.SubSceneAddress;
+        session.GetOrAddComponent<GateSubSceneFlagComponent>().SubSceneAddressId = createSubSceneResponse.SubSceneAddress;
     }
 }

@@ -16,10 +16,7 @@ namespace Fantasy.Http
     /// </summary>
     public static partial class HttpClientHelper
     {
-        private static readonly HttpClient Client = new HttpClient(new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
-        });
+        private static readonly HttpClient Client = new();
 
         /// <summary>
         /// 用Post方式请求string数据
@@ -132,12 +129,18 @@ namespace Fantasy.Http
 
         private static async FTask<T> Deserialize<T>(string url, HttpResponseMessage response)
         {
-            if (response.StatusCode != HttpStatusCode.OK)
+            using (response)
             {
-                throw new Exception($"Unable to connect to server url {(object)url} HttpStatusCode:{(object)response.StatusCode}");
-            }
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException(
+                        $"Unable to connect to server url {url}, " +
+                        $"HttpStatusCode: {response.StatusCode}");
+                }
 
-            return (await response.Content.ReadAsStringAsync()).Deserialize<T>();
+                return (await response.Content.ReadAsStringAsync())
+                    .Deserialize<T>();
+            }
         }
     }
 }

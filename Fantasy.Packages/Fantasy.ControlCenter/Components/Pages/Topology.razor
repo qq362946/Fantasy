@@ -1,0 +1,513 @@
+@page "/topology"
+@inject ControlCenterStore Store
+
+<PageTitle>拓扑配置 · Fantasy Control Center</PageTitle>
+
+<div class="page-heading">
+    <div>
+        <span class="eyebrow">期望状态</span>
+        <h1>拓扑配置</h1>
+        <p>配置 Namespace、服务器、进程、World 分组、World 和 Scene。修改会持久化到 SQLite，并生成新的配置版本。</p>
+    </div>
+    <span class="revision-badge">Revision @_revision</span>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(_message))
+{
+    <div class="alert @(_isError ? "error" : "success")">@_message</div>
+}
+
+<div class="tab-bar" role="tablist" aria-label="拓扑类型">
+    <button type="button" class="@TabClass("namespaces")" @onclick="ShowNamespaces">Namespace <span>@_namespaces.Count</span></button>
+    <button type="button" class="@TabClass("machines")" @onclick="ShowMachines">服务器 <span>@_machines.Count</span></button>
+    <button type="button" class="@TabClass("processes")" @onclick="ShowProcesses">进程 <span>@_processes.Count</span></button>
+    <button type="button" class="@TabClass("world-groups")" @onclick="ShowWorldGroups">World 分组 <span>@_worldGroups.Count</span></button>
+    <button type="button" class="@TabClass("worlds")" @onclick="ShowWorlds">World <span>@_worlds.Count</span></button>
+    <button type="button" class="@TabClass("scenes")" @onclick="ShowScenes">Scene <span>@_scenes.Count</span></button>
+</div>
+
+@if (_loading)
+{
+    <div class="loading-panel">正在加载拓扑配置…</div>
+}
+else if (_tab == "namespaces")
+{
+    <div class="editor-grid">
+        <section class="panel form-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Namespace</span><h2>@(_editingNamespace ? "编辑 Namespace" : "添加 Namespace")</h2></div></div>
+            <EditForm Model="_namespace" OnValidSubmit="SaveNamespaceAsync">
+                <DataAnnotationsValidator />
+                <div class="form-grid two-columns">
+                    <label><span>ID</span><UIntInput @bind-Value="_namespace.Id" /></label>
+                    <label><span>名称</span><InputText @bind-Value="_namespace.Name" placeholder="例如：正式服" /></label>
+                </div>
+                <label class="check-row"><InputCheckbox @bind-Value="_namespace.Enabled" /><span>启用该 Namespace 中的运行配置和服务发现</span></label>
+                <ValidationSummary />
+                <div class="form-actions">
+                    <button class="button primary" type="submit">保存 Namespace</button>
+                    @if (_editingNamespace) { <button class="button secondary" type="button" @onclick="ResetNamespace">取消编辑</button> }
+                </div>
+            </EditForm>
+        </section>
+        <section class="panel table-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Namespaces</span><h2>Namespace 列表</h2></div></div>
+            @if (_namespaces.Count == 0)
+            {
+                <div class="compact-empty"><span>□</span><strong>还没有 Namespace</strong><small>先创建隔离空间，再配置 Process 和 World 分组。</small></div>
+            }
+            else
+            {
+                <div class="table-wrap"><table><thead><tr><th>ID / 名称</th><th>Process</th><th>WorldGroup</th><th>状态</th><th></th></tr></thead><tbody>
+                @foreach (var item in _namespaces)
+                {
+                    <tr>
+                        <td><strong>#@item.Id</strong><small>@item.Name</small></td>
+                        <td>@_processes.Count(process => process.NamespaceId == item.Id)</td>
+                        <td>@_worldGroups.Count(group => group.NamespaceId == item.Id)</td>
+                        <td><span class="pill @(item.Enabled ? "success" : "muted")">@(item.Enabled ? "启用" : "停用")</span></td>
+                        <td class="row-actions"><button type="button" @onclick="() => EditNamespace(item)">编辑</button><button type="button" class="danger" @onclick="() => DeleteNamespaceAsync(item.Id)">删除</button></td>
+                    </tr>
+                }
+                </tbody></table></div>
+            }
+        </section>
+    </div>
+}
+else if (_tab == "machines")
+{
+    <div class="editor-grid">
+        <section class="panel form-panel">
+            <div class="panel-heading">
+                <div><span class="eyebrow">Machine</span><h2>@(_editingMachine ? "编辑服务器" : "添加服务器")</h2></div>
+            </div>
+            <EditForm Model="_machine" OnValidSubmit="SaveMachineAsync">
+                <DataAnnotationsValidator />
+                <div class="form-grid two-columns">
+                    <label><span>ID</span><UIntInput @bind-Value="_machine.Id" /></label>
+                    <label><span>名称</span><InputText @bind-Value="_machine.Name" placeholder="例如：本地开发机" /></label>
+                </div>
+                <label><span>对外访问地址</span><InputText @bind-Value="_machine.OuterIp" placeholder="game.example.com" /></label>
+                <label><span>外网绑定地址</span><InputText @bind-Value="_machine.OuterBindIp" placeholder="0.0.0.0" /></label>
+                <label><span>内网绑定地址</span><InputText @bind-Value="_machine.InnerBindIp" placeholder="192.168.1.10" /></label>
+                <label class="check-row"><InputCheckbox @bind-Value="_machine.Enabled" /><span>允许在这台服务器上部署服务</span></label>
+                <ValidationSummary />
+                <div class="form-actions">
+                    <button class="button primary" type="submit">保存服务器</button>
+                    @if (_editingMachine) { <button class="button secondary" type="button" @onclick="ResetMachine">取消编辑</button> }
+                </div>
+            </EditForm>
+        </section>
+        <section class="panel table-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Machines</span><h2>服务器列表</h2></div></div>
+            @if (_machines.Count == 0)
+            {
+                <div class="compact-empty"><span>□</span><strong>还没有服务器</strong><small>先添加一台服务器，再继续配置进程。</small></div>
+            }
+            else
+            {
+                <div class="table-wrap">
+                    <table><thead><tr><th>ID / 名称</th><th>内网地址</th><th>外网地址</th><th>状态</th><th></th></tr></thead>
+                    <tbody>
+                    @foreach (var item in _machines)
+                    {
+                        <tr>
+                            <td><strong>#@item.Id</strong><small>@item.Name</small></td>
+                            <td>@item.InnerBindIp</td><td>@item.OuterIp</td>
+                            <td><span class="pill @(item.Enabled ? "success" : "muted")">@(item.Enabled ? "启用" : "停用")</span></td>
+                            <td class="row-actions"><button type="button" @onclick="() => EditMachine(item)">编辑</button><button type="button" class="danger" @onclick="() => DeleteMachineAsync(item.Id)">删除</button></td>
+                        </tr>
+                    }
+                    </tbody></table>
+                </div>
+            }
+        </section>
+    </div>
+}
+else if (_tab == "processes")
+{
+    <div class="editor-grid">
+        <section class="panel form-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Process</span><h2>@(_editingProcess ? "编辑进程" : "添加进程")</h2></div></div>
+            @if (_machines.Count == 0 || _namespaces.Count == 0)
+            {
+                <div class="alert warning">请先添加 Namespace 和服务器，再创建进程。</div>
+            }
+            <EditForm Model="_process" OnValidSubmit="SaveProcessAsync">
+                <DataAnnotationsValidator />
+                <div class="form-grid two-columns">
+                    <label><span>ID</span><UIntInput @bind-Value="_process.Id" /></label>
+                    <label><span>名称</span><InputText @bind-Value="_process.Name" placeholder="例如：Game-1" /></label>
+                </div>
+                <label><span>所属 Namespace</span><UIntSelect @bind-Value="_process.NamespaceId"><option value="0">请选择 Namespace</option>@foreach (var item in _namespaces) { <option value="@item.Id">#@item.Id · @item.Name</option> }</UIntSelect></label>
+                <label><span>所属服务器</span><UIntSelect @bind-Value="_process.MachineId"><option value="0">请选择服务器</option>@foreach (var machine in _machines) { <option value="@machine.Id">#@machine.Id · @machine.Name</option> }</UIntSelect></label>
+                <label><span>启动分组</span><UIntInput @bind-Value="_process.StartupGroup" /><small>数字越小越早启动，相同分组可并行启动。</small></label>
+                <label class="check-row"><InputCheckbox @bind-Value="_process.Enabled" /><span>启用该进程定义</span></label>
+                <ValidationSummary />
+                <div class="form-actions">
+                    <button class="button primary" type="submit" disabled="@(_machines.Count == 0 || _namespaces.Count == 0)">保存进程</button>
+                    @if (_editingProcess) { <button class="button secondary" type="button" @onclick="ResetProcess">取消编辑</button> }
+                </div>
+            </EditForm>
+        </section>
+        <section class="panel table-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Processes</span><h2>进程列表</h2></div></div>
+            @if (_processes.Count == 0) { <div class="compact-empty"><span>□</span><strong>还没有进程</strong><small>进程用于把 Scene 分配到具体服务器。</small></div> }
+            else
+            {
+                <div class="table-wrap"><table><thead><tr><th>ID / 名称</th><th>Namespace</th><th>服务器</th><th>启动分组</th><th>状态</th><th></th></tr></thead><tbody>
+                @foreach (var item in _processes)
+                {
+                    <tr><td><strong>#@item.Id</strong><small>@item.Name</small></td><td>@NamespaceName(item.NamespaceId)</td><td>@MachineName(item.MachineId)</td><td>@item.StartupGroup</td><td><span class="pill @(item.Enabled ? "success" : "muted")">@(item.Enabled ? "启用" : "停用")</span></td><td class="row-actions"><button type="button" @onclick="() => EditProcess(item)">编辑</button><button type="button" class="danger" @onclick="() => DeleteProcessAsync(item.Id)">删除</button></td></tr>
+                }
+                </tbody></table></div>
+            }
+        </section>
+    </div>
+}
+else if (_tab == "world-groups")
+{
+    <div class="editor-grid">
+        <section class="panel form-panel">
+            <div class="panel-heading"><div><span class="eyebrow">World Group</span><h2>@(_editingWorldGroup ? "编辑 World 分组" : "添加 World 分组")</h2></div></div>
+            @if (_namespaces.Count == 0)
+            {
+                <div class="alert warning">请先添加 Namespace，再创建 World 分组。</div>
+            }
+            <EditForm Model="_worldGroup" OnValidSubmit="SaveWorldGroupAsync">
+                <DataAnnotationsValidator />
+                <div class="form-grid two-columns">
+                    <label><span>ID</span><UIntInput @bind-Value="_worldGroup.Id" /></label>
+                    <label><span>名称</span><InputText @bind-Value="_worldGroup.Name" placeholder="例如：一区" /></label>
+                </div>
+                <label><span>所属 Namespace</span><UIntSelect @bind-Value="_worldGroup.NamespaceId"><option value="0">请选择 Namespace</option>@foreach (var item in _namespaces) { <option value="@item.Id">#@item.Id · @item.Name</option> }</UIntSelect></label>
+                <label class="check-row"><InputCheckbox @bind-Value="_worldGroup.Enabled" /><span>启用该分组及其所属 World</span></label>
+                <ValidationSummary />
+                <div class="form-actions">
+                    <button class="button primary" type="submit" disabled="@(_namespaces.Count == 0)">保存分组</button>
+                    @if (_editingWorldGroup) { <button class="button secondary" type="button" @onclick="ResetWorldGroup">取消编辑</button> }
+                </div>
+            </EditForm>
+        </section>
+        <section class="panel table-panel">
+            <div class="panel-heading"><div><span class="eyebrow">World Groups</span><h2>World 分组列表</h2></div></div>
+            @if (_worldGroups.Count == 0)
+            {
+                <div class="compact-empty"><span>□</span><strong>还没有 World 分组</strong><small>先创建分组，再向分组中添加 World。</small></div>
+            }
+            else
+            {
+                <div class="table-wrap"><table><thead><tr><th>ID / 名称</th><th>Namespace</th><th>World</th><th>状态</th><th></th></tr></thead><tbody>
+                @foreach (var item in _worldGroups)
+                {
+                    <tr>
+                        <td><strong>#@item.Id</strong><small>@item.Name</small></td>
+                        <td>@NamespaceName(item.NamespaceId)</td>
+                        <td>@_worlds.Count(world => world.GroupId == item.Id)</td>
+                        <td><span class="pill @(item.Enabled ? "success" : "muted")">@(item.Enabled ? "启用" : "停用")</span></td>
+                        <td class="row-actions"><button type="button" @onclick="() => EditWorldGroup(item)">编辑</button><button type="button" class="danger" @onclick="() => DeleteWorldGroupAsync(item.Id)">删除</button></td>
+                    </tr>
+                }
+                </tbody></table></div>
+            }
+        </section>
+    </div>
+}
+else if (_tab == "worlds")
+{
+    <div class="editor-grid">
+        <section class="panel form-panel">
+            <div class="panel-heading"><div><span class="eyebrow">World</span><h2>@(_editingWorld ? "编辑 World" : "添加 World")</h2></div></div>
+            @if (_worldGroups.Count == 0)
+            {
+                <div class="alert warning">请先添加 World 分组，再创建 World。</div>
+            }
+            <EditForm Model="_world" OnValidSubmit="SaveWorldAsync">
+                <DataAnnotationsValidator />
+                <div class="form-grid two-columns"><label><span>ID</span><UIntInput @bind-Value="_world.Id" /></label><label><span>名称</span><InputText @bind-Value="_world.Name" placeholder="例如：WorldA" /></label></div>
+                <label><span>所属分组</span><UIntSelect @bind-Value="_world.GroupId"><option value="0">请选择 World 分组</option>@foreach (var group in _worldGroups) { <option value="@group.Id">#@group.Id · @group.Name · @NamespaceName(group.NamespaceId)</option> }</UIntSelect></label>
+                <label class="check-row"><InputCheckbox @bind-Value="_world.Enabled" /><span>允许在该 World 中发现服务</span></label>
+                <ValidationSummary />
+                <div class="form-actions"><button class="button primary" type="submit" disabled="@(_worldGroups.Count == 0)">保存 World</button>@if (_editingWorld) { <button class="button secondary" type="button" @onclick="ResetWorld">取消编辑</button> }</div>
+            </EditForm>
+        </section>
+        <section class="panel table-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Worlds</span><h2>World 列表</h2></div></div>
+            @if (_worlds.Count == 0) { <div class="compact-empty"><span>□</span><strong>还没有 World</strong><small>World 是 Scene 查询时的隔离边界。</small></div> }
+            else
+            {
+                <div class="table-wrap"><table><thead><tr><th>ID</th><th>名称</th><th>所属分组</th><th>数据库</th><th>Scene</th><th>状态</th><th></th></tr></thead><tbody>
+                @foreach (var item in _worlds)
+                {
+                    var databaseCount = _databases.Count(database => database.WorldId == item.Id);
+                    var groupEnabled = _worldGroups.FirstOrDefault(group => group.Id == item.GroupId)?.Enabled == true;
+                    <tr>
+                        <td><strong>#@item.Id</strong></td>
+                        <td>@item.Name</td>
+                        <td>@WorldGroupName(item.GroupId)</td>
+                        <td><strong>@databaseCount</strong><small>@(databaseCount == 0 ? "缺少配置" : "已配置")</small></td>
+                        <td>@_scenes.Count(scene => scene.WorldId == item.Id)</td>
+                        <td><span class="pill @(item.Enabled && groupEnabled && databaseCount > 0 ? "success" : "muted")">@(!item.Enabled ? "停用" : !groupEnabled ? "分组停用" : databaseCount == 0 ? "待完善" : "启用")</span></td>
+                        <td class="row-actions"><button type="button" @onclick="() => ManageDatabases(item.Id)">数据库</button><button type="button" @onclick="() => EditWorld(item)">编辑</button><button type="button" class="danger" @onclick="() => DeleteWorldAsync(item.Id)">删除</button></td>
+                    </tr>
+                }
+                </tbody></table></div>
+            }
+        </section>
+    </div>
+
+    <section class="panel database-manager">
+        <div class="panel-heading database-heading">
+            <div><span class="eyebrow">World Databases</span><h2>数据库配置</h2></div>
+            @if (_worlds.Count > 0)
+            {
+                <div class="world-chips" aria-label="选择 World">
+                    @foreach (var world in _worlds)
+                    {
+                        <button type="button" class="@(_databaseWorldId == world.Id ? "active" : string.Empty)" @onclick="() => ManageDatabases(world.Id)">#@world.Id · @world.Name</button>
+                    }
+                </div>
+            }
+        </div>
+
+        @if (_worlds.Count == 0)
+        {
+            <div class="compact-empty"><span>◇</span><strong>请先创建 World</strong><small>每个 World 可以配置一个或多个数据库。</small></div>
+        }
+        else
+        {
+            <div class="database-grid">
+                <EditForm Model="_database" OnValidSubmit="SaveDatabaseAsync" class="database-form">
+                    <DataAnnotationsValidator />
+                    <div class="database-form-title">
+                        <div><strong>@(_editingDatabase ? "编辑数据库" : "添加数据库")</strong><small>@WorldName(_databaseWorldId)</small></div>
+                        @if (_editingDatabase) { <button class="text-link" type="button" @onclick="ResetDatabase">取消编辑</button> }
+                    </div>
+                    <div class="form-grid two-columns">
+                        <label><span>数据库类型</span><InputSelect @bind-Value="_database.DbType"><option value="MongoDB">MongoDB</option><option value="PostgreSQL">PostgreSQL</option></InputSelect></label>
+                        <label><span>数据库名称</span><InputText @bind-Value="_database.DbName" placeholder="例如：fantasy_main" /></label>
+                    </div>
+                    <label>
+                        <span>连接字符串</span>
+                        <div class="secret-input">
+                            <input type="@(_showConnection ? "text" : "password")" @bind="_database.DbConnection" placeholder="留空时只生成数据库名称配置" autocomplete="off" />
+                            <button type="button" @onclick="ToggleConnectionVisibility">@(_showConnection ? "隐藏" : "显示")</button>
+                        </div>
+                        <small>允许留空；留空时 Fantasy 不建立连接，但仍保留数据库名称。</small>
+                    </label>
+                    <label class="check-row"><InputCheckbox @bind-Value="_database.IsDefault" /><span>设为该 World 的默认数据库</span></label>
+                    <ValidationSummary />
+                    <button class="button primary" type="submit">保存数据库</button>
+                </EditForm>
+
+                <div class="database-list">
+                    @if (SelectedDatabases.Count == 0)
+                    {
+                        <div class="compact-empty"><span>▱</span><strong>这个 World 还没有数据库</strong><small>Fantasy 配置要求每个 World 至少包含一个 database。</small></div>
+                    }
+                    else
+                    {
+                        @foreach (var database in SelectedDatabases)
+                        {
+                            <article class="database-card">
+                                <span class="database-type">@database.DbType</span>
+                                <div>
+                                    <strong>@database.DbName</strong>
+                                    <small>@(string.IsNullOrWhiteSpace(database.DbConnection) ? "未配置连接字符串" : "已配置连接字符串")</small>
+                                </div>
+                                @if (database.IsDefault) { <span class="pill success">默认</span> }
+                                <div class="row-actions"><button type="button" @onclick="() => EditDatabase(database)">编辑</button><button type="button" class="danger" @onclick="() => DeleteDatabaseAsync(database.Id)">删除</button></div>
+                            </article>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </section>
+}
+else
+{
+    <div class="editor-grid scene-editor-grid">
+        <section class="panel form-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Scene</span><h2>@(_editingScene ? "编辑 Scene" : "添加 Scene")</h2></div></div>
+            @if (_processes.Count == 0 || _worlds.Count == 0) { <div class="alert warning">创建 Scene 前至少需要一个进程和一个 World。</div> }
+            <EditForm Model="_scene" OnValidSubmit="SaveSceneAsync">
+                <DataAnnotationsValidator />
+                <div class="form-grid two-columns"><label><span>ID</span><UIntInput @bind-Value="_scene.Id" /></label><label><span>SceneType</span><InputText @bind-Value="_scene.SceneType" placeholder="例如：Map" /></label></div>
+                <div class="form-grid two-columns">
+                    <label><span>所属进程</span><UIntSelect @bind-Value="_scene.ProcessId"><option value="0">请选择进程</option>@foreach (var process in _processes) { <option value="@process.Id">#@process.Id · @process.Name · @NamespaceName(process.NamespaceId)</option> }</UIntSelect></label>
+                    <label><span>所属 World</span><UIntSelect @bind-Value="_scene.WorldId"><option value="0">请选择 World</option>@foreach (var world in _worlds) { <option value="@world.Id">#@world.Id · @world.Name · @WorldNamespaceName(world)</option> }</UIntSelect></label>
+                </div>
+                <div class="form-grid two-columns">
+                    <label><span>运行模式</span><InputSelect @bind-Value="_scene.RuntimeMode"><option value="MultiThread">MultiThread</option><option value="SingleThread">SingleThread</option></InputSelect></label>
+                    <label><span>网络协议</span><InputSelect @bind-Value="_scene.NetworkProtocol"><option value="">无外网协议</option><option value="TCP">TCP</option><option value="KCP">KCP</option><option value="WebSocket">WebSocket</option><option value="HTTP">HTTP</option></InputSelect></label>
+                </div>
+                <div class="form-grid two-columns"><label><span>内网端口</span><InputNumber @bind-Value="_scene.InnerPort" /></label><label><span>外网端口</span><InputNumber @bind-Value="_scene.OuterPort" /><small>不需要外网监听时填写 0。</small></label></div>
+                <label class="check-row"><InputCheckbox @bind-Value="_scene.Enabled" /><span>允许注册和发现该 Scene</span></label>
+                <ValidationSummary />
+                <div class="form-actions"><button class="button primary" type="submit" disabled="@(_processes.Count == 0 || _worlds.Count == 0)">保存 Scene</button>@if (_editingScene) { <button class="button secondary" type="button" @onclick="ResetScene">取消编辑</button> }</div>
+            </EditForm>
+        </section>
+        <section class="panel table-panel">
+            <div class="panel-heading"><div><span class="eyebrow">Scenes</span><h2>Scene 列表</h2></div></div>
+            @if (_scenes.Count == 0) { <div class="compact-empty"><span>□</span><strong>还没有 Scene</strong><small>完成定义后，运行实例才能向控制中心注册。</small></div> }
+            else
+            {
+                <div class="table-wrap"><table><thead><tr><th>ID / 类型</th><th>进程 / World</th><th>端口</th><th>状态</th><th></th></tr></thead><tbody>
+                @foreach (var item in _scenes)
+                {
+                    <tr><td><strong>#@item.Id</strong><small>@item.SceneType · @item.RuntimeMode</small></td><td>@ProcessName(item.ProcessId)<small>@WorldName(item.WorldId)</small></td><td><strong>@item.InnerPort</strong><small>@(item.OuterPort > 0 ? $"{item.NetworkProtocol} · {item.OuterPort}" : "仅内网")</small></td><td><span class="pill @(item.Enabled ? "success" : "muted")">@(item.Enabled ? "启用" : "停用")</span></td><td class="row-actions"><button type="button" @onclick="() => EditScene(item)">编辑</button><button type="button" class="danger" @onclick="() => DeleteSceneAsync(item.Id)">删除</button></td></tr>
+                }
+                </tbody></table></div>
+            }
+        </section>
+    </div>
+}
+
+@code {
+    private string _tab = "namespaces";
+    private bool _loading = true;
+    private string? _message;
+    private bool _isError;
+    private long _revision;
+    private List<NamespaceDefinition> _namespaces = [];
+    private List<MachineDefinition> _machines = [];
+    private List<ProcessDefinition> _processes = [];
+    private List<WorldGroupDefinition> _worldGroups = [];
+    private List<WorldDefinition> _worlds = [];
+    private List<DatabaseDefinition> _databases = [];
+    private List<SceneDefinition> _scenes = [];
+    private NamespaceDefinition _namespace = NewNamespace();
+    private MachineDefinition _machine = NewMachine();
+    private ProcessDefinition _process = NewProcess();
+    private WorldGroupDefinition _worldGroup = NewWorldGroup();
+    private WorldDefinition _world = NewWorld();
+    private DatabaseDefinition _database = NewDatabase();
+    private SceneDefinition _scene = NewScene();
+    private bool _editingNamespace;
+    private bool _editingMachine;
+    private bool _editingProcess;
+    private bool _editingWorldGroup;
+    private bool _editingWorld;
+    private bool _editingDatabase;
+    private bool _editingScene;
+    private bool _showConnection;
+    private uint _databaseWorldId;
+
+    private IReadOnlyList<DatabaseDefinition> SelectedDatabases =>
+        _databases.Where(database => database.WorldId == _databaseWorldId).ToList();
+
+    protected override async Task OnInitializedAsync() => await LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        _loading = true;
+        try
+        {
+            var topology = await Store.GetTopologyAsync();
+            _namespaces = topology.Namespaces.ToList();
+            _machines = topology.Machines.ToList(); _processes = topology.Processes.ToList();
+            _worldGroups = topology.WorldGroups.ToList();
+            _worlds = topology.Worlds.ToList(); _databases = topology.Databases.ToList();
+            _scenes = topology.Scenes.ToList(); _revision = topology.Revision;
+            if (_worlds.All(world => world.Id != _databaseWorldId))
+            {
+                _databaseWorldId = _worlds.FirstOrDefault()?.Id ?? 0;
+                ResetDatabase();
+            }
+            SetReferenceDefaults();
+        }
+        catch (Exception exception) { ShowError(exception); }
+        finally { _loading = false; }
+    }
+
+    private async Task SaveNamespaceAsync() => await SaveAsync(() => Store.SaveNamespaceAsync(_namespace), ResetNamespace, "Namespace 已保存。");
+    private async Task SaveMachineAsync() => await SaveAsync(() => Store.SaveMachineAsync(_machine), ResetMachine, "服务器配置已保存。");
+    private async Task SaveProcessAsync() => await SaveAsync(() => Store.SaveProcessAsync(_process), ResetProcess, "进程配置已保存。");
+    private async Task SaveWorldGroupAsync() => await SaveAsync(() => Store.SaveWorldGroupAsync(_worldGroup), ResetWorldGroup, "World 分组已保存。");
+    private async Task SaveWorldAsync() => await SaveAsync(() => Store.SaveWorldAsync(_world), ResetWorld, "World 配置已保存。");
+    private async Task SaveDatabaseAsync()
+    {
+        try
+        {
+            _database.WorldId = _databaseWorldId;
+            await Store.SaveDatabaseAsync(_database);
+            ResetDatabase();
+            await LoadAsync();
+            ShowSuccess("数据库配置已保存。");
+        }
+        catch (Exception exception) when (exception is SqlSugar.SqlSugarException or Microsoft.Data.Sqlite.SqliteException)
+        {
+            ShowError("同一个 World 中的数据库名称不能重复，并且只能有一个默认数据库。");
+        }
+        catch (Exception exception) { ShowError(exception); }
+    }
+    private async Task SaveSceneAsync() => await SaveAsync(() => Store.SaveSceneAsync(_scene), ResetScene, "Scene 配置已保存并通过端口校验。");
+    private async Task DeleteNamespaceAsync(uint id) => await DeleteAsync(() => Store.DeleteNamespaceAsync(id), "Namespace 已删除。");
+    private async Task DeleteMachineAsync(uint id) => await DeleteAsync(() => Store.DeleteMachineAsync(id), "服务器已删除。");
+    private async Task DeleteProcessAsync(uint id) => await DeleteAsync(() => Store.DeleteProcessAsync(id), "进程已删除。");
+    private async Task DeleteWorldGroupAsync(uint id) => await DeleteAsync(() => Store.DeleteWorldGroupAsync(id), "World 分组已删除。");
+    private async Task DeleteWorldAsync(uint id) => await DeleteAsync(() => Store.DeleteWorldAsync(id), "World 已删除。");
+    private async Task DeleteDatabaseAsync(long id) => await DeleteAsync(() => Store.DeleteDatabaseAsync(id, _databaseWorldId), "数据库配置已删除。");
+    private async Task DeleteSceneAsync(uint id) => await DeleteAsync(() => Store.DeleteSceneAsync(id), "Scene 已删除。");
+
+    private async Task SaveAsync(Func<Task> action, Action reset, string message)
+    {
+        try { await action(); reset(); await LoadAsync(); ShowSuccess(message); }
+        catch (Exception exception) { ShowError(exception); }
+    }
+
+    private async Task DeleteAsync(Func<Task> action, string message)
+    {
+        try { await action(); await LoadAsync(); ShowSuccess(message); }
+        catch (Exception exception) when (exception is SqlSugar.SqlSugarException or Microsoft.Data.Sqlite.SqliteException) { ShowError("存在关联配置，请先删除依赖项。"); }
+        catch (Exception exception) { ShowError(exception); }
+    }
+
+    private void EditNamespace(NamespaceDefinition item) { _namespace = new() { Id = item.Id, Name = item.Name, Enabled = item.Enabled }; _editingNamespace = true; }
+    private void EditMachine(MachineDefinition item) { _machine = new() { Id = item.Id, Name = item.Name, OuterIp = item.OuterIp, OuterBindIp = item.OuterBindIp, InnerBindIp = item.InnerBindIp, Enabled = item.Enabled }; _editingMachine = true; }
+    private void EditProcess(ProcessDefinition item) { _process = new() { Id = item.Id, NamespaceId = item.NamespaceId, MachineId = item.MachineId, Name = item.Name, StartupGroup = item.StartupGroup, Enabled = item.Enabled }; _editingProcess = true; }
+    private void EditWorldGroup(WorldGroupDefinition item) { _worldGroup = new() { Id = item.Id, NamespaceId = item.NamespaceId, Name = item.Name, Enabled = item.Enabled }; _editingWorldGroup = true; }
+    private void EditWorld(WorldDefinition item) { _world = new() { Id = item.Id, GroupId = item.GroupId, Name = item.Name, Enabled = item.Enabled }; _editingWorld = true; }
+    private void EditDatabase(DatabaseDefinition item) { _databaseWorldId = item.WorldId; _database = new() { Id = item.Id, WorldId = item.WorldId, DbType = item.DbType, DbName = item.DbName, DbConnection = item.DbConnection, IsDefault = item.IsDefault }; _editingDatabase = true; _showConnection = false; }
+    private void EditScene(SceneDefinition item) { _scene = new() { Id = item.Id, ProcessId = item.ProcessId, WorldId = item.WorldId, SceneType = item.SceneType, RuntimeMode = item.RuntimeMode, NetworkProtocol = item.NetworkProtocol, OuterPort = item.OuterPort, InnerPort = item.InnerPort, Enabled = item.Enabled }; _editingScene = true; }
+    private void ResetNamespace() { _namespace = NewNamespace(); _editingNamespace = false; }
+    private void ResetMachine() { _machine = NewMachine(); _editingMachine = false; }
+    private void ResetProcess() { _process = NewProcess(); _editingProcess = false; SetReferenceDefaults(); }
+    private void ResetWorldGroup() { _worldGroup = NewWorldGroup(); _editingWorldGroup = false; SetReferenceDefaults(); }
+    private void ResetWorld() { _world = NewWorld(); _editingWorld = false; SetReferenceDefaults(); }
+    private void ResetDatabase() { _database = NewDatabase(_databaseWorldId); _editingDatabase = false; _showConnection = false; }
+    private void ResetScene() { _scene = NewScene(); _editingScene = false; SetReferenceDefaults(); }
+    private void SetReferenceDefaults()
+    {
+        if (_namespaces.All(item => item.Id != _process.NamespaceId)) _process.NamespaceId = _namespaces.FirstOrDefault()?.Id ?? 0;
+        if (_process.MachineId == 0 && _machines.Count > 0) _process.MachineId = _machines[0].Id;
+        if (_namespaces.All(item => item.Id != _worldGroup.NamespaceId)) _worldGroup.NamespaceId = _namespaces.FirstOrDefault()?.Id ?? 0;
+        if (_worldGroups.All(group => group.Id != _world.GroupId)) _world.GroupId = _worldGroups.FirstOrDefault()?.Id ?? 0;
+        if (_scene.ProcessId == 0 && _processes.Count > 0) _scene.ProcessId = _processes[0].Id;
+        if (_scene.WorldId == 0 && _worlds.Count > 0) _scene.WorldId = _worlds[0].Id;
+    }
+    private static NamespaceDefinition NewNamespace() => new() { Id = 1, Name = "默认 Namespace", Enabled = true };
+    private static MachineDefinition NewMachine() => new() { Id = 1, Name = "本地开发机", Enabled = true };
+    private static ProcessDefinition NewProcess() => new() { Id = 1, Name = "Game-1", StartupGroup = 1, Enabled = true };
+    private static WorldGroupDefinition NewWorldGroup() => new() { Id = 1, Name = "默认分组", Enabled = true };
+    private static WorldDefinition NewWorld() => new() { Id = 1, Name = "WorldA", Enabled = true };
+    private static DatabaseDefinition NewDatabase(uint worldId = 0) => new() { WorldId = worldId, DbType = "MongoDB" };
+    private static SceneDefinition NewScene() => new() { Id = 1001, SceneType = "Addressable", RuntimeMode = "MultiThread", InnerPort = 11001, Enabled = true };
+    private void ManageDatabases(uint worldId) { _databaseWorldId = worldId; ResetDatabase(); }
+    private void ToggleConnectionVisibility() => _showConnection = !_showConnection;
+    private void ShowNamespaces() => _tab = "namespaces"; private void ShowMachines() => _tab = "machines"; private void ShowProcesses() => _tab = "processes"; private void ShowWorldGroups() => _tab = "world-groups"; private void ShowWorlds() => _tab = "worlds"; private void ShowScenes() => _tab = "scenes";
+    private string TabClass(string tab) => _tab == tab ? "active" : string.Empty;
+    private string NamespaceName(uint id) => _namespaces.FirstOrDefault(x => x.Id == id)?.Name ?? $"Namespace #{id}";
+    private string MachineName(uint id) => _machines.FirstOrDefault(x => x.Id == id)?.Name ?? $"#{id}";
+    private string ProcessName(uint id) => _processes.FirstOrDefault(x => x.Id == id)?.Name ?? $"#{id}";
+    private string WorldGroupName(uint id) { var group = _worldGroups.FirstOrDefault(x => x.Id == id); return group is null ? $"分组 #{id}" : $"#{group.Id} · {group.Name}"; }
+    private string WorldName(uint id) => _worlds.FirstOrDefault(x => x.Id == id)?.Name ?? $"World #{id}";
+    private string WorldNamespaceName(WorldDefinition world)
+    {
+        var group = _worldGroups.FirstOrDefault(x => x.Id == world.GroupId);
+        return group is null ? "未知 Namespace" : NamespaceName(group.NamespaceId);
+    }
+    private void ShowSuccess(string message) { _message = message; _isError = false; }
+    private void ShowError(Exception exception) => ShowError(exception.Message);
+    private void ShowError(string message) { _message = message; _isError = true; }
+}

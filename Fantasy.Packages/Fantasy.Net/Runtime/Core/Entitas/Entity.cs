@@ -867,7 +867,10 @@ namespace Fantasy.Entitas
 
                 if (Tree != null && Tree.Count > 0)
                 {
-                    foreach (var (_, entity) in Tree)
+                    using var entities = ListPool<Entity>.Create();
+                    entities.AddRange(Tree.Values);
+                    
+                    foreach (var entity in entities)
                     {
                         entity.Parent = this;
                         entity.Type = entity.GetType();
@@ -877,30 +880,22 @@ namespace Fantasy.Entitas
 
                 if (Multi != null && Multi.Count > 0)
                 {
+                    using var entities = ListPool<Entity>.Create();
+                    entities.AddRange(Multi.Values);
+                    
+                    foreach (var entity in entities)
+                    {
+                        entity.Parent = this;
+                        entity.Deserialize(scene, resetId);
+                    }
+                    
                     if (resetId)
                     {
-                        using var entities = ListPool<Entity>.Create();
-
-                        foreach (var (_, entity) in Multi)
-                        {
-                            entity.Parent = this;
-                            entity.Deserialize(scene, resetId);
-                            entities.Add(entity);
-                        }
-                        
                         Multi.Clear();
                         
                         foreach (var entity in entities)
                         {
                             Multi.Add(entity.Id, entity);
-                        }
-                    }
-                    else
-                    {
-                        foreach (var (_, entity) in Multi)
-                        {
-                            entity.Parent = this;
-                            entity.Deserialize(scene, resetId);
                         }
                     }
                 }

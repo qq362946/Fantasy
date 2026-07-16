@@ -9,6 +9,8 @@
 
 `Event` 监听器应与 Entity 数据定义分离：多 assembly 项目放在逻辑层 assembly，单 assembly 项目按文件夹分离即可。框架通过 Source Generator 编译时自动注册，无需手动注册，不要修改 `.g.cs`。
 
+监听器类按 `{事件名}_{具体行为}` 命名，例如 `OnHpChange_ExitGame`。不要使用 `OnHpChangeSystem`、`OnHpChangeAsync` 这类只描述框架基类或执行方式的名称。
+
 ---
 
 ## Workflow
@@ -55,6 +57,7 @@
 
 - 不要为了使用 Entity Event 而专门创建新的 Entity，直接使用 Struct Event 即可。
 - 如果你的真实需求是“等待结果”，不要强行用 Event 监听器回调链模拟，优先考虑 `EventAwaiter`。
+- 一个事件有多个监听器时，每个类名都必须明确自己的业务行为。
 
 ---
 

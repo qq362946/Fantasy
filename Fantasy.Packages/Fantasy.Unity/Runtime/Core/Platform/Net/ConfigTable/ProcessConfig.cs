@@ -113,6 +113,10 @@ namespace Fantasy.Platform.Net
 	    /// </summary>
 		public uint Id { get; set; } 
 	    /// <summary>
+	    /// 所属Namespace；本地配置模式下可为0
+	    /// </summary>
+		public uint NamespaceId { get; set; }
+	    /// <summary>
 	    /// 机器ID
 	    /// </summary>
 		public uint MachineId { get; set; } 

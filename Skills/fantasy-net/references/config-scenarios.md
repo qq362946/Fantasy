@@ -84,7 +84,49 @@
 - 每个 `scene` 绑定到对应的 `worldConfigId`
 - 如需避免合区时 ID 冲突，考虑把 `<idFactory type="World" />` 打开
 
-## 场景 7：检查配置为什么启动失败
+## 场景 7：启用 Control Center 和服务发现
+
+在根节点增加 `<controlCenter>`，并把所有编译期 Scene 类型放进 `<sceneTypes>`。
+
+规则：
+
+- `url` 不包含 `/api/v1`
+- `sceneType.id` 稳定且唯一
+- `sceneType.name` 与 Control Center 完全一致
+- `heartbeatIntervalSeconds` 小于 `leaseSeconds`
+- 不允许本地回退时保留空 `<server />` 即可
+
+完整流程和 API 见 `service-discovery/index.md`。
+
+## 场景 8：动态增加 Scene
+
+先区分“实例”和“类型”：
+
+- 新增一个已有 Map 类型的 Scene 实例：只在 Control Center 新增 Scene，不改 `sceneTypes`，不重新编译。
+- 新增全新的 Match SceneType：在 Control Center 建立类型，同时向 `sceneTypes` 增加稳定 ID 和名称，然后重新编译源生成常量。
+
+## 场景 9：多台服务器分别启动不同 Scene
+
+在 Control Center 中让不同 Process 绑定不同 Machine 和 Scene。每台服务器使用 Release 模式指定自己的 Process：
+
+```bash
+dotnet YourServer.dll -m Release --pid 2
+```
+
+服务器只创建该 Process 所需的 Scene，启动完成后自动注册当前进程实例。
+
+## 场景 10：允许 Control Center 失败后本地回退
+
+设置 `fallbackToLocal="true"`，并保留完整 `<server>`。额外要求：
+
+- Process 配置非零 `namespaceId`
+- World 同时配置非零 `namespaceId` 和 `groupId`
+- Scene 所属 Process 和 World 位于同一 Namespace
+- 本地 SceneType 与 `<sceneTypes>` 一致
+
+本地回退不是另一套隔离规则；它必须与 Control Center 拓扑保持相同语义。
+
+## 场景 11：检查配置为什么启动失败
 
 优先检查：
 
@@ -94,3 +136,6 @@
 4. `innerPort` 是否为 0 或端口冲突
 5. `outerPort > 0` 时是否漏填 `networkProtocol`
 6. `idFactory type="World"` 时 ID 范围是否越界
+7. Control Center URL、`sceneTypes`、心跳和租约是否合法
+8. 本地回退是否缺少 Namespace / WorldGroup ID
+9. 当前 Process ID 是否存在并绑定了 Scene

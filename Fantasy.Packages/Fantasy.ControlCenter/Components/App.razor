@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="@($"app.css?v={AssetVersion}")" />
+    <HeadOutlet @rendermode="InteractiveServer" />
+</head>
+
+<body>
+    <Routes @rendermode="InteractiveServer" />
+    <script src="_framework/blazor.web.js"></script>
+</body>
+
+</html>
+
+@code {
+    // Keep the stylesheet URL stable during one build, but change it for every
+    // newly compiled executable so browsers never reuse an outdated layout.
+    private static readonly string AssetVersion =
+        typeof(App).Assembly.ManifestModule.ModuleVersionId.ToString("N");
+}

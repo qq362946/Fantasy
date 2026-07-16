@@ -1,8 +1,8 @@
+using System;
 using Fantasy.SourceGenerator.Common;
 using Microsoft.CodeAnalysis;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 #pragma warning disable CS8604 // Possible null reference argument.
 
@@ -12,6 +12,14 @@ namespace Fantasy.SourceGenerator.Generators
     public class FantasyConfigGenerator : IIncrementalGenerator
     {
         private const string SourceItemGroupMetadata = "build_metadata.AdditionalFiles.SourceItemGroup";
+
+        private static readonly DiagnosticDescriptor InvalidConfigRule = new(
+            id: "FANTASYCONFIG001",
+            title: "Invalid Fantasy.config",
+            messageFormat: "Invalid Fantasy.config: {0}",
+            category: "Fantasy.SourceGenerator",
+            defaultSeverity: DiagnosticSeverity.Error,
+            isEnabledByDefault: true);
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
@@ -68,13 +76,15 @@ namespace Fantasy.SourceGenerator.Generators
             });
         }
 
-        private static void GenerateCode(SourceProductionContext context, Compilation compilation, string? configContent)
+        private static void GenerateCode(SourceProductionContext context, Compilation compilation,
+            string? configContent)
         {
             try
             {
                 var config = GetConfig(configContent);
                 // 获取当前程序集名称（仅用于注释）
-                var markerClassName = compilation.GetAssemblyName("FantasyConfigRegistrar", out var assemblyName, out _);
+                var markerClassName =
+                    compilation.GetAssemblyName("FantasyConfigRegistrar", out var assemblyName, out _);
                 // 生成代码文件
                 var builder = new SourceCodeBuilder();
                 // 添加文件头
@@ -87,32 +97,29 @@ namespace Fantasy.SourceGenerator.Generators
                 );
                 builder.AppendLine();
                 // 开始命名空间
-                 builder.BeginDefaultNamespace();
+                builder.BeginDefaultNamespace();
                 // 开始类定义（实现 IFantasyConfigRegistrar 接口）
                 builder.AddXmlComment($"Auto-generated Entity System registration class for {assemblyName}");
-                builder.BeginClass(markerClassName, "internal sealed", "global::Fantasy.Assembly.IFantasyConfigRegistrar");
+                builder.BeginClass(markerClassName, "internal sealed",
+                    "global::Fantasy.Assembly.IFantasyConfigRegistrar");
                 builder.BeginMethod("public Dictionary<string, int> GetSceneTypeDictionary()");
                 builder.AppendLine("var sceneTypeDictionary = new Dictionary<string, int>();");
+
                 if (config is { ConfigContent: true, Root: not null })
-                { 
-                    var sceneTypeHashSet = new HashSet<string?>();
-                    var sceneTypeElements =
-                        config.Root.Element(config.ns + "server")
-                            ?.Element(config.ns + "scenes")
-                            ?.Elements(config.ns + "scene")
-                            .Select(d => new
-                            {
-                                SceneTypeString = d.Attribute("sceneTypeString")?.Value
-                            }).Where(d => d?.SceneTypeString != null && !string.IsNullOrEmpty(d.SceneTypeString)).ToList();
-                    if (sceneTypeElements != null && sceneTypeElements.Any())
+                {
+                    var sceneTypes = GetSceneTypes(
+                        config.Root,
+                        config.ns);
+
+                    if (sceneTypes.Count > 0)
                     {
-                        foreach (var element in sceneTypeElements)
-                        {
-                            sceneTypeHashSet.Add(element.SceneTypeString);
-                        }
-                        GenerateSceneTypeConstCode(context, sceneTypeHashSet, builder);
+                        GenerateSceneTypeConstCode(
+                            context,
+                            sceneTypes,
+                            builder);
                     }
                 }
+
                 builder.AppendLine("return sceneTypeDictionary;");
                 builder.EndMethod();
                 // 结束类和命名空间
@@ -120,41 +127,142 @@ namespace Fantasy.SourceGenerator.Generators
                 builder.EndNamespace();
                 context.AddSource($"{markerClassName}.g.cs", builder.ToString());
             }
-            catch
+            catch (Exception exception)
             {
-                // 解析失败时静默忽略，不影响编译
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        InvalidConfigRule,
+                        Location.None,
+                        exception.Message));
             }
         }
-        
-        private static void GenerateSceneTypeConstCode(SourceProductionContext context, HashSet<string?> sceneTypeNameHashSet,SourceCodeBuilder sceneTypeDicBuilder)
+
+        private static void GenerateSceneTypeConstCode(SourceProductionContext context,
+            IReadOnlyList<KeyValuePair<string, int>> sceneTypes, SourceCodeBuilder sceneTypeDictionaryBuilder)
         {
             var builder = new SourceCodeBuilder();
-            builder.AppendLine(GeneratorConstants.AutoGeneratedHeader);
+
+            builder.AppendLine(
+                GeneratorConstants.AutoGeneratedHeader);
+
             builder.AddUsings(
                 "System",
                 "System.Collections.Generic",
                 "Fantasy.Assembly"
             );
+
             builder.AppendLine();
             builder.BeginNamespace("Fantasy");
-            builder.AddXmlComment("Retrieve the SceneType constant (automatically generated from Fantasy.config)");
-            builder.BeginClass("SceneType", "public static", "");
-            var index = 0;
-            foreach (var sceneType in sceneTypeNameHashSet)
+
+            builder.AddXmlComment(
+                "Retrieve the SceneType constant " +
+                "(automatically generated from Fantasy.config)");
+
+            builder.BeginClass(
+                "SceneType",
+                "public static",
+                "");
+
+            foreach (var sceneType in sceneTypes)
             {
-                if (sceneType == null)
+                var name = sceneType.Key;
+                var id = sceneType.Value;
+
+                builder.AddXmlComment(name);
+
+                // ToPascalCase保留旧模式的名称转换行为。
+                builder.AppendLine(
+                    $"public const int {name.ToPascalCase()} = {id};");
+
+                sceneTypeDictionaryBuilder.AppendLine(
+                    $"sceneTypeDictionary.Add(\"{name}\", {id});");
+            }
+
+            builder.EndClass();
+            builder.EndNamespace();
+
+            context.AddSource(
+                "SceneType.g.cs",
+                builder.ToString());
+        }
+
+        private static List<KeyValuePair<string, int>> GetSceneTypes(XElement root, XNamespace ns)
+        {
+            var controlCenter = root.Element(ns + "controlCenter");
+
+            var controlCenterEnabled = GetBooleanAttribute(
+                controlCenter,
+                "enabled",
+                false);
+
+            if (!controlCenterEnabled)
+            {
+                // 未启用Control Center，完全保持旧逻辑。
+                return GetLocalSceneTypes(root, ns);
+            }
+
+            var sceneTypes = GetControlCenterSceneTypes(
+                controlCenter!,
+                ns);
+
+            var fallbackToLocal = GetBooleanAttribute(
+                controlCenter,
+                "fallbackToLocal",
+                true);
+
+            if (fallbackToLocal)
+            {
+                ValidateLocalFallbackSceneTypes(
+                    root,
+                    ns,
+                    sceneTypes);
+            }
+
+            return sceneTypes;
+        }
+
+        private static List<KeyValuePair<string, int>> GetLocalSceneTypes(XElement root, XNamespace ns)
+        {
+            var result = new List<KeyValuePair<string, int>>();
+            var names = new HashSet<string>(StringComparer.Ordinal);
+
+            var sceneElements = root
+                .Element(ns + "server")
+                ?.Element(ns + "scenes")
+                ?.Elements(ns + "scene");
+
+            if (sceneElements == null)
+            {
+                return result;
+            }
+
+            foreach (var sceneElement in sceneElements)
+            {
+                var name = sceneElement
+                    .Attribute("sceneTypeString")
+                    ?.Value;
+
+                if (string.IsNullOrEmpty(name))
                 {
                     continue;
                 }
-                builder.AddXmlComment(sceneType);
-                builder.AppendLine($"public const int {sceneType.ToPascalCase()} = {++index};");
-                sceneTypeDicBuilder.AppendLine($"sceneTypeDictionary.Add(\"{sceneType}\", {index});");
+
+                // 同一种SceneType只生成一次，
+                // ID按照第一次出现的顺序分配。
+                if (!names.Add(name))
+                {
+                    continue;
+                }
+
+                result.Add(
+                    new KeyValuePair<string, int>(
+                        name,
+                        result.Count + 1));
             }
-            builder.EndClass();
-            builder.EndNamespace();
-            context.AddSource("SceneType.g.cs", builder.ToString());
+
+            return result;
         }
-        
+
         private static (bool ConfigContent, XNamespace? ns, XElement? Root) GetConfig(string? configContent)
         {
             if (configContent == null)
@@ -166,6 +274,173 @@ namespace Fantasy.SourceGenerator.Generators
             var ns = XNamespace.Get("http://fantasy.net/config");
 
             return doc.Root != null ? (true, ns, doc.Root) : (false, null, null);
+        }
+
+        private static List<KeyValuePair<string, int>> GetControlCenterSceneTypes(XElement controlCenter, XNamespace ns)
+        {
+            var sceneTypesElement =
+                controlCenter.Element(ns + "sceneTypes");
+
+            if (sceneTypesElement == null)
+            {
+                throw new InvalidOperationException(
+                    "controlCenter.sceneTypes is required " +
+                    "when Control Center is enabled.");
+            }
+
+            var result =
+                new List<KeyValuePair<string, int>>();
+
+            var names = new HashSet<string>(
+                StringComparer.Ordinal);
+
+            var ids = new HashSet<int>();
+
+            foreach (var sceneTypeElement in sceneTypesElement.Elements(ns + "sceneType"))
+            {
+                var name = sceneTypeElement
+                    .Attribute("name")
+                    ?.Value;
+
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    throw new InvalidOperationException(
+                        "controlCenter.sceneTypes.sceneType " +
+                        "is missing required attribute 'name'.");
+                }
+
+                if (!IsValidSceneTypeName(name))
+                {
+                    throw new InvalidOperationException(
+                        $"SceneType name '{name}' is invalid. " +
+                        "The name must match [A-Z][A-Za-z0-9_]*.");
+                }
+
+                var idText = sceneTypeElement
+                    .Attribute("id")
+                    ?.Value;
+
+                if (!int.TryParse(idText, out var id) ||
+                    id <= 0)
+                {
+                    throw new InvalidOperationException(
+                        $"SceneType '{name}' has invalid id " +
+                        $"'{idText}'. The id must be greater than 0.");
+                }
+
+                if (!names.Add(name))
+                {
+                    throw new InvalidOperationException(
+                        $"Duplicate SceneType name: {name}.");
+                }
+
+                if (!ids.Add(id))
+                {
+                    throw new InvalidOperationException(
+                        $"Duplicate SceneType id: {id}.");
+                }
+
+                result.Add(
+                    new KeyValuePair<string, int>(
+                        name,
+                        id));
+            }
+
+            if (result.Count == 0)
+            {
+                throw new InvalidOperationException(
+                    "controlCenter.sceneTypes must contain " +
+                    "at least one sceneType.");
+            }
+
+            return result;
+        }
+        
+        private static void ValidateLocalFallbackSceneTypes(XElement root, XNamespace ns, IReadOnlyList<KeyValuePair<string, int>> declaredSceneTypes)
+        {
+            var declaredNames = new HashSet<string>(
+                StringComparer.Ordinal);
+
+            foreach (var sceneType in declaredSceneTypes)
+            {
+                declaredNames.Add(sceneType.Key);
+            }
+
+            var localSceneTypes =
+                GetLocalSceneTypes(root, ns);
+
+            foreach (var localSceneType in localSceneTypes)
+            {
+                if (declaredNames.Contains(localSceneType.Key))
+                {
+                    continue;
+                }
+
+                throw new InvalidOperationException(
+                    $"Local fallback SceneType " +
+                    $"'{localSceneType.Key}' is not declared in " +
+                    "controlCenter.sceneTypes.");
+            }
+        }
+        
+        private static bool GetBooleanAttribute( XElement? element, string attributeName, bool defaultValue)
+        {
+            var value = element
+                ?.Attribute(attributeName)
+                ?.Value;
+
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return defaultValue;
+            }
+
+            if (bool.TryParse(value, out var result))
+            {
+                return result;
+            }
+
+            // XML Schema boolean也允许使用1和0。
+            if (value == "1")
+            {
+                return true;
+            }
+
+            if (value == "0")
+            {
+                return false;
+            }
+
+            throw new InvalidOperationException(
+                $"Attribute '{attributeName}' has invalid " +
+                $"boolean value '{value}'.");
+        }
+        
+        private static bool IsValidSceneTypeName( string name)
+        {
+            if (name.Length == 0 || name[0] < 'A' || name[0] > 'Z')
+            {
+                return false;
+            }
+
+            for (var index = 1; index < name.Length; index++)
+            {
+                var character = name[index];
+
+                if (character >= 'A' &&
+                    character <= 'Z' ||
+                    character >= 'a' &&
+                    character <= 'z' ||
+                    character >= '0' &&
+                    character <= '9' ||
+                    character == '_')
+                {
+                    continue;
+                }
+
+                return false;
+            }
+
+            return true;
         }
     }
 }

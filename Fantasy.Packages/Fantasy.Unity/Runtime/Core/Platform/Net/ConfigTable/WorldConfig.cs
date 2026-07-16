@@ -102,6 +102,14 @@ namespace Fantasy.Platform.Net
 		/// </summary>
 		public string WorldName;
 		/// <summary>
+		/// 所属Namespace；本地配置模式下可为0
+		/// </summary>
+		public uint NamespaceId;
+		/// <summary>
+		/// Control Center中所属的WorldGroup；本地配置模式下为0
+		/// </summary>
+		public uint GroupId;
+		/// <summary>
 		/// 默认数据库配置
 		/// </summary>
 		public DatabaseConfig? Default;

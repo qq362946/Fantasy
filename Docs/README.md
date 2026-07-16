@@ -48,10 +48,12 @@ Unity 客户端开发的完整指南。
 服务器端完整的开发指南，从配置到启动，从基础到进阶。
 
 - ✅ [01-ServerConfiguration.md](01-Server/01-ServerConfiguration.md) - Fantasy.config 配置文件详解
+  - ID生成策略和基础运行参数
+  - Control Center与服务发现配置
+  - 本地模式、远程配置和本地回退
   - 网络配置 (network)
   - 会话配置 (session)
   - 机器、进程、世界、场景配置
-  - 配置最佳实践
 
 - ✅ [02-WritingStartupCode.md](01-Server/02-WritingStartupCode.md) - 编写启动代码
   - AssemblyHelper 的作用和实现
@@ -142,6 +144,12 @@ Unity 客户端开发的完整指南。
 - ✅ [08-Roaming.md](04-Advanced/NetworkDevelopment/08-Roaming.md) - Roaming 漫游消息 - 分布式实体路由
 - ✅ [09-SphereEvent.md](04-Advanced/NetworkDevelopment/09-SphereEvent.md) - SphereEvent 跨服域事件系统
 - ✅ [10-HttpServerConfiguration.md](04-Advanced/NetworkDevelopment/10-HttpServerConfiguration.md) - HTTP 服务器配置事件使用指南
+- ✅ [11-ServiceDiscovery.md](04-Advanced/NetworkDevelopment/11-ServiceDiscovery.md) - 服务发现使用指南
+  - Control Center拓扑配置与服务器启动
+  - Namespace、WorldGroup和World范围查询
+  - SubScene即时注册、按父Scene发现、Address路由与主动下线
+  - 随机选择、Rendezvous Hash和Address消息调用
+  - 自动注册、批量心跳、租约、缓存与故障恢复
 
 #### 高级特性
 - ✅ [11-Timer.md](04-Advanced/CoreSystems/11-Timer.md) - Timer 系统使用指南

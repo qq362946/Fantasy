@@ -8,7 +8,7 @@
 
 - 帮助开发者快速理解和使用 Fantasy 框架
 - 按 Fantasy 的规范生成或检查代码
-- 降低分布式服务器、ECS、网络通信、配置系统、数据库、HTTP、Unity 客户端接入的使用成本
+- 降低分布式服务器、服务发现、ECS、网络通信、配置系统、数据库、HTTP、Unity 客户端接入的使用成本
 - 在项目开发过程中统一代码风格、架构边界和最佳实践
 
 ## 功能介绍
@@ -74,14 +74,23 @@
 - 指导多区服、端口、协议、数据库配置
 - 检查配置引用关系、端口冲突、无效 world/database/scene 配置等问题
 
-### 9. Unity 客户端接入
+### 9. Control Center 与服务发现
+
+- 指导 `Fantasy.config` 启用 Control Center 和声明编译期 `sceneTypes`
+- 指导 Namespace、Machine、Process、WorldGroup、World、Database、Scene 拓扑配置
+- 指导多机按 Process 启动、Scene 自动注册、批量心跳、租约和自动下线
+- 指导按 Namespace / WorldGroup / World 查询在线 Scene
+- 指导随机路由、Rendezvous Hash、严格业务绑定的正确边界
+- 检查空结果、动态扩缩容、本地回退、缓存、网络连通性与公网部署安全
+
+### 10. Unity 客户端接入
 
 - 指导 `Fantasy.Unity` 安装与接入
 - 指导编译宏、协议导入、连接方式、Session 使用
 - 指导客户端接收服务器主动推送的 Handler 编写
 - 检查版本一致性、宏配置、连接方式和 Session 生命周期问题
 
-### 10. 代码审查与规范检查
+### 11. 代码审查与规范检查
 
 - 对 Fantasy 项目代码进行针对性的 review
 - 检查代码是否符合 Fantasy 框架的推荐写法
@@ -94,6 +103,7 @@
   - 对象池与销毁逻辑
   - 配置与运行时一致性
   - 分布式服务器通信模型
+  - 服务发现范围、路由策略和实例生命周期
 
 ## 推荐安装方式
 
@@ -114,10 +124,10 @@
 ```text
 fantasy-net/
 ├── SKILL.md
-├── README.md
 ├── REFERENCE_GUIDELINES.md
 ├── references/
-├── templates/
+│   └── service-discovery/
+└── templates/
 ```
 
 ## 安装方式
@@ -259,6 +269,8 @@ fantasy-net/
 - `Roaming 和 SphereEvent 有什么区别？`
 - `OnConfigureHttpServices 在 Fantasy HTTP 里怎么用？`
 - `帮我看下这个 AddressRPC Handler 是否符合规范`
+- `启用 Control Center 后，怎么按 WorldGroup 发现 Map Scene？`
+- `账号路由应该用随机、Rendezvous Hash，还是持久绑定？`
 
 如果工具能命中 `fantasy-net` 并开始按 Fantasy 的规范回答，就说明安装成功。
 
@@ -280,4 +292,4 @@ fantasy-net/
 
 ## 一句话总结
 
-`fantasy-net` 是一个专门服务于 Fantasy 框架开发的智能 Skill，覆盖 **服务端、客户端、ECS、配置、协议、数据库、HTTP、跨服通信、代码审查** 等核心能力，既能指导实现，也能检查问题，帮助团队更高效、更规范地完成 Fantasy 项目开发。
+`fantasy-net` 是一个专门服务于 Fantasy 框架开发的智能 Skill，覆盖 **服务端、客户端、ECS、配置、Control Center、服务发现、协议、数据库、HTTP、跨服通信、代码审查** 等核心能力，既能指导实现，也能检查问题，帮助团队更高效、更规范地完成 Fantasy 项目开发。

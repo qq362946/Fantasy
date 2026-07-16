@@ -42,11 +42,13 @@ var subScene = await Scene.CreateSubScene(parentScene, sceneType, onSubSceneSetu
 2. `onSubSceneSetup` 回调执行
 3. **`OnCreateScene` 事件发布** — 与 Root Scene 创建时触发的是同一个事件
 4. `onSubSceneCreated` 回调执行
+5. 服务发现已启用时，立即注册到父 Root Scene 下
+6. `CreateSubScene` 完成并返回
 
-SubScene 创建时也会触发 `OnCreateScene` 事件，所以 `OnCreateSceneEvent` 的 Handler 中要通过 `SceneType` 区分当前是哪种 Scene，再执行对应的初始化逻辑：
+SubScene 创建时也会触发 `OnCreateScene` 事件，所以 `OnCreateScene_InitializeComponents` 监听器中要通过 `SceneType` 区分当前是哪种 Scene，再执行对应的初始化逻辑：
 
 ```csharp
-public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
+public sealed class OnCreateScene_InitializeComponents : AsyncEventSystem<OnCreateScene>
 {
     protected override async FTask Handler(OnCreateScene self)
     {
@@ -140,6 +142,8 @@ SubScene 不会重复创建这些组件，而是直接引用父 Scene 的：
 
 SubScene 拥有自己的 Address（RuntimeId），因此可以像普通 Scene 一样接收 Address 消息。
 
+启用 Control Center 时，SubScene 的 SceneType 必须声明在 `<controlCenter><sceneTypes>` 中。框架会在创建完成后自动注册，不要从业务代码手动调用注册或心跳接口。
+
 ### 1. 获取 SubScene 的地址
 
 创建 SubScene 后，通过 `subScene.Address` 拿到地址，通常需要将这个地址传回给需要通信的一方（如 Gate）：
@@ -169,7 +173,7 @@ SubScene 收到消息后的 Handler 写法与普通 Address Handler 一致：
 
 ```csharp
 // 泛型参数用 Scene 或 SubScene 都可以
-public class G2SubScene_SentMessageHandler : Address<Scene, G2SubScene_SentMessage>
+public sealed class G2SubScene_SentMessageHandler : Address<Scene, G2SubScene_SentMessage>
 {
     protected override async FTask Run(Scene scene, G2SubScene_SentMessage message)
     {
@@ -178,6 +182,37 @@ public class G2SubScene_SentMessageHandler : Address<Scene, G2SubScene_SentMessa
     }
 }
 ```
+
+### 4. 从其他服务器发现 SubScene
+
+SubScene 注册在所属 Root Scene 下面。查询时必须传父 Root Scene Address：
+
+```csharp
+var subScenes = await ServiceDiscovery.DiscoverSubScenesAsync(
+    parentAddress: mapRootAddress,
+    sceneType: SceneType.Map);
+
+var subSceneAddress =
+    await ServiceDiscovery.DiscoverSubSceneAddressAsync(
+        mapRootAddress,
+        SceneType.Map);
+```
+
+需要稳定选择时使用：
+
+```csharp
+var subSceneAddress =
+    await ServiceDiscovery.DiscoverSubSceneAddressByHashAsync(
+        mapRootAddress,
+        SceneType.Map,
+        routingKey: teamId);
+```
+
+返回端点的 `Address` 是 SubScene 自身目标；`SceneId`、`Host` 和 `InnerPort` 是所属 Root Scene 的网络入口。拿到 Address 后直接调用 `Scene.Send` / `Scene.Call`，路由缺失时框架会自动解析父 Root Scene，通常不需要手动调用 `ResolveAddressAsync`。
+
+如果创建者已经知道使用方，实时流程应直接通过 RPC 或事件分发新 Address。发现列表有本地缓存，适合列表和恢复查询，不应通过高频轮询等待新 SubScene 出现。
+
+服务发现的完整配置、范围和故障语义见 `../service-discovery/implement.md` 与 `../service-discovery/routing.md`。
 
 ---
 
@@ -188,15 +223,16 @@ await subScene.Close();
 ```
 
 销毁时会：
-1. 遍历并 Dispose SubScene 下管理的所有 Entity
-2. 从父 Scene 的实体列表中移除这些 Entity
-3. SubScene 自身被销毁
+1. 服务发现已启用时，先向 Control Center 主动下线
+2. 遍历并 Dispose SubScene 下管理的所有 Entity
+3. 从父 Scene 的实体列表中移除这些 Entity
+4. SubScene 自身被销毁
 
 **销毁 SubScene 不影响父 Scene 和其他 SubScene。**
 
 可以在收到客户端消息时销毁：
 ```csharp
-public class C2SubScene_TestDisposeMessageHandler : Addressable<Unit, C2SubScene_TestDisposeMessage>
+public sealed class C2SubScene_TestDisposeMessageHandler : Addressable<Unit, C2SubScene_TestDisposeMessage>
 {
     protected override async FTask Run(Unit unit, C2SubScene_TestDisposeMessage message)
     {

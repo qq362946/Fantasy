@@ -2284,11 +2284,11 @@ public partial class MainWindow : Window
             string defaultContent = "";
             if (node.Name == "RoamingType.Config")
             {
-                defaultContent = "# Roaming 类型配置\n# 在此添加漫游消息类型\n";
+                defaultContent = "// Roaming 类型配置\n// 在此添加漫游消息类型\n";
             }
             else if (node.Name == "RouteType.Config")
             {
-                defaultContent = "# Route 类型配置\n# 在此添加路由消息类型\n";
+                defaultContent = "// Route 类型配置\n// 在此添加路由消息类型\n";
             }
 
             // 创建文件
