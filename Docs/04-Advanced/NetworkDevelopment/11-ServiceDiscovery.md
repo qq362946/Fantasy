@@ -188,14 +188,14 @@ Root Scene 摘流时会同时摘除它下面的全部 SubScene。调用成功只
 公共入口位于：
 
 ```csharp
-Fantasy.Platform.Net.ServiceDiscovery
+Fantasy.ServiceDiscovery
 ```
 
 建议使用别名避免与项目中的同名命名空间冲突：
 
 ```csharp
 using NetServiceDiscovery =
-    Fantasy.Platform.Net.ServiceDiscovery;
+    Fantasy.ServiceDiscovery;
 ```
 
 ### API 一览
@@ -386,7 +386,7 @@ using Fantasy.Async;
 using Fantasy.Network;
 using Fantasy.Network.Interface;
 using NetServiceDiscovery =
-    Fantasy.Platform.Net.ServiceDiscovery;
+    Fantasy.ServiceDiscovery;
 
 namespace Fantasy.Gate;
 

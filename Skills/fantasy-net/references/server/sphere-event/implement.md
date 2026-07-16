@@ -45,7 +45,7 @@ Source Generator 会自动注册 `SphereEventSystem`，不需要手动注册。
 
 ```csharp
 // 文件顶部：
-using NetServiceDiscovery = Fantasy.Platform.Net.ServiceDiscovery;
+using NetServiceDiscovery = Fantasy.ServiceDiscovery;
 ```
 
 ```csharp

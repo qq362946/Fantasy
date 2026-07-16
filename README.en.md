@@ -110,7 +110,7 @@ Replace fixed server lists and modulo-based routing with a ready-to-use manageme
 - ✅ **Fast routing path** - Hot-path queries use local snapshots, and discovered Addresses work directly with `Scene.Send` and `Scene.Call`
 
 ```csharp
-using NetServiceDiscovery = Fantasy.Platform.Net.ServiceDiscovery;
+using NetServiceDiscovery = Fantasy.ServiceDiscovery;
 
 var mapAddress = await NetServiceDiscovery.DiscoverAddressByHashAsync(
     SceneType.Map,

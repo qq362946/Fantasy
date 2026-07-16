@@ -67,11 +67,11 @@ Develop 模式下，同一个 OS 进程中的所有 Process 必须属于同一 N
 
 ## 第 4 步：查询在线实例
 
-公共入口是 `Fantasy.Platform.Net.ServiceDiscovery`。建议使用别名避免名称冲突：
+公共入口是 `Fantasy.ServiceDiscovery`。建议使用别名避免名称冲突：
 
 ```csharp
 using NetServiceDiscovery =
-    Fantasy.Platform.Net.ServiceDiscovery;
+    Fantasy.ServiceDiscovery;
 ```
 
 获取当前 Namespace 中全部 Map：

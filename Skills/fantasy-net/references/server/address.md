@@ -81,7 +81,7 @@ message M2G_CreatePlayerResponse // IAddressResponse
 
 ```csharp
 // 发送方：Control Center 模式下先发现在线 Scene 入口
-using NetServiceDiscovery = Fantasy.Platform.Net.ServiceDiscovery;
+using NetServiceDiscovery = Fantasy.ServiceDiscovery;
 
 var mapAddress = await NetServiceDiscovery.DiscoverAddressAsync(
     SceneType.Map,

@@ -109,7 +109,7 @@ public class C2G_LoginHandler : Message<Session, C2G_Login, G2C_Login>
 - ✅ **高性能调用链** - 热路径读取本地缓存，发现到的 Address 可直接用于 `Scene.Send` 和 `Scene.Call`
 
 ```csharp
-using NetServiceDiscovery = Fantasy.Platform.Net.ServiceDiscovery;
+using NetServiceDiscovery = Fantasy.ServiceDiscovery;
 
 var mapAddress = await NetServiceDiscovery.DiscoverAddressByHashAsync(
     SceneType.Map,
