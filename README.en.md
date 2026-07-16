@@ -19,11 +19,10 @@
 
 Fantasy is a **zero-reflection, high-performance C# game server framework** built for large-scale multiplayer online games.
 
-<p align="center">
-  <strong>Highlights</strong><br>
-  ⚡ Zero-Reflection · 🚀 Native AOT · 🧭 Control Center & Service Discovery<br>
-  🌐 Multi-Protocol · 🔥 Distributed Architecture · 🎮 ECS Design · 🤖 AI-Assisted Development
-</p>
+## ✨ Highlights
+
+⚡ **Zero-Reflection** · 🚀 **Native AOT** · 🧭 **Control Center & Service Discovery**  
+🌐 **Multi-Protocol** · 🔥 **Distributed Architecture** · 🎮 **ECS Design** · 🤖 **AI-Assisted Development**
 
 ## 🤖 AI-Assisted Development
 
