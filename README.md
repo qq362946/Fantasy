@@ -19,7 +19,11 @@
 
 Fantasy 是一个**零反射、高性能的 C# 游戏服务器框架**，专为大型多人在线游戏打造。
 
-**核心特点：** ⚡ 零反射架构 | 🚀 Native AOT 支持 | 🧭 Control Center 与服务发现 | 🌐 多协议支持 | 🔥 分布式架构 | 🎮 ECS 设计 | 🤖 AI 赋能开发
+<p align="center">
+  <strong>核心特点</strong><br>
+  ⚡ 零反射架构 · 🚀 Native AOT 支持 · 🧭 Control Center 与服务发现<br>
+  🌐 多协议支持 · 🔥 分布式架构 · 🎮 ECS 设计 · 🤖 AI 赋能开发
+</p>
 
 ## 🤖 AI 赋能开发
 
