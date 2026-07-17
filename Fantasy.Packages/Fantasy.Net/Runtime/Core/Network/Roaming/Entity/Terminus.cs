@@ -282,7 +282,7 @@ public sealed partial class Terminus : Entity
     /// <returns></returns>
     public async FTask<uint> StartTransfer(long targetSceneAddress)
     {
-        var currentSceneAddress = Scene.SceneConfig.Address;
+        var currentSceneAddress = Scene.Address;
         
         if (targetSceneAddress == currentSceneAddress)
         {

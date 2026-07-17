@@ -2,6 +2,7 @@
 using System;
 using Fantasy.Async;
 using Fantasy.InnerMessage;
+using Fantasy.Network;
 using Fantasy.Network.Interface;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -14,6 +15,15 @@ internal sealed class I_TransferTerminusRequestHandler : AddressRPC<Scene, I_Tra
 {
     protected override async FTask Run(Scene scene, I_TransferTerminusRequest request, I_TransferTerminusResponse response, Action reply)
     {
+        // 目标 Scene 已经有该 Terminus 时拒绝重复注册。
+        if (scene.TerminusComponent.TryGetTerminus(request.Terminus.Id, out _))
+        {
+            Log.Warning($"Transfer Terminus already exists. Scene:{scene.Address} TerminusId:{request.Terminus.Id}");
+
+            response.ErrorCode = InnerErrorCode.ErrAddRoamingTerminalAlreadyExists;
+            return;
+        }
+        
         // 添加Terminus到当前Scene下。
         scene.TerminusComponent.AddTerminus(request.Terminus);
         
