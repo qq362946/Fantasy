@@ -234,22 +234,38 @@ namespace Fantasy.Network.KCP
         
         private void ReceiveData(KcpHeader header, uint channelId, ReadOnlyMemory<byte> buffer, IPEndPoint ipEndPoint)
         {
-            // 接收KCP的数据
-            if (header == KcpHeader.ReceiveData)
+            // 已建立连接的数据包和断开包必须来自握手时记录的终端。
+            if (header is KcpHeader.ReceiveData or KcpHeader.Disconnect)
             {
+                if (!_connectionChannel.TryGetValue(channelId, out var channel) ||
+                    !channel.RemoteEndPoint.IPEndPointEquals(ipEndPoint))
+                {
+                    // 不记录日志，避免伪造数据包造成日志放大。
+                    return;
+                }
+                
+                if (header == KcpHeader.Disconnect)
+                {
+                    RemoveChannel(channelId);
+                    return;
+                }
+                
                 if (buffer.Length == 0)
                 {
 #if FANTASY_DEVELOP
-                        Log.Warning($"KCP Server KcpHeader.Data  buffer.Length == 0");
+                    Log.Warning("KCP Server ReceiveData buffer.Length == 0");
 #endif
                     return;
                 }
-
-                if (_connectionChannel.TryGetValue(channelId, out var channel))
+                
+                // 限制进入 KCP 的 UDP 数据长度，防止超大恶意分片占用非托管内存
+                if (buffer.Length > Settings.Mtu)
                 {
-                    channel.Input(buffer);
+                    RemoveChannel(channelId);
+                    return;
                 }
                 
+                channel.Input(buffer);
                 return;
             }
             
@@ -288,13 +304,6 @@ namespace Fantasy.Network.KCP
                     }
 
                     AddConnection(ref channelId, ipEndPoint.Clone());
-                    break;
-                }
-                // 断开KCP连接
-                case KcpHeader.Disconnect:
-                {
-                    // 断开不需要清楚PendingConnection让ClearPendingConnection自动清楚就可以了，并且不一定有Pending。
-                    RemoveChannel(channelId);
                     break;
                 }
             }

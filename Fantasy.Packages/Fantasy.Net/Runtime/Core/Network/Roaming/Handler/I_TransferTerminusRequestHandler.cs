@@ -19,7 +19,6 @@ internal sealed class I_TransferTerminusRequestHandler : AddressRPC<Scene, I_Tra
         if (scene.TerminusComponent.TryGetTerminus(request.Terminus.Id, out _))
         {
             Log.Warning($"Transfer Terminus already exists. Scene:{scene.Address} TerminusId:{request.Terminus.Id}");
-
             response.ErrorCode = InnerErrorCode.ErrAddRoamingTerminalAlreadyExists;
             return;
         }

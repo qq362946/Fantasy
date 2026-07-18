@@ -39,6 +39,7 @@ namespace Fantasy.Network.KCP
         private Kcp _kcp;
         private Socket _socket;
         private int _maxSndWnd;
+        private int _packetHeadLength;
         private long _startTime;
         private bool _isConnected;
         private bool _isDisconnect;
@@ -63,6 +64,19 @@ namespace Fantasy.Network.KCP
         private event Action OnConnectFail;
         private event Action OnConnectComplete;
         private event Action OnConnectDisconnect;
+        
+        private static void InvokeSafely(Action callback)
+        {
+            try
+            {
+                callback?.Invoke();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+        
         public uint ChannelId { get; private set; }
         private uint TimeNow => (uint) (TimeHelper.Now - _startTime);
         
@@ -70,6 +84,9 @@ namespace Fantasy.Network.KCP
         {
             base.Initialize(NetworkType.Client, NetworkProtocolType.KCP, networkTarget, enableReceiveMessageJsonLog);
             _packetParser = PacketParserFactory.CreateBufferPacketParser(this);
+            _packetHeadLength = this.NetworkTarget == NetworkTarget.Inner
+                ? Packet.InnerPacketHeadLength
+                : Packet.OuterPacketHeadLength;
         }
         
         public override void Dispose()
@@ -104,7 +121,7 @@ namespace Fantasy.Network.KCP
 
                 if (_connectDisconnectEvent)
                 {
-                    OnConnectDisconnect?.Invoke();
+                    InvokeSafely(OnConnectDisconnect);
                 }
 
                 if (_kcp != null)
@@ -124,7 +141,14 @@ namespace Fantasy.Network.KCP
                 _isConnected = false;
                 _receiveStarted = false;
                 _connectDisconnectEvent = true;
-                _messageCache.Clear();
+                
+                while (_messageCache.TryDequeue(out var memoryStream))
+                {
+                    if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
+                    {
+                        MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -156,7 +180,7 @@ namespace Fantasy.Network.KCP
             _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
             {
                 _connectDisconnectEvent = false;
-                OnConnectFail?.Invoke();
+                InvokeSafely(OnConnectFail);
                 Dispose();
             });
             _connectEventArgs.RemoteEndPoint = _remoteAddress;
@@ -173,7 +197,7 @@ namespace Fantasy.Network.KCP
                 if (_connectEventArgs.SocketError != SocketError.Success)
                 {
                     _connectDisconnectEvent = false;
-                    OnConnectFail?.Invoke();
+                    InvokeSafely(OnConnectFail);
                     Dispose();
                     return null;
                 }
@@ -209,7 +233,7 @@ namespace Fantasy.Network.KCP
                     Scene.ThreadSynchronizationContext.Post(() =>
                     {
                         _connectDisconnectEvent = false;
-                        OnConnectFail?.Invoke();
+                        InvokeSafely(OnConnectFail);
                         Dispose();
                     });
                 }
@@ -280,7 +304,7 @@ namespace Fantasy.Network.KCP
                     if (!_isConnected)
                     {
                         _connectDisconnectEvent = false;
-                        OnConnectFail?.Invoke();
+                        InvokeSafely(OnConnectFail);
                     }
                     
                     Dispose();
@@ -301,14 +325,14 @@ namespace Fantasy.Network.KCP
         {
             if (header == KcpHeader.ReceiveData)
             {
-                if (buffer.Length == 0)
-                {
-                    Log.Warning($"KCP Server KcpHeader.Data  buffer.Length == 0");
-                    return;
-                }
-                    
                 if (channelId != ChannelId)
                 {
+                    return;
+                }
+                
+                if (buffer.Length == 0 || (uint)buffer.Length > _kcp.MaximumTransmissionUnit)
+                {
+                    Dispose();
                     return;
                 }
                     
@@ -322,21 +346,43 @@ namespace Fantasy.Network.KCP
                 case KcpHeader.RepeatChannelId:
                 {
                     // 到这里是客户端的channelId再服务器上已经存在、需要重新生成一个再次尝试连接
-                    ChannelId = CreateChannelId();
+                    if (IsDisposed || _cancellationTokenSource.IsCancellationRequested || _isConnected || channelId != ChannelId)
+                    {
+                        break;
+                    }
+                    
+                    var newChannelId = CreateChannelId();
+                    var newKcp = KCPFactory.Create(
+                        NetworkTarget,
+                        newChannelId,
+                        KcpSpanCallback,
+                        out var kcpSettings);
+                    
+                    _kcp.Dispose();
+                    _kcp = newKcp;
+                    ChannelId = newChannelId;
+                    _maxSndWnd = kcpSettings.MaxSendWindowSize;
+                    
                     SendRequestConnection();
                     break;
                 }
                 // 收到服务器发送会来的确认握手
                 case KcpHeader.WaitConfirmConnection:
                 {
-                    if (channelId != ChannelId)
+                    if (channelId != ChannelId || _isConnected)
                     {
                         break;
                     }
                     
                     ClearConnectTimeout();
                     SendConfirmConnection();
-                    OnConnectComplete?.Invoke();
+                    InvokeSafely(OnConnectComplete);
+                    
+                    if (IsDisposed || _cancellationTokenSource.IsCancellationRequested)
+                    {
+                        break;
+                    }
+                    
                     _isConnected = true;
                     while (_messageCache.TryDequeue(out var memoryStream))
                     {
@@ -361,7 +407,12 @@ namespace Fantasy.Network.KCP
 
         private void Input(ReadOnlyMemory<byte> buffer)
         {
-            _kcp.Input(buffer.Span);
+            if (_kcp.Input(buffer.Span) < 0)
+            {
+                Dispose();
+                return;
+            }
+            
             AddToUpdate(0);
 
             while (!_cancellationTokenSource.IsCancellationRequested)
@@ -374,17 +425,22 @@ namespace Fantasy.Network.KCP
                     {
                         return;
                     }
+                    
+                    if (peekSize < _packetHeadLength ||
+                        peekSize > _receiveBuffer.Length ||
+                        peekSize - _packetHeadLength > ProgramDefine.MaxMessageSize)
+                    {
+                        Dispose();
+                        return;
+                    }
 
                     var receiveCount = _kcp.Receive(_receiveBuffer.AsSpan(0, peekSize));
 
-                    if (receiveCount != peekSize)
+                    if (receiveCount != peekSize || 
+                        !_packetParser.UnPack(_receiveBuffer, ref receiveCount, out var packInfo))
                     {
+                        Dispose();
                         return;
-                    }
-                    
-                    if (!_packetParser.UnPack(_receiveBuffer, ref receiveCount, out var packInfo))
-                    {
-                        continue;
                     }
                     
                     Session.Receive(packInfo);
@@ -393,10 +449,13 @@ namespace Fantasy.Network.KCP
                 {
                     Log.Debug($"RemoteAddress:{_remoteAddress} \n{e}");
                     Dispose();
+                    return;
                 }
                 catch (Exception e)
                 {
                     Log.Error(e);
+                    Dispose();
+                    return;
                 }
             }
         }
@@ -522,14 +581,27 @@ namespace Fantasy.Network.KCP
             {
                 // 检查等待发送的消息，如果超出两倍窗口大小，KCP作者给的建议是要断开连接
                 Log.Warning($"ERR_KcpWaitSendSizeTooLarge {_kcp.WaitSendCount} > {_maxSndWnd}");
+                
+                if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
+                {
+                    MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                }
+                
                 Dispose();
                 return;
             }
+            
+            var packetLength = (int)memoryStream.Position;
+            var sendCount = -1;
 
             try
             {
-                _kcp.Send(memoryStream.GetBuffer().AsSpan(0, (int)memoryStream.Position));
-                AddToUpdate(0);
+                sendCount = _kcp.Send(memoryStream.GetBuffer().AsSpan(0, (int)memoryStream.Position));
+                
+                if (sendCount == packetLength)
+                {
+                    AddToUpdate(0);
+                }
             }
             finally
             {
@@ -537,6 +609,12 @@ namespace Fantasy.Network.KCP
                 {
                     MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
                 }
+            }
+            
+            if (sendCount != packetLength)
+            {
+                Log.Error($"ERR_KcpSendFailed {sendCount} != {packetLength} RemoteAddress:{_remoteAddress}");
+                Dispose();
             }
         }
         

@@ -15,7 +15,7 @@ namespace Fantasy.Network.KCP
         public static KCPSettings Create(NetworkTarget networkTarget)
         {
             var settings = new KCPSettings();
-            
+
             switch (networkTarget)
             {
                 case NetworkTarget.Outer:
@@ -27,36 +27,35 @@ namespace Fantasy.Network.KCP
 #if FANTASY_NET
                     settings.SendWindowSize = 8192;
                     settings.ReceiveWindowSize = 8192;
-                    settings.MaxSendWindowSize = 8192 * 8192 * 7;
 #endif
 #if FANTASY_UNITY || FANTASY_CONSOLE
                     settings.SendWindowSize = 2048;
                     settings.ReceiveWindowSize = 2048;
-                    settings.MaxSendWindowSize = 2048 * 2048 * 7;
 #endif
-                    
                     break;
                 }
 #if FANTASY_NET
-                 case NetworkTarget.Inner:
+                case NetworkTarget.Inner:
                 {
                     // 内网设置1400的原因
                     // 1、一般都是同一台服务器来运行多个进程来处理
                     // 2、内网每个进程跟其他进程只有一个通道进行发送、所以发送的数量会比较大
                     // 3、如果不把窗口设置大点、会出现消息滞后。
-                    // 4、因为内网发送的可不只是外网转发数据、还有可能是其他进程的通讯
+                    // 4、因为内网发送的不只是外网转发数据，还有其他进程间通信
                     settings.Mtu = 1200;
                     settings.SendWindowSize = 8192;
                     settings.ReceiveWindowSize = 8192;
-                    settings.MaxSendWindowSize = 8192 * 8192 * 7;
                     break;
-                }   
+                }
 #endif
                 default:
                 {
                     throw new NotSupportedException($"KCPServerNetwork NotSupported NetworkType:{networkTarget}");
                 }
             }
+
+            // KCP等待发送的数据超过两倍发送窗口时断开连接。
+            settings.MaxSendWindowSize = settings.SendWindowSize * 2;
 
             return settings;
         }

@@ -1,5 +1,6 @@
 #if FANTASY_NET
 using System;
+using System.Buffers;
 using System.Net;
 using System.Runtime.InteropServices;
 using Fantasy.Network.Interface;
@@ -23,13 +24,18 @@ namespace Fantasy.Network.KCP
         private readonly int _maxSndWnd;
         private KCPServerNetwork _kcpServerNetwork;
         private readonly BufferPacketParser _packetParser;
-        private readonly byte[] _receiveBuffer = new byte[ProgramDefine.MaxMessageSize + 20];
+        private readonly int _packetHeadLength;
+        
         public Kcp Kcp { get; private set; }
         public uint ChannelId { get; private set; }
 
         public KCPServerNetworkChannel(KCPServerNetwork network, uint channelId, IPEndPoint ipEndPoint) : base(network, channelId, ipEndPoint)
         {
             _kcpServerNetwork = network;
+            _packetHeadLength =
+                _kcpServerNetwork.NetworkTarget == NetworkTarget.Inner
+                    ? Packet.InnerPacketHeadLength
+                    : Packet.OuterPacketHeadLength;
             ChannelId = channelId;
             _maxSndWnd = network.Settings.MaxSendWindowSize;
             Kcp = KCPFactory.Create(network.Settings, ChannelId, KcpSpanCallback);
@@ -48,6 +54,7 @@ namespace Fantasy.Network.KCP
                 _isInnerDispose = true;
                 _kcpServerNetwork.RemoveChannel(Id);
                 IsDisposed = true;
+                _packetParser.Dispose();
                 Kcp.Dispose();
                 Kcp = null;
                 ChannelId = 0;
@@ -65,30 +72,42 @@ namespace Fantasy.Network.KCP
 
         public void Input(ReadOnlyMemory<byte> buffer)
         {
-            Kcp.Input(buffer.Span);
+            if (Kcp.Input(buffer.Span) < 0)
+            {
+                Dispose();
+                return;
+            }
+            
             _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
 
             while (!IsDisposed)
             {
+                var peekSize = Kcp.PeekSize();
+
+                if (peekSize < 0)
+                {
+                    return;
+                }
+                    
+                // 使用减法，避免 MaxMessageSize + packetHeadLength 整数溢出。
+                if (peekSize < _packetHeadLength ||
+                    peekSize - _packetHeadLength > ProgramDefine.MaxMessageSize)
+                {
+                    Dispose();
+                    return;
+                }
+                
+                var receiveBuffer = ArrayPool<byte>.Shared.Rent(peekSize);
+                
                 try
                 {
-                    var peekSize = Kcp.PeekSize();
+                    var receiveCount = Kcp.Receive(receiveBuffer.AsSpan(0, peekSize));
 
-                    if (peekSize < 0)
+                    if (receiveCount != peekSize || 
+                        !_packetParser.UnPack(receiveBuffer, ref receiveCount, out var packInfo))
                     {
+                        Dispose();
                         return;
-                    }
-
-                    var receiveCount = Kcp.Receive(_receiveBuffer.AsSpan(0, peekSize));
-
-                    if (receiveCount != peekSize)
-                    {
-                        return;
-                    }
-
-                    if (!_packetParser.UnPack(_receiveBuffer, ref receiveCount, out var packInfo))
-                    {
-                        continue;
                     }
 
                     Session.Receive(packInfo);
@@ -97,10 +116,17 @@ namespace Fantasy.Network.KCP
                 {
                     Log.Debug($"RemoteAddress:{RemoteEndPoint} \n{e}");
                     Dispose();
+                    return;
                 }
                 catch (Exception e)
                 {
                     Log.Error(e);
+                    Dispose();
+                    return;
+                }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return(receiveBuffer);
                 }
             }
         }
@@ -116,17 +142,32 @@ namespace Fantasy.Network.KCP
             {
                 // 检查等待发送的消息，如果超出两倍窗口大小，KCP作者给的建议是要断开连接
                 Log.Warning($"ERR_KcpWaitSendSizeTooLarge {Kcp.WaitSendCount} > {_maxSndWnd}");
+                
+                message?.Dispose();
+                
+                if (memoryStream?.MemoryStreamBufferSource == MemoryStreamBufferSource.Pack)
+                {
+                    _kcpServerNetwork.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                }
+                
                 Dispose();
                 return;
             }
 
             MemoryStreamBuffer buffer = null;
-            
+            var packetLength = 0;
+            var sendCount = -1;
+
             try
             {
                 buffer = _packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType);
-                Kcp.Send(buffer.GetBuffer().AsSpan(0, (int)buffer.Position));
-                _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
+                packetLength = (int)buffer.Position;
+                sendCount = Kcp.Send(buffer.GetBuffer().AsSpan(0, packetLength));
+
+                if (sendCount == packetLength)
+                {
+                    _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
+                }
             }
             finally
             {
@@ -134,6 +175,12 @@ namespace Fantasy.Network.KCP
                 {
                     _kcpServerNetwork.MemoryStreamBufferPool.ReturnMemoryStream(buffer);
                 }
+            }
+            
+            if (sendCount != packetLength)
+            {
+                Log.Error($"ERR_KcpSendFailed {sendCount} != {packetLength} RemoteAddress:{RemoteEndPoint}");
+                Dispose();
             }
         }
 

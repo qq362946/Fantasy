@@ -66,10 +66,27 @@ namespace Fantasy.Helper
                     portSpan = span.Slice(lastColonIndex + 1);
                 }
                 
-                // 解析IP地址
+                // IP 直接使用；域名在首次建连时交给系统 DNS 解析。
                 if (!IPAddress.TryParse(ipSpan, out var ipAddress))
                 {
-                    throw new FormatException("Invalid IP address");
+                    var hostAddresses = Dns.GetHostAddresses(ipSpan.ToString());
+                    IPAddress? resolvedAddress = null;
+
+                    foreach (var hostAddress in hostAddresses)
+                    {
+                        if (hostAddress.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            resolvedAddress = hostAddress;
+                            break;
+                        }
+
+                        if (resolvedAddress == null && hostAddress.AddressFamily == AddressFamily.InterNetworkV6)
+                        {
+                            resolvedAddress = hostAddress;
+                        }
+                    }
+
+                    ipAddress = resolvedAddress ?? throw new SocketException((int)SocketError.HostNotFound);
                 }
                 // 解析端口 
                 if (!int.TryParse(portSpan, out var port) || port < 0 || port > 65535)
@@ -81,8 +98,8 @@ namespace Fantasy.Helper
             }
             catch (Exception e)
             {
-                Log.Error($"Error parsing IP and Port: '{address}'. " +
-                          $"Expected format: 'IP:Port' (e.g., '192.168.1.1:8080' or '[::1]:8080'). " +
+                Log.Error($"Error parsing Host and Port: '{address}'. " +
+                          $"Expected format: 'Host:Port' (e.g., 'game.example.com:8080', '192.168.1.1:8080' or '[::1]:8080'). " +
                           $"Error: {e.Message}");
                 return null;
             }
