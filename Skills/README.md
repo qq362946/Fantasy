@@ -83,14 +83,21 @@
 - 指导随机路由、Rendezvous Hash、严格业务绑定的正确边界
 - 检查空结果、动态扩缩容、本地回退、缓存、网络连通性与公网部署安全
 
-### 10. Unity 客户端接入
+### 10. Kubernetes 部署
+
+- 指导 StatefulSet、Headless Service 和 Pod 专属 DNS 配置
+- 指导 `innerBindIP`、`outerBindIP` 与外部 Service 的地址选择
+- 检查 `publishNotReadyAddresses`、TCP/KCP 协议映射和多副本身份
+- 检查 Control Center 的单副本持久化与集群网络隔离
+
+### 11. Unity 客户端接入
 
 - 指导 `Fantasy.Unity` 安装与接入
 - 指导编译宏、协议导入、连接方式、Session 使用
 - 指导客户端接收服务器主动推送的 Handler 编写
 - 检查版本一致性、宏配置、连接方式和 Session 生命周期问题
 
-### 11. 代码审查与规范检查
+### 12. 代码审查与规范检查
 
 - 对 Fantasy 项目代码进行针对性的 review
 - 检查代码是否符合 Fantasy 框架的推荐写法

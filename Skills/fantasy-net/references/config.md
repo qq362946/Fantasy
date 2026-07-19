@@ -50,6 +50,7 @@ Control Center 加载失败且 fallbackToLocal="true"
 新建项目或从零写配置 -> config-scenarios.md
 启用 Control Center 或服务发现 -> service-discovery/index.md
 新增 / 修改 machine 或 process -> templates/Fantasy.config
+Kubernetes / Pod DNS / 容器绑定地址 -> server/kubernetes.md
 新增 / 修改 world 或 database -> config-scenarios.md
 新增 / 删除 scene、改端口、改网络协议 -> config-scenarios.md
 需要查节点属性和默认值 -> templates/Fantasy.config

@@ -1,4 +1,5 @@
 #if !FANTASY_WEBGL
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -66,11 +67,9 @@ namespace Fantasy.Helper
                     portSpan = span.Slice(lastColonIndex + 1);
                 }
                 
-                // 解析IP地址
-                if (!IPAddress.TryParse(ipSpan, out var ipAddress))
-                {
-                    throw new FormatException("Invalid IP address");
-                }
+                // IP 直接使用；域名在首次建连时交给系统 DNS 解析。
+                // IP直接解析；域名交给系统DNS。
+                var ipAddress = ResolveHostAddress(ipSpan, requireLocalAddress: false);
                 // 解析端口 
                 if (!int.TryParse(portSpan, out var port) || port < 0 || port > 65535)
                 {
@@ -81,11 +80,94 @@ namespace Fantasy.Helper
             }
             catch (Exception e)
             {
-                Log.Error($"Error parsing IP and Port: '{address}'. " +
-                          $"Expected format: 'IP:Port' (e.g., '192.168.1.1:8080' or '[::1]:8080'). " +
+                Log.Error($"Error parsing Host and Port: '{address}'. " +
+                          $"Expected format: 'Host:Port' (e.g., 'game.example.com:8080', '192.168.1.1:8080' or '[::1]:8080'). " +
                           $"Error: {e.Message}");
                 return null;
             }
+        }
+
+        /// <summary>
+        /// 将IP或主机名解析为IP地址。
+        /// 远程连接允许使用任意解析结果；服务端绑定只能使用属于本机网络接口的地址。
+        /// IPv4和IPv6同时存在时优先IPv4。
+        /// </summary>
+        private static IPAddress ResolveHostAddress(ReadOnlySpan<char> host, bool requireLocalAddress)
+        {
+            if (host.IsEmpty)
+            {
+                throw new ArgumentException("Host cannot be empty.", nameof(host));
+            }
+
+            // IP快速路径：不分配字符串、不查询DNS、不扫描网卡。
+            if (IPAddress.TryParse(host, out var ipAddress))
+            {
+                return ipAddress;
+            }
+
+            // Dns API需要string，只有域名路径才产生一次分配。
+            var hostName = host.ToString();
+
+            if (string.IsNullOrWhiteSpace(hostName))
+            {
+                throw new ArgumentException("Host cannot be whitespace.", nameof(host));
+            }
+
+            var resolvedAddresses = Dns.GetHostAddresses(hostName);
+
+            HashSet<IPAddress>? localAddresses = null;
+
+            if (requireLocalAddress)
+            {
+                localAddresses = new HashSet<IPAddress>
+                {
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback
+                };
+
+                foreach (var networkInterface in NetworkInterface.GetAllNetworkInterfaces())
+                {
+                    foreach (var unicastAddress in networkInterface.GetIPProperties().UnicastAddresses)
+                    {
+                        localAddresses.Add( unicastAddress.Address);
+                    }
+                }
+            }
+
+            IPAddress? ipv6Address = null;
+
+            foreach (var resolvedAddress in resolvedAddresses)
+            {
+                if (localAddresses != null && !localAddresses.Contains(resolvedAddress))
+                {
+                    continue;
+                }
+
+                if (resolvedAddress.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return resolvedAddress;
+                }
+
+                if (resolvedAddress.AddressFamily == AddressFamily.InterNetworkV6 && ipv6Address == null)
+                {
+                    ipv6Address = resolvedAddress;
+                }
+            }
+
+            if (ipv6Address != null)
+            {
+                return ipv6Address;
+            }
+
+            if (requireLocalAddress)
+            {
+                throw new InvalidOperationException(
+                    $"Host '{hostName}' resolved successfully, " +
+                    "but none of its addresses belongs to this machine. " +
+                    "A bind host must resolve to a local network interface.");
+            }
+
+            throw new SocketException((int)SocketError.HostNotFound);
         }
 
         /// <summary>
@@ -165,7 +247,7 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// 将byre[]转换为SocketAddress
+        /// 将byte[]转换为SocketAddress
         /// </summary>
         /// <param name="buffer"></param>
         /// <param name="offset"></param>
@@ -354,14 +436,27 @@ namespace Fantasy.Helper
         }
 
         /// <summary>
-        /// 将主机名和端口号转换为 <see cref="IPEndPoint"/> 实例。
+        /// 将远程主机名和端口转换为IPEndPoint。
+        /// 域名可以解析到任意远程地址。
         /// </summary>
-        /// <param name="host">主机名。</param>
-        /// <param name="port">端口号。</param>
-        /// <returns><see cref="IPEndPoint"/> 实例。</returns>
+        /// <param name="host">IP地址或域名。</param>
+        /// <param name="port">端口。</param>
+        /// <returns>远程IPEndPoint。</returns>
         public static IPEndPoint ToIPEndPoint(string host, int port)
         {
-            return new IPEndPoint(IPAddress.Parse(host), port);
+            return new IPEndPoint(ResolveHostAddress(host.AsSpan(), requireLocalAddress: false), port);
+        }
+
+        /// <summary>
+        /// 将服务端绑定主机名和端口转换为IPEndPoint。
+        /// 域名解析结果必须属于本机网络接口。
+        /// </summary>
+        /// <param name="host">本机IP地址或指向本机的域名。</param>
+        /// <param name="port">监听端口。</param>
+        /// <returns>用于Socket.Bind的IPEndPoint。</returns>
+        public static IPEndPoint ToBindIPEndPoint(string host, int port)
+        {
+            return new IPEndPoint(ResolveHostAddress(host.AsSpan(), requireLocalAddress: true), port);
         }
 
         /// <summary>

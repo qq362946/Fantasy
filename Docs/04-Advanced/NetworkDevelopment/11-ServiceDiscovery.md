@@ -536,8 +536,10 @@ await dungeon.Close();
 服务注册使用 Machine 的 `innerBindIP` 作为 Host。多机部署时，该地址必须能被其他服务器直接访问：
 
 - 不要使用其他机器无法访问的 `127.0.0.1`。
-- 容器部署时应配置可路由的容器地址、宿主机地址或内部域名。
+- 容器部署时应配置可路由的容器地址或内部域名。
 - 防火墙和安全组必须放行 Scene 的 `innerPort`。
+
+Kubernetes 中应使用 StatefulSet Pod 专属 DNS。普通 ClusterIP Service DNS 指向非本地虚拟 IP，不能用于绑定；共享 Headless Service DNS 可能指向多个 Pod，也不能作为某个 Scene 的注册地址。Headless Service 应设置 `publishNotReadyAddresses: true`，避免 Pod 因等待 Ready 状态而无法在启动时解析自己的 DNS。完整示例见 [Kubernetes 部署指南](../14-Deployment.md)。
 
 ### Control Center 安全
 
@@ -618,6 +620,7 @@ var address =
 ## 相关文档
 
 - [Fantasy.config 配置文件详解](../../01-Server/01-ServerConfiguration.md)
+- [Kubernetes 部署指南](../14-Deployment.md)
 - [命令行参数](../../01-Server/03-CommandLineArguments.md)
 - [Address 消息](06-Address消息.md)
 - [Scene 和 SubScene](../CoreSystems/03-Scene.md)

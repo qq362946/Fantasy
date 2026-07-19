@@ -423,14 +423,14 @@ git clone https://github.com/qq362946/Fantasy.git
 
 | 配置项 | 说明 | 示例值 |
 |--------|------|--------|
-| `<machine>` | 定义服务器的IP地址<br>• `outerIP`: 客户端连接的IP<br>• `innerBindIP`: 服务器间通信的IP | 本地开发都用 `127.0.0.1`<br>生产环境使用实际IP |
+| `<machine>` | 定义服务器网络地址<br>• `outerIP`: 客户端连接的 IP 或域名<br>• `innerBindIP`: 内网监听和服务器间通信的 IP 或域名 | 本地开发使用 `127.0.0.1`<br>Kubernetes 使用 Pod 专属 DNS |
 | `<process>` | 定义进程运行在哪台机器上<br>• `machineId`: 引用机器ID<br>• `startupGroup`: 启动顺序 | 相同分组的进程同时启动 |
 | `<world>` | 定义游戏世界和数据库<br>• 可配置多个数据库（主库、从库等）<br>• `dbConnection` 为空则不连接 | 开发环境可不配置数据库 |
 | `<scene>` | **核心配置**，定义业务场景<br>• `outerPort`: 客户端连接端口<br>• `innerPort`: 服务器间通信端口<br>• `networkProtocol`: 网络协议 | Gate场景使用 KCP 协议<br>Map场景不对外监听 |
 
 **💡 快速理解：**
-- 本地开发：所有 IP 都用 `127.0.0.1`，配置一个 Gate 场景即可
-- 生产环境：配置实际IP地址，根据业务需求配置多个场景
+- 本地开发：所有地址都用 `127.0.0.1`，配置一个 Gate 场景即可
+- 生产环境：配置实际 IP 或域名；Kubernetes 部署见 [Kubernetes 部署指南](../04-Advanced/14-Deployment.md)
 - 数据库可选：开发环境可以不连接数据库（`dbConnection=""`）
 
 > **📖 详细说明：** 完整的配置参数说明请查看 [Fantasy.config 配置文件详解](../01-Server/01-ServerConfiguration.md)

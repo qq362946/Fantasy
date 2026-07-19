@@ -1,4 +1,5 @@
 #if !FANTASY_WEBGL
+#nullable enable
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -178,9 +179,18 @@ namespace Fantasy.Http
 
             foreach (var header in headers)
             {
-                ArgumentException.ThrowIfNullOrWhiteSpace(header.Key);
-                ArgumentNullException.ThrowIfNull(header.Value);
+                if (string.IsNullOrWhiteSpace(header.Key))
+                {
+                    // ReSharper disable once NotResolvedInText
+                    throw new ArgumentException("Header key 不能为空或空白字符。", "header.Key");
+                }
 
+                if (header.Value == null)
+                {
+                    // ReSharper disable once NotResolvedInText
+                    throw new ArgumentNullException("header.Value");
+                }
+                
                 request.Headers.Add(header.Key, header.Value);
             }
         }

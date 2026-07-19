@@ -68,6 +68,8 @@
 
 检查目标 Machine 的 `innerBindIP` 是否能从调用方机器访问、InnerPort 是否开放、NAT 或容器是否发布正确端口。注册成功只说明 HTTP 控制面可达，不等于服务器之间的数据面网络可达。
 
+Kubernetes 中检查 `innerBindIP` 是否为 StatefulSet Pod 专属 DNS，并确认 Headless Service 设置了 `publishNotReadyAddresses: true`。普通 ClusterIP Service DNS 不能绑定到 Pod 本地网卡；共享 Headless Service DNS 可能解析到其他 Pod，不能作为特定 Scene 的注册地址。完整检查见 `../server/kubernetes.md`。
+
 SubScene 没有独立端口，它使用父 Root Scene 的 SceneId、Host 和 InnerPort。若 SubScene Address 来自 RPC 或事件而本地尚无路由，可直接调用 `Scene.Send` / `Scene.Call`，框架会解析父 Root Scene；不需要业务代码提前调用 `ResolveAddressAsync`。
 
 ### Control Center 短暂不可用

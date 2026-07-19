@@ -84,9 +84,13 @@ namespace Fantasy.Network.KCP
         {
             base.Initialize(NetworkType.Client, NetworkProtocolType.KCP, networkTarget, enableReceiveMessageJsonLog);
             _packetParser = PacketParserFactory.CreateBufferPacketParser(this);
+#if FANTASY_NET
             _packetHeadLength = this.NetworkTarget == NetworkTarget.Inner
                 ? Packet.InnerPacketHeadLength
                 : Packet.OuterPacketHeadLength;
+#else
+            _packetHeadLength = Packet.OuterPacketHeadLength;
+#endif
         }
         
         public override void Dispose()

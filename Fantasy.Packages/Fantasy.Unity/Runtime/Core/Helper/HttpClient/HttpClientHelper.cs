@@ -1,13 +1,13 @@
 #if !FANTASY_WEBGL
+#nullable enable
 using System;
-using System.Net;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.Pool;
-#pragma warning disable CS8603 // Possible null reference return.
 
 namespace Fantasy.Http
 {
@@ -18,130 +18,196 @@ namespace Fantasy.Http
     {
         private static readonly HttpClient Client = new();
 
-        /// <summary>
-        /// 用Post方式请求string数据
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static async FTask<string> CallNotDeserializeByPost(string url, HttpContent content)
+        #region String Response
+
+        public static FTask<string> CallNotDeserializeByPost(string url, HttpContent content)
         {
-            var response = await Client.PostAsync(url, content);
-
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception($"Unable to connect to server url {(object)url} HttpStatusCode:{(object)response.StatusCode}");
-            }
-
-            return await response.Content.ReadAsStringAsync();
-        }
-        
-        /// <summary>
-        /// 用Get方式请求string数据
-        /// </summary>
-        /// <param name="url"></param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static async FTask<string> CallNotDeserializeByGet(string url)
-        {
-            var response = await Client.GetAsync(url);
-
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception($"Unable to connect to server url {(object)url} HttpStatusCode:{(object)response.StatusCode}");
-            }
-
-            return await response.Content.ReadAsStringAsync();
+            return CallNotDeserializeByPost(url, content, null);
         }
 
-        /// <summary>
-        /// 用Post方式请求JSON数据，并自动把JSON转换为对象。
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="content"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static async FTask<T> CallByPost<T>(string url, HttpContent content)
+        public static async FTask<string> CallNotDeserializeByPost(string url, HttpContent content, IReadOnlyDictionary<string, string>? headers)
         {
-            return await Deserialize<T>(url, await Client.PostAsync(url, content));
-        }
-
-        /// <summary>
-        /// 用Post方式请求JSON数据，并自动把JSON转换为对象。
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="method"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static async FTask<T> CallByPost<T>(string url, HttpMethod method)
-        {
-            return await Deserialize<T>(url, await Client.SendAsync(new HttpRequestMessage(method, url)));
-        }
-        
-        /// <summary>
-        /// 用Get方式请求JSON数据，并自动把JSON转换为对象。
-        /// </summary>
-        /// <param name="url"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static async FTask<T> CallByGet<T>(string url)
-        {
-            return await Deserialize<T>(url, await Client.GetAsync(url));
-        }
-        
-        /// <summary>
-        /// 用Post方式请求JSON数据，并自动把JSON转换为对象。
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="id"></param>
-        /// <param name="authentication"></param>
-        /// <param name="method"></param>
-        /// <param name="params"></param>
-        /// <typeparam name="TRequest"></typeparam>
-        /// <typeparam name="TResponse"></typeparam>
-        /// <returns></returns>
-        public static async FTask<TResponse> Call<TRequest, TResponse>(string url, int id, AuthenticationHeaderValue authentication, string method, params object[] @params) where TRequest : class, IJsonRpcRequest, new()
-        {
-            var request = Pool<TRequest>.Rent();
-            using var httpClientPool = HttpClientPool.Create();
-            var client = httpClientPool.Client;
-            client.DefaultRequestHeaders.Authorization = authentication;
+            using var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Content = content;
 
             try
             {
-                request.Init(method, id, @params);
-                var content = new StringContent(request.ToJson(), Encoding.UTF8, "application/json");
-                var response = await Deserialize<TResponse>(url, await client.PostAsync(url, content));
-                return response;
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
+                AddHeaders(request, headers);
+                using var response = await Client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                return await response.Content.ReadAsStringAsync();
             }
             finally
             {
-                Pool<TRequest>.Return(request);
+                // HttpContent由调用方管理，避免Dispose request时重复释放。
+                request.Content = null;
             }
-
-            return default;
         }
 
-        private static async FTask<T> Deserialize<T>(string url, HttpResponseMessage response)
+        public static FTask<string> CallNotDeserializeByGet(string url)
+        {
+            return CallNotDeserializeByGet(url, null);
+        }
+
+        public static async FTask<string> CallNotDeserializeByGet(string url, IReadOnlyDictionary<string, string>? headers)
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            AddHeaders(request, headers);
+
+            using var response = await Client.SendAsync(request);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        #endregion
+
+        #region JSON Response
+
+        public static FTask<T> CallByPost<T>(string url, HttpContent content)
+        {
+            return CallByPost<T>(url, content, null);
+        }
+
+        public static async FTask<T> CallByPost<T>(string url, HttpContent content, IReadOnlyDictionary<string, string>? headers)
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Content = content;
+
+            try
+            {
+                AddHeaders(request, headers);
+                return await Deserialize<T>(await Client.SendAsync(request));
+            }
+            finally
+            {
+                // HttpContent仍归调用方所有。
+                request.Content = null;
+            }
+        }
+
+        public static FTask<T> CallByPost<T>(string url, HttpMethod method)
+        {
+            return CallByPost<T>(url, method, null);
+        }
+
+        public static async FTask<T> CallByPost<T>(string url, HttpMethod method, IReadOnlyDictionary<string, string>? headers)
+        {
+            using var request = new HttpRequestMessage(method, url);
+
+            AddHeaders(request, headers);
+
+            return await Deserialize<T>(await Client.SendAsync(request));
+        }
+
+        public static FTask<T> CallByGet<T>(string url)
+        {
+            return CallByGet<T>(url, null);
+        }
+
+        public static async FTask<T> CallByGet<T>(string url, IReadOnlyDictionary<string, string>? headers)
+        {
+            using var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            AddHeaders(request, headers);
+
+            return await Deserialize<T>(await Client.SendAsync(request));
+        }
+
+        #endregion
+
+        #region JSON RPC
+
+        public static FTask<TResponse> Call<TRequest, TResponse>(
+            string url,
+            int id,
+            AuthenticationHeaderValue authentication,
+            string method,
+            params object[] @params)
+            where TRequest : class, IJsonRpcRequest, new()
+        {
+            return Call<TRequest, TResponse>(
+                url,
+                id,
+                authentication,
+                null,
+                method,
+                @params);
+        }
+
+        public static async FTask<TResponse> Call<TRequest, TResponse>(
+            string url,
+            int id,
+            AuthenticationHeaderValue authentication,
+            IReadOnlyDictionary<string, string>? headers,
+            string method,
+            params object[] @params)
+            where TRequest : class, IJsonRpcRequest, new()
+        {
+            var rpcRequest = Pool<TRequest>.Rent();
+
+            try
+            {
+                rpcRequest.Init(method, id, @params);
+
+                using var request = new HttpRequestMessage(HttpMethod.Post, url);
+                request.Content = new StringContent(rpcRequest.ToJson(), Encoding.UTF8, "application/json");
+                AddHeaders(request, headers);
+
+                // 强类型认证参数优先于Header字典中的Authorization。
+                request.Headers.Authorization = authentication;
+
+                return await Deserialize<TResponse>(await Client.SendAsync(request));
+            }
+            finally
+            {
+                Pool<TRequest>.Return(rpcRequest);
+            }
+        }
+
+        #endregion
+
+        #region Helper
+
+        private static void AddHeaders(HttpRequestMessage request, IReadOnlyDictionary<string, string>? headers)
+        {
+            if (headers == null)
+            {
+                return;
+            }
+
+            foreach (var header in headers)
+            {
+                if (string.IsNullOrWhiteSpace(header.Key))
+                {
+                    // ReSharper disable once NotResolvedInText
+                    throw new ArgumentException("Header key 不能为空或空白字符。", "header.Key");
+                }
+
+                if (header.Value == null)
+                {
+                    // ReSharper disable once NotResolvedInText
+                    throw new ArgumentNullException("header.Value");
+                }
+
+                request.Headers.Add(header.Key, header.Value);
+            }
+        }
+
+        private static async FTask<T> Deserialize<T>(HttpResponseMessage response)
         {
             using (response)
             {
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new HttpRequestException(
-                        $"Unable to connect to server url {url}, " +
-                        $"HttpStatusCode: {response.StatusCode}");
-                }
+                response.EnsureSuccessStatusCode();
 
-                return (await response.Content.ReadAsStringAsync())
-                    .Deserialize<T>();
+                var json = await response.Content.ReadAsStringAsync();
+
+                return json.Deserialize<T>();
             }
         }
+
+        #endregion
     }
 }
 #endif

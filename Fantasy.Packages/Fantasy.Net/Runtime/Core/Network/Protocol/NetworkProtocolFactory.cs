@@ -26,14 +26,14 @@ namespace Fantasy.Network
                 case NetworkProtocolType.TCP:
                 {
                     var network = Entity.Create<TCPServerNetwork>(scene, false, false);
-                    var address = NetworkHelper.ToIPEndPoint(bindIp, port);
+                    var address = NetworkHelper.ToBindIPEndPoint(bindIp, port);
                     network.Initialize(networkTarget, address);
                     return network;
                 }
                 case NetworkProtocolType.KCP:
                 {
                     var network = Entity.Create<KCPServerNetwork>(scene, false, true);
-                    var address = NetworkHelper.ToIPEndPoint(bindIp, port);
+                    var address = NetworkHelper.ToBindIPEndPoint(bindIp, port);
                     network.Initialize(networkTarget, address);
                     return network;
                 }

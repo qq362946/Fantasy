@@ -151,9 +151,9 @@ public sealed class MachineConfigData
 public sealed class MachineConfig
 {
     public uint Id { get; set; }              // 机器ID
-    public string OuterIP { get; set; }       // 外网IP
-    public string OuterBindIP { get; set; }   // 外网绑定IP
-    public string InnerBindIP { get; set; }   // 内网绑定IP
+    public string OuterIP { get; set; }       // 外网公布地址（IP或域名）
+    public string OuterBindIP { get; set; }   // 外网监听地址
+    public string InnerBindIP { get; set; }   // 内网监听和通信地址
 }
 ```
 

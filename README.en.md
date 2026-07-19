@@ -219,7 +219,7 @@ public class PlayerAwakeSystem : AwakeSystem<Player>
 | Platform | Status | Notes |
 |------|-------|------------------|
 | 🖥️ **Windows Server** | ✅ Fully supported | Recommended game server platform |
-| 🐧 **Linux Server** | ✅ Fully supported | Docker/K8s containerized deployment |
+| 🐧 **Linux Server** | ✅ Fully supported | Docker/Kubernetes deployment with Pod DNS binding |
 | 🍎 **macOS** | ✅ Fully supported | Friendly for development and debugging |
 | 🎮 **Unity (Win/Mac/iOS/Android)** | ✅ Fully supported | 2022.3.62+ |
 | 🌐 **Unity WebGL (H5)** | ✅ Fully supported | WebSocket protocol |

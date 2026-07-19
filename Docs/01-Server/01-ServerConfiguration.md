@@ -340,10 +340,12 @@ SceneType.HttpGift
 |---|---|---|
 | `id` | 是 | 大于 `0` 的唯一 Machine ID |
 | `outerIP` | 是 | 对外公布的 IP 或域名，供客户端连接 |
-| `outerBindIP` | 是 | 外网监听绑定地址，例如 `0.0.0.0` |
-| `innerBindIP` | 是 | 服务器内部通信地址，应能被其他服务器访问 |
+| `outerBindIP` | 是 | 外网监听绑定地址；TCP/KCP 可使用 IP 或解析到本机网卡的域名 |
+| `innerBindIP` | 是 | 内网监听和服务器间通信地址；可使用 IP 或解析到本机网卡的域名，并且必须能被其他服务器访问 |
 
 不要把多机部署的 `innerBindIP` 配置成 `127.0.0.1`。Control Center 部署在外网时，注册的 Host 和端口也必须能被调用方实际访问。
+
+Kubernetes 中推荐使用 StatefulSet Pod 专属 DNS，例如 `fantasy-gate-0.fantasy-gate-headless.game.svc.cluster.local`。不要使用普通 ClusterIP Service DNS：它解析到的虚拟 IP 不属于 Pod 本地网卡；也不要使用会返回多个 Pod 的共享 Headless Service 名称作为 `innerBindIP`。完整配置见 [Kubernetes 部署指南](../04-Advanced/14-Deployment.md)。
 
 ### 8. Process (`<process>`)
 

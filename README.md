@@ -216,7 +216,7 @@ public class PlayerAwakeSystem : AwakeSystem<Player>
 | 平台 | 支持状态  | 说明               |
 |------|-------|------------------|
 | 🖥️ **Windows Server** | ✅ 完全支持 | 游戏服务器首选平台        |
-| 🐧 **Linux Server** | ✅ 完全支持 | Docker/K8s 容器化部署 |
+| 🐧 **Linux Server** | ✅ 完全支持 | [Docker/Kubernetes 容器化部署](Docs/04-Advanced/14-Deployment.md) |
 | 🍎 **macOS** | ✅ 完全支持 | 开发调试友好           |
 | 🎮 **Unity (Win/Mac/iOS/Android)** | ✅ 完全支持 | 2022.3.62+       |
 | 🌐 **Unity WebGL (H5)** | ✅ 完全支持 | WebSocket 协议     |
