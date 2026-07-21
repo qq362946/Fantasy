@@ -50,7 +50,7 @@ public interface IDatabase
 - ✅ **自动协程锁**：确保数据库操作的线程安全
 - ✅ **对象池优化**：减少序列化开销
 - ✅ **BSON 序列化**：高性能的二进制序列化
-- ✅ **自动反序列化**：查询结果自动注册到框架系统
+- ✅ **可选反序列化**：通过 `isDeserialize` 决定是否把查询结果注册到框架系统
 - ✅ **集合管理**：自动创建和管理数据库集合
 
 ---
@@ -59,24 +59,25 @@ public interface IDatabase
 
 ### 1. 在 Fantasy.config 中配置数据库
 
+数据库配置属于 `World`，必须放在 `<server><worlds><world>` 下。Scene 通过 `worldConfigId` 绑定 World，并共享该 World 的数据库配置：
+
 ```xml
-<?xml version="1.0" encoding="utf-8" ?>
 <fantasy xmlns="http://fantasy.net/config">
   <server>
-    <!-- 世界配置 -->
     <worlds>
-      <world id="1" worldName="GameWorld">
-        <!-- MongoDB 配置 -->
+      <world id="1" namespaceId="1" groupId="1" worldName="GameWorld">
         <database dbType="MongoDB"
                   dbName="game_data"
-                  dbConnection="mongodb://localhost:27017/" />
+                  dbConnection="mongodb://127.0.0.1:27017/"
+                  isDefault="true" />
 
-        <!-- 可配置多个数据库 -->
         <database dbType="MongoDB"
                   dbName="log_data"
-                  dbConnection="mongodb://localhost:27017/" />
+                  dbConnection="mongodb://127.0.0.1:27017/" />
       </world>
     </worlds>
+
+    <!-- machines、processes、scenes 等其他必需配置省略 -->
   </server>
 </fantasy>
 ```
@@ -85,58 +86,55 @@ public interface IDatabase
 
 | 参数 | 说明 | 示例 |
 |------|------|------|
-| `dbType` | 数据库类型，目前支持 `MongoDB` | `MongoDB` |
-| `dbName` | 数据库名称，用于代码中获取数据库实例 | `game_data` |
-| `dbConnection` | MongoDB 连接字符串 | `mongodb://localhost:27017/` |
+| `dbType` | 数据库类型；MongoDB 可写 `MongoDB` 或 `Mongo` | `MongoDB` |
+| `dbName` | 数据库名称，同一 World 内不能重复；代码按此字符串取库 | `game_data` |
+| `dbConnection` | MongoDB 连接字符串；为空时不会创建数据库连接 | `mongodb://127.0.0.1:27017/` |
+| `isDefault` | 是否为当前 World 的默认数据库，默认 `false` | `true` |
 
-### 2. Source Generator 自动生成常量
+纯本地模式可省略 `world` 的 `namespaceId` 和 `groupId`；允许从 Control Center 回退到本地时，两者必须配置为大于 `0`。要实际使用数据库，目标配置的 `dbConnection` 必须非空且可连接。
 
-配置完成后，Source Generator 会自动生成 `DatabaseName.g.cs` 文件：
+默认数据库的选择规则：
 
-```csharp
-// 自动生成的代码
-namespace Fantasy.Database
-{
-    public static class DatabaseName
-    {
-        public const int game_data = 0;
-        public const int log_data = 1;
-    }
-}
-```
+- 有一个或多个 `isDefault="true"` 时，使用第一个被标记的数据库
+- 都未标记时，使用第一条 `<database>`
+- `Scene.World.Database` 指向这个默认数据库
+
+当前版本不再生成 `DatabaseName.g.cs`，非默认数据库直接使用 `dbName` 字符串获取。启用 Control Center 且远程配置加载成功时，World 和 Database 配置来自 Control Center；只有本地模式或回退本地配置时才读取这里的 `<server>`。
 
 ---
 
 ## 获取数据库实例
 
-### 1. 通过 Scene.World.Database 获取
+### 1. 获取默认数据库
 
 ```csharp
-// 获取第一个数据库（默认数据库）
+// 获取 isDefault 指定的数据库；未指定时获取第一条配置
 var database = scene.World.Database;
-
-// 使用自动生成的常量切换数据库
-var logDatabase = scene.World.SelectDatabase(DatabaseName.log_data);
 ```
 
-### 2. 通过索引获取
+### 2. 按名称获取数据库
 
 ```csharp
-// 根据数据库名称常量获取
-var database = scene.World[DatabaseName.game_data];
-
-// 类型安全的获取方式
-if (scene.World.TryGetDatabase<MongoDatabase>(DatabaseName.game_data, out var mongoDb))
+// 推荐：未找到或未初始化时返回 false
+if (scene.World.TryGetDatabase("log_data", out var logDatabase))
 {
-    // 使用 mongoDb
+    await logDatabase.Save(log);
 }
+
+// 也可以使用索引器；未找到时返回 null 并记录错误日志
+var gameDatabase = scene.World["game_data"];
 ```
+
+`TryGetDatabase` 返回 `IDatabase`，不再使用泛型参数；按名称取库也不会改变 `Scene.World.Database` 指向的默认库。
 
 ### 3. 获取原生 MongoDB 实例
 
 ```csharp
 // 获取原生 IMongoDatabase 对象，用于高级操作
-var mongoDatabase = (IMongoDatabase)database.GetDatabaseInstance;
+if (database is MongoDatabase)
+{
+    var mongoDatabase = (IMongoDatabase)database.GetDatabaseInstance;
+}
 ```
 
 ---
@@ -149,7 +147,7 @@ var mongoDatabase = (IMongoDatabase)database.GetDatabaseInstance;
 
 ```csharp
 // 定义可持久化的实体
-public class Player : Entity, ISupportedSerialize
+public sealed class Player : Entity, ISupportedSerialize
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -157,7 +155,7 @@ public class Player : Entity, ISupportedSerialize
 }
 
 // 多实例 + 数据库持久化
-public class ItemComponent : Entity, ISupportedSerialize
+public sealed class ItemComponent : Entity, ISupportedSerialize
 {
     public int ItemId { get; set; }
     public int Count { get; set; }
@@ -188,7 +186,7 @@ player.Gold = 1000;
 await database.Save(player);
 
 // 保存到指定集合
-await database.Save(player, collection: "players_backup");
+await database.Save(player, "players_backup");
 ```
 
 #### 2. 保存多个拥有相同 Id 实体
@@ -376,6 +374,27 @@ Log.Info($"游戏内总金币: {totalGold}");
 
 ## 高级特性
 
+### 数据库锁机制
+
+按 ID 查询、保存、插入和删除等操作会在 `MongoDatabase` 内部自动加锁。`QueryNotLock` 只适用于调用方已经保证并发安全的场景。
+
+“查询 → 修改 → 保存”是多个数据库操作，内部锁不会覆盖整个业务流程；并发修改同一实体时，应让所有写入路径使用相同的锁职责和实体 ID：
+
+```csharp
+var lockDuty = typeof(Player).TypeHandle.Value.ToInt64();
+using (await scene.CoroutineLockComponent.Wait(lockDuty, playerId))
+{
+    var player = await database.QueryNotLock<Player>(playerId);
+    if (player == null)
+    {
+        return;
+    }
+
+    player.Gold += 100;
+    await database.Save(player);
+}
+```
+
 ### 反序列化参数
 
 查询时可选择是否反序列化实体：
@@ -444,24 +463,15 @@ await database.CreateDB(typeof(ItemComponent));
 如果需要自定义 MongoDB 连接参数：
 
 ```csharp
-// 在程序启动时设置自定义初始化委托
-DataBaseSetting.MongoDbCustomInitialize = (config) =>
+// 必须在 Scene/World 初始化数据库之前设置
+Initializer.MongoDbCustomInitialize = config =>
 {
     var settings = MongoClientSettings.FromConnectionString(config.ConnectionString);
 
-    // 自定义连接参数
     settings.MaxConnectionPoolSize = 500;
     settings.MinConnectionPoolSize = 10;
     settings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
     settings.ConnectTimeout = TimeSpan.FromSeconds(10);
-
-    // 配置序列化器
-    settings.ClusterConfigurator = builder =>
-    {
-        builder.ConfigureCluster(s => s.With(
-            serverSelectionTimeout: TimeSpan.FromSeconds(5)
-        ));
-    };
 
     return new MongoClient(settings);
 };
@@ -475,7 +485,7 @@ DataBaseSetting.MongoDbCustomInitialize = (config) =>
 
 ```csharp
 // ✅ 推荐：清晰的实体定义
-public class Player : Entity, ISupportedSerialize
+public sealed class Player : Entity, ISupportedSerialize
 {
     // 使用属性而非字段
     public string Name { get; set; }
@@ -486,7 +496,7 @@ public class Player : Entity, ISupportedSerialize
 }
 
 // ❌ 不推荐：在实体中包含大量嵌套数据
-public class Player : Entity, ISupportedSerialize
+public sealed class Player : Entity, ISupportedSerialize
 {
     public List<Item> Items { get; set; }  // 应该拆分为 ItemComponent
     public Dictionary<int, Buff> Buffs { get; set; }  // 应该拆分为 BuffComponent
@@ -538,7 +548,7 @@ await database.Save(player);  // 每次活动都保存，性能开销大
 
 ```csharp
 // 在 Scene 创建时创建索引
-public class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
+public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 {
     protected override async FTask Handler(OnCreateScene self)
     {
@@ -621,9 +631,15 @@ database.Save(player);  // 异步操作未完成
 
 **使用协程锁：**
 ```csharp
-using (await scene.CoroutineLockComponent.Wait(playerId))
+var lockDuty = typeof(Player).TypeHandle.Value.ToInt64();
+using (await scene.CoroutineLockComponent.Wait(lockDuty, playerId))
 {
     var player = await database.QueryNotLock<Player>(playerId);
+    if (player == null)
+    {
+        return;
+    }
+
     player.Gold += 100;
     await database.Save(player);
 }
@@ -640,14 +656,16 @@ using (await scene.CoroutineLockComponent.Wait(playerId))
 ### 5. 如何在不同数据库之间切换？
 
 ```csharp
-// 方法 1: 使用 SelectDatabase
-scene.World.SelectDatabase(DatabaseName.log_data);
-var database = scene.World.Database;
+var gameDb = scene.World.Database;
 
-// 方法 2: 直接通过索引获取
-var gameDb = scene.World[DatabaseName.game_data];
-var logDb = scene.World[DatabaseName.log_data];
+if (!scene.World.TryGetDatabase("log_data", out var logDb))
+{
+    Log.Warning("log_data 数据库不存在或未初始化");
+    return;
+}
 ```
+
+按名称获取数据库不会修改默认库；后续继续分别使用 `gameDb` 和 `logDb` 即可。
 
 ### 6. 如何进行数据迁移？
 
@@ -659,7 +677,7 @@ var oldPlayers = await database.Query<OldPlayer>(p => true);
 var newPlayers = new List<Player>();
 foreach (var oldPlayer in oldPlayers)
 {
-    var newPlayer = Entity.Create<Player>(scene, id: oldPlayer.Id);
+    var newPlayer = Entity.Create<Player>(scene, oldPlayer.Id, isPool: true, isRunEvent: false);
     newPlayer.Name = oldPlayer.Name;
     newPlayer.Level = oldPlayer.Level;
     newPlayers.Add(newPlayer);
