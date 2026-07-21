@@ -885,6 +885,17 @@ namespace Fantasy
 
 #if FANTASY_NET
 
+        private void AddProcessSessionInfo(uint sceneId, ProcessSessionInfo processSessionInfo)
+        {
+            _processSessionInfos.Add(sceneId, processSessionInfo);
+            processSessionInfo.Session.OnDispose += () => _processSessionInfos.Remove(sceneId);
+
+            if (processSessionInfo.Session.IsDisposed)
+            {
+                _processSessionInfos.Remove(sceneId);
+            }
+        }
+
         /// <summary>
         /// 尝试获取或创建目标 Address 所属 Scene 的 Session。
         /// 当目标 Scene 尚未被服务发现解析，并且本地配置中也不存在时返回 false。
@@ -912,7 +923,7 @@ namespace Fantasy
             if (Process.IsInAppliaction(ref sceneId))
             {
                 session = Session.CreateInnerSession(Scene);
-                _processSessionInfos.Add(sceneId, new ProcessSessionInfo(session, null));
+                AddProcessSessionInfo(sceneId, new ProcessSessionInfo(session, null));
                 return true;
             }
             
@@ -962,7 +973,7 @@ namespace Fantasy
                         $"Unable to connect to the target server sourceServerId:{Scene.Process.Id} targetServerId:{targetProcessId}");
                 }, null, false);
 
-            _processSessionInfos.Add(sceneId, new ProcessSessionInfo(session, client));
+            AddProcessSessionInfo(sceneId, new ProcessSessionInfo(session, client));
             
             return true;
         }
