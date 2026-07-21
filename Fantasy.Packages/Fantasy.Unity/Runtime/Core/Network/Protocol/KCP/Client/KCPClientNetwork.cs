@@ -1,5 +1,6 @@
 #if !FANTASY_WEBGL
 using System;
+using System.Buffers;
 using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Net;
@@ -40,23 +41,26 @@ namespace Fantasy.Network.KCP
         private Socket _socket;
         private int _maxSndWnd;
         private int _packetHeadLength;
-        private long _startTime;
         private bool _isConnected;
         private bool _isDisconnect;
         private bool _receiveStarted;
-        private uint _updateMinTime;
+        
+        private long _nextUpdateTime = long.MaxValue;
         private bool _isInnerDispose;
         private long _connectTimeoutId;
-        private bool _allowWraparound = true;
+        private long _connectRetryTimerId;
+        
         private bool _connectDisconnectEvent = true;
         private IPEndPoint _remoteAddress;
         private BufferPacketParser _packetParser;
         
         private const int MaxReceiveCountPerUpdate = 2048;
+        private const int ReceiveBufferSize = ushort.MaxValue;
         private readonly byte[] _sendBuff = new byte[5];
-        private readonly byte[] _receiveBuffer = new byte[ProgramDefine.MaxMessageSize + 20];
-        private readonly List<uint> _updateTimeOutTime = new List<uint>();
-        private readonly SortedSet<uint> _updateTimer = new SortedSet<uint>();
+        private readonly byte[] _receiveBuffer = new byte[ReceiveBufferSize];
+        
+        private readonly System.Diagnostics.Stopwatch _stopwatch = new();
+        
         private readonly SocketAsyncEventArgs _connectEventArgs = new SocketAsyncEventArgs();
         private readonly Queue<MemoryStreamBuffer> _messageCache = new Queue<MemoryStreamBuffer>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -78,8 +82,8 @@ namespace Fantasy.Network.KCP
         }
         
         public uint ChannelId { get; private set; }
-        private uint TimeNow => (uint) (TimeHelper.Now - _startTime);
-
+        private long TimeNow => _stopwatch.ElapsedMilliseconds;
+        
         public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
         {
             base.Initialize(NetworkType.Client, NetworkProtocolType.KCP, networkTarget, enableReceiveMessageJsonLog);
@@ -92,7 +96,7 @@ namespace Fantasy.Network.KCP
             _packetHeadLength = Packet.OuterPacketHeadLength;
 #endif
         }
-
+        
         public override void Dispose()
         {
             if (IsDisposed || _isInnerDispose)
@@ -103,13 +107,14 @@ namespace Fantasy.Network.KCP
             try
             {
                 _isInnerDispose = true;
+                _connectEventArgs.Dispose();
 
-                if (!_isDisconnect)
+                if (!_isDisconnect && _socket?.Connected == true)
                 {
                     SendDisconnect();
                 }
 
-                ClearConnectTimeout();
+                ClearConnectTimers();
 
                 if (!_cancellationTokenSource.IsCancellationRequested)
                 {
@@ -148,7 +153,7 @@ namespace Fantasy.Network.KCP
                 
                 while (_messageCache.TryDequeue(out var memoryStream))
                 {
-                    if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
+                    if ((memoryStream.MemoryStreamBufferSource & MemoryStreamBufferSource.Return) != 0)
                     {
                         MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
                     }
@@ -173,80 +178,143 @@ namespace Fantasy.Network.KCP
                 throw new NotSupportedException($"KCPClientNetwork Has already been initialized. If you want to call Connect again, please re instantiate it.");
             }
             
-            IsInit = true;
-            _startTime = TimeHelper.Now;
-            ChannelId = CreateChannelId();
-            _remoteAddress = NetworkHelper.GetIPEndPoint(remoteAddress);
-            OnConnectFail = onConnectFail;
-            OnConnectComplete = onConnectComplete;
-            OnConnectDisconnect = onConnectDisconnect;
-            _connectEventArgs.Completed += OnConnectSocketCompleted;
-            _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
+            var remoteEndPoint = NetworkHelper.GetIPEndPoint(remoteAddress);
+
+            if (remoteEndPoint == null)
             {
-                _connectDisconnectEvent = false;
-                InvokeSafely(OnConnectFail);
-                Dispose();
-            });
-            _connectEventArgs.RemoteEndPoint = _remoteAddress;
-            _socket = new Socket(_remoteAddress.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
-            _socket.Blocking = false;
-            _socket.SetSocketBufferToOsLimit();
-            _socket.SetSioUdpConnReset();
-            _socket.Bind(new IPEndPoint(_remoteAddress.AddressFamily == AddressFamily.InterNetworkV6 ? IPAddress.IPv6Any : IPAddress.Any, 0));
-            _kcp = KCPFactory.Create(NetworkTarget, ChannelId, KcpSpanCallback, out var kcpSettings);
-            _maxSndWnd = kcpSettings.MaxSendWindowSize;
+                throw new ArgumentException(
+                    $"Invalid or unresolvable remote address: {remoteAddress}",
+                    nameof(remoteAddress));
+            }
             
-            if (!_socket.ConnectAsync(_connectEventArgs))
+            Session session;
+
+            try
             {
-                if (_connectEventArgs.SocketError != SocketError.Success)
+                IsInit = true;
+                _stopwatch.Restart();
+                ChannelId = CreateChannelId();
+                _remoteAddress = remoteEndPoint;
+                OnConnectFail = onConnectFail;
+                OnConnectComplete = onConnectComplete;
+                OnConnectDisconnect = onConnectDisconnect;
+                
+                _connectEventArgs.Completed += OnConnectSocketCompleted;
+                _connectTimeoutId = Scene.TimerComponent.Net.OnceTimer(connectTimeout, () =>
                 {
                     _connectDisconnectEvent = false;
                     InvokeSafely(OnConnectFail);
                     Dispose();
-                    return null;
-                }
+                });
                 
-                OnReceiveSocketComplete();
-            }
+                _connectEventArgs.RemoteEndPoint = _remoteAddress;
+                _socket = new Socket(_remoteAddress.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+                _socket.Blocking = false;
+                _socket.SetSocketBufferToOsLimit();
+                _socket.SetSioUdpConnReset();
+                _socket.Bind(new IPEndPoint(_remoteAddress.AddressFamily == AddressFamily.InterNetworkV6 ? IPAddress.IPv6Any : IPAddress.Any, 0));
+                
+                _kcp = KCPFactory.Create(NetworkTarget, ChannelId, KcpSpanCallback, out var kcpSettings);
+                _maxSndWnd = kcpSettings.MaxSendWindowSize;
             
 #if FANTASY_UNITY || FANTASY_CONSOLE
             Session = EnableMessageJsonLog
                 ? Session.CreateDebugClientSession(this, _remoteAddress)
                 : Session.Create(this, _remoteAddress);
 #else
-            Session = Session.Create(this, _remoteAddress);
+                Session = Session.Create(this, _remoteAddress);
 #endif
-            return Session;
+                session = Session;
+            }
+            catch
+            {
+                _connectDisconnectEvent = false;
+                _connectEventArgs.Dispose();
+                Dispose();
+                throw;
+            }
+           
+            bool connectPending;
+            
+            try
+            {
+                connectPending = _socket.ConnectAsync(_connectEventArgs);
+            }
+            catch (Exception e)
+            {
+                _connectEventArgs.Dispose();
+                Log.Error(e);
+                _connectDisconnectEvent = false;
+                InvokeSafely(OnConnectFail);
+                Dispose();
+                return session;
+            }
+            
+            if (!connectPending)
+            {
+                var socketError = _connectEventArgs.SocketError;
+                _connectEventArgs.Dispose();
+    
+                if (socketError != SocketError.Success)
+                {
+                    _connectDisconnectEvent = false;
+                    InvokeSafely(OnConnectFail);
+                    Dispose();
+                    return session;
+                }
+    
+                OnReceiveSocketComplete();
+            }
+            
+            return session;
         }
 
         private void OnConnectSocketCompleted(object sender, SocketAsyncEventArgs asyncEventArgs)
         {
-            if (_cancellationTokenSource.IsCancellationRequested)
+            var lastOperation = asyncEventArgs.LastOperation;
+            var socketError = asyncEventArgs.SocketError;
+            asyncEventArgs.Dispose();
+            
+            if (lastOperation != SocketAsyncOperation.Connect)
             {
                 return;
             }
+            
+            var synchronizationContext = Scene?.ThreadSynchronizationContext;
 
-            if (asyncEventArgs.LastOperation == SocketAsyncOperation.Connect)
+            if (_isInnerDispose || _cancellationTokenSource.IsCancellationRequested || synchronizationContext == null)
             {
-                if (asyncEventArgs.SocketError == SocketError.Success)
-                {
-                    Scene.ThreadSynchronizationContext.Post(OnReceiveSocketComplete);
-                }
-                else
-                {
-                    Scene.ThreadSynchronizationContext.Post(() =>
-                    {
-                        _connectDisconnectEvent = false;
-                        InvokeSafely(OnConnectFail);
-                        Dispose();
-                    });
-                }
+                return;
             }
+            
+            synchronizationContext.Post(() =>
+            {
+                if (_isInnerDispose || _cancellationTokenSource.IsCancellationRequested)
+                {
+                    return;
+                }
+                
+                if (socketError == SocketError.Success)
+                {
+                    OnReceiveSocketComplete();
+                    return;
+                }
+                
+                _connectDisconnectEvent = false;
+                InvokeSafely(OnConnectFail);
+                Dispose();
+            });
         }
 
         private void OnReceiveSocketComplete()
         {
+            if (_isInnerDispose || _cancellationTokenSource.IsCancellationRequested)
+            {
+                return;
+            }
+
             _receiveStarted = true;
+            _connectRetryTimerId = Scene.TimerComponent.Net.RepeatedTimer(500, SendRequestConnection);
             SendRequestConnection();
         }
 
@@ -272,7 +340,7 @@ namespace Fantasy.Network.KCP
             {
                 try
                 {
-                    if (socket.Available <= 0)
+                    if (!socket.Poll(0, SelectMode.SelectRead))
                     {
                         return;
                     }
@@ -317,6 +385,15 @@ namespace Fantasy.Network.KCP
                 catch (Exception ex)
                 {
                     Log.Error(ex);
+                    
+                    if (!_isConnected)
+                    {
+                        _connectDisconnectEvent = false;
+                        InvokeSafely(OnConnectFail);
+                    }
+
+                    Dispose();
+                    return;
                 }
             }
         }
@@ -378,20 +455,31 @@ namespace Fantasy.Network.KCP
                         break;
                     }
                     
-                    ClearConnectTimeout();
                     SendConfirmConnection();
+                    break;
+                }
+                // 服务端已经创建连接，完成客户端连接流程
+                case KcpHeader.ConfirmConnection:
+                {
+                    if (channelId != ChannelId || _isConnected)
+                    {
+                        break;
+                    }
+
+                    ClearConnectTimers();
                     InvokeSafely(OnConnectComplete);
-                    
+
                     if (IsDisposed || _cancellationTokenSource.IsCancellationRequested)
                     {
                         break;
                     }
-                    
+
                     _isConnected = true;
                     while (_messageCache.TryDequeue(out var memoryStream))
                     {
                         SendMemoryStream(memoryStream);
                     }
+
                     break;
                 }
                 // 接收到服务器的断开连接消息
@@ -417,36 +505,37 @@ namespace Fantasy.Network.KCP
                 return;
             }
             
-            AddToUpdate(0);
+            _nextUpdateTime = TimeNow;
 
             while (!_cancellationTokenSource.IsCancellationRequested)
             {
+                var peekSize = _kcp.PeekSize();
+
+                if (peekSize < 0)
+                {
+                    return;
+                }
+                    
+                if (peekSize < _packetHeadLength ||
+                    peekSize - _packetHeadLength > ProgramDefine.MaxMessageSize)
+                {
+                    Dispose();
+                    return;
+                }
+                    
+                var messageBuffer = ArrayPool<byte>.Shared.Rent(peekSize);
+                
                 try
                 {
-                    var peekSize = _kcp.PeekSize();
-
-                    if (peekSize < 0)
-                    {
-                        return;
-                    }
-                    
-                    if (peekSize < _packetHeadLength ||
-                        peekSize > _receiveBuffer.Length ||
-                        peekSize - _packetHeadLength > ProgramDefine.MaxMessageSize)
+                    var receiveCount = _kcp.Receive(messageBuffer.AsSpan(0, peekSize));
+                        
+                    if (receiveCount != peekSize ||
+                        !_packetParser.UnPack(messageBuffer, ref receiveCount, out var packInfo))
                     {
                         Dispose();
                         return;
                     }
 
-                    var receiveCount = _kcp.Receive(_receiveBuffer.AsSpan(0, peekSize));
-
-                    if (receiveCount != peekSize || 
-                        !_packetParser.UnPack(_receiveBuffer, ref receiveCount, out var packInfo))
-                    {
-                        Dispose();
-                        return;
-                    }
-                    
                     Session.Receive(packInfo);
                 }
                 catch (ScanException e)
@@ -461,6 +550,10 @@ namespace Fantasy.Network.KCP
                     Dispose();
                     return;
                 }
+                finally
+                {
+                    ArrayPool<byte>.Shared.Return(messageBuffer);
+                }
             }
         }
 
@@ -471,85 +564,37 @@ namespace Fantasy.Network.KCP
         public void CheckUpdate()
         {
             ReceiveSocket();
-            
-            var nowTime = TimeNow;
-            _allowWraparound = nowTime < _updateMinTime;
 
-            if (IsTimeGreaterThan(nowTime, _updateMinTime) && _updateTimer.Count > 0)
-            {
-                foreach (var timeId in _updateTimer)
-                {
-                    if (IsTimeGreaterThan(timeId, nowTime))
-                    {
-                        _updateMinTime = timeId;
-                        break;
-                    }
-
-                    _updateTimeOutTime.Add(timeId);
-                }
-
-                foreach (var timeId in _updateTimeOutTime)
-                {
-                    _updateTimer.Remove(timeId);
-                    KcpUpdate();
-                }
-                
-                _updateTimeOutTime.Clear();
-            }
-
-            _allowWraparound = true;
-        }
-        
-        private void AddToUpdate(uint tillTime)
-        {
-            if (tillTime == 0)
+            if (TimeNow >= _nextUpdateTime)
             {
                 KcpUpdate();
-                return;
             }
-
-            if (IsTimeGreaterThan(_updateMinTime, tillTime) || _updateMinTime == 0)
-            {
-                _updateMinTime = tillTime;
-            }
-
-            _updateTimer.Add(tillTime);
         }
         
         private void KcpUpdate()
         {
-            if (_kcp == null)
+            var kcp = _kcp;
+
+            if (kcp == null)
             {
+                _nextUpdateTime = long.MaxValue;
                 return;
             }
-            
+
             var nowTime = TimeNow;
-            
+            var kcpNow = unchecked((uint)nowTime);
+
             try
             {
-                _kcp.Update(nowTime);
+                kcp.Update(kcpNow);
             }
             catch (Exception e)
             {
                 Log.Error(e);
             }
-                
-            AddToUpdate(_kcp.Check(nowTime));
-        }
-        
-        private const uint HalfMaxUint = uint.MaxValue / 2;
-    
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool IsTimeGreaterThan(uint timeId, uint nowTime)
-        {
-            if (!_allowWraparound)
-            {
-                return timeId > nowTime;
-            }
-            var diff = timeId - nowTime;
-            // 如果 diff 的值在 [0, HalfMaxUint] 范围内，说明 timeId 是在 nowTime 之后或相等。
-            // 如果 diff 的值在 (HalfMaxUint, uint.MaxValue] 范围内，说明 timeId 是在 nowTime 之前（时间回绕的情况）。
-            return diff < HalfMaxUint || diff == HalfMaxUint;
+
+            var delay = unchecked((int)(kcp.Check(kcpNow) - kcpNow));
+            _nextUpdateTime = nowTime + delay;
         }
 
         #endregion
@@ -565,11 +610,25 @@ namespace Fantasy.Network.KCP
         {
             if (_cancellationTokenSource.IsCancellationRequested)
             {
+                message?.Dispose();
                 return;
             }
 
             var buffer = _packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType);
+            var packetLength = (int)buffer.Position;
+            var maxPacketLength = (long)_kcp.MaximumSegmentSize * byte.MaxValue;
 
+            if (packetLength > maxPacketLength)
+            {
+                if ((buffer.MemoryStreamBufferSource & MemoryStreamBufferSource.Return) != 0)
+                {
+                    MemoryStreamBufferPool.ReturnMemoryStream(buffer);
+                }
+                
+                throw new InvalidOperationException(
+                    $"KCP packet length {packetLength} exceeds the maximum {maxPacketLength} bytes.");
+            }
+            
             if (!_isConnected)
             {
                 _messageCache.Enqueue(buffer);
@@ -586,7 +645,7 @@ namespace Fantasy.Network.KCP
                 // 检查等待发送的消息，如果超出两倍窗口大小，KCP作者给的建议是要断开连接
                 Log.Warning($"ERR_KcpWaitSendSizeTooLarge {_kcp.WaitSendCount} > {_maxSndWnd}");
                 
-                if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
+                if ((memoryStream.MemoryStreamBufferSource & MemoryStreamBufferSource.Return) != 0)
                 {
                     MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
                 }
@@ -604,12 +663,12 @@ namespace Fantasy.Network.KCP
                 
                 if (sendCount == packetLength)
                 {
-                    AddToUpdate(0);
+                    KcpUpdate();
                 }
             }
             finally
             {
-                if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
+                if ((memoryStream.MemoryStreamBufferSource & MemoryStreamBufferSource.Return) != 0)
                 {
                     MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
                 }
@@ -728,14 +787,10 @@ namespace Fantasy.Network.KCP
             Dispose();
         }
         
-        private void ClearConnectTimeout()
+        private void ClearConnectTimers()
         {
-            if (_connectTimeoutId == 0)
-            {
-                return;
-            }
-
             Scene?.TimerComponent?.Net.Remove(ref _connectTimeoutId);
+            Scene?.TimerComponent?.Net.Remove(ref _connectRetryTimerId);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

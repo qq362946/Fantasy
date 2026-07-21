@@ -57,8 +57,26 @@ namespace Fantasy
             {
                 IsBackground = true
             };
-            _threads.TryAdd(scene.RuntimeId, new MultiThreadStruct(thread, cts));
-            thread.Start();
+            
+            var multiThreadStruct = new MultiThreadStruct(thread, cts);
+            
+            if (!_threads.TryAdd(scene.RuntimeId, multiThreadStruct))
+            {
+                multiThreadStruct.Dispose();
+                throw new InvalidOperationException(
+                    $"Scene RuntimeId already exists: {scene.RuntimeId}.");
+            }
+            
+            try
+            {
+                thread.Start();
+            }
+            catch
+            {
+                _threads.TryRemove(scene.RuntimeId, out _);
+                multiThreadStruct.Dispose();
+                throw;
+            }
         }
 
         public void Remove(Scene scene)

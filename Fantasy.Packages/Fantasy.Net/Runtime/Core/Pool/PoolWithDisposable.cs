@@ -93,7 +93,7 @@ namespace Fantasy.Pool
             }
 
             _poolCount++;
-            t.SetIsPool(true);
+            t.SetIsPool(false);
             _poolQueue.Enqueue(t);
             t.Dispose();
         }

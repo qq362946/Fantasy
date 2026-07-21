@@ -61,17 +61,32 @@ namespace Fantasy.Database
                         Scene = scene, ConnectionString = connectionString, DBName = dbName
                     })
                     : new MongoClient(connectionString);
+                
                 Name = dbName;
                 _mongoDatabase = _mongoClient.GetDatabase(dbName);
                 _dataBaseLock = scene.CoroutineLockComponent.Create(GetType().TypeHandle.Value.ToInt64());
+                
                 // 记录所有集合名
                 _collections.UnionWith(_mongoDatabase.ListCollectionNames().ToList());
+                
                 _serializer = SerializerManager.BsonPack;
                 Log.Info($"dbName:{dbName} Database connection successful.");
             }
             catch (Exception e)
             {
                 Log.Error($"dbName:{dbName} cannot connect to the database. Please check if the connectionString is correct or the network conditions.\n{e.Message}");
+                
+                try
+                {
+                    Dispose();
+                }
+                catch (Exception disposeException)
+                {
+                    Log.Error(
+                        $"dbName:{dbName} cleanup failed after initialization failure.\n{disposeException}");
+                }
+
+                // 保留原始初始化异常及其堆栈。
                 throw;
             }
             
@@ -83,16 +98,25 @@ namespace Fantasy.Database
         /// </summary>
         public void Dispose()
         {
-            // 优先释放协程锁。
-            _dataBaseLock.Dispose();
-            // 清理资源。
+            var dataBaseLock = _dataBaseLock;
+            var mongoClient = _mongoClient;
+
             Name = null;
             _scene = null;
             _serializer = null;
             _mongoDatabase = null;
             _dataBaseLock = null;
+            _mongoClient = null;
             _collections.Clear();
-            _mongoClient.Dispose();
+
+            try
+            {
+                dataBaseLock?.Dispose();
+            }
+            finally
+            {
+                mongoClient?.Dispose();
+            }
         }
 
         #region Other
@@ -207,7 +231,7 @@ namespace Fantasy.Database
         /// <returns>查询到的文档。</returns>
         public async FTask<T> QueryNotLock<T>(long id, bool isDeserialize = false, string? collection = null, Scene? scene = null) where T : Entity
         {
-            var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
+            using var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
             var v = await cursor.FirstOrDefaultAsync();
 
             if (isDeserialize && v != null)
@@ -231,7 +255,7 @@ namespace Fantasy.Database
         {
             using (await _dataBaseLock.Wait(id))
             {
-                var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
+                using var cursor = await GetCollection<T>(collection).FindAsync(d => d.Id == id);
                 var v = await cursor.FirstOrDefaultAsync();
 
                 if (isDeserialize && v != null)
@@ -417,7 +441,7 @@ namespace Fantasy.Database
         {
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
-                var cursor = await GetCollection<T>(collection).FindAsync(filter);
+                using var cursor = await GetCollection<T>(collection).FindAsync(filter);
                 var t = await cursor.FirstOrDefaultAsync();
 
                 if (isDeserialize && t != null)
@@ -454,7 +478,7 @@ namespace Fantasy.Database
 
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
 
-                var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition, options);
+                using var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition, options);
                 var t = await cursor.FirstOrDefaultAsync();
 
                 if (isDeserialize && t != null)
@@ -521,7 +545,7 @@ namespace Fantasy.Database
             var currentScene = scene ?? _scene;
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
-                var cursor = await GetCollection<T>(collection).FindAsync(filter);
+                using var cursor = await GetCollection<T>(collection).FindAsync(filter);
                 var list = await cursor.ToListAsync();
                 
                 if (!isDeserialize || list is not { Count: > 0 })
@@ -557,7 +581,7 @@ namespace Fantasy.Database
 
                 foreach (var collectionName in collectionNames)
                 {
-                    var cursor = await GetCollection(collectionName).FindAsync(d => d.Id == id);
+                    using var cursor = await GetCollection(collectionName).FindAsync(d => d.Id == id);
 
                     var e = await cursor.FirstOrDefaultAsync();
 
@@ -591,7 +615,7 @@ namespace Fantasy.Database
             using (await _dataBaseLock.Wait(RandomHelper.RandInt64() % DefaultTaskSize))
             {
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
-                var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
+                using var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
                 var list = await cursor.ToListAsync();
                 
                 if (!isDeserialize || list is not { Count: > 0 })
@@ -634,7 +658,7 @@ namespace Fantasy.Database
 
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
 
-                var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition, options);
+                using var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition, options);
                 var list = await cursor.ToListAsync();
                 
                 if (!isDeserialize || list is not { Count: > 0 })
@@ -667,7 +691,7 @@ namespace Fantasy.Database
             using (await _dataBaseLock.Wait(taskId))
             {
                 FilterDefinition<T> filterDefinition = new JsonFilterDefinition<T>(json);
-                var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
+                using var cursor = await GetCollection<T>(collection).FindAsync(filterDefinition);
                 var list = await cursor.ToListAsync();
                 
                 if (!isDeserialize || list is not { Count: > 0 })

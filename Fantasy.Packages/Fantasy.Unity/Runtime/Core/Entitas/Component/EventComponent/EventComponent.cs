@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
@@ -55,29 +56,28 @@ namespace Fantasy.Event
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
         /// <returns>异步任务</returns>
-        public async FTask OnLoad(AssemblyManifest assemblyManifest)
+        public Task OnLoad(AssemblyManifest assemblyManifest)
         {
-            var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
             
-            Scene?.ThreadSynchronizationContext.Post(() =>
-            {
-                var eventSystemRegistrar = assemblyManifest.EventSystemRegistrar;
+            return AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
+                {
+                    var eventSystemRegistrar = assemblyManifest.EventSystemRegistrar;
 
-                _eventMerger.Add(
-                    assemblyManifestId,
-                    eventSystemRegistrar.EventTypeHandles(),
-                    eventSystemRegistrar.Events());
-                _asyncEventMerger.Add(
-                    assemblyManifestId,
-                    eventSystemRegistrar.AsyncEventTypeHandles(),
-                    eventSystemRegistrar.AsyncEvents());
-                
-                _events = _eventMerger.GetFrozenDictionary();
-                _asyncEvents = _asyncEventMerger.GetFrozenDictionary();
-                tcs.SetResult();
-            });
-            await tcs;
+                    _eventMerger.Add(
+                        assemblyManifestId,
+                        eventSystemRegistrar.EventTypeHandles(),
+                        eventSystemRegistrar.Events());
+                    _asyncEventMerger.Add(
+                        assemblyManifestId,
+                        eventSystemRegistrar.AsyncEventTypeHandles(),
+                        eventSystemRegistrar.AsyncEvents());
+            
+                    _events = _eventMerger.GetFrozenDictionary();
+                    _asyncEvents = _asyncEventMerger.GetFrozenDictionary();
+                });
         }
         
         /// <summary>
@@ -85,26 +85,24 @@ namespace Fantasy.Event
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
         /// <returns>异步任务</returns>
-        public async FTask OnUnload(AssemblyManifest assemblyManifest)
+        public Task OnUnload(AssemblyManifest assemblyManifest)
         {
-            var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-            
-            Scene?.ThreadSynchronizationContext.Post(() =>
-            {
-                if (_eventMerger.Remove(assemblyManifestId))
-                {
-                    _events = _eventMerger.GetFrozenDictionary();
-                }
 
-                if (_asyncEventMerger.Remove(assemblyManifestId))
+            return AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
                 {
-                    _asyncEvents = _asyncEventMerger.GetFrozenDictionary();
-                }
-                
-                tcs.SetResult();
-            });
-            await tcs;
+                    if (_eventMerger.Remove(assemblyManifestId))
+                    {
+                        _events = _eventMerger.GetFrozenDictionary();
+                    }
+
+                    if (_asyncEventMerger.Remove(assemblyManifestId))
+                    {
+                        _asyncEvents = _asyncEventMerger.GetFrozenDictionary();
+                    }
+                });
         }
 
         #endregion
@@ -144,27 +142,32 @@ namespace Fantasy.Event
         /// <param name="isDisposed">事件处理完成后是否自动销毁Entity</param>
         public void Publish<TEventData>(TEventData eventData, bool isDisposed = true) where TEventData : Entity
         {
-            if (!_events.TryGetValue(typeof(TEventData).TypeHandle, out var list))
+            try
             {
-                return;
-            }
-
-            foreach (var @event in list)
-            {
-                try
+                if (!_events.TryGetValue(typeof(TEventData).TypeHandle, out var list))
                 {
-                    // 转换为泛型接口，Entity是引用类型但仍避免虚方法调用开销
-                    ((IEvent<TEventData>)@event).Invoke(eventData);
+                    return;
                 }
-                catch (Exception e)
+
+                foreach (var @event in list)
                 {
-                    Log.Error(e);
+                    try
+                    {
+                        // 转换为泛型接口，Entity是引用类型但仍避免虚方法调用开销
+                        ((IEvent<TEventData>)@event).Invoke(eventData);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e);
+                    }
                 }
             }
-
-            if (isDisposed)
+            finally
             {
-                eventData.Dispose();
+                if (isDisposed)
+                {
+                    eventData.Dispose();
+                }
             }
         }
         
@@ -198,30 +201,35 @@ namespace Fantasy.Event
         /// <param name="isDisposed">事件处理完成后是否自动销毁Entity</param>
         public async FTask PublishAsync<TEventData>(TEventData eventData, bool isDisposed = true) where TEventData : Entity
         {
-            if (!_asyncEvents.TryGetValue(typeof(TEventData).TypeHandle, out var list))
+            try
             {
-                return;
-            }
-
-            using var tasks = ListPool<FTask>.Create();
-
-            foreach (var @event in list)
-            {
-                try
+                if (!_asyncEvents.TryGetValue(typeof(TEventData).TypeHandle, out var list))
                 {
-                    tasks.Add(((IAsyncEvent<TEventData>)@event).InvokeAsync(eventData));
+                    return;
                 }
-                catch (Exception e)
+
+                using var tasks = ListPool<FTask>.Create();
+
+                foreach (var @event in list)
                 {
-                    Log.Error(e);
+                    try
+                    {
+                        tasks.Add(((IAsyncEvent<TEventData>)@event).InvokeAsync(eventData));
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(e);
+                    }
                 }
+
+                await FTask.WaitAll(tasks);
             }
-
-            await FTask.WaitAll(tasks);
-
-            if (isDisposed)
+            finally
             {
-                eventData.Dispose();
+                if (isDisposed)
+                {
+                    eventData.Dispose();
+                }
             }
         }
 

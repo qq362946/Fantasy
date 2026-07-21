@@ -52,12 +52,16 @@ public sealed class Process
     
     internal void AddSceneToProcess(Scene scene)
     {
-        _processScenes.TryAdd(scene.SceneConfigId, scene);
+        if (!_processScenes.TryAdd(scene.SceneConfigId, scene))
+        {
+            throw new InvalidOperationException(
+                $"Duplicate Scene ID: {scene.SceneConfigId}.");
+        }
     }
 
     internal void RemoveSceneToProcess(Scene scene)
     {
-        _processScenes.Remove(scene.SceneConfigId, out _);
+        _processScenes.TryRemove(new KeyValuePair<uint, Scene>(scene.SceneConfigId, scene));
     }
     
     internal bool TryGetSceneToProcess(long address, out Scene scene)
@@ -113,9 +117,17 @@ public sealed class Process
         var process = new Process(processConfigId, processConfig.NamespaceId, processConfig.MachineId);
         var sceneConfigs = SceneConfigData.Instance.GetByProcess(processConfigId);
 
-        foreach (var sceneConfig in sceneConfigs)
+        try
         {
-            await Scene.Create(process, machineConfig, sceneConfig);
+            foreach (var sceneConfig in sceneConfigs)
+            {
+                await Scene.Create(process, machineConfig, sceneConfig);
+            }
+        }
+        catch
+        {
+            await process.Close();
+            throw;
         }
 
         Log.Info($"Process:{processConfigId} Startup Complete SceneCount:{sceneConfigs.Count}");
@@ -129,12 +141,16 @@ public sealed class Process
 
     internal static void AddScene(Scene scene)
     {
-        Scenes.TryAdd(scene.SceneConfigId, scene);
+        if (!Scenes.TryAdd(scene.SceneConfigId, scene))
+        {
+            throw new InvalidOperationException(
+                $"Duplicate Scene ID: {scene.SceneConfigId}.");
+        }
     }
 
     internal static void RemoveScene(Scene scene, bool isDispose)
     {
-        if (!Scenes.Remove(scene.SceneConfigId, out _))
+        if (!Scenes.TryRemove(new KeyValuePair<uint, Scene>(scene.SceneConfigId, scene)))
         {
             return;
         }

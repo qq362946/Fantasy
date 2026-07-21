@@ -25,15 +25,23 @@ namespace Fantasy
             // 所以根据情况来使用不同的调度器。
             var maxThreadCount = Environment.ProcessorCount;
             _threads = new List<Thread>(maxThreadCount);
-            
-            for (var i = 0; i < maxThreadCount; ++i)
+
+            try
             {
-                Thread thread = new(() => Loop(_cancellationTokenSource.Token))
+                for (var i = 0; i < maxThreadCount; ++i)
                 {
-                    IsBackground = true
-                };
-                _threads.Add(thread);
-                thread.Start();
+                    Thread thread = new(() => Loop(_cancellationTokenSource.Token))
+                    {
+                        IsBackground = true
+                    };
+                    _threads.Add(thread);
+                    thread.Start();
+                }
+            }
+            catch
+            {
+                Dispose();
+                throw;
             }
         }
         
@@ -49,7 +57,8 @@ namespace Fantasy
             
             foreach (var thread in _threads)
             {
-                if (thread.IsAlive)
+                // Close 可能从当前工作线程调用，不能 Join 自身。
+                if (thread.IsAlive && thread != Thread.CurrentThread)
                 {
                     thread.Join();
                 }
@@ -57,6 +66,9 @@ namespace Fantasy
             
             _cancellationTokenSource.Dispose();
             _threads.Clear();
+            _queue.Clear();
+            _removedScenes.Clear();
+            _runningScenes.Clear();
         }
 
         public void Add(Scene scene)

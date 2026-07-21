@@ -12,7 +12,12 @@ namespace Fantasy.Entitas
         
         public static EntityMultiCollection Create(bool isPool)
         {
-            return isPool ? Pool<EntityMultiCollection>.Rent() : new EntityMultiCollection();
+            var collection = isPool
+                ? Pool<EntityMultiCollection>.Rent()
+                : new EntityMultiCollection();
+
+            collection._isPool = isPool;
+            return collection;
         }
 
         public bool IsPool()

@@ -125,12 +125,28 @@ namespace Fantasy
             
             foreach (var (runtimeId, entity) in _entities.ToList())
             {
-                if (ReferenceEquals(entity, this) || runtimeId != entity.RuntimeId)
+                try
                 {
-                    continue;
+                    if (ReferenceEquals(entity, this) || runtimeId != entity.RuntimeId)
+                    {
+                        continue;
+                    }
+
+                    entity.Dispose();
                 }
-                
-                entity.Dispose();
+                catch (Exception e)
+                {
+#if FANTASY_NET
+                    Log.Error(
+                        $"SubScene SceneConfigId:{SceneConfigId} " +
+                        $"Entity:{entity?.GetType().FullName ?? "null"} " +
+                        $"RuntimeId:{runtimeId} dispose failed.\n{e}");
+#elif FANTASY_UNITY
+                     Log.Error(
+                        $"Entity:{entity?.GetType().FullName ?? "null"} " +
+                        $"RuntimeId:{runtimeId} dispose failed.\n{e}");
+#endif
+                }
             }
 
             // 保留自身到基类销毁流程，让 Entity.Dispose 从 SubScene 和 RootScene 中同时移除它。

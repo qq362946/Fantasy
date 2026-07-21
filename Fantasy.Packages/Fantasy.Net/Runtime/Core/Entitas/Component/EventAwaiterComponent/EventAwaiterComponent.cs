@@ -28,6 +28,16 @@ namespace Fantasy.EventAwaiter
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public async FTask<EventAwaiterResult<T>> Wait<T>(FCancellationToken? cancellationToken = null) where T : struct
         {
+            if (_isDisposing || IsDisposed)
+            {
+                return EventAwaiterResult<T>.CreateDestroyResult();
+            }
+            
+            if (cancellationToken?.IsCancel == true)
+            {
+                return EventAwaiterResult<T>.CreateCancelResult();
+            }
+            
             EventAwaiterResult<T> result = default;
             var typeHandle = typeof(T).TypeHandle;
             var sceneEventAwaiterPool = Scene.EventAwaiterPool;
@@ -88,6 +98,16 @@ namespace Fantasy.EventAwaiter
             if (timeout <= 0)
             {
                 throw new ArgumentException($"Timeout must be greater than 0, but got {timeout}", nameof(timeout));
+            }
+            
+            if (_isDisposing || IsDisposed)
+            {
+                return EventAwaiterResult<T>.CreateDestroyResult();
+            }
+            
+            if (cancellationToken?.IsCancel == true)
+            {
+                return EventAwaiterResult<T>.CreateCancelResult();
             }
 
             EventAwaiterResult<T> result = default;
@@ -152,15 +172,24 @@ namespace Fantasy.EventAwaiter
             {
                 return;
             }
-
-            // 通知所有等待该类型事件的回调
-            foreach (var waitCallback in waitCallbackList)
-            {
-                ((EventAwaiterCallback<T>)waitCallback).SetResult(obj);
-            }
-
-            // 清理整个类型的等待队列（正常完成时统一清理）
+            
+            // SetResult会同步执行续体，先复制并移除本次回调队列，
+            // 避免续体重入Wait<T>()时修改当前正在遍历的列表。
+            using var waitCallbacks = ListPool<IEventAwaiterCallback>.Create(waitCallbackList);
             WaitCallbacks.RemoveKey(typeHandle);
+
+            foreach (var waitCallback in waitCallbacks)
+            {
+                try
+                {
+                    ((EventAwaiterCallback<T>)waitCallback).SetResult(obj);
+                }
+                catch (Exception e)
+                {
+                    // 一个等待者的续体异常不能阻断其他等待者。
+                    Log.Error(e);
+                }
+            }
         }
 
         /// <summary>
@@ -168,25 +197,43 @@ namespace Fantasy.EventAwaiter
         /// </summary>
         public override void Dispose()
         {
-            if (IsDisposed)
+            if (IsDisposed || _isDisposing)
             {
                 return;
             }
 
             _isDisposing = true;
             
-            // 通知所有等待中的回调，组件已被销毁
-            // 避免等待者无限等待，返回 Destroy 状态
-            foreach (var (_, waitCallbackList) in WaitCallbacks)
+            // 必须在唤醒任何等待者前摘除全部队列，隔离同步重入。
+            using (var waitCallbacks = ListPool<IEventAwaiterCallback>.Create())
             {
-                foreach (var waitCallback in waitCallbackList)
+                while (WaitCallbacks.Count > 0)
                 {
-                    waitCallback.SetDestroyResult();
+                    // Dictionary枚举器是结构体，不会产生GC。
+                    var enumerator = WaitCallbacks.GetEnumerator();
+                    enumerator.MoveNext();
+                    var current = enumerator.Current;
+                    enumerator.Dispose();
+
+                    // RemoveKey会清空原列表，所以必须先复制回调。
+                    waitCallbacks.AddRange(current.Value);
+                    WaitCallbacks.RemoveKey(current.Key);
+                }
+
+                foreach (var waitCallback in waitCallbacks)
+                {
+                    try
+                    {
+                        waitCallback.SetDestroyResult();
+                    }
+                    catch (Exception e)
+                    {
+                        // 一个等待者的续体异常不能阻断其他等待者和组件销毁。
+                        Log.Error(e);
+                    }
                 }
             }
-
-            // 清空所有等待队列
-            WaitCallbacks.Clear();
+            
             _isDisposing = false;
             base.Dispose();
         }

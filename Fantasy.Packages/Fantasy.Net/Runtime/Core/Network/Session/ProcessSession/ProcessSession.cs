@@ -27,6 +27,7 @@ public sealed class ProcessSession : Session
     {
         if (IsDisposed)
         {
+            message.Dispose();
             return;
         }
         
@@ -43,6 +44,7 @@ public sealed class ProcessSession : Session
     {
         if (IsDisposed)
         {
+            message.Dispose();
             return;
         }
 

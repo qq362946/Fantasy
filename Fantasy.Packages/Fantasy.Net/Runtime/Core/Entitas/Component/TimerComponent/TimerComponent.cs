@@ -33,6 +33,17 @@ namespace Fantasy.Timer
         /// </summary>
         public TimerSchedulerNetUnity Unity { get; private set; }
 #endif
+        public override void Dispose()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            Net?.Dispose();
+            base.Dispose();
+        }
+        
         internal TimerComponent Initialize()
         {
             Net = new TimerSchedulerNet(Scene);

@@ -29,20 +29,20 @@ public class WebSocketServerNetwork : ANetwork
             _httpListener = new HttpListener();
             StartAcceptAsync(port).Coroutine();
         }
-        catch (HttpListenerException e)
+        catch (HttpListenerException e) when (e.ErrorCode == 5)
         {
-            if (e.ErrorCode == 5)
-            {
-                throw new Exception($"如果看下如下错误请尝试下面的办法:" +
-                                    $"1.用管理员运行CMD 输入命令: netsh http add urlacl url=http://+:8080/ user=Everyone。" +
-                                    $"2.用管理员身份运行编辑器或者程序。", e);
-            }
+            Dispose();
 
-            Log.Error(e);
+            throw new Exception(
+                $"如果看到如下错误请尝试下面的办法:" +
+                $"1.用管理员运行CMD 输入命令: netsh http add urlacl url=http://+:{port}/ user=Everyone。" +
+                $"2.用管理员身份运行编辑器或者程序。",
+                e);
         }
-        catch (Exception e)
+        catch
         {
-            Log.Error(e);
+            Dispose();
+            throw;
         }
     }
 
@@ -162,11 +162,22 @@ public class WebSocketServerNetwork : ANetwork
         _httpListener.Prefixes.Add(listenUrl);
         _httpListener.Start();
         Log.Info($"SceneConfigId = {Scene.SceneConfigId} WebSocketServer Listen {listenUrl}");
+        
         while (!IsDisposed)
         {
+            WebSocketServerNetworkChannel? channel = null;
+            System.Net.WebSockets.WebSocket? acceptedWebSocket = null;
+            
             try
             {
                 var httpListenerContext = await _httpListener.GetContextAsync();
+                
+                if (IsDisposed)
+                {
+                    httpListenerContext.Response.Close();
+                    break;
+                }
+                
                 // 验证WebSocket握手请求头部
                 if (!IsValidWebSocketRequest(httpListenerContext.Request))
                 {
@@ -175,7 +186,16 @@ public class WebSocketServerNetwork : ANetwork
                     httpListenerContext.Response.Close();
                     continue;
                 }
+                
                 var webSocketContext = await httpListenerContext.AcceptWebSocketAsync(null);
+                
+                acceptedWebSocket = webSocketContext.WebSocket;
+                
+                if (IsDisposed)
+                {
+                    break;
+                }
+                
                 var channelId = 0xC0000000 | (uint) _random.Next();
                 while (_connectionChannel.ContainsKey(channelId))
                 {
@@ -184,12 +204,32 @@ public class WebSocketServerNetwork : ANetwork
 
                 // 从HTTP请求头中获取真实客户端IP(处理Nginx等反向代理)
                 var realClientEndPoint = GetRealClientIpEndPoint(httpListenerContext.Request);
-                var webSocketServerNetworkChannel = new WebSocketServerNetworkChannel(this, channelId, webSocketContext, realClientEndPoint);
-                _connectionChannel.Add(channelId, webSocketServerNetworkChannel);
+                
+                channel = new WebSocketServerNetworkChannel(
+                    this, 
+                    channelId, 
+                    webSocketContext, 
+                    realClientEndPoint);
+                
+                // Channel 构造成功后，WebSocket 的所有权转交给 Channel。
+                acceptedWebSocket = null;
+                
+                _connectionChannel.Add(channelId, channel);
+                channel.Start();
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                channel?.Dispose();
+
+                if (!IsDisposed)
+                {
+                    Log.Error(e);
+                }
+            }
+            finally
+            {
+                // Channel 尚未接管时，由接入循环负责释放。
+                acceptedWebSocket?.Dispose();
             }
         }
     }

@@ -37,12 +37,14 @@ public abstract class Roaming<TEntity, TMessage> : IAddressMessageHandler where 
         if (roamingMessage is not TMessage rMessage)
         {
             Log.Error($"Message type conversion error: {roamingMessage.GetType().FullName} to {typeof(TMessage).Name}");
+            ((IMessage)roamingMessage).Dispose();
             return;
         }
 
         if (entity is not TEntity tEntity)
         {
             Log.Error($"{this.GetType().Name} Roaming type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
+            rMessage.Dispose();
             return;
         }
 
@@ -61,8 +63,8 @@ public abstract class Roaming<TEntity, TMessage> : IAddressMessageHandler where 
         }
         finally
         {
-            session.Send(MessageObjectPool<AddressResponse>.Rent(), rpcId);
             rMessage.Dispose();
+            session.Send(MessageObjectPool<AddressResponse>.Rent(), rpcId);
         }
     }
 
@@ -104,12 +106,14 @@ public abstract class RoamingRPC<TEntity, TAddressRequest, TAddressResponse> : I
         if (addressMessage is not TAddressRequest aAddressRequest)
         {
             Log.Error($"Message type conversion error: {addressMessage.GetType().FullName} to {typeof(TAddressRequest).Name}");
+            ((IMessage)addressMessage).Dispose();
             return;
         }
 
         if (entity is not TEntity tEntity)
         {
             Log.Error($"{this.GetType().Name} Roaming type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
+            aAddressRequest.Dispose();
             return;
         }
 
@@ -124,12 +128,6 @@ public abstract class RoamingRPC<TEntity, TAddressRequest, TAddressResponse> : I
             }
 
             isReply = true;
-
-            if (session.IsDisposed)
-            {
-                return;
-            }
-
             session.Send(response, rpcId);
         }
 
@@ -145,12 +143,16 @@ public abstract class RoamingRPC<TEntity, TAddressRequest, TAddressResponse> : I
             }
 
             Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ProcessConfigId:{scene.Process.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
-            response.ErrorCode = InnerErrorCode.ErrRpcFail;
+            
+            if (!isReply)
+            {
+                response.ErrorCode = InnerErrorCode.ErrRpcFail;
+            }
         }
         finally
         {
-            Reply();
             aAddressRequest.Dispose();
+            Reply();
         }
     }
 

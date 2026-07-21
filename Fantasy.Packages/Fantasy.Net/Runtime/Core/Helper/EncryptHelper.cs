@@ -1,6 +1,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+// ReSharper disable InconsistentNaming
 
 namespace Fantasy.Helper
 {
@@ -9,8 +10,6 @@ namespace Fantasy.Helper
     /// </summary>
     public static partial class EncryptHelper
     {
-        private static readonly SHA256 Sha256Hash = SHA256.Create();
-        
         /// <summary>
         /// 计算指定字节数组的Sha256。
         /// </summary>
@@ -44,7 +43,7 @@ namespace Fantasy.Helper
         /// <returns>表示文件流的 MD5 散列值的字符串。</returns>
         public static string FileMD5(FileStream fileStream)
         {
-            var md5 = MD5.Create();
+            using var md5 = MD5.Create();
             return md5.ComputeHash(fileStream).ToHex(false);
         }
 
@@ -55,7 +54,7 @@ namespace Fantasy.Helper
         /// <returns>表示字节数组的 MD5 散列值的字符串。</returns>
         public static string BytesMD5(byte[] bytes)
         {
-            var md5 = MD5.Create();
+            using var md5 = MD5.Create();
             bytes = md5.ComputeHash(bytes);
             return bytes.ToHex(false);
         }

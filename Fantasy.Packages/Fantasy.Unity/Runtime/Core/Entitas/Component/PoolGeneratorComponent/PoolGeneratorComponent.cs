@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Dictionary;
+using System.Threading.Tasks;
 using Fantasy.Entitas.Interface;
 using Fantasy.Pool;
 // ReSharper disable CheckNamespace
@@ -17,6 +18,17 @@ namespace Fantasy.Entitas
         private RuntimeTypeHandleFrozenDictionary<Func<IPool>> _frozenDictionary;
         private readonly TypeHandleMergerFrozenDictionary<Func<IPool>> _typeHandleMerger = new();
         
+        public override void Dispose()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            AssemblyLifecycle.Remove(this);
+            base.Dispose();
+        }
+        
         #region AssemblyManifest
         
         internal async FTask<PoolGeneratorComponent> Initialize()
@@ -25,35 +37,32 @@ namespace Fantasy.Entitas
             return this;
         }
 
-        public async FTask OnLoad(AssemblyManifest assemblyManifest)
+        public Task OnLoad(AssemblyManifest assemblyManifest)
         {
-            var tcs = FTask.Create(false);
-            Scene?.ThreadSynchronizationContext.Post(() =>
-            {
-                var poolCreatorGenerator = assemblyManifest.PoolCreatorGenerator;
-                _typeHandleMerger.Add(
-                    assemblyManifest.AssemblyManifestId,
-                    poolCreatorGenerator.RuntimeTypeHandles(),
-                    poolCreatorGenerator.Generators());
-                _frozenDictionary = _typeHandleMerger.GetFrozenDictionary();
-                tcs.SetResult();
-            });
-            await tcs;
+            return AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
+                {
+                    var poolCreatorGenerator = assemblyManifest.PoolCreatorGenerator;
+                    _typeHandleMerger.Add(
+                        assemblyManifest.AssemblyManifestId,
+                        poolCreatorGenerator.RuntimeTypeHandles(),
+                        poolCreatorGenerator.Generators());
+                    _frozenDictionary = _typeHandleMerger.GetFrozenDictionary();
+                });
         }
 
-        public async FTask OnUnload(AssemblyManifest assemblyManifest)
+        public Task OnUnload(AssemblyManifest assemblyManifest)
         {
-            var tcs = FTask.Create(false);
-            Scene?.ThreadSynchronizationContext.Post(() =>
-            {
-                if (_typeHandleMerger.Remove(assemblyManifest.AssemblyManifestId))
+            return AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
                 {
-                    _frozenDictionary = _typeHandleMerger.GetFrozenDictionary();
-                }
-                
-                tcs.SetResult();
-            });
-            await tcs;
+                    if (_typeHandleMerger.Remove(assemblyManifest.AssemblyManifestId))
+                    {
+                        _frozenDictionary = _typeHandleMerger.GetFrozenDictionary();
+                    }
+                });
         }
 
         #endregion

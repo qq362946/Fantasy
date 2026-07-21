@@ -123,7 +123,7 @@ namespace Fantasy
                             catch (Exception e)
                             {
                                 Log.Error(
-                                    $"WorldId:{Id} DbName:{dataBaseConfig.DbName} DbConnection:{dataBaseConfig.DbConnection} Initialization failed. Please check if the target database server can be connected normally.\n{e.Message}");
+                                    $"WorldId:{Id} DbName:{dataBaseConfig.DbName} Initialization failed. Please check if the target database server can be connected normally.\n{e.Message}");
                             }
 
                             break;
@@ -169,13 +169,28 @@ namespace Fantasy
         /// </summary>
         public void Dispose()
         {
-            foreach (var database in AllDatabase.Values)
-            {
-                database.Dispose();
-            }
-            
-            AllDatabase.Clear();
+            // Database 是 AllDatabase 中默认数据库的别名，不需要重复释放。
             Database = null;
+
+            try
+            {
+                foreach (var (dbName, database) in AllDatabase)
+                {
+                    try
+                    {
+                        database.Dispose();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(
+                            $"WorldId:{Id} DbName:{dbName} Database dispose failed.\n{e}");
+                    }
+                }
+            }
+            finally
+            {
+                AllDatabase.Clear();
+            }
         }
     }
 }

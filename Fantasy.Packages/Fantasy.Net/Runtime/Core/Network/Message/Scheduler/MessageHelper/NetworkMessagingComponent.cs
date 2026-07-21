@@ -53,9 +53,30 @@ namespace Fantasy.Scheduler
                 self.TimerComponent.Net.Remove(ref self.TimerId);
             }
             
-            foreach (var (rpcId, messageSender) in self.RequestCallback.ToDictionary())
+            var pendingCallbacks = self.RequestCallback.ToDictionary();
+            self.RequestCallback.Clear();
+            
+            foreach (var (rpcId, pendingSender) in pendingCallbacks)
             {
-                self.ReturnMessageSender(rpcId, messageSender);
+                // foreach 中的结构体迭代变量不可修改，复制为局部变量。
+                var messageSender = pendingSender;
+
+                try
+                {
+                    messageSender.Tcs.SetException(
+                        new ObjectDisposedException(
+                            nameof(NetworkMessagingComponent),
+                            $"Pending RPC {rpcId} was canceled because the component is being destroyed."));
+                }
+                catch (Exception e)
+                {
+                    // continuation 抛出不能阻断其他 RPC 和后续资源清理。
+                    Log.Error($"Pending RPC {rpcId} completion callback failed: {e}");
+                }
+                finally
+                {
+                    messageSender.Dispose();
+                }
             }
 
             // 组件销毁时释放所有尚未发送的序列化缓冲区。
@@ -65,7 +86,6 @@ namespace Fantasy.Scheduler
             
             self.AddressableRouteMessageLock.Dispose();
             
-            self.RequestCallback.Clear();
             self.TimeoutRouteMessageSenders.Clear();
             self.TimerComponent = null;
             self.MessageDispatcherComponent = null;
@@ -188,11 +208,25 @@ namespace Fantasy.Scheduler
             if (address == 0)
             {
                 Log.Error($"Send appId == 0");
+                message.Dispose();
                 return;
             }
             
+            Session session;
+            bool hasSession;
+
+            try
+            {
+                hasSession = Scene.TryGetSession(address, out session);
+            }
+            catch
+            {
+                message.Dispose();
+                throw;
+            }
+            
             // 高频路径：Session 已存在时与原来的发送流程一致。
-            if (Scene.TryGetSession(address, out var session))
+            if (hasSession)
             {
                 session.Send(message, 0, address);
                 return;
@@ -202,7 +236,17 @@ namespace Fantasy.Scheduler
             // 调用 GetSession 是为了保持旧模式统一的异常信息。
             if (!ServiceDiscovery.IsEnabled)
             {
-                Scene.GetSession(address).Send(message, 0, address);
+                try
+                {
+                    session = Scene.GetSession(address);
+                }
+                catch
+                {
+                    message.Dispose();
+                    throw;
+                }
+
+                session.Send(message, 0, address);
                 return;
             }
             
@@ -211,7 +255,7 @@ namespace Fantasy.Scheduler
             var rpcId = 0U;
             var routeAddress = 0L;
             var buffer = MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.MultiPack);
-
+            
             try
             {
                 PacketParser.PackMemoryStream(ref rpcId, ref routeAddress, message, typeof(T), buffer);
@@ -221,7 +265,7 @@ namespace Fantasy.Scheduler
                 MemoryStreamBufferPool.ReturnMemoryStream(buffer);
                 throw;
             }
-
+            
             EnqueuePending(sceneId, new PendingSend(address, protocolCode, typeof(T), buffer));
         }
 
@@ -269,6 +313,7 @@ namespace Fantasy.Scheduler
             if (addressCollection.Count <= 0)
             {
                 Log.Warning("Send addressCollection.Count <= 0");
+                message.Dispose();
                 return;
             }
             
@@ -513,7 +558,62 @@ namespace Fantasy.Scheduler
             var session = await Scene.GetSessionAsync(address);
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create(rpcId, packInfo.ProtocolCode, requestType, requestCallback));
-            session.Send(rpcId, address, requestType, packInfo);
+
+            try
+            {
+                session.Send(rpcId, address, requestType, packInfo);
+            }
+            catch
+            {
+                RequestCallback.Remove(rpcId);
+                throw;
+            }
+            
+            return await requestCallback;
+        }
+        
+        internal MemoryStreamBuffer Pack<T>(T request) where T : IAddressMessage
+        {
+            var rpcId = 0U;
+            var address = 0L;
+            var buffer = MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.MultiPack);
+
+            try
+            {
+                PacketParser.PackMemoryStream(ref rpcId, ref address, request, typeof(T), buffer);
+                return buffer;
+            }
+            catch
+            {
+                MemoryStreamBufferPool.ReturnMemoryStream(buffer);
+                throw;
+            }
+        }
+        
+        internal async FTask<IResponse> Call( long address, Type requestType, uint protocolCode, MemoryStreamBuffer buffer)
+        {
+            if (address == 0)
+            {
+                Log.Error($"Call address == 0");
+                return null;
+            }
+
+            var rpcId = ++_rpcId;
+            var session = await Scene.GetSessionAsync(address);
+            var requestCallback = FTask<IResponse>.Create(false);
+
+            RequestCallback.Add(rpcId, MessageSender.Create(rpcId, protocolCode, requestType, requestCallback));
+
+            try
+            {
+                session.Send(buffer, requestType, protocolCode, rpcId, address);
+            }
+            catch
+            {
+                RequestCallback.Remove(rpcId);
+                throw;
+            }
+
             return await requestCallback;
         }
 
@@ -522,69 +622,115 @@ namespace Fantasy.Scheduler
             if (address == 0)
             {
                 Log.Error($"Call address == 0");
+                request.Dispose();
                 return null;
             }
             
             var rpcId = ++_rpcId;
-            var session = await Scene.GetSessionAsync(address);
+            Session session;
+
+            try
+            {
+                session = await Scene.GetSessionAsync(address);
+            }
+            catch
+            {
+                request.Dispose();
+                throw;
+            }
+            
             var requestCallback = FTask<IResponse>.Create(false);
             RequestCallback.Add(rpcId, MessageSender.Create<T>(rpcId, request.OpCode(), requestCallback));
-            session.Send<T>(request, rpcId, address);
+    
+            try
+            {
+                session.Send<T>(request, rpcId, address);
+            }
+            catch
+            {
+                RequestCallback.Remove(rpcId);
+                throw;
+            }
+            
             return await requestCallback;
         }
         
         public async FTask SendAddressable<T>(long addressableId, T message) where T : IAddressableMessage
         {
-            await CallAddressable(addressableId, message);
+            using var response = await CallAddressable(addressableId, message);
         }
         
         public async FTask<IResponse> CallAddressable<T>(long addressableId, T request) where T : IAddressableMessage
         {
             var failCount = 0;
-            
-            using (await AddressableRouteMessageLock.Wait(addressableId, "CallAddressable"))
-            {
-                var addressableAddress = await AddressableHelper.GetAddressableAddress(Scene, addressableId);
+            var protocolCode = request.OpCode();
+            var requestType = typeof(T);
+            var buffer = Pack(request);
 
-                while (true)
+            try
+            {
+                using (await AddressableRouteMessageLock.Wait(addressableId, "CallAddressable"))
                 {
-                    if (addressableAddress == 0)
+                    var addressableAddress = await AddressableHelper.GetAddressableAddress(Scene, addressableId);
+
+                    while (true)
                     {
-                        addressableAddress = await AddressableHelper.GetAddressableAddress(Scene, addressableId);
-                    }
-                    
-                    if (addressableAddress == 0)
-                    {
-                        return MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoute);
-                    }
-                    
-                    var iRouteResponse = await Call(addressableAddress, request);
-                    
-                    switch (iRouteResponse.ErrorCode)
-                    {
-                        case InnerErrorCode.ErrNotFoundRoute:
+                        if (addressableAddress == 0)
                         {
-                            if (++failCount > 20)
+                            addressableAddress = await AddressableHelper.GetAddressableAddress(Scene, addressableId);
+                        }
+                        
+                        if (addressableAddress == 0)
+                        {
+                            return MessageDispatcherComponent.CreateResponse(
+                                protocolCode,
+                                InnerErrorCode.ErrNotFoundRoute);
+                        }
+                        
+                        var iRouteResponse = await Call(
+                            addressableAddress,
+                            requestType,
+                            protocolCode,
+                            buffer);
+
+                        switch (iRouteResponse.ErrorCode)
+                        {
+                            case InnerErrorCode.ErrNotFoundRoute:
                             {
-                                Log.Error($"AddressableComponent.Call failCount > 20 route send message fail, address: {addressableAddress} AddressableMessageComponent:{addressableId}");
+                                if (++failCount > 20)
+                                {
+                                    Log.Error(
+                                        $"AddressableComponent.Call failCount > 20 route send message fail, " +
+                                        $"address: {addressableAddress} AddressableMessageComponent:{addressableId}");
+
+                                    return iRouteResponse;
+                                }
+                                
+                                iRouteResponse.Dispose();
+
+                                await TimerComponent.Net.WaitAsync(500);
+                                addressableAddress = 0;
+                                continue;
+                            }
+                            case InnerErrorCode.ErrRouteTimeout:
+                            {
+                                Log.Error(
+                                    $"CallAddressableRoute ErrorCode.ErrRouteTimeout " +
+                                    $"Error:{iRouteResponse.ErrorCode} Message:{requestType.Name}");
+
                                 return iRouteResponse;
                             }
-                            
-                            await TimerComponent.Net.WaitAsync(500);
-                            addressableAddress = 0;
-                            continue;
-                        }
-                        case InnerErrorCode.ErrRouteTimeout:
-                        {
-                            Log.Error($"CallAddressableRoute ErrorCode.ErrRouteTimeout Error:{iRouteResponse.ErrorCode} Message:{request}");
-                            return iRouteResponse;
-                        }
-                        default:
-                        {
-                            return iRouteResponse;
+                            default:
+                            {
+                                return iRouteResponse;
+                            }
                         }
                     }
                 }
+            }
+            finally
+            {
+                MemoryStreamBufferPool.ReturnMemoryStream(buffer);
             }
         }
         
@@ -592,7 +738,23 @@ namespace Fantasy.Scheduler
         {
             if (!RequestCallback.Remove(rpcId, out var routeMessageSender))
             {
-                Log.Error($"not found rpc, response.RpcId:{rpcId} response message: {response.GetType().Name} Process:{Scene.Process.Id} Scene:{Scene.SceneConfigId}");
+                Log.Error(
+                    $"not found rpc, response.RpcId:{rpcId} " +
+                    $"response message:{response?.GetType().Name ?? "null"} " +
+                    $"Process:{Scene.Process.Id} Scene:{Scene.SceneConfigId}");
+
+                response?.Dispose();
+                return;
+            }
+            
+            if (response == null)
+            {
+                routeMessageSender.Tcs.SetException(
+                    new InvalidOperationException(
+                        $"Deserialize response failed, RpcId:{rpcId} Request:{routeMessageSender.MessageType}"));
+
+                routeMessageSender.Dispose();
+                return;
             }
 
             ResponseHandler(routeMessageSender, response);
@@ -603,15 +765,23 @@ namespace Fantasy.Scheduler
         {
             if (response.ErrorCode == InnerErrorCode.ErrRouteTimeout)
             {
+                try
+                {
 #if FANTASY_DEVELOP
-                messageSender.Tcs.SetException(new Exception($"Rpc error: request, 注意Address消息超时，请注意查看是否死锁或者没有reply: {messageSender.MessageType}, response: {response}"));
+                    messageSender.Tcs.SetException(new Exception($"Rpc error: request, 注意Address消息超时，请注意查看是否死锁或者没有reply: {messageSender.MessageType}, response: {response}"));
 #else
-                messageSender.Tcs.SetException(new Exception($"Rpc error: request, 注意Address消息超时，请注意查看是否死锁或者没有reply: {messageSender.MessageType}, response: {response}"));
+                    messageSender.Tcs.SetException(new Exception($"Rpc error: request, 注意Address消息超时，请注意查看是否死锁或者没有reply: {messageSender.MessageType}, response: {response}"));
 #endif
-                messageSender.Dispose();
+                }
+                finally
+                {
+                    response.Dispose();
+                    messageSender.Dispose();
+                }
+
                 return;
             }
-
+            
             messageSender.Tcs.SetResult(response);
             messageSender.Dispose();
         }

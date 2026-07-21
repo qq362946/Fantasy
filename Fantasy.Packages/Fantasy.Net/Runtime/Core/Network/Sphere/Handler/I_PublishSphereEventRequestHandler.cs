@@ -18,25 +18,34 @@ internal sealed class I_PublishSphereEventRequestHandler : AddressRPC<Scene, I_P
 {
     protected override async FTask Run(Scene scene, I_PublishSphereEventRequest request, I_PublishSphereEventResponse response, Action reply)
     {
-        // 验证 Address 是否有效
-        // Address用于标识发布者,不能为 0
-        if (request.Address == 0)
-        {
-            response.ErrorCode = InnerErrorCode.ErrPublishSphereEventInvalidAddress;
-            return;
-        }
+        var sphereEventArgs = request.SphereEventArgs;
 
-        // 验证 SphereEventArgs 是否为空
-        // SphereEventArgs 包含事件的具体数据,不能为 null
-        if (request.SphereEventArgs == null)
+        try
         {
-            response.ErrorCode = InnerErrorCode.ErrPublishSphereEventNullEventArgs;
-            return;
-        }
+// 验证 Address 是否有效
+            // Address用于标识发布者,不能为 0
+            if (request.Address == 0)
+            {
+                response.ErrorCode = InnerErrorCode.ErrPublishSphereEventInvalidAddress;
+                return;
+            }
 
-        // 处理远程发布的事件并调用本地订阅者
-        // 将事件分发给所有订阅了该事件类型的本地处理器
-        response.ErrorCode = await scene.SphereEventComponent.HandleRemotePublication(request.Address, request.SphereEventArgs);
+            // 验证 SphereEventArgs 是否为空
+            // SphereEventArgs 包含事件的具体数据,不能为 null
+            if (request.SphereEventArgs == null)
+            {
+                response.ErrorCode = InnerErrorCode.ErrPublishSphereEventNullEventArgs;
+                return;
+            }
+
+            // 处理远程发布的事件并调用本地订阅者
+            // 将事件分发给所有订阅了该事件类型的本地处理器
+            response.ErrorCode = await scene.SphereEventComponent.HandleRemotePublication(request.Address, request.SphereEventArgs);
+        }
+        finally
+        {
+            sphereEventArgs?.Dispose();
+        }
     }
 }
 #endif

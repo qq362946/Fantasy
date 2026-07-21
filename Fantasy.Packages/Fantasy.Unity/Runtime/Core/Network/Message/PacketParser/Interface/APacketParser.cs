@@ -21,6 +21,23 @@ namespace Fantasy.PacketParser.Interface
         protected bool IsDisposed { get; private set; }
         public abstract MemoryStreamBuffer Pack(ref uint rpcId, ref long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType);
         public abstract void PackMemoryStream(ref uint rpcId, ref long address, IMessage message, Type messageType, MemoryStreamBuffer memoryStream);
+        
+        protected MemoryStreamBuffer RentAndPack(ref uint rpcId, ref long address, IMessage message, Type messageType)
+        {
+            var memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
+
+            try
+            {
+                PackMemoryStream(ref rpcId, ref address, message, messageType, memoryStream);
+                return memoryStream;
+            }
+            catch
+            {
+                Network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                throw;
+            }
+        }
+        
         public virtual void Dispose()
         {
             IsDisposed = true;

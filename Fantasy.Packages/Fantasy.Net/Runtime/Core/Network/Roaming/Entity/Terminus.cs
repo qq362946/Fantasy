@@ -87,25 +87,42 @@ public sealed partial class Terminus : Entity
 
     internal async FTask DisposeAsync(DisposeTerminusType disposeTerminusType)
     {
-        IsDisposeTerminus = true;
-        await Scene.TerminusComponent.RemoveTerminusAsync(disposeTerminusType, Id, false);
-        
-        TerminusId = 0;
-        RoamingType = 0;
-        ForwardSceneAddress = 0;
-        ForwardSessionAddress = 0;
-        
-        TerminusEntity = null;
-        IsAutoDisposeLinkTerminusEntity = false;
-        
-        if (RoamingMessageLock != null)
+        if (IsDisposed || IsDisposeTerminus)
         {
-            RoamingMessageLock.Dispose();
-            RoamingMessageLock = null;
+            return;
         }
         
-        _roamingTerminusId.Clear();
-        base.Dispose();
+        IsDisposeTerminus = true;
+
+        try
+        {
+            await Scene.TerminusComponent.RemoveTerminusAsync(disposeTerminusType, Id, false);
+        }
+        finally
+        {
+            TerminusId = 0;
+            RoamingType = 0;
+            ForwardSceneAddress = 0;
+            ForwardSessionAddress = 0;
+        
+            TerminusEntity = null;
+            IsAutoDisposeLinkTerminusEntity = false;
+
+            try
+            {
+                RoamingMessageLock?.Dispose();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            finally
+            {
+                RoamingMessageLock = null;
+                _roamingTerminusId.Clear();
+                base.Dispose();
+            }
+        }
     }
 
     #region Link
@@ -314,7 +331,7 @@ public sealed partial class Terminus : Entity
             }
             
             // 开始执行传送请求。
-            var response = (I_TransferTerminusResponse)await Scene.NetworkMessagingComponent.Call(
+            using var response = (I_TransferTerminusResponse)await Scene.NetworkMessagingComponent.Call(
                 targetSceneAddress,
                 new I_TransferTerminusRequest()
                 {
@@ -402,7 +419,7 @@ public sealed partial class Terminus : Entity
     /// <returns></returns>
     private async FTask<uint> Lock()
     {
-        var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
+        using var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
             new I_LockTerminusIdRequest()
             {
                 RoamingId = Id,
@@ -417,7 +434,7 @@ public sealed partial class Terminus : Entity
     /// <returns></returns>
     private async FTask<uint> UnLock()
     {
-        var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
+        using var response = await Scene.NetworkMessagingComponent.Call(ForwardSceneAddress,
             new I_UnLockTerminusIdRequest()
             {
                 RoamingId = Id,
@@ -439,7 +456,7 @@ public sealed partial class Terminus : Entity
             return 0;
         }
 
-        var response = (I_GetTerminusIdResponse)await Scene.NetworkMessagingComponent.Call(
+        using var response = (I_GetTerminusIdResponse)await Scene.NetworkMessagingComponent.Call(
             ForwardSceneAddress,
             new I_GetTerminusIdRequest()
             {
@@ -457,6 +474,7 @@ public sealed partial class Terminus : Entity
     {
         if (StopForwarding)
         {
+            message.Dispose();
             return;
         }
         
@@ -470,7 +488,12 @@ public sealed partial class Terminus : Entity
     /// <param name="message"></param>
     public void Send<T>(int roamingType, T message) where T : IRoamingMessage
     {
-        Call(roamingType,  message).Coroutine();
+        SendAsync(roamingType, message).Coroutine();
+    }
+    
+    private async FTask SendAsync<T>(int roamingType, T message) where T : IRoamingMessage
+    {
+        using var response = await Call(roamingType, message);
     }
 
     /// <summary>
@@ -481,82 +504,141 @@ public sealed partial class Terminus : Entity
     /// <returns></returns>
     public async FTask<IResponse> Call<T>(int roamingType, T request) where T : IRoamingMessage
     {
+        var protocolCode = request.OpCode();
+
         if (IsDisposed)
         {
-            return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrRoamingDisposed);
+            request.Dispose();
+            return null;
         }
-
+        
+        var scene = Scene;
+        var messageDispatcherComponent = scene.MessageDispatcherComponent;
+        
         if (roamingType == RoamingType)
         {
-            Log.Warning($"Does not support sending messages to the same scene as roamingType currentRoamingType:{RoamingType} roamingType:{roamingType}");
-            return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
-        }
+            request.Dispose();
 
+            Log.Warning(
+                $"Does not support sending messages to the same scene as roamingType " +
+                $"currentRoamingType:{RoamingType} roamingType:{roamingType}");
+
+            return messageDispatcherComponent.CreateResponse(
+                protocolCode,
+                InnerErrorCode.ErrNotFoundRoaming);
+        }
+        
         var failCount = 0;
         var runtimeId = RuntimeId;
-        var iRouteResponse = Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoaming);
+        var requestType = typeof(T);
+        var timerComponent = scene.TimerComponent;
+        var roamingMessageLock = RoamingMessageLock!;
+        var networkMessagingComponent = scene.NetworkMessagingComponent;
+        
         _roamingTerminusId.TryGetValue(roamingType, out var address);
 
-        using (await RoamingMessageLock!.Wait(roamingType, "Terminus Call request"))
+        var buffer = networkMessagingComponent.Pack(request);
+
+        try
         {
-            while (!IsDisposed)
+            using (await roamingMessageLock.Wait(roamingType, "Terminus Call request"))
             {
-                if (address == 0)
+                while (runtimeId == RuntimeId)
                 {
-                    address = await GetTerminusId(roamingType);
-                    
-                    if (address != 0)
+                    if (address == 0)
                     {
-                        _roamingTerminusId[roamingType] = address;
-                    }
-                    else
-                    {
-                        return Scene.MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrRoamingNotReady);
-                    }
-                }
-
-                iRouteResponse = await Scene.NetworkMessagingComponent.Call(address, request);
-
-                if (runtimeId != RuntimeId)
-                {
-                    iRouteResponse.ErrorCode = InnerErrorCode.ErrRoamingTimeout;
-                }
-
-                switch (iRouteResponse.ErrorCode)
-                {
-                    case InnerErrorCode.ErrRouteTimeout:
-                    case InnerErrorCode.ErrRoamingTimeout:
-                    {
-                        return iRouteResponse;
-                    }
-                    case InnerErrorCode.ErrNotFoundRoute:
-                    case InnerErrorCode.ErrNotFoundRoaming:
-                    {
-                        if (++failCount > RoamingConstants.MaxRetryCount)
-                        {
-                            Log.Error($"Terminus.Call failCount > {RoamingConstants.MaxRetryCount} route send message fail, TerminusId: {address}");
-                            return iRouteResponse;
-                        }
-
-                        await Scene.TimerComponent.Net.WaitAsync(RoamingConstants.RetryIntervalMs);
+                        address = await GetTerminusId(roamingType);
 
                         if (runtimeId != RuntimeId)
                         {
-                            iRouteResponse.ErrorCode = InnerErrorCode.ErrRoamingDisposed;
+                            return messageDispatcherComponent.CreateResponse(
+                                protocolCode,
+                                InnerErrorCode.ErrRoamingDisposed);
                         }
-
-                        address = 0;
-                        continue;
+                        
+                        if (address != 0)
+                        {
+                            _roamingTerminusId[roamingType] = address;
+                        }
+                        else
+                        {
+                            return messageDispatcherComponent.CreateResponse(
+                                protocolCode,
+                                InnerErrorCode.ErrRoamingNotReady);
+                        }
                     }
-                    default:
+                    
+                    var iRouteResponse = await networkMessagingComponent.Call(
+                        address,
+                        requestType,
+                        protocolCode,
+                        buffer);
+                    
+                    if (runtimeId != RuntimeId)
                     {
-                        return iRouteResponse; // 对于其他情况，直接返回响应，无需额外处理
+                        iRouteResponse.ErrorCode = InnerErrorCode.ErrRoamingTimeout;
+                        return iRouteResponse;
+                    }
+
+                    switch (iRouteResponse.ErrorCode)
+                    {
+                        case InnerErrorCode.ErrRouteTimeout:
+                        case InnerErrorCode.ErrRoamingTimeout:
+                        {
+                            return iRouteResponse;
+                        }
+                        case InnerErrorCode.ErrNotFoundRoute:
+                        case InnerErrorCode.ErrNotFoundRoaming:
+                        {
+                            if (++failCount > RoamingConstants.MaxRetryCount)
+                            {
+                                Log.Error(
+                                    $"Terminus.Call failCount > " +
+                                    $"{RoamingConstants.MaxRetryCount} route send message fail, " +
+                                    $"TerminusId: {address}");
+
+                                return iRouteResponse;
+                            }
+
+                            try
+                            {
+                                await timerComponent.Net.WaitAsync(
+                                    RoamingConstants.RetryIntervalMs);
+                            }
+                            catch
+                            {
+                                iRouteResponse.Dispose();
+                                throw;
+                            }
+
+                            if (runtimeId != RuntimeId)
+                            {
+                                iRouteResponse.ErrorCode =
+                                    InnerErrorCode.ErrRoamingDisposed;
+
+                                return iRouteResponse;
+                            }
+
+                            iRouteResponse.Dispose();
+                            address = 0;
+                            continue;
+                        }
+                        default:
+                        {
+                            return iRouteResponse;
+                        }
                     }
                 }
             }
+            
+            return messageDispatcherComponent.CreateResponse(
+                protocolCode,
+                InnerErrorCode.ErrRoamingDisposed);
         }
-
-        return iRouteResponse;
+        finally
+        {
+            networkMessagingComponent.MemoryStreamBufferPool.ReturnMemoryStream(buffer);
+        }
     }
 
     #endregion

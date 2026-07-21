@@ -60,6 +60,7 @@ internal static class ProcessScheduler
             
                         if (entity == null || entity.IsDisposed)
                         {
+                            ((IMessage)message).Dispose();
                             return;
                         }
 
@@ -90,6 +91,7 @@ internal static class ProcessScheduler
             
                         if (entity == null || entity.IsDisposed)
                         {
+                            ((IMessage)message).Dispose();
                             sceneMessageDispatcherComponent.FailRouteResponse(session, protocolCode, InnerErrorCode.ErrNotFoundRoute, rpcId);
                             return;
                         }
@@ -125,6 +127,7 @@ internal static class ProcessScheduler
 
                         if (entity == null || entity.IsDisposed)
                         {
+                            ((IMessage)message).Dispose();
                             scene.MessageDispatcherComponent.FailRouteResponse(session, protocolCode, InnerErrorCode.ErrNotFoundRoute, rpcId);
                             return;
                         }
@@ -175,6 +178,7 @@ internal static class ProcessScheduler
                 
                 if (!Process.TryGetScene(sceneId, out var scene))
                 {
+                    ((IMessage)message).Dispose();
                     throw new Exception($"not found scene address:{address}");
                 }
         
@@ -187,6 +191,7 @@ internal static class ProcessScheduler
             
                     if (entity == null || entity.IsDisposed)
                     {
+                        ((IMessage)messageObject).Dispose();
                         return;
                     }
 
@@ -205,6 +210,7 @@ internal static class ProcessScheduler
                 
                 if (!Process.TryGetScene(sceneId, out var scene))
                 {
+                    ((IMessage)message).Dispose();
                     throw new Exception($"not found scene address:{address}");
                 }
                 
@@ -217,6 +223,7 @@ internal static class ProcessScheduler
             
                     if (entity == null || entity.IsDisposed)
                     {
+                        ((IMessage)messageObject).Dispose();
                         sceneMessageDispatcherComponent.FailRouteResponse(session, protocolCode, InnerErrorCode.ErrNotFoundRoute, rpcId);
                         return;
                     }
@@ -236,6 +243,7 @@ internal static class ProcessScheduler
                 
                 if (!Process.TryGetScene(sceneId, out var scene))
                 {
+                    ((IMessage)message).Dispose();
                     Log.Error($"not found scene address:{address}");
                     return;
                 }
@@ -252,6 +260,7 @@ internal static class ProcessScheduler
                         {
                             // 执行到这里是说明Session已经断开了
                             // 因为这里是其他服务器Send到外网的数据、所以不需要给发送端返回就可以
+                            ((IMessage)messageObject).Dispose();
                             return;
                         }
                         case Session gateSession:
@@ -273,6 +282,7 @@ internal static class ProcessScheduler
             }
             default:
             {
+                ((IMessage)message).Dispose();
                 throw new NotSupportedException($"SessionInnerScheduler Received unsupported message protocolCode:{protocolCode} messageType:{messageType}");
             }
         }
@@ -322,6 +332,7 @@ internal static class ProcessScheduler
             
                     if (entity == null || entity.IsDisposed)
                     {
+                        ((IMessage)messageObject).Dispose();
                         return;
                     }
 
@@ -352,6 +363,7 @@ internal static class ProcessScheduler
             
                     if (entity == null || entity.IsDisposed)
                     {
+                        ((IMessage)messageObject).Dispose();
                         sceneMessageDispatcherComponent.FailRouteResponse(session, protocolCode, InnerErrorCode.ErrNotFoundRoute, rpcId);
                         return;
                     }
@@ -387,6 +399,7 @@ internal static class ProcessScheduler
                         {
                             // 执行到这里是说明Session已经断开了
                             // 因为这里是其他服务器Send到外网的数据、所以不需要给发送端返回就可以
+                            ((IMessage)messageObject).Dispose();
                             return;
                         }
                         case Session gateSession:

@@ -3,6 +3,7 @@ using System;
 using System.Net;
 using System.Text;
 using Fantasy.Assembly;
+using Fantasy.Async;
 using Fantasy.Network.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -80,6 +81,8 @@ namespace Fantasy.Network.HTTP
     /// </summary>
     public sealed class HTTPServerNetwork : ANetwork
     {
+        private WebApplication? _application;
+        
         /// <summary>
         /// 初始化入口
         /// </summary>
@@ -94,56 +97,75 @@ namespace Fantasy.Network.HTTP
             {
                 StartAsync(bindIp, port);
             }
-            catch (HttpListenerException e)
+            catch (HttpListenerException e) when (e.ErrorCode == 5)
             {
-                if (e.ErrorCode == 5)
-                {
-                    var sb = new StringBuilder();
-                    sb.AppendLine("CMD管理员中输入下面命令:");
-                    sb.AppendLine($"netsh http add urlacl url=http://{bindIp}:{port}/ user=Everyone");
-                    throw new Exception(sb.ToString(), e);
-                }
+                Dispose();
 
-                Log.Error(e);
+                var sb = new StringBuilder();
+                sb.AppendLine("CMD管理员中输入下面命令:");
+                sb.AppendLine(
+                    $"netsh http add urlacl url=http://{bindIp}:{port}/ user=Everyone");
+                throw new Exception(sb.ToString(), e);
             }
-            catch (Exception e)
+            catch
             {
-                Log.Error(e);
+                Dispose();
+                throw;
             }
         }
 
         private void StartAsync(string bindIp, int port)
         {
             var builder = WebApplication.CreateBuilder();
+            
             builder.Logging.ClearProviders();
+            
             // 将Scene注册到 DI 容器中，传递给控制器
             builder.Services.AddSingleton(Scene);
+            
             // 注册Scene同步过滤器
             builder.Services.AddScoped<SceneContextFilter>();
+            
             // 注册控制器服务，使用框架默认配置
             var mvcBuilder = builder.Services.AddControllers()
                 .AddJsonOptions(options => { options.JsonSerializerOptions.PropertyNamingPolicy = null; });
+            
             // 触发服务配置事件，允许开发者注册自定义服务并配置MVC选项
-            Scene.EventComponent.PublishAsync(new OnConfigureHttpServices(Scene, builder, mvcBuilder)).GetAwaiter().GetResult();
+            Scene.EventComponent
+                .PublishAsync(new OnConfigureHttpServices(Scene, builder, mvcBuilder))
+                .GetAwaiter()
+                .GetResult();
+            
             // 添加所有程序集的控制器部件
             foreach (var assemblyManifest in AssemblyManifest.GetAssemblyManifest)
             {
                 mvcBuilder.AddApplicationPart(assemblyManifest.Assembly);
             }
+            
             var app = builder.Build();
+            _application = app;
+            
             var listenUrl = $"http://{bindIp}:{port}/";
             app.Urls.Add(listenUrl);
+            
             // 启用开发者异常页面（作为第一个中间件）
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            
             // 触发应用配置事件，允许开发者添加自定义中间件（CORS、认证、授权等）
-            Scene.EventComponent.PublishAsync(new OnConfigureHttpApplication(Scene, app)).GetAwaiter().GetResult();
+            Scene.EventComponent
+                .PublishAsync(new OnConfigureHttpApplication(Scene, app))
+                .GetAwaiter()
+                .GetResult();
+            
             // 端点映射（必须在最后）
             app.MapControllers();
+            
             // 开启监听
-            app.RunAsync();
+            app.StartAsync().GetAwaiter().GetResult();
+            
             Log.Info($"SceneConfigId = {Scene.SceneConfigId} HTTPServer Listen {listenUrl}");
         }
 
@@ -155,6 +177,45 @@ namespace Fantasy.Network.HTTP
         public override void RemoveChannel(uint channelId)
         {
             throw new NotImplementedException();
+        }
+
+        public override void Dispose()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            var application = _application;
+            _application = null;
+
+            try
+            {
+                if (application != null)
+                {
+                    application.StopAsync().GetAwaiter().GetResult();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+
+            try
+            {
+                if (application != null)
+                {
+                    application.DisposeAsync().AsTask().GetAwaiter().GetResult();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            finally
+            {
+                base.Dispose();
+            }
         }
     }
 }

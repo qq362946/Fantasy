@@ -1,6 +1,7 @@
 using System;
 using System.Buffers;
 using System.IO;
+using System.Threading.Tasks;
 using LightProto;
 using Fantasy.Assembly;
 using Fantasy.Async;
@@ -50,7 +51,7 @@ namespace Fantasy.Serialize
         /// 程序集加载时的回调，注册所有网络协议类型到 ProtoBuf 运行时模型。
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
-        public async FTask OnLoad(AssemblyManifest assemblyManifest)
+        public async Task OnLoad(AssemblyManifest assemblyManifest)
         {
             var protoBufTypes = assemblyManifest.NetworkProtocolRegistrar.GetNetworkProtocolTypes();
 
@@ -58,27 +59,23 @@ namespace Fantasy.Serialize
             {
                 return;
             }
-            
-            // 因为网络协议再服务器部分热重载没有意义。
-            // 所以基本不会在运行的时候热重载协议的，这样就不会有线程安全问题。
-            // 所以这里没有任何关于线程安全的相关处理。
-            // 如果要热更协议，这里就要做线程安全相关的处理。
-            
+    
+            // 网络协议在服务器运行期间通常不会热重载；
+            // 运行期变更仍统一切到主线程处理。
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-            var protoBufDispatcherRegistrar = assemblyManifest.ProtoBufDispatcherRegistrar;
+            var protoBufDispatcherRegistrar =
+                assemblyManifest.ProtoBufDispatcherRegistrar;
 
             if (ProgramDefine.IsAppRunning)
             {
-                var tcs = FTask.Create(false);
-                ThreadScheduler.MainScheduler.ThreadSynchronizationContext.Post(() =>
-                {
-                    InnerOnLoad(assemblyManifestId, protoBufDispatcherRegistrar);
-                    tcs.SetResult();
-                });
-                await tcs;
+                await AssemblyLifecycle.RunOnContext(
+                    ThreadScheduler.MainScheduler.ThreadSynchronizationContext,
+                    () => InnerOnLoad(
+                        assemblyManifestId,
+                        protoBufDispatcherRegistrar)).ConfigureAwait(false);
                 return;
             }
-            
+    
             InnerOnLoad(assemblyManifestId, protoBufDispatcherRegistrar);
         }
 
@@ -118,9 +115,9 @@ namespace Fantasy.Serialize
         /// 程序集卸载时的回调。
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
-        public async FTask OnUnload(AssemblyManifest assemblyManifest)
+        public Task OnUnload(AssemblyManifest assemblyManifest)
         {
-            await FTask.CompletedTask;
+            return Task.CompletedTask;
         }
 
         #endregion

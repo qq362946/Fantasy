@@ -30,27 +30,29 @@ public sealed class SceneContextFilter : IAsyncActionFilter
     /// <returns></returns>
     public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        var tcs = FTask.Create();
+        var tcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously);
         
         _scene.ThreadSynchronizationContext.Post(() =>
         {
             Action().Coroutine();
         });
         
-        await tcs;
-        return;
-
+        await tcs.Task;
+        
         async FTask Action()
         {
             try
             {
                 await next();
-                tcs.SetResult();
             }
             catch (Exception e)
             {
                 tcs.SetException(e);
+                return;
             }
+
+            tcs.SetResult();
         }
     }
 }

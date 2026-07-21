@@ -31,7 +31,7 @@ namespace Fantasy.Scheduler
             {
                 if (timeNow < value.CreateTime + Timeout)
                 {
-                    break;
+                    continue;
                 }
 
                 selfNetworkMessagingComponent.TimeoutRouteMessageSenders.Add(rpcId, value);

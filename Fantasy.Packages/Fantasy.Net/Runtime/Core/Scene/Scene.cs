@@ -213,23 +213,34 @@ namespace Fantasy
         {
             EntityPool = new EntityPool();
             EventAwaiterPool = new EventAwaiterPool();
-            EntityComponent = await Create<EntityComponent>(this, false, false).Initialize();
-            SceneUpdate = EntityComponent;
+            EntityComponent = Create<EntityComponent>(this, false, false);
+
+            try
+            {
+                await EntityComponent.Initialize();
+                SceneUpdate = EntityComponent;
 #if FANTASY_UNITY
             SceneLateUpdate = EntityComponent;
 #endif
-            EventComponent = await Create<EventComponent>(this,false,true).Initialize();
-            TimerComponent = Create<TimerComponent>(this, false, true).Initialize();
-            CoroutineLockComponent = Create<CoroutineLockComponent>(this, false, true).Initialize();
-            MessageDispatcherComponent = await Create<MessageDispatcherComponent>(this, false, true).Initialize();
-            PoolGeneratorComponent = await Create<PoolGeneratorComponent>(this,false,false).Initialize();
+                EventComponent = await Create<EventComponent>(this,false,true).Initialize();
+                TimerComponent = Create<TimerComponent>(this, false, true).Initialize();
+                CoroutineLockComponent = Create<CoroutineLockComponent>(this, false, true).Initialize();
+                MessageDispatcherComponent = await Create<MessageDispatcherComponent>(this, false, true).Initialize();
+                PoolGeneratorComponent = await Create<PoolGeneratorComponent>(this,false,false).Initialize();
 #if FANTASY_NET
-            NetworkMessagingComponent = Create<NetworkMessagingComponent>(this, false, true);
-            SeparateTableComponent = await Create<SeparateTableComponent>(this, false, true).Initialize();
-            TerminusComponent = Create<TerminusComponent>(this, false, true);
-            RoamingComponent = Create<RoamingComponent>(this, false, true).Initialize();
-            SphereEventComponent = await Create<SphereEventComponent>(this, false, true).Initialize();
+                NetworkMessagingComponent = Create<NetworkMessagingComponent>(this, false, true);
+                SeparateTableComponent = await Create<SeparateTableComponent>(this, false, true).Initialize();
+                TerminusComponent = Create<TerminusComponent>(this, false, true);
+                RoamingComponent = Create<RoamingComponent>(this, false, true).Initialize();
+                SphereEventComponent = Create<SphereEventComponent>(this, false, true);
+                await SphereEventComponent.Initialize();
 #endif
+            }
+            catch
+            {
+                await Close();
+                throw;
+            }
         }
 
         /// <summary>
@@ -266,6 +277,34 @@ namespace Fantasy
                 if (SphereEventComponent != null && !SphereEventComponent.IsDisposed)
                 {
                     await SphereEventComponent.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                closeException = closeException == null
+                    ? e
+                    : new AggregateException(closeException, e);
+            }
+            
+            try
+            {
+                if (RoamingComponent != null && !RoamingComponent.IsDisposed)
+                {
+                    await RoamingComponent.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                closeException = closeException == null
+                    ? e
+                    : new AggregateException(closeException, e);
+            }
+            
+            try
+            {
+                if (TerminusComponent != null && !TerminusComponent.IsDisposed)
+                {
+                    await TerminusComponent.Close();
                 }
             }
             catch (Exception e)
@@ -330,9 +369,18 @@ namespace Fantasy
                 case SceneRuntimeType.Root:
                 {
 #if FANTASY_NET
-                    foreach (var (_, processSessionInfo) in _processSessionInfos.ToList())
+                    foreach (var (targetSceneId, processSessionInfo) in _processSessionInfos.ToList())
                     {
-                        processSessionInfo.Dispose();
+                        try
+                        {
+                            processSessionInfo.Dispose();
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error(
+                                $"SceneConfigId:{SceneConfigId} " +
+                                $"ProcessSession targetSceneId:{targetSceneId} dispose failed.\n{e}");
+                        }
                     }
 
                     _processSessionInfos.Clear();
@@ -341,11 +389,28 @@ namespace Fantasy
 
                     foreach (var (runtimeId, entity) in _entities.ToList())
                     {
-                        if (runtimeId != entity.RuntimeId)
+                        try
                         {
-                            continue;
+                            if (runtimeId != entity.RuntimeId)
+                            {
+                                continue;
+                            }
+
+                            entity.Dispose();
                         }
-                        entity.Dispose();
+                        catch (Exception e)
+                        {
+#if FANTASY_NET
+                            Log.Error(
+                                $"SceneConfigId:{SceneConfigId} " +
+                                $"Entity:{entity?.GetType().FullName ?? "null"} " +
+                                $"RuntimeId:{runtimeId} dispose failed.\n{e}");
+#elif FANTASY_UNITY
+                             Log.Error(
+                                $"Entity:{entity?.GetType().FullName ?? "null"} " +
+                                $"RuntimeId:{runtimeId} dispose failed.\n{e}");
+#endif
+                        }
                     }
 
                     _entities.Clear();
@@ -494,7 +559,16 @@ namespace Fantasy
                 }
                 catch (Exception e)
                 {
-                    tcs.SetException(e);
+                    try
+                    {
+                        await scene.Close();
+                    }
+                    finally
+                    {
+                        tcs.SetException(e);
+                    }
+            
+                    return;
                 }
                 
                 tcs.SetResult(scene);
@@ -538,54 +612,67 @@ namespace Fantasy
             scene.SceneType = sceneConfig.SceneType;
             scene.SceneConfigId = sceneConfig.Id;
             await SetScheduler(scene, sceneConfig.SceneRuntimeMode);
-            scene.LogSceneName = $"{sceneConfig.SceneTypeString}_{sceneConfig.Id}";
-            
-            if (sceneConfig.WorldConfigId != 0)
-            {
-                scene.World = World.Create(scene, (byte)sceneConfig.WorldConfigId);
-            }
 
-            if (sceneConfig.InnerPort != 0)
+            try
             {
-                // 创建内网网络服务器
-                scene.InnerNetwork = NetworkProtocolFactory.CreateServer(scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner, machineConfig.InnerBindIP, sceneConfig.InnerPort);
-            }
-
-            if (sceneConfig.OuterPort != 0)
-            {
-                // 创建外网网络服务
-                var networkProtocolType = Enum.Parse<NetworkProtocolType>(sceneConfig.NetworkProtocol);
-                scene.OuterNetwork = NetworkProtocolFactory.CreateServer(scene, networkProtocolType, NetworkTarget.Outer, machineConfig.OuterBindIP, sceneConfig.OuterPort);
-            }
-            
-            Process.AddScene(scene);
-            process.AddSceneToProcess(scene);
-            
-            var tcs = FTask<Scene>.Create(false);
-            
-            scene.ThreadSynchronizationContext.Post(() => {OnEvent().Coroutine();});
-
-            return await tcs;
-            
-            async FTask OnEvent()
-            {
-                try
+                scene.LogSceneName = $"{sceneConfig.SceneTypeString}_{sceneConfig.Id}";
+                
+                if (sceneConfig.WorldConfigId != 0)
                 {
-                    if (sceneConfig.SceneTypeString == "Addressable")
+                    scene.World = World.Create(scene, (byte)sceneConfig.WorldConfigId);
+                }
+                
+                if (sceneConfig.InnerPort != 0)
+                {
+                    // 创建内网网络服务器
+                    scene.InnerNetwork = NetworkProtocolFactory.CreateServer(scene, ProgramDefine.InnerNetwork, NetworkTarget.Inner, machineConfig.InnerBindIP, sceneConfig.InnerPort);
+                }
+                
+                if (sceneConfig.OuterPort != 0)
+                {
+                    // 创建外网网络服务
+                    var networkProtocolType = Enum.Parse<NetworkProtocolType>(sceneConfig.NetworkProtocol);
+                    scene.OuterNetwork = NetworkProtocolFactory.CreateServer(scene, networkProtocolType, NetworkTarget.Outer, machineConfig.OuterBindIP, sceneConfig.OuterPort);
+                }
+                
+                Process.AddScene(scene);
+                process.AddSceneToProcess(scene);
+            
+                var tcs = FTask<Scene>.Create(false);
+                
+                async FTask OnEvent()
+                {
+                    try
                     {
-                        // 如果是AddressableScene,自动添加上AddressableManageComponent。
-                        scene.AddComponent<AddressableManageComponent>();
+                        if (sceneConfig.SceneTypeString == "Addressable")
+                        {
+                            // 如果是AddressableScene,自动添加上AddressableManageComponent。
+                            scene.AddComponent<AddressableManageComponent>();
+                        }
+
+                        await scene.EventComponent.PublishAsync(new OnCreateScene(scene));
+                        await Entry.RegisterServiceSceneAsync(scene);
+                    }
+                    catch (Exception e)
+                    {
+                        tcs.SetException(e);
+                        return;
                     }
 
-                    await scene.EventComponent.PublishAsync(new OnCreateScene(scene));
-                    await Entry.RegisterServiceSceneAsync(scene);
+                    tcs.SetResult(scene);
                 }
-                catch (Exception e)
+                
+                scene.ThreadSynchronizationContext.Post(() => {OnEvent().Coroutine();});
+                return await tcs;
+            }
+            catch
+            {
+                if (!scene.IsDisposed)
                 {
-                    tcs.SetException(e);
+                    await scene.Close();
                 }
 
-                tcs.SetResult(scene);   
+                throw;
             }
         }
 
@@ -640,7 +727,17 @@ namespace Fantasy
                 }
                 catch (Exception e)
                 {
-                    tcs.SetException(e);
+                    try
+                    {
+                        await scene.Close();
+                    }
+                    finally
+                    {
+                        // 即使 Close 抛出异常，也必须结束调用方正在等待的 tcs。
+                        tcs.SetException(e);
+                    }
+                    
+                    return;
                 }
 
                 tcs.SetResult(scene);
@@ -672,8 +769,7 @@ namespace Fantasy
 #if FANTASY_UNITY
                     scene.SceneLateUpdate = new EmptySceneLateUpdate();
 #endif
-                    ThreadScheduler.AddToMultiThreadScheduler(scene);
-                    scene.SceneScheduler = ThreadScheduler.MultiThreadScheduler;
+                    scene.SceneScheduler = ThreadScheduler.AddToMultiThreadScheduler(scene);
                     await scene.Initialize();
                     break;
                 }
@@ -686,10 +782,16 @@ namespace Fantasy
 #if FANTASY_UNITY
                     scene.SceneLateUpdate = new EmptySceneLateUpdate();
 #endif
-                    ThreadScheduler.AddToThreadPoolScheduler(scene);
-                    scene.SceneScheduler = ThreadScheduler.ThreadPoolScheduler;
+                    scene.SceneScheduler = ThreadScheduler.AddToThreadPoolScheduler(scene);
                     await scene.Initialize();
                     break;
+                }
+                default:
+                {
+                    throw new ArgumentOutOfRangeException(
+                        nameof(sceneRuntimeMode),
+                        sceneRuntimeMode,
+                        $"Unsupported scene runtime mode. Expected '{SceneRuntimeMode.MainThread}', '{SceneRuntimeMode.MultiThread}', or '{SceneRuntimeMode.ThreadPool}'.");
                 }
             }
         }
@@ -789,7 +891,6 @@ namespace Fantasy
         /// </summary>
         /// <param name="address">目标实体的 RuntimeId Address。</param>
         /// <param name="session">找到或创建的 Session。</param>
-        /// <param name="sceneId">根据Address计算出的sceneId</param>
         /// <returns>成功取得 Session 时返回 true，否则返回 false。</returns>
         internal virtual bool TryGetSession(long address, out Session session)
         {

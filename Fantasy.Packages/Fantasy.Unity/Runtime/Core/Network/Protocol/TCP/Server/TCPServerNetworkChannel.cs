@@ -38,10 +38,23 @@ namespace Fantasy.Network.TCP
         {
             _socket = socket;
             _network = network;
-            _socket.NoDelay = true;
-            _sendArgs = new SocketAsyncEventArgs();
-            _sendArgs.Completed += OnSendCompletedHandler;
-            _packetParser = PacketParserFactory.CreateReadOnlyMemoryPacketParser(network);
+
+            try
+            {
+                _socket.NoDelay = true;
+                _sendArgs = new SocketAsyncEventArgs();
+                _sendArgs.Completed += OnSendCompletedHandler;
+                _packetParser = PacketParserFactory.CreateReadOnlyMemoryPacketParser(network);
+            }
+            catch
+            {
+                Dispose();
+                throw;
+            }
+        }
+        
+        internal void Start()
+        {
             ReadPipeDataAsync().Coroutine();
             ReceiveSocketAsync().Coroutine();
         }
@@ -95,8 +108,9 @@ namespace Fantasy.Network.TCP
                     }
                 }
                 
+                _sendArgs?.Dispose();
                 ClearSendBuffers();
-                _packetParser.Dispose();
+                _packetParser?.Dispose();
                 _isSending = false;
             }
             catch (Exception e)
@@ -123,7 +137,7 @@ namespace Fantasy.Network.TCP
                     if (count == 0)
                     {
                         Dispose();
-                        return;
+                        break;
                     }
                     
                     _pipe.Writer.Advance(count);
@@ -146,6 +160,8 @@ namespace Fantasy.Network.TCP
                 catch (Exception ex)
                 {
                     Log.Error($"Unexpected exception: {ex.Message}");
+                    Dispose();
+                    break;
                 }
             }
 
@@ -218,10 +234,12 @@ namespace Fantasy.Network.TCP
         {
             try
             {
-                while (_packetParser.UnPack(ref buffer, out var packInfo))
+                while (!_cancellationTokenSource.IsCancellationRequested && 
+                       _packetParser.UnPack(ref buffer, out var packInfo))
                 {
                     if (_cancellationTokenSource.IsCancellationRequested)
                     {
+                        packInfo.Dispose();
                         return;
                     }
 
@@ -246,6 +264,12 @@ namespace Fantasy.Network.TCP
 
         public override void Send(uint rpcId, long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
+            if (IsDisposed || _isInnerDispose)
+            {
+                message?.Dispose();
+                return;
+            }
+            
             _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType));
 
             if (!_isSending)
@@ -285,6 +309,7 @@ namespace Fantasy.Network.TCP
                         {
                             ReturnMemoryStream(memoryStreamBuffer);
                             _isSending = false;
+                            Dispose();
                             return;
                         }
                         
@@ -293,6 +318,7 @@ namespace Fantasy.Network.TCP
                         {
                             ReturnMemoryStream(memoryStreamBuffer);
                             _isSending = false;
+                            Dispose();
                             return;
                         }
                         
@@ -302,6 +328,7 @@ namespace Fantasy.Network.TCP
                     {
                         ReturnMemoryStream(memoryStreamBuffer);
                         _isSending = false;
+                        Dispose();
                         return;
                     }
                 }
@@ -316,10 +343,18 @@ namespace Fantasy.Network.TCP
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ReturnMemoryStream(MemoryStreamBuffer memoryStream)
         {
-            if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
+            if ((memoryStream.MemoryStreamBufferSource & MemoryStreamBufferSource.Return) == 0)
             {
-                _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
+                return;
             }
+
+            if (_isInnerDispose)
+            {
+                memoryStream.Dispose();
+                return;
+            }
+
+            _network.MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
         }
         
         private void ClearSendBuffers()
@@ -333,6 +368,14 @@ namespace Fantasy.Network.TCP
         private void OnSendCompletedHandler(object sender, SocketAsyncEventArgs asyncEventArgs)
         {
             var memoryStreamBuffer = (MemoryStreamBuffer)asyncEventArgs.UserToken;
+            var synchronizationContext = Scene?.ThreadSynchronizationContext;
+            
+            if (_isInnerDispose || synchronizationContext == null)
+            {
+                ReturnMemoryStream(memoryStreamBuffer);
+                return;
+            }
+            
             // 限制最大重试次数，防止死循环
             // 理论上一个包不应该需要超过 10000 次 partial send
             const int maxRetries = 10000;
@@ -341,10 +384,11 @@ namespace Fantasy.Network.TCP
             {
                 if (asyncEventArgs.SocketError != SocketError.Success || asyncEventArgs.BytesTransferred == 0)
                 {
-                    Scene.ThreadSynchronizationContext.Post(() =>
+                    synchronizationContext.Post(() =>
                     {
                         _isSending = false;
                         ReturnMemoryStream(memoryStreamBuffer);
+                        Dispose();
                     });
                 
                     return;
@@ -358,10 +402,11 @@ namespace Fantasy.Network.TCP
                     // 部分发送，更新 offset 继续发送剩余部分
                     var newOffset = asyncEventArgs.Offset + sent;
                     var remaining = total - sent;
-                    asyncEventArgs.SetBuffer(newOffset, remaining);
                 
                     try
                     {
+                        asyncEventArgs.SetBuffer(newOffset, remaining);
+                        
                         if (_socket.SendAsync(asyncEventArgs))
                         {
                             return;  // 继续异步发送，等待下次回调
@@ -371,17 +416,18 @@ namespace Fantasy.Network.TCP
                     }
                     catch
                     {
-                        Scene.ThreadSynchronizationContext.Post(() =>
+                        synchronizationContext.Post(() =>
                         {
                             _isSending = false;
                             ReturnMemoryStream(memoryStreamBuffer);
+                            Dispose();
                         });
                         return;
                     }
                 }
                 
                 // 当前 buffer 发送完整，归还并继续下一个
-                Scene.ThreadSynchronizationContext.Post(() =>
+                synchronizationContext.Post(() =>
                 {
                     ReturnMemoryStream(memoryStreamBuffer);
                 
@@ -401,7 +447,8 @@ namespace Fantasy.Network.TCP
             
             // 如果达到最大重试次数，记录错误并断开连接
             Log.Error($"OnSendCompleted exceeded max retries ({maxRetries}), possible infinite loop. Disconnecting.");
-            Scene.ThreadSynchronizationContext.Post(() =>
+            
+            synchronizationContext.Post(() =>
             {
                 ReturnMemoryStream(memoryStreamBuffer);
                 _isSending = false;

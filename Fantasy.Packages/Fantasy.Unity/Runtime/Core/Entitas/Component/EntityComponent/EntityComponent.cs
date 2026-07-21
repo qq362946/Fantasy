@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Fantasy.Assembly;
 using Fantasy.Async;
+using System.Threading.Tasks;
 using Fantasy.DataStructure.Dictionary;
 using Fantasy.Entitas.Interface;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
@@ -99,6 +100,9 @@ namespace Fantasy.Entitas
         /// <returns>返回初始化后的EntityComponent实例</returns>
         internal async FTask<EntityComponent> Initialize()
         {
+            // 保证程序集加载失败时，半初始化的 Scene 仍能安全执行销毁流程。
+            _destroySystems = _destroySystemMerger.GetFrozenDictionary();
+            
             await AssemblyLifecycle.Add(this);
             return this;
         }
@@ -109,62 +113,67 @@ namespace Fantasy.Entitas
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
         /// <returns>异步任务</returns>
-        public FTask OnLoad(AssemblyManifest assemblyManifest)
+        public Task OnLoad(AssemblyManifest assemblyManifest)
         {
-            var task = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-            Scene?.ThreadSynchronizationContext.Post(() =>
-            {
-                var entitySystemRegistrar = assemblyManifest.EntitySystemRegistrar;
 
-                _awakeSystemMerger.Add(
-                    assemblyManifestId,
-                    entitySystemRegistrar.AwakeTypeHandles(),
-                    entitySystemRegistrar.AwakeHandles()
-                );
-                _updateSystemMerger.Add(
-                    assemblyManifestId,
-                    entitySystemRegistrar.UpdateTypeHandles(),
-                    entitySystemRegistrar.UpdateHandles()
-                );
-                _destroySystemMerger.Add(
-                    assemblyManifestId,
-                    entitySystemRegistrar.DestroyTypeHandles(),
-                    entitySystemRegistrar.DestroyHandles()
-                );
-                _deserializeSystemMerger.Add(
-                    assemblyManifestId,
-                    entitySystemRegistrar.DeserializeTypeHandles(),
-                    entitySystemRegistrar.DeserializeHandles()
-                );
-                _transferOutSystemMerger.Add(
-                    assemblyManifestId,
-                    entitySystemRegistrar.TransferOutTypeHandles(),
-                    entitySystemRegistrar.TransferOutHandles()
+            return AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
+                {
+                    var entitySystemRegistrar = assemblyManifest.EntitySystemRegistrar;
+
+                    _awakeSystemMerger.Add(
+                        assemblyManifestId,
+                        entitySystemRegistrar.AwakeTypeHandles(),
+                        entitySystemRegistrar.AwakeHandles()
                     );
-                _transferInSystemMerger.Add(
-                    assemblyManifestId,
-                    entitySystemRegistrar.TransferInTypeHandles(),
-                    entitySystemRegistrar.TransferInHandles()
-                );
 
-                _awakeSystems = _awakeSystemMerger.GetFrozenDictionary();
-                _updateSystems = _updateSystemMerger.GetFrozenDictionary();
-                _destroySystems = _destroySystemMerger.GetFrozenDictionary();
-                _deserializeSystems = _deserializeSystemMerger.GetFrozenDictionary();
-                _transferOutSystems = _transferOutSystemMerger.GetFrozenDictionary();
-                _transferInSystems = _transferInSystemMerger.GetFrozenDictionary();
+                    _updateSystemMerger.Add(
+                        assemblyManifestId,
+                        entitySystemRegistrar.UpdateTypeHandles(),
+                        entitySystemRegistrar.UpdateHandles()
+                    );
+
+                    _destroySystemMerger.Add(
+                        assemblyManifestId,
+                        entitySystemRegistrar.DestroyTypeHandles(),
+                        entitySystemRegistrar.DestroyHandles()
+                    );
+
+                    _deserializeSystemMerger.Add(
+                        assemblyManifestId,
+                        entitySystemRegistrar.DeserializeTypeHandles(),
+                        entitySystemRegistrar.DeserializeHandles()
+                    );
+
+                    _transferOutSystemMerger.Add(
+                        assemblyManifestId,
+                        entitySystemRegistrar.TransferOutTypeHandles(),
+                        entitySystemRegistrar.TransferOutHandles()
+                    );
+
+                    _transferInSystemMerger.Add(
+                        assemblyManifestId,
+                        entitySystemRegistrar.TransferInTypeHandles(),
+                        entitySystemRegistrar.TransferInHandles()
+                    );
+
+                    _awakeSystems = _awakeSystemMerger.GetFrozenDictionary();
+                    _updateSystems = _updateSystemMerger.GetFrozenDictionary();
+                    _destroySystems = _destroySystemMerger.GetFrozenDictionary();
+                    _deserializeSystems = _deserializeSystemMerger.GetFrozenDictionary();
+                    _transferOutSystems = _transferOutSystemMerger.GetFrozenDictionary();
+                    _transferInSystems = _transferInSystemMerger.GetFrozenDictionary();
 #if FANTASY_UNITY
-                _lateUpdateSystemMerger.Add(
+                    _lateUpdateSystemMerger.Add(
                     assemblyManifestId,
                     entitySystemRegistrar.LateUpdateTypeHandles(),
                     entitySystemRegistrar.LateUpdateHandles()
                 );
-                _lateUpdateSystems = _lateUpdateSystemMerger.GetFrozenDictionary();
+                    _lateUpdateSystems = _lateUpdateSystemMerger.GetFrozenDictionary();
 #endif
-                task.SetResult();
-            });
-            return task;
+                });
         }
         
         /// <summary>
@@ -172,76 +181,76 @@ namespace Fantasy.Entitas
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
         /// <returns>异步任务</returns>
-        public FTask OnUnload(AssemblyManifest assemblyManifest)
+        public Task OnUnload(AssemblyManifest assemblyManifest)
         {
-            var task = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-            Scene?.ThreadSynchronizationContext.Post(() =>
-            {
-                if (_awakeSystemMerger.Remove(assemblyManifestId))
-                {
-                    _awakeSystems = _awakeSystemMerger.GetFrozenDictionary();
-                }
-                
-                if(_updateSystemMerger.Remove(assemblyManifestId))
-                {
-                    _updateSystems = _updateSystemMerger.GetFrozenDictionary();
-                }
 
-                if (_destroySystemMerger.Remove(assemblyManifestId))
+            return AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
                 {
-                    _destroySystems = _destroySystemMerger.GetFrozenDictionary();
-                }
-
-                if (_deserializeSystemMerger.Remove(assemblyManifestId))
-                {
-                    _deserializeSystems = _deserializeSystemMerger.GetFrozenDictionary();
-                }
-                
-                if (_transferOutSystemMerger.Remove(assemblyManifestId))
-                {
-                    _transferOutSystems = _transferOutSystemMerger.GetFrozenDictionary();
-                }
-                
-                if (_transferInSystemMerger.Remove(assemblyManifestId))
-                {
-                    _transferInSystems = _transferInSystemMerger.GetFrozenDictionary();
-                }
-                
-#if FANTASY_UNITY
-                if(_lateUpdateSystemMerger.Remove(assemblyManifestId))
-                {
-                    _lateUpdateSystems = _lateUpdateSystemMerger.GetFrozenDictionary();
-                }
-#endif
-                // 清理更新队列中已失效的节点（系统被卸载后，对应实体的更新系统不再存在）
-                var node = _updateQueue.First;
-                while (node != null)
-                {
-                    var next = node.Next;
-                    if (!_updateSystems.ContainsKey(node.Value.RuntimeTypeHandle))
+                    if (_awakeSystemMerger.Remove(assemblyManifestId))
                     {
-                        _updateQueue.Remove(node);
-                        _updateNodes.Remove(node.Value.RunTimeId);
+                        _awakeSystems = _awakeSystemMerger.GetFrozenDictionary();
                     }
-                    node = next;
-                }
+                
+                    if(_updateSystemMerger.Remove(assemblyManifestId))
+                    {
+                        _updateSystems = _updateSystemMerger.GetFrozenDictionary();
+                    }
+
+                    if (_destroySystemMerger.Remove(assemblyManifestId))
+                    {
+                        _destroySystems = _destroySystemMerger.GetFrozenDictionary();
+                    }
+
+                    if (_deserializeSystemMerger.Remove(assemblyManifestId))
+                    {
+                        _deserializeSystems = _deserializeSystemMerger.GetFrozenDictionary();
+                    }
+                
+                    if (_transferOutSystemMerger.Remove(assemblyManifestId))
+                    {
+                        _transferOutSystems = _transferOutSystemMerger.GetFrozenDictionary();
+                    }
+                
+                    if (_transferInSystemMerger.Remove(assemblyManifestId))
+                    {
+                        _transferInSystems = _transferInSystemMerger.GetFrozenDictionary();
+                    }
+                
 #if FANTASY_UNITY
-            var lateNode = _lateUpdateQueue.First;
-            while (lateNode != null)
-            {
-                var next = lateNode.Next;
-                if (!_lateUpdateSystems.ContainsKey(lateNode.Value.RuntimeTypeHandle))
-                {
-                    _lateUpdateQueue.Remove(lateNode);
-                    _lateUpdateNodes.Remove(lateNode.Value.RunTimeId);
-                }
-                lateNode = next;
-            }
+                    if(_lateUpdateSystemMerger.Remove(assemblyManifestId))
+                    {
+                        _lateUpdateSystems = _lateUpdateSystemMerger.GetFrozenDictionary();
+                    }
 #endif
-                task.SetResult();
-            });
-            return task;
+                    // 清理更新队列中已失效的节点（系统被卸载后，对应实体的更新系统不再存在）
+                    var node = _updateQueue.First;
+                    while (node != null)
+                    {
+                        var next = node.Next;
+                        if (!_updateSystems.ContainsKey(node.Value.RuntimeTypeHandle))
+                        {
+                            _updateQueue.Remove(node);
+                            _updateNodes.Remove(node.Value.RunTimeId);
+                        }
+                        node = next;
+                    }
+#if FANTASY_UNITY
+                    var lateNode = _lateUpdateQueue.First;
+                    while (lateNode != null)
+                    {
+                        var next = lateNode.Next;
+                        if (!_lateUpdateSystems.ContainsKey(lateNode.Value.RuntimeTypeHandle))
+                        {
+                            _lateUpdateQueue.Remove(lateNode);
+                            _lateUpdateNodes.Remove(lateNode.Value.RunTimeId);
+                        }
+                        lateNode = next;
+                    }
+#endif
+                });
         }
 
         #endregion

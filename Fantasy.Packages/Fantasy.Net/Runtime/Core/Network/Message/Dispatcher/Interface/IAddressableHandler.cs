@@ -37,12 +37,14 @@ public abstract class Addressable<TEntity, TMessage> : IAddressMessageHandler wh
         if (addressMessage is not TMessage tAddressMessage)
         {
             Log.Error($"Message type conversion error: {addressMessage.GetType().FullName} to {typeof(TMessage).Name}");
+            ((IMessage)addressMessage).Dispose();
             return;
         }
 
         if (entity is not TEntity tEntity)
         {
             Log.Error($"{this.GetType().Name} Addressable type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
+            tAddressMessage.Dispose();
             return;
         }
 
@@ -61,8 +63,8 @@ public abstract class Addressable<TEntity, TMessage> : IAddressMessageHandler wh
         }
         finally
         {
-            session.Send(MessageObjectPool<AddressResponse>.Rent(), rpcId);
             tAddressMessage.Dispose();
+            session.Send(MessageObjectPool<AddressResponse>.Rent(), rpcId);
         }
     }
 
@@ -107,6 +109,7 @@ public abstract class AddressableRPC<TEntity, TAddressRequest, TAddressResponse>
         {
             Log.Error(
                 $"Message type conversion error: {routeMessage.GetType().FullName} to {typeof(TAddressRequest).Name}");
+            ((IMessage)routeMessage).Dispose();
             return;
         }
 
@@ -114,6 +117,7 @@ public abstract class AddressableRPC<TEntity, TAddressRequest, TAddressResponse>
         {
             Log.Error(
                 $"{this.GetType().Name} Addressable type conversion error: {entity.GetType().Name} to {typeof(TEntity).Name}");
+            tAddressRequest.Dispose();
             return;
         }
 
@@ -128,12 +132,6 @@ public abstract class AddressableRPC<TEntity, TAddressRequest, TAddressResponse>
             }
 
             isReply = true;
-
-            if (session.IsDisposed)
-            {
-                return;
-            }
-
             session.Send(response, rpcId);
         }
 
@@ -149,12 +147,16 @@ public abstract class AddressableRPC<TEntity, TAddressRequest, TAddressResponse>
             }
 
             Log.Error($"SceneConfigId:{session.Scene.SceneConfigId} ProcessConfigId:{scene.Process.Id} SceneType:{scene.SceneType} EntityId {tEntity.Id} : Error {e}");
-            response.ErrorCode = InnerErrorCode.ErrRpcFail;
+            
+            if (!isReply)
+            {
+                response.ErrorCode = InnerErrorCode.ErrRpcFail;
+            }
         }
         finally
         {
-            Reply();
             tAddressRequest.Dispose();
+            Reply();
         }
     }
 

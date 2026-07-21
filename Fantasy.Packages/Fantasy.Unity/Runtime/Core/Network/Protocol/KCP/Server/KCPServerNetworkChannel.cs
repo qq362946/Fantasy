@@ -31,15 +31,28 @@ namespace Fantasy.Network.KCP
 
         public KCPServerNetworkChannel(KCPServerNetwork network, uint channelId, IPEndPoint ipEndPoint) : base(network, channelId, ipEndPoint)
         {
-            _kcpServerNetwork = network;
-            _packetHeadLength =
-                _kcpServerNetwork.NetworkTarget == NetworkTarget.Inner
-                    ? Packet.InnerPacketHeadLength
-                    : Packet.OuterPacketHeadLength;
-            ChannelId = channelId;
-            _maxSndWnd = network.Settings.MaxSendWindowSize;
-            Kcp = KCPFactory.Create(network.Settings, ChannelId, KcpSpanCallback);
-            _packetParser = PacketParserFactory.CreateBufferPacketParser(network);
+            try
+            {
+                _kcpServerNetwork = network;
+                _packetHeadLength =
+                    _kcpServerNetwork.NetworkTarget == NetworkTarget.Inner
+                        ? Packet.InnerPacketHeadLength
+                        : Packet.OuterPacketHeadLength;
+                ChannelId = channelId;
+                _maxSndWnd = network.Settings.MaxSendWindowSize;
+                Kcp = KCPFactory.Create(
+                    network.Settings,
+                    ChannelId,
+                    KcpSpanCallback);
+                _packetParser =
+                    PacketParserFactory.CreateBufferPacketParser(network);
+            }
+            catch
+            {
+                Kcp?.Dispose();
+                base.Dispose();
+                throw;
+            }
         }
 
         public override void Dispose()
@@ -78,7 +91,7 @@ namespace Fantasy.Network.KCP
                 return;
             }
             
-            _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
+            _kcpServerNetwork.AddUpdateChannel(ChannelId);
 
             while (!IsDisposed)
             {
@@ -135,6 +148,7 @@ namespace Fantasy.Network.KCP
         {
             if (IsDisposed)
             {
+                message?.Dispose();
                 return;
             }
 
@@ -162,16 +176,25 @@ namespace Fantasy.Network.KCP
             {
                 buffer = _packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType);
                 packetLength = (int)buffer.Position;
+                
+                var maxPacketLength = (long)Kcp.MaximumSegmentSize * byte.MaxValue;
+
+                if (packetLength > maxPacketLength)
+                {
+                    throw new InvalidOperationException(
+                        $"KCP packet length {packetLength} exceeds the maximum {maxPacketLength} bytes.");
+                }
+                
                 sendCount = Kcp.Send(buffer.GetBuffer().AsSpan(0, packetLength));
 
                 if (sendCount == packetLength)
                 {
-                    _kcpServerNetwork.AddUpdateChannel(ChannelId, 0);
+                    _kcpServerNetwork.AddUpdateChannel(ChannelId);
                 }
             }
             finally
             {
-                if (buffer != null && MemoryStreamBufferSource.Return.HasFlag(buffer.MemoryStreamBufferSource))
+                if (buffer != null && (buffer.MemoryStreamBufferSource & MemoryStreamBufferSource.Return) != 0)
                 {
                     _kcpServerNetwork.MemoryStreamBufferPool.ReturnMemoryStream(buffer);
                 }

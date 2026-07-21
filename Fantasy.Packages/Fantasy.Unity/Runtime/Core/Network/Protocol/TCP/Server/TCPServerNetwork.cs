@@ -89,34 +89,59 @@ namespace Fantasy.Network.TCP
 
         private void OnAcceptComplete(SocketAsyncEventArgs asyncEventArgs)
         {
-            if (asyncEventArgs.AcceptSocket == null)
-            {
-                return;
-            }
-
-            if (asyncEventArgs.SocketError != SocketError.Success)
-            {
-                Log.Error($"Socket Accept Error: {_acceptAsync.SocketError}");
-                return;
-            }
+            var acceptSocket = asyncEventArgs.AcceptSocket;
+            TCPServerNetworkChannel channel = null;
 
             try
             {
+                if (IsDisposed)
+                {
+                    return;
+                }
+
+                if (asyncEventArgs.SocketError != SocketError.Success)
+                {
+                    Log.Error($"Socket Accept Error: {asyncEventArgs.SocketError}");
+                    return;
+                }
+
+                if (acceptSocket == null)
+                {
+                    return;
+                }
+
                 uint channelId;
                 do
                 {
                     channelId = 0xC0000000 | (uint)_random.Next();
                 } while (_connectionChannel.ContainsKey(channelId));
 
-                _connectionChannel.Add(channelId, new TCPServerNetworkChannel(this, asyncEventArgs.AcceptSocket, channelId));
+                channel = new TCPServerNetworkChannel(this, acceptSocket, channelId);
+                acceptSocket = null;
+                _connectionChannel.Add(channelId, channel);
+                channel.Start();
             }
             catch (Exception e)
             {
+                channel?.Dispose();
                 Log.Error(e);
             }
             finally
             {
-                AcceptAsync();
+                acceptSocket?.Dispose();
+
+                var synchronizationContext = Scene?.ThreadSynchronizationContext;
+
+                if (!IsDisposed && synchronizationContext != null)
+                {
+                    synchronizationContext.Post(() =>
+                    {
+                        if (!IsDisposed)
+                        {
+                            AcceptAsync();
+                        }
+                    });
+                }
             }
         }
 
@@ -139,29 +164,34 @@ namespace Fantasy.Network.TCP
 
         private void OnCompleted(object sender, SocketAsyncEventArgs asyncEventArgs)
         {
-            switch (asyncEventArgs.LastOperation)
+            if (asyncEventArgs.LastOperation != SocketAsyncOperation.Accept)
             {
-                case SocketAsyncOperation.Accept:
-                {
-                    try
-                    {
-                        Scene.ThreadSynchronizationContext.Post(() =>
-                        {
-                            OnAcceptComplete(asyncEventArgs);
-                        });
-                    }
-                    catch
-                    {
-                        // ignored
-                    }
+                throw new Exception($"Socket Accept Error: {asyncEventArgs.LastOperation}");
+            }
 
-                    break;
-                }
-                default:
+            try
+            {
+                var synchronizationContext = Scene?.ThreadSynchronizationContext;
+
+                if (synchronizationContext != null)
                 {
-                    throw new Exception($"Socket Accept Error: {asyncEventArgs.LastOperation}");
+                    synchronizationContext.Post(() =>
+                    {
+                        OnAcceptComplete(asyncEventArgs);
+                    });
+
+                    return;
                 }
             }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+            
+            // Scene 已经销毁或投递失败，由网络线程接管并释放 Socket。
+            var acceptSocket = asyncEventArgs.AcceptSocket;
+            asyncEventArgs.AcceptSocket = null;
+            acceptSocket?.Dispose();
         }
 
         #endregion

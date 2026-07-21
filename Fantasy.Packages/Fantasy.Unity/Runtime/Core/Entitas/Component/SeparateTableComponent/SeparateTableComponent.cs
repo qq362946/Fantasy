@@ -7,6 +7,7 @@ using Fantasy.Database;
 using Fantasy.DataStructure.Collection;
 using Fantasy.DataStructure.Dictionary;
 using Fantasy.Entitas;
+using System.Threading.Tasks;
 // ReSharper disable SuspiciousTypeConversion.Global
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 // ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
@@ -41,6 +42,17 @@ namespace Fantasy.SeparateTable
         /// </summary>
         private readonly TypeHandleMergerFrozenOneToManyDic<RuntimeTypeHandle, (Type EntityType, string TableName)> _separateMerger = new();
         
+        public override void Dispose()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            AssemblyLifecycle.Remove(this);
+            base.Dispose();
+        }
+        
         #region AssemblyManifest
 
         /// <summary>
@@ -65,7 +77,7 @@ namespace Fantasy.SeparateTable
         /// </remarks>
         /// <exception cref="ArgumentNullException">当 assemblyManifest 为 null 时抛出。</exception>
         /// <exception cref="InvalidOperationException">当 Scene 或 SeparateTableRegistrar 为 null 时抛出。</exception>
-        public async FTask OnLoad(AssemblyManifest assemblyManifest)
+        public async Task OnLoad(AssemblyManifest assemblyManifest)
         {
             if (assemblyManifest == null)
             {
@@ -83,12 +95,11 @@ namespace Fantasy.SeparateTable
                 throw new InvalidOperationException($"SeparateTableRegistrar is null in assembly {assemblyManifest.Assembly.FullName}");
             }
 
-            var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
 
-            Scene.ThreadSynchronizationContext.Post(() =>
-            {
-                try
+            await AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
                 {
                     _separateMerger.Add(
                         assemblyManifestId,
@@ -99,16 +110,7 @@ namespace Fantasy.SeparateTable
 
                     // 重新生成冻结字典以获得最佳查找性能
                     _separateTables = _separateMerger.GetFrozenDictionary();
-
-                    tcs.SetResult();
-                }
-                catch (Exception ex)
-                {
-                    tcs.SetException(ex);
-                }
-            });
-
-            await tcs;
+                }).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -122,7 +124,7 @@ namespace Fantasy.SeparateTable
         /// </remarks>
         /// <exception cref="ArgumentNullException">当 assemblyManifest 为 null 时抛出。</exception>
         /// <exception cref="InvalidOperationException">当 Scene 为 null 时抛出。</exception>
-        public async FTask OnUnload(AssemblyManifest assemblyManifest)
+        public async Task OnUnload(AssemblyManifest assemblyManifest)
         {
             if (assemblyManifest == null)
             {
@@ -135,27 +137,17 @@ namespace Fantasy.SeparateTable
                 // throw new InvalidOperationException("Scene is null, cannot unregister separate table information");
             }
 
-            var task = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
 
-            Scene.ThreadSynchronizationContext.Post(() =>
-            {
-                try
+            await AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
                 {
                     if (_separateMerger.Remove(assemblyManifestId))
                     {
                         _separateTables = _separateMerger.GetFrozenDictionary();
                     }
-
-                    task.SetResult();
-                }
-                catch (Exception ex)
-                {
-                    task.SetException(ex);
-                }
-            });
-
-            await task;
+                }).ConfigureAwait(false);
         }
 
         #endregion

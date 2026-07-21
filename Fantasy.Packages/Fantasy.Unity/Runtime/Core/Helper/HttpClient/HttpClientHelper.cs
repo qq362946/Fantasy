@@ -190,7 +190,7 @@ namespace Fantasy.Http
                     // ReSharper disable once NotResolvedInText
                     throw new ArgumentNullException("header.Value");
                 }
-
+                
                 request.Headers.Add(header.Key, header.Value);
             }
         }

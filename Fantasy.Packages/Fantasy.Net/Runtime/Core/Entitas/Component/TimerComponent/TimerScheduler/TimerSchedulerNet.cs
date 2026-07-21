@@ -16,6 +16,7 @@ namespace Fantasy.Timer
     public sealed class TimerSchedulerNet
     {
         private readonly Scene _scene;
+        private bool _isDisposed;
         private long _idGenerator;
         private long _minTime; // 最小时间
         private readonly Queue<long> _timeOutTime = new Queue<long>();
@@ -42,8 +43,8 @@ namespace Fantasy.Timer
         /// </summary>
         public void Update()
         {
-            if (_timeId.Count == 0)
-            { 
+            if (_isDisposed || _timeId.Count == 0)
+            {
                 return;
             }
             
@@ -70,13 +71,13 @@ namespace Fantasy.Timer
             while (_timeOutTime.TryDequeue(out var time))
             {
                 var timerIds = _timeId[time];
+                
                 for (var i = 0; i < timerIds.Count; ++i)
                 {
                     _timeOutTimerIds.Enqueue(timerIds[i]);
                 }
-
-                _timeId.Remove(time);
-                // _timeId.RemoveKey(time);
+                
+                _timeId.RemoveKey(time);
             }
             
             if (_timeId.Count == 0)
@@ -92,45 +93,57 @@ namespace Fantasy.Timer
                     continue;
                 }
 
-                // 根据计时器类型执行不同的操作
-                switch (timerAction.TimerType)
+                try
                 {
-                    case TimerType.OnceWaitTimer:
+                    // 根据计时器类型执行不同的操作
+                    switch (timerAction.TimerType)
                     {
-                        var tcs = (FTask<bool>)timerAction.Callback;
-                        tcs.SetResult(true);
-                        break;
-                    }
-                    case TimerType.OnceTimer:
-                    {
-                        if (timerAction.Callback is not Action action)
+                        case TimerType.OnceWaitTimer:
                         {
-                            Log.Error($"timerAction {timerAction.ToJson()}");
+                            var tcs = (FTask<bool>)timerAction.Callback;
+                            tcs.SetResult(true);
                             break;
                         }
+                        case TimerType.OnceTimer:
+                        {
+                            if (timerAction.Callback is not Action action)
+                            {
+                                Log.Error($"timerAction {timerAction.ToJson()}");
+                                break;
+                            }
 
-                        action();
-                        break;
-                    }
-                    case TimerType.RepeatedTimer:
-                    {
-                        if (timerAction.Callback is not Action action)
-                        {
-                            Log.Error($"timerAction {timerAction.ToJson()}");
+                            action();
                             break;
                         }
-                        
-                        timerAction.StartTime = Now();
-                        AddTimer(ref timerAction);
-                        action();
-                        break;
+                        case TimerType.RepeatedTimer:
+                        {
+                            if (timerAction.Callback is not Action action)
+                            {
+                                Log.Error($"timerAction {timerAction.ToJson()}");
+                                break;
+                            }
+
+                            timerAction.StartTime = Now();
+                            AddTimer(ref timerAction);
+                            action();
+                            break;
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
                 }
             }
         }
         
         private void AddTimer(ref TimerAction timer)
         {
+            if (_isDisposed)
+            {
+                throw new ObjectDisposedException(nameof(TimerSchedulerNet));
+            }
+            
             var tillTime = timer.StartTime + timer.TriggerTime;
             _timeId.Add(tillTime, timer.TimerId);
             _timerActions.Add(timer.TimerId, timer);
@@ -154,7 +167,7 @@ namespace Fantasy.Timer
                 return true;
             }
             
-            if (cancellationToken?.IsCancel == true)
+            if (_isDisposed || cancellationToken?.IsCancel == true)
             {
                 return false;
             }
@@ -208,7 +221,7 @@ namespace Fantasy.Timer
                 return true;
             }
             
-            if (cancellationToken?.IsCancel == true)
+            if (_isDisposed || cancellationToken?.IsCancel == true)
             {
                 return false;
             }
@@ -404,7 +417,51 @@ namespace Fantasy.Timer
         /// <param name="timerId">计时器的 ID。</param>
         public bool Remove(long timerId)
         {
-            return timerId != 0 && _timerActions.Remove(timerId, out _);
+            if (timerId == 0 || !_timerActions.Remove(timerId, out var timerAction))
+            {
+                return false;
+            }
+            
+            _timeId.RemoveValue(
+                timerAction.StartTime + timerAction.TriggerTime,
+                timerId);
+
+            return true;
+        }
+        
+        public void Dispose()
+        {
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            _isDisposed = true;
+
+            var waitTasks = new List<FTask<bool>>();
+
+            foreach (var timerAction in _timerActions.Values)
+            {
+                if (timerAction.TimerType == TimerType.OnceWaitTimer)
+                {
+                    waitTasks.Add((FTask<bool>)timerAction.Callback);
+                }
+            }
+
+            // 先切断任务、Action和闭包引用，隔离同步continuation重入。
+            _timerActions.Clear();
+
+            foreach (var waitTask in waitTasks)
+            {
+                try
+                {
+                    waitTask.SetResult(false);
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+            }
         }
     }
 }

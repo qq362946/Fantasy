@@ -98,7 +98,7 @@ public sealed class Roaming : Entity
     /// <returns></returns>
     internal async FTask SetForwardSessionAddress(long forwardSessionAddress)
     {
-        var response = await Scene.NetworkMessagingComponent.Call(
+        using var response = await Scene.NetworkMessagingComponent.Call(
             TargetSceneAddress,
             new I_SetForwardSessionAddressRequest()
             {
@@ -122,7 +122,7 @@ public sealed class Roaming : Entity
     /// <returns></returns>
     internal async FTask StopForwarding()
     {
-        var response = await Scene.NetworkMessagingComponent.Call(
+        using var response = await Scene.NetworkMessagingComponent.Call(
             TargetSceneAddress,
             new I_StopForwardingRequest()
             {
@@ -143,7 +143,7 @@ public sealed class Roaming : Entity
     /// <returns></returns>
     internal async FTask<uint> Disconnect()
     {
-        var response =
+        using var response =
             await Scene.NetworkMessagingComponent.Call(TargetSceneAddress, new I_UnLinkRoamingRequest()
             {
                 RoamingId = SessionRoamingComponent!.Id, DisposeRoaming = true

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Collection;
@@ -44,22 +45,21 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     /// </summary>
     /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
     /// <returns>异步任务</returns>
-    public async FTask OnLoad(AssemblyManifest assemblyManifest)
+    public Task OnLoad(AssemblyManifest assemblyManifest)
     {
-        var tcs = FTask.Create(false);
         var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-        
-        Scene?.ThreadSynchronizationContext.Post(() =>
-        {
-            var sphereEventRegistrar = assemblyManifest.SphereEventRegistrar;
-            _sphereEventMerger.Add(
-                assemblyManifestId,
-                sphereEventRegistrar.TypeHashCodes(),
-                sphereEventRegistrar.SphereEvent());
-            _sphereEvents = _sphereEventMerger.GetFrozenDictionary();
-            tcs.SetResult();
-        });
-        await tcs;
+
+        return AssemblyLifecycle.RunOnContext(
+            Scene.ThreadSynchronizationContext,
+            () =>
+            {
+                var sphereEventRegistrar = assemblyManifest.SphereEventRegistrar;
+                _sphereEventMerger.Add(
+                    assemblyManifestId,
+                    sphereEventRegistrar.TypeHashCodes(),
+                    sphereEventRegistrar.SphereEvent());
+                _sphereEvents = _sphereEventMerger.GetFrozenDictionary();
+            });
     }
 
     /// <summary>
@@ -67,21 +67,19 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     /// </summary>
     /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
     /// <returns>异步任务</returns>
-    public async FTask OnUnload(AssemblyManifest assemblyManifest)
+    public Task OnUnload(AssemblyManifest assemblyManifest)
     {
-        var tcs = FTask.Create(false);
         var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-        
-        Scene?.ThreadSynchronizationContext.Post(() =>
-        {
-            if (_sphereEventMerger.Remove(assemblyManifestId))
+
+        return AssemblyLifecycle.RunOnContext(
+            Scene.ThreadSynchronizationContext,
+            () =>
             {
-                _sphereEvents = _sphereEventMerger.GetFrozenDictionary();
-            }
-            
-            tcs.SetResult();
-        });
-        await tcs;
+                if (_sphereEventMerger.Remove(assemblyManifestId))
+                {
+                    _sphereEvents = _sphereEventMerger.GetFrozenDictionary();
+                }
+            });
     }
 
     #endregion
@@ -121,7 +119,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     {
         using (await _localSphereEventLock.Wait(typeHashCode))
         {
-            var response = await Scene.NetworkMessagingComponent.Call(address, new I_SubscribeSphereEventRequest()
+            using var response = await Scene.NetworkMessagingComponent.Call(address, new I_SubscribeSphereEventRequest()
             {
                 Address = Scene.Address,
                 TypeHashCode = typeHashCode
@@ -162,7 +160,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
         {
             if (sendRemote)
             {
-                var response = await Scene.NetworkMessagingComponent.Call(address,
+                using var response = await Scene.NetworkMessagingComponent.Call(address,
                     new I_UnsubscribeSphereEventRequest()
                     {
                         Address = Scene.Address,
@@ -188,6 +186,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     internal async FTask<uint> HandleRemotePublication(long address, SphereEventArgs eventArgs)
     {
         var eventArgsTypeHashCode = eventArgs.TypeHashCode;
+        List<Func<Scene, SphereEventArgs, FTask>> sphereEvents;
 
         using (await _localSphereEventLock.Wait(eventArgsTypeHashCode))
         {
@@ -200,30 +199,30 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
 
             // 获取该事件类型的所有本地处理器
             // 如果没有注册任何处理器，直接返回成功（这是正常情况，可能还未注册处理器）
-            if (!_sphereEvents.TryGetValue(eventArgsTypeHashCode, out var sphereEvents))
+            if (!_sphereEvents.TryGetValue(eventArgsTypeHashCode, out sphereEvents))
             {
                 return InnerErrorCode.Success;
             }
-        
-            // 并发调用所有订阅了该事件的本地处理器
-            using var tasks = ListPool<FTask>.Create();
-
-            foreach (var @event in sphereEvents)
-            {
-                try
-                {
-                    tasks.Add(@event(Scene, eventArgs));
-                }
-                catch (Exception e)
-                {
-                    Log.Error(e);
-                }
-            }
-
-            // 等待所有事件处理器执行完成
-            await FTask.WaitAll(tasks);
-            return InnerErrorCode.Success;
         }
+
+        // 并发调用所有订阅了该事件的本地处理器
+        using var tasks = ListPool<FTask>.Create();
+
+        foreach (var @event in sphereEvents)
+        {
+            try
+            {
+                tasks.Add(@event(Scene, eventArgs));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
+
+        // 等待所有事件处理器执行完成
+        await FTask.WaitAll(tasks);
+        return InnerErrorCode.Success;
     }
 
     #endregion
@@ -289,7 +288,7 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     {
         using (await _remoteSphereEventLock.Wait(typeHashCode))
         {
-            var response = await Scene.NetworkMessagingComponent.Call(fromAddress,
+            using var response = await Scene.NetworkMessagingComponent.Call(fromAddress,
                 new I_RevokeRemoteSubscriberRequest()
                 {
                     Address = Scene.Address,
@@ -312,31 +311,42 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
     /// <param name="isAutoDisposed">是否自动释放事件参数</param>
     public async FTask PublishToRemoteSubscribers(SphereEventArgs sphereEventArgs, bool isAutoDisposed)
     {
-        var typeHashCode = sphereEventArgs.TypeHashCode;
-
-        using (await _remoteSphereEventLock.Wait(typeHashCode))
+        try
         {
-            if (!_remoteSubscribers.TryGetValue(typeHashCode, out var subscribers))
+            var typeHashCode = sphereEventArgs.TypeHashCode;
+
+            using (await _remoteSphereEventLock.Wait(typeHashCode))
             {
-                return;
-            }
-        
-            var address = Scene.Address;
-        
-            foreach (var subscriber in subscribers)
-            {
-                var response = await Scene.NetworkMessagingComponent.Call(subscriber,
-                    new I_PublishSphereEventRequest()
-                    {
-                        Address = address,
-                        SphereEventArgs = sphereEventArgs
-                    });
-                if (response.ErrorCode != 0)
+                if (!_remoteSubscribers.TryGetValue(typeHashCode, out var subscribers))
                 {
-                    Log.Error($"SphereEventComponent PublishToRemoteSubscribers failed with errorCode {response.ErrorCode}");
+                    return;
+                }
+                
+                // RegisterRemoteSubscriber不获取协程锁。
+                // 必须在第一次await前生成快照，避免原HashSet在异步枚举期间被修改。
+                using var subscriberSnapshot = ListPool<long>.Create();
+                subscriberSnapshot.AddRange(subscribers);
+        
+                var address = Scene.Address;
+        
+                foreach (var subscriber in subscriberSnapshot)
+                {
+                    using var response = await Scene.NetworkMessagingComponent.Call(subscriber,
+                        new I_PublishSphereEventRequest()
+                        {
+                            Address = address,
+                            SphereEventArgs = sphereEventArgs
+                        });
+                    
+                    if (response.ErrorCode != 0)
+                    {
+                        Log.Error($"SphereEventComponent PublishToRemoteSubscribers failed with errorCode {response.ErrorCode}");
+                    }
                 }
             }
-        
+        }
+        finally
+        {
             if (isAutoDisposed)
             {
                 sphereEventArgs.Dispose();
@@ -402,8 +412,17 @@ public sealed class SphereEventComponent : Entity, IAssemblyLifecycle
         {
             return;
         }
-        await Close();
-        base.Dispose();
+        
+        AssemblyLifecycle.Remove(this);
+
+        try
+        {
+            await Close();
+        }
+        finally
+        {
+            base.Dispose();
+        }
     }
 }
 

@@ -89,7 +89,9 @@ namespace Fantasy.Scheduler
     {
         public override FTask Scheduler(Session session, APackInfo packInfo)
         {
-            throw new NotSupportedException($"ClientMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}");
+            var protocolCode = packInfo.ProtocolCode;
+            packInfo.Dispose();
+            throw new NotSupportedException($"ClientMessageScheduler Received unsupported message protocolCode:{protocolCode}");
         }
     }
 #endif

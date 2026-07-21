@@ -60,12 +60,17 @@ namespace Fantasy.Network.Route
 
         internal void Send<T>(T message)  where T : IAddressableMessage
         {
-            Call<T>(message).Coroutine();
+            SendAsync(message).Coroutine();
+        }
+        
+        private async FTask SendAsync<T>(T message) where T : IAddressableMessage
+        {
+            using var response = await Call(message);
         }
 
-        internal async FTask Send(Type requestType,APackInfo packInfo)
+        internal async FTask Send(Type requestType, APackInfo packInfo)
         {
-            await Call(requestType, packInfo);
+            using var response = await Call(requestType, packInfo);
         }
 
         internal async FTask<IResponse> Call(Type requestType, APackInfo packInfo)
@@ -117,13 +122,23 @@ namespace Fantasy.Network.Route
                                     return iRouteResponse;
                                 }
 
-                                await TimerComponent.Net.WaitAsync(100);
+                                try
+                                {
+                                    await TimerComponent.Net.WaitAsync(100);
+                                }
+                                catch
+                                {
+                                    iRouteResponse.Dispose();
+                                    throw;
+                                }
 
                                 if (runtimeId != RuntimeId)
                                 {
                                     iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
+                                    return iRouteResponse;
                                 }
 
+                                iRouteResponse.Dispose();
                                 AddressableAddress = 0;
                                 continue;
                             }
@@ -137,10 +152,10 @@ namespace Fantasy.Network.Route
             }
             finally
             {
+                packInfo.IsDisposed = false;
                 packInfo.Dispose();
             }
-
-
+            
             return iRouteResponse;
         }
 
@@ -150,65 +165,100 @@ namespace Fantasy.Network.Route
         /// <param name="request">可寻址路由请求。</param>
         private async FTask<IResponse> Call<T>(T request) where T : IAddressableMessage
         {
+            var protocolCode = request.OpCode();
+            
             if (IsDisposed)
             {
-                return MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoute);
+                request.Dispose();
+                return MessageDispatcherComponent.CreateResponse(protocolCode, InnerErrorCode.ErrNotFoundRoute);
             }
 
             var failCount = 0;
             var runtimeId = RuntimeId;
+            var requestType = typeof(T);
+            var networkMessagingComponent = NetworkMessagingComponent;
+            var buffer = networkMessagingComponent.Pack(request);
 
-            using (await AddressableRouteLock.Wait(AddressableId, "AddressableRouteComponent Call"))
+            try
             {
-                while (true)
+                using (await AddressableRouteLock.Wait(AddressableId, "AddressableRouteComponent Call"))
                 {
-                    if (AddressableAddress == 0)
+                    while (true)
                     {
-                        AddressableAddress = await AddressableHelper.GetAddressableAddress(Scene, AddressableId);
-                    }
-
-                    if (AddressableAddress == 0)
-                    {
-                        return MessageDispatcherComponent.CreateResponse(request.OpCode(), InnerErrorCode.ErrNotFoundRoute);
-                    }
-
-                    var iRouteResponse = await NetworkMessagingComponent.Call(AddressableAddress, request);
-
-                    if (runtimeId != RuntimeId)
-                    {
-                        iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
-                    }
-
-                    switch (iRouteResponse.ErrorCode)
-                    {
-                        case InnerErrorCode.ErrNotFoundRoute:
+                        if (AddressableAddress == 0)
                         {
-                            if (++failCount > 20)
+                            AddressableAddress = await AddressableHelper.GetAddressableAddress(Scene, AddressableId);
+                        }
+
+                        if (AddressableAddress == 0)
+                        {
+                            return MessageDispatcherComponent.CreateResponse(
+                                protocolCode,
+                                InnerErrorCode.ErrNotFoundRoute);
+                        }
+
+                        var iRouteResponse = await networkMessagingComponent.Call(
+                            AddressableAddress,
+                            requestType,
+                            protocolCode,
+                            buffer);
+
+                        if (runtimeId != RuntimeId)
+                        {
+                            iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
+                            return iRouteResponse;
+                        }
+
+                        switch (iRouteResponse.ErrorCode)
+                        {
+                            case InnerErrorCode.ErrNotFoundRoute:
                             {
-                                Log.Error($"AddressableRouteComponent.Call failCount > 20 route send message fail, Address: {Address} AddressableRouteComponent:{Id}");
+                                if (++failCount > 20)
+                                {
+                                    Log.Error(
+                                        $"AddressableRouteComponent.Call failCount > 20 " +
+                                        $"route send message fail, Address: {Address} " +
+                                        $"AddressableRouteComponent:{Id}");
+
+                                    return iRouteResponse;
+                                }
+
+                                try
+                                {
+                                    await TimerComponent.Net.WaitAsync(500);
+                                }
+                                catch
+                                {
+                                    iRouteResponse.Dispose();
+                                    throw;
+                                }
+
+                                if (runtimeId != RuntimeId)
+                                {
+                                    iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
+                                    return iRouteResponse;
+                                }
+
+                                iRouteResponse.Dispose();
+                                AddressableAddress = 0;
+                                continue;
+                            }
+                            case InnerErrorCode.ErrRouteTimeout:
+                            {
                                 return iRouteResponse;
                             }
-
-                            await TimerComponent.Net.WaitAsync(500);
-
-                            if (runtimeId != RuntimeId)
+                            default:
                             {
-                                iRouteResponse.ErrorCode = InnerErrorCode.ErrRouteTimeout;
+                                return iRouteResponse;
                             }
+                        }
 
-                            AddressableAddress = 0;
-                            continue;
-                        }
-                        case InnerErrorCode.ErrRouteTimeout:
-                        {
-                            return iRouteResponse;
-                        }
-                        default:
-                        {
-                            return iRouteResponse;
-                        }
                     }
                 }
+            }
+            finally
+            {
+                networkMessagingComponent.MemoryStreamBufferPool.ReturnMemoryStream(buffer);
             }
         }
     }

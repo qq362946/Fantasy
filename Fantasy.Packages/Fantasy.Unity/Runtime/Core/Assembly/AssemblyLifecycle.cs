@@ -1,6 +1,7 @@
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using Fantasy.Async;
+using System.Threading.Tasks;
 using Fantasy.DataStructure.Collection;
 
 namespace Fantasy.Assembly
@@ -23,6 +24,33 @@ namespace Fantasy.Assembly
         /// </summary>
         private static readonly ConcurrentHashSet<IAssemblyLifecycle> AssemblyLifecycles = new();
 #endif
+        
+        internal static Task RunOnContext(ThreadSynchronizationContext context, Action action)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            var taskCompletionSource = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+
+            context.Post(() =>
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception e)
+                {
+                    taskCompletionSource.SetException(e);
+                    return;
+                }
+
+                taskCompletionSource.SetResult(true);
+            });
+
+            return taskCompletionSource.Task;
+        }
 
         /// <summary>
         /// 触发程序集加载事件
@@ -30,14 +58,16 @@ namespace Fantasy.Assembly
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象</param>
         /// <returns>异步任务</returns>
-        internal static async FTask OnLoad(AssemblyManifest assemblyManifest)
+        internal static async Task OnLoad(AssemblyManifest assemblyManifest)
         {
-            List<FTask> loadTasks = new();
+            List<Task> loadTasks = new();
+            
             foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
                 loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
-            await FTask.WaitAll(loadTasks);
+            
+            await Task.WhenAll(loadTasks).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -46,15 +76,31 @@ namespace Fantasy.Assembly
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象</param>
         /// <returns>异步任务</returns>
-        internal static async FTask OnUnLoad(AssemblyManifest assemblyManifest)
+        internal static async Task OnUnLoad(AssemblyManifest assemblyManifest)
         {
-            List<FTask> unloadTasks = new();
+            List<Task> unloadTasks = new();
+            
             foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
-                unloadTasks.Add(assemblyLifecycle.OnUnload(assemblyManifest));
+                unloadTasks.Add(RunOnUnload(assemblyLifecycle));
             }
-            await FTask.WaitAll(unloadTasks);
+            
+            await Task.WhenAll(unloadTasks).ConfigureAwait(false);
             assemblyManifest.Clear();
+            
+            async Task RunOnUnload(IAssemblyLifecycle assemblyLifecycle)
+            {
+                try
+                {
+                    await assemblyLifecycle
+                        .OnUnload(assemblyManifest)
+                        .ConfigureAwait(false);
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+            }
         }
 
         /// <summary>
@@ -62,19 +108,21 @@ namespace Fantasy.Assembly
         /// 添加后会立即对所有已加载的程序集触发 Load 回调
         /// </summary>
         /// <param name="assemblyLifecycle">实现 IAssemblyLifecycle 接口的生命周期回调对象</param>
-        public static async FTask Add(IAssemblyLifecycle assemblyLifecycle)
+        public static async Task Add(IAssemblyLifecycle assemblyLifecycle)
         {
 #if FANTASY_WEBGL
             AssemblyLifecycles.Add(assemblyLifecycle);
 #else
             AssemblyLifecycles.TryAdd(assemblyLifecycle);
 #endif
-            List<FTask> loadTasks = new();
+            List<Task> loadTasks = new();
+
             foreach (var (_, assemblyManifest) in AssemblyManifest.Manifests)
             {
                 loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
-            await FTask.WaitAll(loadTasks);
+
+            await Task.WhenAll(loadTasks).ConfigureAwait(false);
         }
 
         /// <summary>

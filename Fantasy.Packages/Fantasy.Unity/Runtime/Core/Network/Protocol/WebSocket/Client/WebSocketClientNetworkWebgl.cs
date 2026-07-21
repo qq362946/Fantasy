@@ -51,7 +51,14 @@ namespace Fantasy.Network.WebSocket
                 }
             
                 _packetParser.Dispose();
-                _messageCache.Clear();
+
+                while (_messageCache.TryDequeue(out var memoryStream))
+                {
+                    if ((memoryStream.MemoryStreamBufferSource & MemoryStreamBufferSource.Return) != 0)
+                    {
+                        memoryStream.Dispose();
+                    }
+                }
                 
                 if (_connectDisconnectEvent)
                 {
@@ -109,7 +116,7 @@ namespace Fantasy.Network.WebSocket
 
         private void OnNetworkConnectComplete(object sender, OpenEventArgs e)
         {
-            if (IsDisposed)
+            if (IsDisposed || _isInnerDispose)
             {
                 return;
             }
@@ -128,6 +135,11 @@ namespace Fantasy.Network.WebSocket
 
         private void OnReceiveComplete(object sender, MessageEventArgs e)
         {
+            if (IsDisposed || _isInnerDispose)
+            {
+                return;
+            }
+
             try
             {
                 // WebSocket 协议已经在协议层面处理了消息的边界问题，因此不需要额外的粘包处理逻辑。
@@ -154,8 +166,9 @@ namespace Fantasy.Network.WebSocket
 
         public override void Send(uint rpcId, long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType)
         {
-            if (IsDisposed)
+            if (IsDisposed || _isInnerDispose)
             {
+                message?.Dispose();
                 return;
             }
 
@@ -174,7 +187,7 @@ namespace Fantasy.Network.WebSocket
         {
             _webSocket.SendAsync(memoryStream.GetBuffer(), 0, (int)memoryStream.Position);
 #if !UNITY_EDITOR && UNITY_WEBGL
-            if (MemoryStreamBufferSource.Return.HasFlag(memoryStream.MemoryStreamBufferSource))
+            if ((memoryStream.MemoryStreamBufferSource & MemoryStreamBufferSource.Return) != 0)
             {
                 MemoryStreamBufferPool.ReturnMemoryStream(memoryStream);
             }

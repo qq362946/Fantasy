@@ -46,6 +46,7 @@ namespace Fantasy.Scheduler
         {
             if (session.IsDisposed)
             {
+                packInfo.Dispose();
                 return;
             }
             
@@ -83,6 +84,7 @@ namespace Fantasy.Scheduler
                     catch (Exception e)
                     {
                         Log.Error($"ANetworkMessageScheduler OuterResponse error messageProtocolCode:{packInfo.ProtocolCode} messageType:{messageType} SessionId {session.Id} IsDispose {session.IsDisposed} {e}");
+                        session.Dispose();
                     }
                     finally
                     {
@@ -93,6 +95,8 @@ namespace Fantasy.Scheduler
                 }
                 case OpCodeType.OuterResponse:
                 {
+                    // 这里服务器几乎不会执行到这里。
+                    // 考虑未来，所以暂时先实现这个分支。
                     using (packInfo)
                     {
                         var messageType = MessageDispatcherComponent.GetOpCodeType(packInfo.ProtocolCode);
@@ -167,6 +171,10 @@ namespace Fantasy.Scheduler
                         {
                             var responseType = MessageDispatcherComponent.GetOpCodeType(response.OpCode());
                             session.Send(response, responseType, rpcId);
+                        }
+                        else
+                        {
+                            response.Dispose();
                         }
                     }
                     finally
@@ -266,6 +274,10 @@ namespace Fantasy.Scheduler
                             var responseType = MessageDispatcherComponent.GetOpCodeType(response.OpCode());
                             session.Send(response, responseType, rpcId);
                         }
+                        else
+                        {
+                            response.Dispose();
+                        }
                     }
                     finally
                     {
@@ -354,6 +366,10 @@ namespace Fantasy.Scheduler
                             var responseType = MessageDispatcherComponent.GetOpCodeType(response.OpCode());
                             session.Send(response, responseType, rpcId);
                         }
+                        else
+                        {
+                            response.Dispose();
+                        }
                     }
                     finally
                     {
@@ -368,8 +384,9 @@ namespace Fantasy.Scheduler
                 default:
                 {
                     var ipAddress = session.IsDisposed ? "null" : session.RemoteEndPoint.ToString();
+                    var protocolCode = packInfo.ProtocolCode;
                     packInfo.Dispose();
-                    throw new NotSupportedException($"OuterMessageScheduler Received unsupported message protocolCode:{packInfo.ProtocolCode}\n1、请检查该协议所在的程序集是否在框架初始化的时候添加到框架中。\n2、如果看到这个消息表示你有可能用的老版本的导出工具，请更换为最新的导出工具。\n IP地址:{ipAddress}");
+                    throw new NotSupportedException($"OuterMessageScheduler Received unsupported message protocolCode:{protocolCode}\n1、请检查该协议所在的程序集是否在框架初始化的时候添加到框架中。\n2、如果看到这个消息表示你有可能用的老版本的导出工具，请更换为最新的导出工具。\n IP地址:{ipAddress}");
                 }
             }
         }

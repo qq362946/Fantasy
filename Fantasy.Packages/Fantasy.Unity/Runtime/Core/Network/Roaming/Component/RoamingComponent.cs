@@ -1,6 +1,7 @@
 #if FANTASY_NET
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Fantasy.DataStructure.Collection;
 using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Timer;
@@ -89,33 +90,72 @@ public sealed class RoamingComponent : Entity
     /// </summary>
     public override void Dispose()
     {
-        if (_isInnerDisposed)
-        {
-            return;
-        }
-        
-        _isInnerDisposed =  true;
-        
-        foreach (var (_,taskId) in _delayRemoveTaskId)
-        {
-            _timerSchedulerNet.Remove(taskId);
-        }
-        
-        _delayRemoveTaskId.Clear();
-        _timerSchedulerNet = null;
         DisposeAsync().Coroutine();
     }
 
     private async FTask DisposeAsync()
     {
-        foreach (var (_, sessionRoamingComponent) in _sessionRoamingComponents)
+        if (IsDisposed)
         {
-            await sessionRoamingComponent.UnLinkAll();
-            sessionRoamingComponent.Dispose();
+            return;
         }
-        
+
+        try
+        {
+            await Close();
+        }
+        finally
+        {
+            base.Dispose();
+        }
+    }
+    
+    /// <summary>
+    /// 关闭并清理所有漫游连接。
+    /// Scene关闭时必须等待此方法完成后再销毁网络组件。
+    /// </summary>
+    internal async FTask Close()
+    {
+        if (_isInnerDisposed)
+        {
+            return;
+        }
+
+        _isInnerDisposed = true;
+
+        foreach (var (_, taskId) in _delayRemoveTaskId)
+        {
+            _timerSchedulerNet.Remove(taskId);
+        }
+
+        _delayRemoveTaskId.Clear();
+        _timerSchedulerNet = null;
+
+        using var sessionRoamingComponents = ListPool<SessionRoamingComponent>.Create();
+
+        sessionRoamingComponents.AddRange(_sessionRoamingComponents.Values);
+
+        // 先摘除，避免异步续体再次取得正在关闭的组件。
         _sessionRoamingComponents.Clear();
-        base.Dispose();
+
+        foreach (var sessionRoamingComponent in sessionRoamingComponents)
+        {
+            try
+            {
+                await sessionRoamingComponent.UnLinkAll();
+            }
+            catch (Exception e)
+            {
+                // 一个Session断链失败不能阻断其余Session。
+                Log.Error(
+                    $"SessionRoamingComponent UnLinkAll failed, " +
+                    $"roamingId:{sessionRoamingComponent.Id} {e}");
+            }
+            finally
+            {
+                sessionRoamingComponent.Dispose();
+            }
+        }
     }
 
     /// <summary>

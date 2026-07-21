@@ -114,9 +114,7 @@ namespace Fantasy.PacketParser
                     Pack(ref rpcId, ref address, memoryStream);
             }
             
-            memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
-            PackMemoryStream(ref rpcId, ref address, message, messageType, memoryStream);
-            return memoryStream;
+            return RentAndPack(ref rpcId, ref address, message, messageType);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -150,44 +148,45 @@ namespace Fantasy.PacketParser
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void PackMemoryStream(ref uint rpcId, ref long address, IMessage message, Type messageType, MemoryStreamBuffer memoryStream)
         {
-            var memoryStreamLength = 0;
-            var opCode = message.OpCode();
-            OpCodeIdStruct opCodeIdStruct = opCode;
-            memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
+            try
+            {
+                var opCode = message.OpCode();
+                OpCodeIdStruct opCodeIdStruct = opCode;
+                memoryStream.Seek(Packet.InnerPacketHeadLength, SeekOrigin.Begin);
 
-            if (SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream, out var error))
-            {
-                memoryStreamLength = (int)memoryStream.Position;
+                if (!SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream, out var error))
+                {
+                    throw new NotSupportedException($"type:{messageType} {error}");
+                }
+                
+                var memoryStreamLength = (int)memoryStream.Position;
+                var packetBodyCount = memoryStreamLength - Packet.InnerPacketHeadLength;
+        
+                if (packetBodyCount == 0)
+                {
+                    // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
+                    // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
+                    packetBodyCount = -1;
+                }
+        
+                if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
+                {
+                    // 检查消息体长度是否超出限制
+                    throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
+                }
+                
+                var buffer = memoryStream.GetBuffer();
+                ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+        
+                Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), address);
             }
-            else
+            finally
             {
-                Log.Error($"type:{messageType} {error}");
+                message.Dispose();
             }
-            
-            var packetBodyCount = memoryStreamLength - Packet.InnerPacketHeadLength;
-            
-            if (packetBodyCount == 0)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packetBodyCount = -1;
-            }
-            
-            if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
-            {
-                // 检查消息体长度是否超出限制
-                throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
-            }
-
-            var buffer = memoryStream.GetBuffer();
-            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
-            
-            Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), address);
-            
-            message.Dispose();
         }
     }
 #endif
@@ -256,9 +255,7 @@ namespace Fantasy.PacketParser
                 return Pack(ref rpcId, memoryStream);
             }
             
-            memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack);
-            PackMemoryStream(ref rpcId, ref address, message, messageType, memoryStream);
-            return memoryStream;
+            return RentAndPack(ref rpcId, ref address, message, messageType);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -271,52 +268,55 @@ namespace Fantasy.PacketParser
             ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
 #endif
             Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRpcIdLocation), rpcId);
+            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), 0L);
             return memoryStream;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void PackMemoryStream(ref uint rpcId, ref long address, IMessage message, Type messageType, MemoryStreamBuffer memoryStream)
         {
-            var memoryStreamLength = 0;
-            var opCode = message.OpCode();
-            OpCodeIdStruct opCodeIdStruct = opCode;
-            memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-            
-            if (SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream, out var error))
+            try
             {
-                memoryStreamLength = (int)memoryStream.Position;
-            }
-            else
-            {
-                Log.Error($"type:{messageType} {error}");
-            }
-            
-            // var opCode = Scene.MessageDispatcherComponent.GetOpCode(messageType);
-            var packetBodyCount = memoryStreamLength - Packet.OuterPacketHeadLength;
-            
-            if (packetBodyCount == 0)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packetBodyCount = -1;
-            }
-            
-            if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
-            {
-                // 检查消息体长度是否超出限制
-                throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
-            }
-
-            var buffer = memoryStream.GetBuffer();
+                var opCode = message.OpCode();
+                OpCodeIdStruct opCodeIdStruct = opCode;
+                memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
+                
+                if (!SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream, out var error))
+                {
+                    throw new NotSupportedException($"type:{messageType} {error}");
+                }
+                
+                var memoryStreamLength = (int)memoryStream.Position;
+                var packetBodyCount = memoryStreamLength - Packet.OuterPacketHeadLength;
+        
+                if (packetBodyCount == 0)
+                {
+                    // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
+                    // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
+                    packetBodyCount = -1;
+                }
+        
+                if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
+                {
+                    // 检查消息体长度是否超出限制
+                    throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
+                }
+                
+                var buffer = memoryStream.GetBuffer();
 #if FANTASY_UNITY
-            ref var bufferRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
+        ref var bufferRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
 #else
-            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+                ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
 #endif   
-            Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
-            message.Dispose();
+                Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), 0L);
+            }
+            finally
+            {
+                message.Dispose();
+            }
         }
     }
     /// <summary>
@@ -384,9 +384,7 @@ namespace Fantasy.PacketParser
                 return Pack(ref rpcId, memoryStream);
             }
             
-            memoryStream = Network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.UnPack);
-            PackMemoryStream(ref rpcId, ref address, message, messageType, memoryStream);
-            return memoryStream;
+            return RentAndPack(ref rpcId, ref address, message, messageType);
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -399,51 +397,57 @@ namespace Fantasy.PacketParser
 #if FANTASY_UNITY
             MemoryMarshal.Write(buffer.Slice(Packet.OuterPacketRpcIdLocation, sizeof(uint)), ref rpcId);
 #endif
+            buffer.Slice(
+                Packet.InnerPacketRouteAddressLocation,
+                Packet.PacketAddressLength).Clear();
             return memoryStream;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void PackMemoryStream(ref uint rpcId, ref long address, IMessage message, Type messageType, MemoryStreamBuffer memoryStream)
         {
-            var memoryStreamLength = 0;
-            var opCode = message.OpCode();
-            OpCodeIdStruct opCodeIdStruct = opCode;
-            memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
-            
-            if (SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream, out var error))
+            try
             {
-                memoryStreamLength = (int)memoryStream.Position;
-            }
-            else
-            {
-                Log.Error($"type:{messageType} {error}");
-            }
+                var opCode = message.OpCode();
+                OpCodeIdStruct opCodeIdStruct = opCode;
+                memoryStream.Seek(Packet.OuterPacketHeadLength, SeekOrigin.Begin);
             
-            var packetBodyCount = memoryStreamLength - Packet.OuterPacketHeadLength;
-            
-            if (packetBodyCount == 0)
-            {
-                // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
-                // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
-                packetBodyCount = -1;
-            }
-            
-            if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
-            {
-                // 检查消息体长度是否超出限制
-                throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
-            }
-            
-            var buffer = memoryStream.GetBuffer();
+                if (!SerializerManager.TrySerialize(opCodeIdStruct.OpCodeProtocolType, messageType, message, memoryStream, out var error))
+                {
+                    throw new NotSupportedException($"type:{messageType} {error}");
+                }
+                
+                var memoryStreamLength = (int)memoryStream.Position;
+                var packetBodyCount = memoryStreamLength - Packet.OuterPacketHeadLength;
+        
+                if (packetBodyCount == 0)
+                {
+                    // protoBuf做了一个优化、就是当序列化的对象里的属性和字段都为默认值的时候就不会序列化任何东西。
+                    // 为了TCP的分包和粘包、需要判定下是当前包数据不完整还是本应该如此、所以用-1代表。
+                    packetBodyCount = -1;
+                }
+        
+                if (packetBodyCount < -1 || packetBodyCount > ProgramDefine.MaxMessageSize)
+                {
+                    // 检查消息体长度是否超出限制
+                    throw new Exception($"Message content exceeds {ProgramDefine.MaxMessageSize} bytes");
+                }
+                
+                var buffer = memoryStream.GetBuffer();
 #if FANTASY_UNITY
-            ref var bufferRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
+        ref var bufferRef = ref MemoryMarshal.GetReference(buffer.AsSpan());
 #else
-            ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
+                ref var bufferRef = ref MemoryMarshal.GetArrayDataReference(buffer);
 #endif 
-            Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
-            Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
-            message.Dispose();
+                Unsafe.WriteUnaligned(ref bufferRef, packetBodyCount);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.PacketLength), opCode);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.OuterPacketRpcIdLocation), rpcId);
+                Unsafe.WriteUnaligned(ref Unsafe.Add(ref bufferRef, Packet.InnerPacketRouteAddressLocation), 0L);
+            }
+            finally
+            {
+                message.Dispose();
+            }
         }
     }
 }

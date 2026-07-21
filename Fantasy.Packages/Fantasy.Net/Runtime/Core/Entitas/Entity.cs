@@ -990,7 +990,15 @@ namespace Fantasy.Entitas
             {
                 foreach (var (_, entity) in Tree)
                 {
-                    entity.Dispose();
+                    try
+                    {
+                        entity.Dispose();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(
+                            $"Entity child {entity.GetType().FullName} dispose failed.\n{e}");
+                    }
                 }
                 
                 Tree.Dispose();
@@ -1001,7 +1009,15 @@ namespace Fantasy.Entitas
             {
                 foreach (var (_, entity) in Multi)
                 {
-                    entity.Dispose();
+                    try
+                    {
+                        entity.Dispose();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error(
+                            $"Entity child {entity.GetType().FullName} dispose failed.\n{e}");
+                    }
                 }
 
                 Multi.Dispose();

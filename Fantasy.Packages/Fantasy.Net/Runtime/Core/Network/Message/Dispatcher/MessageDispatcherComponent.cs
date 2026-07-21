@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Fantasy.Assembly;
 using Fantasy.Async;
@@ -65,77 +66,78 @@ namespace Fantasy.Network.Interface
             return this;
         }
 
-        public async FTask OnLoad(AssemblyManifest assemblyManifest)
+        public Task OnLoad(AssemblyManifest assemblyManifest)
         {
-            var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-            
-            Scene?.ThreadSynchronizationContext.Post(() =>
-            {
-                // 注册Handler
-                var messageHandlerResolver = assemblyManifest.MessageHandlerResolver;
-                _messageHandlerMerger.Add(
-                    assemblyManifestId,
-                    messageHandlerResolver.MessageHandlerOpCodes(),
-                    messageHandlerResolver.MessageHandlers());
-                _messageHandlerDictionary = _messageHandlerMerger.GetFrozenDictionary();
-                // 注册OpCode
-                var opCodeResolver = assemblyManifest.OpCodeRegistrar;
-                _opCodeMerger.Add(
-                    assemblyManifestId,
-                    opCodeResolver.TypeOpCodes(),
-                    opCodeResolver.OpCodeTypes());
-                _opCodeDictionary = _opCodeMerger.GetFrozenDictionary();
+
+            return AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
+                {
+                    // 注册Handler
+                    var messageHandlerResolver = assemblyManifest.MessageHandlerResolver;
+                    _messageHandlerMerger.Add(
+                        assemblyManifestId,
+                        messageHandlerResolver.MessageHandlerOpCodes(),
+                        messageHandlerResolver.MessageHandlers());
+                    _messageHandlerDictionary = _messageHandlerMerger.GetFrozenDictionary();
+
+                    // 注册OpCode
+                    var opCodeResolver = assemblyManifest.OpCodeRegistrar;
+                    _opCodeMerger.Add(
+                        assemblyManifestId,
+                        opCodeResolver.TypeOpCodes(),
+                        opCodeResolver.OpCodeTypes());
+                    _opCodeDictionary = _opCodeMerger.GetFrozenDictionary();
 #if FANTASY_NET
-                _customRouteMerger.Add(
-                    assemblyManifestId,
-                    opCodeResolver.CustomRouteTypeOpCodes(),
-                    opCodeResolver.CustomRouteTypes());
-                _customRouteDictionary = _customRouteMerger.GetFrozenDictionary();
-                
-                _routeMessageHandlerMerger.Add(
-                    assemblyManifestId,
-                    messageHandlerResolver.AddressMessageHandlerOpCodes(),
-                    messageHandlerResolver.AddressMessageHandler());
-                _routeMessageHandlerDictionary = _routeMessageHandlerMerger.GetFrozenDictionary();
+                    _customRouteMerger.Add(
+                        assemblyManifestId,
+                        opCodeResolver.CustomRouteTypeOpCodes(),
+                        opCodeResolver.CustomRouteTypes());
+                    _customRouteDictionary = _customRouteMerger.GetFrozenDictionary();
+            
+                    _routeMessageHandlerMerger.Add(
+                        assemblyManifestId,
+                        messageHandlerResolver.AddressMessageHandlerOpCodes(),
+                        messageHandlerResolver.AddressMessageHandler());
+                    _routeMessageHandlerDictionary =
+                        _routeMessageHandlerMerger.GetFrozenDictionary();
 #endif
-                // 注册ResponseType
-                var responseTypeRegistrar = assemblyManifest.ResponseTypeRegistrar;
-                _responseTypeMerger.Add(
-                    assemblyManifest.AssemblyManifestId,
-                    responseTypeRegistrar.OpCodes(),
-                    responseTypeRegistrar.Types());
-                _responseTypeDictionary = _responseTypeMerger.GetFrozenDictionary();
-                
-                tcs.SetResult();
-            });
-            await tcs;
+                    // 注册ResponseType
+                    var responseTypeRegistrar = assemblyManifest.ResponseTypeRegistrar;
+                    _responseTypeMerger.Add(
+                        assemblyManifestId,
+                        responseTypeRegistrar.OpCodes(),
+                        responseTypeRegistrar.Types());
+                    _responseTypeDictionary = _responseTypeMerger.GetFrozenDictionary();
+                });
         }
 
-        public async FTask OnUnload(AssemblyManifest assemblyManifest)
+        public Task OnUnload(AssemblyManifest assemblyManifest)
         {
-            var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-            
-            Scene?.ThreadSynchronizationContext.Post(() =>
-            {
-                _opCodeMerger.Remove(assemblyManifestId);
-                _responseTypeMerger.Remove(assemblyManifestId);
-                _messageHandlerMerger.Remove(assemblyManifestId);
 
-                _opCodeDictionary = _opCodeMerger.GetFrozenDictionary();
-                _responseTypeDictionary = _responseTypeMerger.GetFrozenDictionary();
-                _messageHandlerDictionary = _messageHandlerMerger.GetFrozenDictionary();
+            return AssemblyLifecycle.RunOnContext(
+                Scene.ThreadSynchronizationContext,
+                () =>
+                {
+                    _opCodeMerger.Remove(assemblyManifestId);
+                    _responseTypeMerger.Remove(assemblyManifestId);
+                    _messageHandlerMerger.Remove(assemblyManifestId);
+
+                    _opCodeDictionary = _opCodeMerger.GetFrozenDictionary();
+                    _responseTypeDictionary = _responseTypeMerger.GetFrozenDictionary();
+                    _messageHandlerDictionary =
+                        _messageHandlerMerger.GetFrozenDictionary();
 #if FANTASY_NET
-                _customRouteMerger.Remove(assemblyManifestId);
-                _routeMessageHandlerMerger.Remove(assemblyManifestId);
-            
-                _customRouteDictionary = _customRouteMerger.GetFrozenDictionary();
-                _routeMessageHandlerDictionary = _routeMessageHandlerMerger.GetFrozenDictionary();
+                    _customRouteMerger.Remove(assemblyManifestId);
+                    _routeMessageHandlerMerger.Remove(assemblyManifestId);
+        
+                    _customRouteDictionary = _customRouteMerger.GetFrozenDictionary();
+                    _routeMessageHandlerDictionary =
+                        _routeMessageHandlerMerger.GetFrozenDictionary();
 #endif
-                tcs.SetResult();
-            });
-            await tcs;
+                });
         }
 
         #endregion
@@ -144,6 +146,7 @@ namespace Fantasy.Network.Interface
         {
             if (!_messageHandlerDictionary.TryGetValue(protocolCode, out var messageHandler))
             {
+                ((IMessage)message).Dispose();
                 Log.Warning($"Scene:{session.Scene.Id} Found Unhandled Message: {type.FullName}");
                 return;
             }
@@ -156,6 +159,19 @@ namespace Fantasy.Network.Interface
         {
             if (!_routeMessageHandlerDictionary.TryGetValue(protocolCode, out var messageHandler))
             {
+                var isRequest = rpcId != 0 && message is IAddressRequest;
+
+                ((IMessage)message).Dispose();
+                
+                if (isRequest)
+                {
+                    FailRouteResponse(
+                        session,
+                        protocolCode,
+                        InnerErrorCode.ErrRpcFail,
+                        rpcId);
+                }
+                
                 return false;
             }
 
@@ -182,14 +198,21 @@ namespace Fantasy.Network.Interface
             {
                 if (sessionRuntimeId != session.RuntimeId)
                 {
+                    ((IMessage)message).Dispose();
                     return;
                 }
 
                 if (runtimeId != entity.RuntimeId)
                 {
-                    if (message is IAddressRequest request)
+                    uint? requestOpCode = message is IAddressRequest request
+                        ? request.OpCode()
+                        : null;
+
+                    ((IMessage)message).Dispose();
+
+                    if (requestOpCode.HasValue)
                     {
-                        FailRouteResponse(session, request.OpCode(), InnerErrorCode.ErrEntityNotFound, rpcId);
+                        FailRouteResponse(session, requestOpCode.Value, InnerErrorCode.ErrEntityNotFound, rpcId);
                     }
                     
                     return;

@@ -20,18 +20,19 @@ namespace Fantasy.Network.Interface
         public abstract void Send(uint rpcId, long address, MemoryStreamBuffer memoryStream, IMessage message, Type messageType);
         public override void Dispose()
         {
-            IsInit = false;
-            
+            // 客户端网络资源是一次性的，Dispose 后必须重新创建实例。
+            IsInit = true;
+    
             if (Session != null)
             {
                 if (!Session.IsDisposed)
                 {
                     Session.Dispose();
                 }
-                
+        
                 Session = null;
             }
-            
+    
             base.Dispose();
         }
     }

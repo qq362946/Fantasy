@@ -7,6 +7,8 @@ namespace Fantasy
     /// </summary>
     internal static class ThreadScheduler
     {
+        private static readonly object SchedulerLock = new();
+        
         /// <summary>
         /// 主线程调度器
         /// </summary>
@@ -42,32 +44,50 @@ namespace Fantasy
             MainScheduler.Add(scene);
         }
 
-        internal static void AddToMultiThreadScheduler(Scene scene)
+        internal static ISceneScheduler AddToMultiThreadScheduler(Scene scene)
         {
-            if (MultiThreadScheduler == null)
+            lock (SchedulerLock)
             {
+                if (MultiThreadScheduler == null)
+                {
 #if FANTASY_SINGLETHREAD || FANTASY_WEBGL || UNITY_WEBGL
-                MultiThreadScheduler = MainScheduler;
+            MultiThreadScheduler = MainScheduler;
 #else
-                MultiThreadScheduler = new MultiThreadScheduler();
+                    MultiThreadScheduler = new MultiThreadScheduler();
 #endif
-            }
+                }
 
-            MultiThreadScheduler.Add(scene);
+                var scheduler = MultiThreadScheduler;
+                scheduler.Add(scene);
+                return scheduler;
+            }
         }
 
-        internal static void AddToThreadPoolScheduler(Scene scene)
+        internal static ISceneScheduler AddToThreadPoolScheduler(Scene scene)
         {
-            if (ThreadPoolScheduler == null)
+            lock (SchedulerLock)
             {
+                if (ThreadPoolScheduler == null)
+                {
 #if FANTASY_SINGLETHREAD || FANTASY_WEBGL || UNITY_WEBGL
-                ThreadPoolScheduler = MainScheduler;
+            ThreadPoolScheduler = MainScheduler;
 #else
-                ThreadPoolScheduler = new ThreadPoolScheduler();
+                    ThreadPoolScheduler = new ThreadPoolScheduler();
 #endif
+                }
+
+                var scheduler = ThreadPoolScheduler;
+                scheduler.Add(scene);
+                return scheduler;
             }
-            
-            ThreadPoolScheduler.Add(scene);
+        }
+        
+        internal static void DisposeBackgroundSchedulers()
+        {
+#if !FANTASY_WEBGL && !UNITY_WEBGL && !FANTASY_SINGLETHREAD
+            MultiThreadScheduler?.Dispose();
+            ThreadPoolScheduler?.Dispose();
+#endif
         }
     }
 }

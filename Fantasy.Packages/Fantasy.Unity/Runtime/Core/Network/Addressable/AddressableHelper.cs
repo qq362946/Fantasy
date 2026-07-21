@@ -37,7 +37,7 @@ namespace Fantasy.Network.Route
             // 获取指定索引的地址映射场景配置信息
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
             // 调用内部路由方法，发送添加地址映射的请求并等待响应
-            var response = await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
+            using var  response = await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
                 new I_AddressableAdd_Request
                 {
                     AddressableId = addressableId, Address = address, IsLock = isLock
@@ -59,7 +59,7 @@ namespace Fantasy.Network.Route
             // 获取指定索引的地址映射场景配置信息
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
             // 调用内部路由方法，发送获取地址映射路由 ID 的请求并等待响应
-            var response = (I_AddressableGet_Response) await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
+            using var  response = (I_AddressableGet_Response) await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
                 new I_AddressableGet_Request
                 {
                     AddressableId = addressableId
@@ -82,7 +82,7 @@ namespace Fantasy.Network.Route
         public static async FTask RemoveAddressable(Scene scene, long addressableId)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
-            var response = await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
+            using var  response = await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
                 new I_AddressableRemove_Request
                 {
                     AddressableId = addressableId
@@ -102,7 +102,7 @@ namespace Fantasy.Network.Route
         public static async FTask LockAddressable(Scene scene, long addressableId)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
-            var response = await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
+            using var response = await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
                 new I_AddressableLock_Request
                 {
                     AddressableId = addressableId
@@ -124,7 +124,7 @@ namespace Fantasy.Network.Route
         public static async FTask UnLockAddressable(Scene scene, long addressableId, long address, string source)
         {
             var addressableScene = AddressableScenes[(int)addressableId % AddressableScenes.Count];
-            var response = await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
+            using var response = await scene.NetworkMessagingComponent.Call(addressableScene.RunTimeId,
                 new I_AddressableUnLock_Request
                 {
                     AddressableId = addressableId,

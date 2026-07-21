@@ -118,6 +118,7 @@ namespace Fantasy.Network
                 return;
             }
 
+            packInfo.MemoryStream.Position = packInfo.MemoryStream.Length;
             Channel.Send(rpcId, address, packInfo.MemoryStream, null, messageType);
         }
 
@@ -136,6 +137,7 @@ namespace Fantasy.Network
                 return;
             }
 
+            memoryStream.Position = memoryStream.Length;
             Channel.Send(rpcId, address, memoryStream, null, messageType);
         }
 #endif
@@ -149,6 +151,13 @@ namespace Fantasy.Network
                 return;
             }
             
+            var sessionId = Id;
+            var pendingCallbacks = RequestCallback.Values.ToArray();
+            RequestCallback.Clear();
+            
+            var onDispose = OnDispose;
+            OnDispose = null;
+            
             _rpcId = 0;
             LastReceiveTime = 0;
             Channel = null;
@@ -159,22 +168,40 @@ namespace Fantasy.Network
             RouteComponent = null;
             AddressableRouteComponent = null;
 #endif
-            base.Dispose();
-
-            // 终止所有等待中的请求回调
-            foreach (var requestCallback in RequestCallback.Values.ToArray())
+            try
             {
-                requestCallback.SetException(new Exception($"session is dispose: {Id}"));
+                base.Dispose();
             }
-            
-            RequestCallback.Clear();
-            OnDispose?.Invoke();
+            finally
+            {
+                try
+                {
+                    foreach (var requestCallback in pendingCallbacks)
+                    {
+                        try
+                        {
+                            requestCallback.SetException(
+                                new Exception($"session is dispose: {sessionId}"));
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error(
+                                $"Session {sessionId} pending RPC completion callback failed: {e}");
+                        }
+                    }
+                }
+                finally
+                {
+                    onDispose?.Invoke();
+                }
+            }
         }
 
         public virtual void Send(IMessage message, Type messageType, uint rpcId = 0, long address = 0)
         {
             if (IsDisposed)
             {
+                message.Dispose();
                 return;
             }
             
@@ -191,6 +218,7 @@ namespace Fantasy.Network
         {
             if (IsDisposed)
             {
+                message.Dispose();
                 return;
             }
 
@@ -207,20 +235,34 @@ namespace Fantasy.Network
         {
             if (IsDisposed)
             {
-                return null;
+                request.Dispose();
+                
+                var disposedTask = FTask<IResponse>.Create();
+                disposedTask.SetException(new ObjectDisposedException(nameof(Session)));
+                return disposedTask;
             }
             
             var requestCallback = FTask<IResponse>.Create();
             var rpcId = ++_rpcId; 
             RequestCallback.Add(rpcId, requestCallback);
-            Send<T>(request, rpcId, address);
-            return requestCallback;
+            
+            try
+            {
+                Send<T>(request, rpcId, address);
+                return requestCallback;
+            }
+            catch
+            {
+                RequestCallback.Remove(rpcId);
+                throw;
+            }
         }
 
         internal void Receive(APackInfo packInfo)
         {
             if (IsDisposed)
             {
+                packInfo.Dispose();
                 return;
             }
 

@@ -3,6 +3,7 @@ using System.Buffers;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.DataStructure.Dictionary;
@@ -67,7 +68,7 @@ namespace Fantasy.Serialize
         /// 程序集加载时的回调
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
-        public async FTask OnLoad(AssemblyManifest assemblyManifest)
+        public async Task OnLoad(AssemblyManifest assemblyManifest)
         {
             var memoryPackEntityGenerator = assemblyManifest.MemoryPackEntityGenerator;
             memoryPackEntityGenerator.Initialize();
@@ -79,13 +80,11 @@ namespace Fantasy.Serialize
             
             if (ProgramDefine.IsAppRunning)
             {
-                var tcs = FTask.Create(false);
-                ThreadScheduler.MainScheduler.ThreadSynchronizationContext.Post(() =>
-                {
-                    InnerOnLoad(assemblyManifest.AssemblyManifestId, memoryPackEntityGenerator);
-                    tcs.SetResult();
-                });
-                await tcs;
+                await AssemblyLifecycle.RunOnContext(
+                    ThreadScheduler.MainScheduler.ThreadSynchronizationContext,
+                    () => InnerOnLoad(
+                        assemblyManifest.AssemblyManifestId,
+                        memoryPackEntityGenerator)).ConfigureAwait(false);
                 return;
             }
             
@@ -106,21 +105,21 @@ namespace Fantasy.Serialize
         /// 程序集卸载时的回调。
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
-        public FTask OnUnload(AssemblyManifest assemblyManifest)
+        public Task OnUnload(AssemblyManifest assemblyManifest)
         {
-            var tcs = FTask.Create(false);
             var assemblyManifestId = assemblyManifest.AssemblyManifestId;
-            
-            ThreadScheduler.MainScheduler.ThreadSynchronizationContext.Post(() =>
-            {
-                if (TypesMerger.Remove(assemblyManifestId))
+
+            return AssemblyLifecycle.RunOnContext(
+                ThreadScheduler.MainScheduler.ThreadSynchronizationContext,
+                () =>
                 {
-                    Interlocked.Exchange(ref _types, TypesMerger.GetFrozenDictionary());
-                }
-                tcs.SetResult();
-            });
-            
-            return tcs;
+                    if (TypesMerger.Remove(assemblyManifestId))
+                    {
+                        Interlocked.Exchange(
+                            ref _types,
+                            TypesMerger.GetFrozenDictionary());
+                    }
+                });
         }
 
         #endregion

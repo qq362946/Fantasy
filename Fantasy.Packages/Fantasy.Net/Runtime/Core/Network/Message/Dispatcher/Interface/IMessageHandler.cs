@@ -49,7 +49,13 @@ namespace Fantasy.Network.Interface
         /// <returns>异步任务。</returns>
         public async FTask Handle(Session session, uint rpcId, object message)
         {
-            var messageObject = (T)message;
+            if (message is not T messageObject)
+            {
+                Log.Error($"消息类型转换错误: {message.GetType().Name} to {typeof(T).Name}");
+                ((IMessage)message).Dispose();
+                return;
+            }
+            
             try
             {
                 await Run(session, messageObject);
@@ -99,6 +105,7 @@ namespace Fantasy.Network.Interface
             if (message is not TRequest request)
             {
                 Log.Error($"消息类型转换错误: {message.GetType().Name} to {typeof(TRequest).Name}");
+                ((IMessage)message).Dispose();
                 return;
             }
             
@@ -113,12 +120,6 @@ namespace Fantasy.Network.Interface
                 }
 
                 isReply = true;
-
-                if (session.IsDisposed)
-                {
-                    return;
-                }
-                
                 session.Send(response, rpcId);
             }
 
@@ -129,12 +130,16 @@ namespace Fantasy.Network.Interface
             catch (Exception e)
             {
                 Log.Error(e);
-                response.ErrorCode = InnerErrorCode.ErrRpcFail;
+                
+                if (!isReply)
+                {
+                    response.ErrorCode = InnerErrorCode.ErrRpcFail;
+                }
             }
             finally
             {
-                Reply();
                 request.Dispose();
+                Reply();
             }
         }
 

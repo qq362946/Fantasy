@@ -12,7 +12,12 @@ namespace Fantasy.Entitas
         
         public static EntityTreeCollection Create(bool isPool)
         {
-            return isPool ? Pool<EntityTreeCollection>.Rent() : new EntityTreeCollection();
+            var collection = isPool
+                ? Pool<EntityTreeCollection>.Rent()
+                : new EntityTreeCollection();
+
+            collection._isPool = isPool;
+            return collection;
         }
 
         public bool IsPool()

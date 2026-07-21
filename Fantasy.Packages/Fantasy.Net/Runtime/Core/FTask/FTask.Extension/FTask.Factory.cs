@@ -168,6 +168,7 @@ namespace Fantasy.Async
                 return;
             }
 
+            _value = default!;
             _callBack = null;
             _status = STaskStatus.Pending;
             caches.Push(this);

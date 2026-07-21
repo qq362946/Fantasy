@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Fantasy.Async;
+using System.Threading.Tasks;
 using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas.Interface;
 #if FANTASY_NET
@@ -136,6 +136,18 @@ namespace Fantasy.Assembly
         }
         
         #region static
+        
+        private static async Task ObserveLifecycleTask(Task task)
+        {
+            try
+            {
+                await task.ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+        }
 
 #if FANTASY_NET
         /// <summary>
@@ -208,7 +220,7 @@ namespace Fantasy.Assembly
             
             customInterfaceRegistrar.Register(manifest._customInterfaces);
             Manifests.TryAdd(assemblyManifestId, manifest);
-            AssemblyLifecycle.OnLoad(manifest).Coroutine();
+            _ = ObserveLifecycleTask(AssemblyLifecycle.OnLoad(manifest));
         }
 #endif
 #if FANTASY_UNITY
@@ -270,7 +282,7 @@ namespace Fantasy.Assembly
             Manifests.TryAdd(assemblyManifestId, manifest);
 #endif
             customInterfaceRegistrar.Register(manifest._customInterfaces);
-            AssemblyLifecycle.OnLoad(manifest).Coroutine();
+            _ = ObserveLifecycleTask(AssemblyLifecycle.OnLoad(manifest));
         }
 #endif
         /// <summary>
@@ -282,14 +294,14 @@ namespace Fantasy.Assembly
 #if FANTASY_WEBGL
             if (Manifests.TryGetValue(assemblyManifestId, out var manifest))
             {
-                AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
+                _ = ObserveLifecycleTask(AssemblyLifecycle.OnUnLoad(manifest));
                 Manifests.Remove(assemblyManifestId);
                 manifest.CustomInterfaceRegistrar.UnRegister(manifest._customInterfaces);
             }
 #else
             if (Manifests.TryRemove(assemblyManifestId, out var manifest))
             {
-                AssemblyLifecycle.OnUnLoad(manifest).Coroutine();
+                _ = ObserveLifecycleTask(AssemblyLifecycle.OnUnLoad(manifest));
                 manifest.CustomInterfaceRegistrar.UnRegister(manifest._customInterfaces);
             }
 #endif
@@ -471,11 +483,11 @@ namespace Fantasy.Assembly
         /// 卸载所有已注册的程序集，触发卸载事件，清理所有注册器和生命周期回调
         /// </summary>
         /// <returns>异步任务</returns>
-        public static async FTask Dispose()
+        public static async Task Dispose()
         {
             foreach (var (_, assemblyManifest) in Manifests)
             {
-                await AssemblyLifecycle.OnUnLoad(assemblyManifest);
+                await AssemblyLifecycle.OnUnLoad(assemblyManifest).ConfigureAwait(false);
                 assemblyManifest.Clear();
             }
             

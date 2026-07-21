@@ -1,6 +1,7 @@
 #if FANTASY_NET
 using System.Buffers;
 using System.Net;
+using System.Threading.Tasks;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Entitas;
@@ -67,7 +68,7 @@ namespace Fantasy.Serialize
         /// 程序集加载时的回调，注册所有实体类型的 BSON ClassMap。
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
-        public async FTask OnLoad(AssemblyManifest assemblyManifest)
+        public Task OnLoad(AssemblyManifest assemblyManifest)
         {
             var entityTypes = assemblyManifest.EntityTypeCollectionRegistrar.GetEntityTypes();
             
@@ -84,16 +85,16 @@ namespace Fantasy.Serialize
                 }
             }
 
-            await FTask.CompletedTask;
+            return Task.CompletedTask;
         }
 
         /// <summary>
         /// 程序集卸载时的回调。
         /// </summary>
         /// <param name="assemblyManifest">程序集清单对象，包含程序集的元数据和注册器</param>
-        public async FTask OnUnload(AssemblyManifest assemblyManifest)
+        public Task OnUnload(AssemblyManifest assemblyManifest)
         {
-            await FTask.CompletedTask;
+            return Task.CompletedTask;
         }
 
         #endregion

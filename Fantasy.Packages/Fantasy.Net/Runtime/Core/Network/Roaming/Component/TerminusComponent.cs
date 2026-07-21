@@ -1,5 +1,6 @@
 #if FANTASY_NET
 using System.Collections.Generic;
+using System.Linq;
 using Fantasy.Async;
 using Fantasy.Entitas;
 #pragma warning disable CS8601 // Possible null reference assignment.
@@ -137,6 +138,9 @@ public struct OnDisposeTerminus
 /// </summary>
 public sealed class TerminusComponent : Entity
 {
+    private bool _isClosed;
+    private bool _isDisposing;
+    
     /// <summary>
     /// 漫游终端的实体集合。Key 为 roamingId（即 Terminus.Id），Value 为 Terminus 实例。
     /// </summary>
@@ -147,13 +151,63 @@ public sealed class TerminusComponent : Entity
     /// </summary>
     public override void Dispose()
     {
-        foreach (var (_, terminus) in _terminals)
+        if (IsDisposed || _isDisposing)
         {
-            terminus.Dispose();
+            return;
         }
 
-        _terminals.Clear();
-        base.Dispose();
+        _isDisposing = true;
+        DisposeAsync().Coroutine();
+    }
+    
+    private async FTask DisposeAsync()
+    {
+        try
+        {
+            await Close();
+        }
+        finally
+        {
+            base.Dispose();
+        }
+    }
+    
+    /// <summary>
+    /// 关闭并清理当前 Scene 下的所有漫游终端。
+    /// </summary>
+    internal async FTask Close()
+    {
+        if (IsDisposed || _isClosed)
+        {
+            return;
+        }
+
+        _isClosed = true;
+        var roamingIds = _terminals.Keys.ToArray();
+
+        try
+        {
+            foreach (var roamingId in roamingIds)
+            {
+                try
+                {
+                    await RemoveTerminusAsync(
+                        DisposeTerminusType.UnLink,
+                        roamingId,
+                        true);
+                }
+                catch (Exception e)
+                {
+                    Log.Error(
+                        $"TerminusComponent Close failed, " +
+                        $"roamingId:{roamingId} {e}");
+                }
+            }
+        }
+        finally
+        {
+            _terminals.Clear();
+        }
     }
 
     /// <summary>
@@ -170,6 +224,11 @@ public sealed class TerminusComponent : Entity
     /// <returns>返回元组：(错误码, Terminus实例)。错误码为0表示成功。</returns>
     internal async FTask<(uint, Terminus)> Create(Scene scene, long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress, Entity? args)
     {
+        if (_isClosed)
+        {
+            return (InnerErrorCode.ErrRoamingDisposed, null);
+        }
+        
         if (roamingId == 0)
         {
             return (InnerErrorCode.ErrCreateTerminusInvalidRoamingId, null);
@@ -191,6 +250,13 @@ public sealed class TerminusComponent : Entity
         _terminals.Add(terminus.Id, terminus);
 
         await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, CreateTerminusType.Link, terminus, args));
+        
+        if (_isClosed ||
+            terminus.IsDisposeTerminus ||
+            terminus.IsDisposed)
+        {
+            return (InnerErrorCode.ErrRoamingDisposed, null);
+        }
         
         if (terminus.TerminusId == 0)
         {
@@ -215,6 +281,11 @@ public sealed class TerminusComponent : Entity
     /// <returns>返回元组：(错误码, Terminus实例)。错误码为0表示成功。</returns>
     internal async FTask<(uint, Terminus)> ReLink(Scene scene, long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress, Entity? args)
     {
+        if (_isClosed)
+        {
+            return (InnerErrorCode.ErrRoamingDisposed, null);
+        }
+        
         if (roamingId == 0)
         {
             return (InnerErrorCode.ErrCreateTerminusInvalidRoamingId, null);
@@ -241,6 +312,13 @@ public sealed class TerminusComponent : Entity
 
         await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, CreateTerminusType.ReLink, terminus, args));
 
+        if (_isClosed ||
+            terminus.IsDisposeTerminus ||
+            terminus.IsDisposed)
+        {
+            return (InnerErrorCode.ErrRoamingDisposed, null);
+        }
+        
         if (terminus.TerminusId == 0)
         {
             terminus.TerminusId = terminus.RuntimeId;
@@ -254,9 +332,15 @@ public sealed class TerminusComponent : Entity
     /// <para>通常用于 Terminus 传送（Transfer）完成后，在目标 Scene 中注册 Terminus。</para>
     /// </summary>
     /// <param name="terminus">要添加的漫游终端实例。</param>
-    internal void AddTerminus(Terminus terminus)
+    internal bool AddTerminus(Terminus terminus)
     {
+        if (_isClosed)
+        {
+            return false;
+        }
+
         _terminals.Add(terminus.Id, terminus);
+        return true;
     }
 
     /// <summary>
@@ -320,16 +404,19 @@ public sealed class TerminusComponent : Entity
         }
 
         var scene = terminus.Scene;
-        await scene.EventComponent.PublishAsync(new OnDisposeTerminus(scene, disposeTerminusType, terminus));
 
-        if (isDispose && !terminus.IsDisposeTerminus)
+        try
         {
-            if (terminus.IsDisposed)
+            await scene.EventComponent.PublishAsync(new OnDisposeTerminus(scene, disposeTerminusType, terminus));
+        }
+        finally
+        {
+            if (isDispose &&
+                !terminus.IsDisposeTerminus &&
+                !terminus.IsDisposed)
             {
-                return;
+                await terminus.DisposeAsync(disposeTerminusType);
             }
-            
-            await terminus.DisposeAsync(disposeTerminusType);
         }
     }
 }
