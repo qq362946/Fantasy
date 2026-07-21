@@ -218,10 +218,7 @@ namespace Fantasy
             try
             {
                 await EntityComponent.Initialize();
-                SceneUpdate = EntityComponent;
-#if FANTASY_UNITY
-            SceneLateUpdate = EntityComponent;
-#endif
+
                 EventComponent = await Create<EventComponent>(this,false,true).Initialize();
                 TimerComponent = Create<TimerComponent>(this, false, true).Initialize();
                 CoroutineLockComponent = Create<CoroutineLockComponent>(this, false, true).Initialize();
@@ -234,6 +231,10 @@ namespace Fantasy
                 RoamingComponent = Create<RoamingComponent>(this, false, true).Initialize();
                 SphereEventComponent = Create<SphereEventComponent>(this, false, true);
                 await SphereEventComponent.Initialize();
+#endif
+                SceneUpdate = EntityComponent;
+#if FANTASY_UNITY
+                SceneLateUpdate = EntityComponent;
 #endif
             }
             catch
