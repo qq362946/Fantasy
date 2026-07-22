@@ -2,6 +2,8 @@
 using System;
 using System.Net;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using Fantasy.Assembly;
 using Fantasy.Async;
 using Fantasy.Network.Interface;
@@ -79,12 +81,12 @@ namespace Fantasy.Network.HTTP
     /// <summary>
     /// HTTP服务器
     /// </summary>
-    public sealed class HTTPServerNetwork : ANetwork
+    public sealed class HTTPServerNetwork : ANetwork, IAsyncDisposable
     {
         private WebApplication? _application;
         
         /// <summary>
-        /// 初始化入口
+        /// 初始化入口 
         /// </summary>
         /// <param name="networkTarget"></param>
         /// <param name="bindIp"></param>
@@ -169,6 +171,43 @@ namespace Fantasy.Network.HTTP
             Log.Info($"SceneConfigId = {Scene.SceneConfigId} HTTPServer Listen {listenUrl}");
         }
 
+        public async ValueTask DisposeAsync()
+        {
+            if (IsDisposed)
+            {
+                return;
+            }
+
+            var application = Interlocked.Exchange(ref _application, null);
+
+            if (application == null)
+            {
+                Dispose();
+                return;
+            }
+
+            try
+            {
+                // 保留Scene同步上下文，确保最终的Entity.Dispose仍在Scene线程执行。
+                await application.StopAsync();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+
+            try
+            {
+                await application.DisposeAsync();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e);
+            }
+
+            Dispose();
+        }
+
         /// <summary>
         /// 移除Channel
         /// </summary>
@@ -186,27 +225,9 @@ namespace Fantasy.Network.HTTP
                 return;
             }
 
-            var application = _application;
-            _application = null;
-
             try
             {
-                if (application != null)
-                {
-                    application.StopAsync().GetAwaiter().GetResult();
-                }
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-
-            try
-            {
-                if (application != null)
-                {
-                    application.DisposeAsync().AsTask().GetAwaiter().GetResult();
-                }
+                ((IDisposable?)Interlocked.Exchange(ref _application, null))?.Dispose();
             }
             catch (Exception e)
             {

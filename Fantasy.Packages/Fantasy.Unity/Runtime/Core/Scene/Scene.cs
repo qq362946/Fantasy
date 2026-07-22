@@ -271,7 +271,27 @@ namespace Fantasy
                 closeException = e;
             }
 #endif
-            
+
+#if FANTASY_NET
+            // 网络自行决定是否需要异步释放，Scene不感知具体协议。
+            if (OuterNetwork is IAsyncDisposable asyncDisposable)
+            {
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                await SwitchToSceneThread();
+#endif
+                try
+                {
+                    await asyncDisposable.DisposeAsync();
+                }
+                catch (Exception e)
+                {
+                    closeException = closeException == null
+                        ? e
+                        : new AggregateException(closeException, e);
+                }
+            }
+#endif
+
 #if FANTASY_NET
             try
             {
