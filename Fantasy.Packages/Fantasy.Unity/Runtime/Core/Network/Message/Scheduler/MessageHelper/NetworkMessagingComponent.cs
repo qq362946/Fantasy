@@ -420,6 +420,9 @@ namespace Fantasy.Scheduler
             try
             {
                 await ServiceDiscovery.ResolveAddressAsync(sceneId);
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                await Scene.SwitchToSceneThread();
+#endif
 
                 if (IsDisposed || !_pendingRoutes.TryGetValue(sceneId, out var pendingRoute))
                 {

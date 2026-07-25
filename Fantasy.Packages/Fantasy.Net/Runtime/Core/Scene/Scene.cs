@@ -591,7 +591,10 @@ namespace Fantasy
             
                     return;
                 }
-                
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                await scene.SwitchToSceneThread();
+#endif
+
                 tcs.SetResult(scene);
             }
         }
@@ -672,6 +675,9 @@ namespace Fantasy
                         }
 
                         await scene.EventComponent.PublishAsync(new OnCreateScene(scene));
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                        await scene.SwitchToSceneThread();
+#endif
                         await Entry.RegisterServiceSceneAsync(scene);
                     }
                     catch (Exception e)
@@ -679,6 +685,10 @@ namespace Fantasy
                         tcs.SetException(e);
                         return;
                     }
+
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                    await scene.SwitchToSceneThread();
+#endif
 
                     tcs.SetResult(scene);
                 }
@@ -708,6 +718,10 @@ namespace Fantasy
         public static async FTask<SubScene> CreateSubScene(Scene parentScene, int sceneType,
             Func<SubScene, Scene, FTask> onSubSceneSetup = null, Func<SubScene, Scene, FTask> onSubSceneCreated = null)
         {
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            await parentScene.SwitchToSceneThread();
+#endif
+
             var tcs = FTask<SubScene>.Create(false);
             var scene = new SubScene();
             scene.Scene = scene;
@@ -735,13 +749,22 @@ namespace Fantasy
                     if (onSubSceneSetup != null)
                     {
                         await onSubSceneSetup(scene, parentScene);
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                        await scene.SwitchToSceneThread();
+#endif
                     }
 
                     await scene.EventComponent.PublishAsync(new OnCreateScene(scene));
-                    
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                    await scene.SwitchToSceneThread();
+#endif
+
                     if (onSubSceneCreated != null)
                     {
                         await onSubSceneCreated(scene, parentScene);
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                        await scene.SwitchToSceneThread();
+#endif
                     }
                     
                     await Entry.RegisterServiceSceneAsync(scene);
@@ -761,6 +784,10 @@ namespace Fantasy
                     return;
                 }
 
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+                await scene.SwitchToSceneThread();
+#endif
+
                 tcs.SetResult(scene);
             }
         }
@@ -778,7 +805,6 @@ namespace Fantasy
 #endif
                     ThreadScheduler.AddMainScheduler(scene);
                     scene.SceneScheduler = ThreadScheduler.MainScheduler;
-                    await scene.Initialize();
                     break;
                 }
                 case "MultiThread":
@@ -791,7 +817,6 @@ namespace Fantasy
                     scene.SceneLateUpdate = new EmptySceneLateUpdate();
 #endif
                     scene.SceneScheduler = ThreadScheduler.AddToMultiThreadScheduler(scene);
-                    await scene.Initialize();
                     break;
                 }
                 case "ThreadPool":
@@ -804,7 +829,6 @@ namespace Fantasy
                     scene.SceneLateUpdate = new EmptySceneLateUpdate();
 #endif
                     scene.SceneScheduler = ThreadScheduler.AddToThreadPoolScheduler(scene);
-                    await scene.Initialize();
                     break;
                 }
                 default:
@@ -815,6 +839,17 @@ namespace Fantasy
                         $"Unsupported scene runtime mode. Expected '{SceneRuntimeMode.MainThread}', '{SceneRuntimeMode.MultiThread}', or '{SceneRuntimeMode.ThreadPool}'.");
                 }
             }
+
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            await scene.SwitchToSceneThread();
+#endif
+
+            await scene.Initialize();
+
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            // FTask 不保证恢复原上下文，初始化结束后再次确认。
+            await scene.SwitchToSceneThread();
+#endif
         }
         #endregion
 
@@ -1041,6 +1076,9 @@ namespace Fantasy
             var sceneId = IdFactoryHelper.RuntimeIdTool.GetSceneId(address);
             // 仅在本地确实没有路由时访问 Control Center。
             await ServiceDiscovery.ResolveAddressAsync(sceneId);
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            await SwitchToSceneThread();
+#endif
             // 重新经过 TryGetSession，复用可能已经由其他调用创建的 Session。
             return GetSession(address);
         }
@@ -1205,7 +1243,7 @@ namespace Fantasy
         /// 切换到当前 Scene 的线程同步上下文。
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected FThreadTask SwitchToSceneThread()
+        protected internal FThreadTask SwitchToSceneThread()
         {
             var completion = FThreadTask.Create(false);
             var context = ThreadSynchronizationContext;
