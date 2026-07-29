@@ -37,3 +37,4 @@ examples/**/Unity/.vscode
 CLAUDE.md
 .claude
 Fantasy.Packages/Fantasy.Cil/Resources
+Tools/ControlCenter/data/fantasy-control.db

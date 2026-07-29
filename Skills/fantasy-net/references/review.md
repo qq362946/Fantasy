@@ -21,6 +21,7 @@
   客户端消息 Handler -> server-message-handler.md 和 server-message-handler-check.md
   日志 -> logging.md 和 logging-check.md
   服务器项目接入 -> server/setup-server.md 和 setup-server-check.md
+  Entry 初始化钩子 -> server/entry-initialize-hook.md 和 entry-initialize-hook-check.md
 ```
 
 ## 通用检查顺序
@@ -232,7 +233,7 @@
 - `server/server-message-handler.md`
 - `server/server-message-handler-check.md`
 
-### Logging / Setup
+### Logging / Setup / Entry Hook
 
 重点检查：
 
@@ -241,6 +242,10 @@
 - 自定义 `ILog` 是否实现 appId 和 Scene 名称重载
 - Develop / Release 的文件刷新与控制台规则是否符合当前行为
 - 服务器项目接入 Fantasy 的 NuGet、宏、AssemblyHelper、Program 入口是否完整
+- Entry 初始化钩子是否正确实现 `IEntryInitializeHook`
+- 钩子是否在正确时机执行（config 已加载，Scene 尚未创建）
+- 钩子异常处理是否合理（应该 throw 还是 swallow）
+- 是否误用 Entry Hook 做 Scene 相关初始化（应该用 `OnCreateScene` 事件）
 
 读：
 
@@ -248,6 +253,7 @@
 - `logging-check.md`
 - `server/setup-server.md`
 - `server/setup-server-check.md`
+- `server/entry-initialize-hook.md`
 
 ## 一句话标准
 

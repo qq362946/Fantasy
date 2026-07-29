@@ -40,7 +40,7 @@ public sealed class OnCreateSceneEvent : AsyncEventSystem<OnCreateScene>
 
         await FTask.CompletedTask;
         scene.LogDebug("OnCreateSceneEvent");
-
+        
         switch (scene.SceneType)
         {
             case 6666:
