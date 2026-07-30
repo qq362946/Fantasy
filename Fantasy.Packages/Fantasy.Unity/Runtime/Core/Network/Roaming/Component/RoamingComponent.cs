@@ -189,6 +189,10 @@ public sealed class RoamingComponent : Entity
         }
         else
         {
+            // 新Session开始绑定相同roamingId时，立即取消已经登记的旧Session延迟删除任务。
+            // 后面的owner校验还会兜底处理旧DisposeAsync在本次绑定之后才恢复并创建任务的竞态。
+            CancelRemoveTask(roamingId);
+
             if (!_sessionRoamingComponents.TryGetValue(roamingId, out sessionRoamingComponent))
             {
                 sessionRoamingComponent = Entity.Create<SessionRoamingComponent>(Scene, roamingId, true, true);
@@ -212,12 +216,9 @@ public sealed class RoamingComponent : Entity
                     }
                     parentSession.SessionRoamingComponent = null;
                 }
-                else
-                {
-                    // 有可能关联的Session已经断开过，需要清除下定时删除任务
-                    session.Scene.RoamingComponent.CancelRemoveTask(roamingId);
-                }
 
+                // 必须在下面的await之前切换owner，使旧Session正在运行的DisposeAsync无法再删除当前绑定。
+                sessionRoamingComponent.OwnerSessionRuntimeId = session.RuntimeId;
                 sessionRoamingComponent.Session = session;
                 session.SessionRoamingComponent = sessionRoamingComponent;
                 // 重新设定ForwardSessionAddress
@@ -225,7 +226,9 @@ public sealed class RoamingComponent : Entity
                 status = CreateRoamingStatus.AlreadyExists;
             }
             
-            session.AddComponent<SessionRoamingFlgComponent>(roamingId).DelayRemove = delayRemove;
+            var newSessionRoamingFlgComponent = session.AddComponent<SessionRoamingFlgComponent>(roamingId);
+            newSessionRoamingFlgComponent.DelayRemove = delayRemove;
+            newSessionRoamingFlgComponent.OwnerSessionRuntimeId = session.RuntimeId;
         }
 
         return new CreateRoamingResult(status, sessionRoamingComponent!);
@@ -316,30 +319,47 @@ public sealed class RoamingComponent : Entity
     /// <param name="roamingId"></param>
     /// <param name="roamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
     /// <param name="delayRemove">当设置了延迟移除时间后，会在设置的时间后再进行移除。</param>
-    internal async FTask Remove(long roamingId, int roamingType, int delayRemove = 0)
+    /// <param name="expectedOwnerSessionRuntimeId">非0时，仅允许删除仍属于该Session的漫游组件。</param>
+    internal async FTask Remove(
+        long roamingId,
+        int roamingType,
+        int delayRemove = 0,
+        long expectedOwnerSessionRuntimeId = 0)
     {
         if (_isInnerDisposed)
         {
             return;
         }
-        
+
+        // 旧Session的DisposeAsync可能在新Session完成重连后才从StopForwarding恢复。
+        // 必须先校验owner再取消任务，避免旧清理流程取消或覆盖新Session的清理状态。
+        if (expectedOwnerSessionRuntimeId != 0 &&
+            (!_sessionRoamingComponents.TryGetValue(roamingId, out var current) ||
+             current.OwnerSessionRuntimeId != expectedOwnerSessionRuntimeId))
+        {
+            return;
+        }
+
         CancelRemoveTask(roamingId);
 
         if (delayRemove <= 0)
         {
-            await InnerRemove(roamingId, roamingType);
+            await InnerRemove(roamingId, roamingType, expectedOwnerSessionRuntimeId);
             return;
         }
 
         var taskId = _timerSchedulerNet.OnceTimer(delayRemove, () =>
         {
-            InnerRemove(roamingId, roamingType).Coroutine();
+            InnerRemove(roamingId, roamingType, expectedOwnerSessionRuntimeId).Coroutine();
         });
         
         _delayRemoveTaskId.Add(roamingId, taskId);
     }
 
-    private async FTask InnerRemove(long roamingId, int roamingType)
+    private async FTask InnerRemove(
+        long roamingId,
+        int roamingType,
+        long expectedOwnerSessionRuntimeId = 0)
     {
         if (_isInnerDisposed)
         {
@@ -348,6 +368,15 @@ public sealed class RoamingComponent : Entity
 
         if (!_sessionRoamingComponents.TryGetValue(roamingId, out var sessionRoamingComponent))
         {
+            return;
+        }
+
+        // 定时器触发前可能已经发生重连。只按roamingId查找会命中新Session的组件，
+        // 因此必须再次校验绑定Session，防止180秒旧任务误删当前有效连接。
+        if (expectedOwnerSessionRuntimeId != 0 &&
+            sessionRoamingComponent.OwnerSessionRuntimeId != expectedOwnerSessionRuntimeId)
+        {
+            _delayRemoveTaskId.Remove(roamingId);
             return;
         }
 

@@ -34,6 +34,12 @@ internal static class RoamingConstants
 public sealed class SessionRoamingComponent : Entity
 {
     internal EntityReference<Session> Session;
+
+    /// <summary>
+    /// 当前绑定的外网Session RuntimeId。
+    /// 延迟删除必须校验该值，避免旧Session遗留的定时任务误删重连后新Session正在使用的漫游组件。
+    /// </summary>
+    internal long OwnerSessionRuntimeId;
     
     private CoroutineLock? _roamingLock;
     private CoroutineLock? _roamingMessageLock;
@@ -56,6 +62,7 @@ public sealed class SessionRoamingComponent : Entity
         _roamingMessageLock = scene.CoroutineLockComponent.Create(this.GetType().TypeHandle.Value.ToInt64());
         
         Session = session;
+        OwnerSessionRuntimeId = session.RuntimeId;
         session.SessionRoamingComponent = this;
     }
 
@@ -82,6 +89,7 @@ public sealed class SessionRoamingComponent : Entity
         }
         
         Session.Clear();
+        OwnerSessionRuntimeId = 0;
         _timerComponent = null;
         _networkMessagingComponent = null;
         _messageDispatcherComponent = null;

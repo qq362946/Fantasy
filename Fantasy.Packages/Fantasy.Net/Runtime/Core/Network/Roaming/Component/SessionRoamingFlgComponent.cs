@@ -9,6 +9,12 @@ internal sealed class SessionRoamingFlgComponent : Entity
     private bool _isInnerDisposed;
     public bool DoNotRemove;
     public int DelayRemove;
+
+    /// <summary>
+    /// 创建当前标记组件时绑定的外网Session RuntimeId。
+    /// 用于确保本组件发起的延迟删除只能清理同一代Session的漫游绑定。
+    /// </summary>
+    public long OwnerSessionRuntimeId;
     
     public override void Dispose()
     {
@@ -24,6 +30,7 @@ internal sealed class SessionRoamingFlgComponent : Entity
     private async FTask DisposeAsync()
     {
         var roamingId = Id;
+        var ownerSessionRuntimeId = OwnerSessionRuntimeId;
 
         if (!DoNotRemove && DelayRemove > 0)
         {
@@ -32,11 +39,16 @@ internal sealed class SessionRoamingFlgComponent : Entity
             if (sceneRoamingComponent.TryGet(roamingId, out var roamingComponent))
             {
                 await roamingComponent.StopForwarding();
-                await sceneRoamingComponent.Remove(roamingId, 0, DelayRemove);
+                await sceneRoamingComponent.Remove(
+                    roamingId,
+                    0,
+                    DelayRemove,
+                    ownerSessionRuntimeId);
             }
         }
 
         DelayRemove = 0;
+        OwnerSessionRuntimeId = 0;
         DoNotRemove = false;
         _isInnerDisposed = false;
         
