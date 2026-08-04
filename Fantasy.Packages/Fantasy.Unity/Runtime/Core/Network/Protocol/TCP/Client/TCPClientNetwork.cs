@@ -36,12 +36,13 @@ namespace Fantasy.Network.TCP
         private bool _isInnerDispose;
         private long _connectTimeoutId;
         private bool _connectDisconnectEvent = true;
-        private bool _keyExchangeDone; // TCP 是流式协议，需要一个flag来判断握手是否完成
+        private bool _keyExchangeDone;
         private EncryptionHelper _encryptionHelper;
         private bool _enableEncryption;
+        private string _serverPublicKey;
         private byte[] _encryptSendBuffer;
         private byte[] _decryptReceiveBuffer;
-        private int _connectTimeout; // 保存连接超时，用于密钥交换阶段重新起超时
+        private int _connectTimeout;
         private Socket _socket;
         private IPEndPoint _remoteEndPoint;
         private SocketAsyncEventArgs _sendArgs;
@@ -68,10 +69,11 @@ namespace Fantasy.Network.TCP
         
         public uint ChannelId { get; private set; }
 
-        public void Initialize(NetworkTarget networkTarget, bool enableMessageJsonLog, bool enableEncryption = false)
+        public void Initialize(NetworkTarget networkTarget, bool enableMessageJsonLog, bool enableEncryption = false, string serverPublicKey = null)
         {
             base.Initialize(NetworkType.Client, NetworkProtocolType.TCP, networkTarget, enableMessageJsonLog);
             _enableEncryption = enableEncryption;
+            _serverPublicKey = serverPublicKey;
         }
 
         public override void Dispose()
@@ -493,25 +495,50 @@ namespace Fantasy.Network.TCP
             disposed = false;
             if (!_keyExchangeDone)
             {
-                const int keyExchangePacketSize = sizeof(int) + 1 + EncryptionHelper.PublicKeySize;
+                if (buffer.Length < sizeof(int) + 1) return false;
                 var sp = buffer.Span;
-                
-                if (sp.Length < keyExchangePacketSize) return false;
-                
-                // 如果不是握手包，返回 false 并触发连接失败事件
-                if (sp[sizeof(int)] != EncryptionHelper.KeyExchangeMarker)
+                var marker = sp[sizeof(int)];
+
+                // 固定密钥模式（0xED）：握手包不带公钥，客户端必须用配置的 serverPublicKey
+                // 临时密钥模式（0xEC）：握手包带公钥，客户端用它
+                byte[] serverPublicKey;
+                int frameLength;
+                if (marker == EncryptionHelper.KeyExchangeMarkerFixed)
                 {
-                    Log.Error($"Key exchange failed. Expected marker 0x{EncryptionHelper.KeyExchangeMarker:X2} at offset {sizeof(int)}, got 0x{sp[sizeof(int)]:X2}. Check server Fantasy.config enableEncryption setting.");
+                    // 服务端固定密钥模式：必须用客户端配置的公钥，否则 ECDH 无法进行
+                    if (string.IsNullOrEmpty(_serverPublicKey))
+                    {
+                        Log.Error("Server is in fixed-key mode. Client must configure serverPublicKey to connect.");
+                        _connectDisconnectEvent = false;
+                        _onConnectFail?.Invoke();
+                        Dispose();
+                        disposed = true;
+                        return false;
+                    }
+                    serverPublicKey = Convert.FromBase64String(_serverPublicKey);
+                    frameLength = sizeof(int) + 1;
+                }
+                else if (marker == EncryptionHelper.KeyExchangeMarker)
+                {
+                    const int keyExchangePacketSize = sizeof(int) + 1 + EncryptionHelper.PublicKeySize;
+                    if (sp.Length < keyExchangePacketSize) return false;
+                    serverPublicKey = sp.Slice(sizeof(int) + 1, EncryptionHelper.PublicKeySize).ToArray();
+                    frameLength = keyExchangePacketSize;
+                }
+                else
+                {
+                    Log.Error($"Key exchange failed. Invalid marker 0x{marker:X2}. Check server Fantasy.config enableEncryption setting.");
                     _connectDisconnectEvent = false;
                     _onConnectFail?.Invoke();
                     Dispose();
                     disposed = true;
                     return false;
                 }
-                
-                _encryptionHelper.DeriveSharedKey(sp.Slice(sizeof(int) + 1, EncryptionHelper.PublicKeySize).ToArray());
+
+                _encryptionHelper.DeriveSharedKey(serverPublicKey);
                 _keyExchangeDone = true;
                 _isConnected = true;
+                buffer = buffer.Slice(frameLength);
 
                 // 密钥交换完成，取消握手超时并回调连接成功
                 ClearConnectTimeout();
@@ -520,7 +547,6 @@ namespace Fantasy.Network.TCP
                 // 加密就绪后，发送握手期间积压的数据（Send 内部会加密）
                 if (!_isSending && _sendBuffers.Count > 0) Send();
 
-                buffer = buffer.Slice(keyExchangePacketSize);
                 return true;
             }
 

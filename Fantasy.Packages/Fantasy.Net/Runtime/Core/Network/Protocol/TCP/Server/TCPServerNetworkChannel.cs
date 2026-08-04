@@ -293,11 +293,23 @@ namespace Fantasy.Network.TCP
                 }
 
                 _encryptionHelper.DeriveSharedKey(sp.Slice(sizeof(int) + 1, EncryptionHelper.PublicKeySize).ToArray());
-                var kf = new byte[keyExchangePacketSize];
-                BinaryPrimitives.WriteInt32LittleEndian(kf, 33);
-                kf[sizeof(int)] = EncryptionHelper.KeyExchangeMarker;
-                Array.Copy(_encryptionHelper.PublicKey, 0, kf, sizeof(int) + 1, EncryptionHelper.PublicKeySize);
-                _socket.Send(kf);
+                if (ProgramDefine.ServerPrivateKey != null)
+                {
+                    // 固定密钥模式：握手包不返回公钥（0xED），客户端必须用配置的 serverPublicKey，否则无法完成握手
+                    var fixedKf = new byte[sizeof(int) + 1];
+                    BinaryPrimitives.WriteInt32LittleEndian(fixedKf, 1);
+                    fixedKf[sizeof(int)] = EncryptionHelper.KeyExchangeMarkerFixed;
+                    _socket.Send(fixedKf);
+                }
+                else
+                {
+                    // 临时密钥模式：握手包返回公钥（0xEC）
+                    var kf = new byte[keyExchangePacketSize];
+                    BinaryPrimitives.WriteInt32LittleEndian(kf, 33);
+                    kf[sizeof(int)] = EncryptionHelper.KeyExchangeMarker;
+                    Array.Copy(_encryptionHelper.PublicKey, 0, kf, sizeof(int) + 1, EncryptionHelper.PublicKeySize);
+                    _socket.Send(kf);
+                }
                 _keyExchangeDone = true;
                 // 加密就绪后，发送握手期间积压的数据（Send 内部会加密）
                 if (!_isSending && _sendBuffers.Count > 0) Send();
