@@ -53,7 +53,7 @@ namespace Fantasy.Network.KCP
         private const int ReceiveCountPerConnection = 12;
         
         private const int ReceiveBufferSize = ushort.MaxValue;
-        private readonly byte[] _sendBuff = new byte[5 + EncryptionHelper.PublicKeySize]; // 5 + public key size
+        private readonly byte[] _sendBuff = new byte[5 + 1 + EncryptionHelper.PublicKeySize]; // 5 头 + 1 模式字节 + 公钥
         private readonly byte[] _receiveBuffer = new byte[ReceiveBufferSize];
         
         private readonly List<long> _pendingTimeOutTime = new List<long>();
@@ -314,7 +314,14 @@ namespace Fantasy.Network.KCP
                             break;
                         }
                         var enc = new EncryptionHelper();
-                        enc.GenerateKeyPair();
+                        if (!string.IsNullOrEmpty(ProgramDefine.ServerPrivateKey))
+                        {
+                            enc.SetKeyPair(Convert.FromBase64String(ProgramDefine.ServerPrivateKey)); // 固定密钥模式（服务端认证）
+                        }
+                        else
+                        {
+                            enc.GenerateKeyPair(); // 临时密钥（防解包)
+                        }
                         enc.DeriveSharedKey(buffer.Slice(0, 32).Span);
                         _channelEncryption[channelId] = enc;
                     }
@@ -604,8 +611,19 @@ namespace Fantasy.Network.KCP
             {
                 _sendBuff[0] = KcpHeaderWaitConfirmConnection;
                 MemoryMarshal.Write(_sendBuff.AsSpan(1), in channelId);
-                Array.Copy(enc.PublicKey, 0, _sendBuff, 5, EncryptionHelper.PublicKeySize);
-                SendAsync(_sendBuff, 0, 37, clientEndPoint);
+                if (ProgramDefine.ServerPrivateKey != null)
+                {
+                    // 固定密钥模式：模式字节 0xED，不返回公钥，客户端必须用配置的 serverPublicKey
+                    _sendBuff[5] = EncryptionHelper.KeyExchangeMarkerFixed;
+                    SendAsync(_sendBuff, 0, 6, clientEndPoint);
+                }
+                else
+                {
+                    // 临时密钥模式：模式字节 0xEC + 公钥
+                    _sendBuff[5] = EncryptionHelper.KeyExchangeMarker;
+                    Array.Copy(enc.PublicKey, 0, _sendBuff, 6, EncryptionHelper.PublicKeySize);
+                    SendAsync(_sendBuff, 0, 6 + EncryptionHelper.PublicKeySize, clientEndPoint);
+                }
             }
             else
             {

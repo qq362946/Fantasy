@@ -436,6 +436,11 @@
         <xs:documentation>启用网络加密 适用于KCP和TCP，默认关闭</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="serverPrivateKey" use="optional">
+      <xs:annotation>
+        <xs:documentation>服务端固定X25519私钥(Base64, 32字节)。配置后服务端开启认证模式(防MITM)，客户端需要启动时传入对应公钥</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
 
   <!-- Session Runtime type -->

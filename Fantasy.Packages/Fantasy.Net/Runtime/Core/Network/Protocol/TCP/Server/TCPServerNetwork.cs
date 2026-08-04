@@ -124,7 +124,14 @@ namespace Fantasy.Network.TCP
                 if (_enableEncryption)
                 {
                     encryptionHelper = new EncryptionHelper();
-                    encryptionHelper.GenerateKeyPair();
+                    if (!string.IsNullOrEmpty(ProgramDefine.ServerPrivateKey))
+                    {
+                        encryptionHelper.SetKeyPair(Convert.FromBase64String(ProgramDefine.ServerPrivateKey)); // 固定密钥模式（服务端认证）
+                    }
+                    else
+                    {
+                        encryptionHelper.GenerateKeyPair(); // 临时密钥（防解包)
+                    }
                 }
 
                 channel = new TCPServerNetworkChannel(this, acceptSocket, channelId, encryptionHelper);

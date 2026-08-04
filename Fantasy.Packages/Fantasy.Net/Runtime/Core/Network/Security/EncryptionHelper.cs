@@ -21,6 +21,7 @@ namespace Fantasy.Network.Security
         public const int Overhead = 64;
         public const int PublicKeySize = 32;
         public const byte KeyExchangeMarker = 0xEC;
+        public const byte KeyExchangeMarkerFixed = 0xED; // 固定密钥模式：握手包不返回公钥
         public const int KeyExchangeFrameSize = 33;
 
         public void GenerateKeyPair()
@@ -28,6 +29,37 @@ namespace Fantasy.Network.Security
             var kp = X25519KeyAgreement.GenerateKeyPair();
             PrivateKey = kp.PrivateKey;
             PublicKey = kp.PublicKey;
+        }
+
+        /// <summary>
+        /// 设置固定密钥对（服务端认证用：客户端使用此公钥即可防 MITM）。
+        /// </summary>
+        public void SetKeyPair(byte[] privateKey)
+        {
+            if (privateKey == null || privateKey.Length != PublicKeySize)
+            {
+                throw new ArgumentException($"Private key must be {PublicKeySize} bytes.", nameof(privateKey));
+            }
+
+            PrivateKey = privateKey;
+            PublicKey = X25519KeyAgreement.GenerateKeyFromPrivateKey(privateKey).PublicKey;
+        }
+
+        /// <summary>
+        /// 从 Base64 私钥派生公钥（用于服务端启动时打印给客户端钉住）。
+        /// </summary>
+        public static byte[] GeneratePublicKey(string base64PrivateKey)
+        {
+            try
+            {
+                return X25519KeyAgreement.GenerateKeyFromPrivateKey(Convert.FromBase64String(base64PrivateKey)).PublicKey;
+            }
+            catch (Exception e)
+            {
+                throw new ArgumentException(
+                    $"serverPrivateKey must be a valid Base64 string of a 32-byte private key. Error: {e.Message}",
+                    nameof(base64PrivateKey));
+            }
         }
 
         public void DeriveSharedKey(ReadOnlySpan<byte> peerPublicKey)
@@ -86,7 +118,7 @@ namespace Fantasy.Network.Security
                 hmac.TryComputeHash(src.Slice(srcOffset, bodyLen), hashExpected, out _);
             }
 
-            if (!ConstantTimeEqual(hashExpected, src.Slice(srcOffset + bodyLen, 32)))
+            if (!CryptographicOperations.FixedTimeEquals(hashExpected, src.Slice(srcOffset + bodyLen, 32)))
                 throw new CryptographicException("HMAC verification failed");
 
             return DecryptData(
@@ -129,12 +161,5 @@ namespace Fantasy.Network.Security
         }
 #endif
 
-        private static bool ConstantTimeEqual(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
-        {
-            if (a.Length != b.Length) return false;
-            int diff = 0;
-            for (int i = 0; i < a.Length; i++) diff |= a[i] ^ b[i];
-            return diff == 0;
-        }
     }
 }

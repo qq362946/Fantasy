@@ -168,11 +168,18 @@ public static class ConfigLoader
         ProgramDefine.InnerNetwork = Enum.Parse<NetworkProtocolType>(GetOptionalAttribute(networkNode, "inner") ?? "TCP");
         ProgramDefine.MaxMessageSize = int.Parse(GetOptionalAttribute(networkNode, "maxMessageSize") ?? "1048560");
         ProgramDefine.EnableEncryption = bool.Parse(GetOptionalAttribute(networkNode, "enableEncryption") ?? "false");
+        ProgramDefine.ServerPrivateKey = GetOptionalAttribute(networkNode, "serverPrivateKey") ?? null;
         // 加载会话配置
         XmlNode? sessionNode = root.SelectSingleNode("f:session", nsManager);
         ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "8000");
         ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "5000");
         
+
+        if (!string.IsNullOrEmpty(ProgramDefine.ServerPrivateKey))
+        {
+            var publicKey = EncryptionHelper.GeneratePublicKey(ProgramDefine.ServerPrivateKey);
+            Log.Info($"serverPublicKey: {Convert.ToBase64String(publicKey)}");
+        }
         Log.Info($"Current inner network protocol:{ProgramDefine.InnerNetwork.ToString()}");
         Log.Info($"Max Message Size(byte):{ProgramDefine.MaxMessageSize}");
         Log.Info($"Current session idle timeout:{ProgramDefine.SessionIdleCheckerTimeout}");

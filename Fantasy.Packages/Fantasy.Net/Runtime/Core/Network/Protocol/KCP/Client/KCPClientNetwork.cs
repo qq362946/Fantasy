@@ -63,6 +63,7 @@ namespace Fantasy.Network.KCP
         private readonly System.Diagnostics.Stopwatch _stopwatch = new();
         private EncryptionHelper _encryptionHelper;
         private bool _enableEncryption;
+        private string _serverPublicKey;
         private byte[] _encryptSendBuffer;
         private byte[] _decryptReceiveBuffer;
         private readonly SocketAsyncEventArgs _connectEventArgs = new SocketAsyncEventArgs();
@@ -88,7 +89,7 @@ namespace Fantasy.Network.KCP
         public uint ChannelId { get; private set; }
         private long TimeNow => _stopwatch.ElapsedMilliseconds;
         
-        public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog, bool enableEncryption = false)
+        public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog, bool enableEncryption = false, string serverPublicKey = null)
         {
             base.Initialize(NetworkType.Client, NetworkProtocolType.KCP, networkTarget, enableReceiveMessageJsonLog);
             _packetParser = PacketParserFactory.CreateBufferPacketParser(this);
@@ -100,6 +101,7 @@ namespace Fantasy.Network.KCP
             _packetHeadLength = Packet.OuterPacketHeadLength;
 #endif
             _enableEncryption = enableEncryption;
+            _serverPublicKey = serverPublicKey;
         }
         
         public override void Dispose()
@@ -483,14 +485,47 @@ namespace Fantasy.Network.KCP
 
                     if (_enableEncryption)
                     {
-                        if (buffer.Length < EncryptionHelper.PublicKeySize)
+                        if (buffer.Length < 1)
                         {
                             _connectDisconnectEvent = false;
                             OnConnectFail?.Invoke();
                             Dispose();
                             break;
                         }
-                        _encryptionHelper.DeriveSharedKey(buffer.Slice(0, EncryptionHelper.PublicKeySize).Span);
+
+                        // 0xED 固定密钥模式：握手包不带公钥，必须用配置的 serverPublicKey
+                        // 0xEC 临时密钥模式：握手包带公钥，用它
+                        var marker = buffer.Span[0];
+                        if (marker == EncryptionHelper.KeyExchangeMarkerFixed)
+                        {
+                            if (string.IsNullOrEmpty(_serverPublicKey))
+                            {
+                                Log.Error("Server is in fixed-key mode. Client must configure serverPublicKey to connect.");
+                                _connectDisconnectEvent = false;
+                                OnConnectFail?.Invoke();
+                                Dispose();
+                                break;
+                            }
+                            _encryptionHelper.DeriveSharedKey(Convert.FromBase64String(_serverPublicKey));
+                        }
+                        else if (marker == EncryptionHelper.KeyExchangeMarker)
+                        {
+                            if (buffer.Length < 1 + EncryptionHelper.PublicKeySize)
+                            {
+                                _connectDisconnectEvent = false;
+                                OnConnectFail?.Invoke();
+                                Dispose();
+                                break;
+                            }
+                            _encryptionHelper.DeriveSharedKey(buffer.Slice(1, EncryptionHelper.PublicKeySize).Span);
+                        }
+                        else
+                        {
+                            _connectDisconnectEvent = false;
+                            OnConnectFail?.Invoke();
+                            Dispose();
+                            break;
+                        }
                     }
 
                     ClearConnectTimers();

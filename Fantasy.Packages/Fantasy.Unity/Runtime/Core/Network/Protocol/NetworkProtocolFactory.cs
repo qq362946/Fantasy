@@ -56,7 +56,7 @@ namespace Fantasy.Network
             }
         }
 #endif
-        public static AClientNetwork CreateClient(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, bool enableMessageJsonLog, bool enableEncryption = false)
+        public static AClientNetwork CreateClient(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, bool enableMessageJsonLog, bool enableEncryption = false, string serverPublicKey = null!)
         {
 #if !FANTASY_WEBGL
             switch (protocolType)
@@ -64,13 +64,13 @@ namespace Fantasy.Network
                 case NetworkProtocolType.TCP:
                 {
                     var network = Entity.Create<TCPClientNetwork>(scene, false, false);
-                    network.Initialize(networkTarget, enableMessageJsonLog, enableEncryption);
+                    network.Initialize(networkTarget, enableMessageJsonLog, enableEncryption, serverPublicKey);
                     return network;
                 }
                 case NetworkProtocolType.KCP:
                 {
                     var network = Entity.Create<KCPClientNetwork>(scene, false, true);
-                    network.Initialize(networkTarget, enableMessageJsonLog, enableEncryption);
+                    network.Initialize(networkTarget, enableMessageJsonLog, enableEncryption, serverPublicKey);
                     return network;
                 }
                 case NetworkProtocolType.WebSocket:

@@ -220,7 +220,8 @@ namespace Fantasy
             [CanBeNull] Action onConnectFail = null,
             [CanBeNull] Action onConnectDisconnect = null,
             bool enableReceiveMessageJsonLog = false,
-            bool enableEncryption = false
+            bool enableEncryption = false,
+            string serverPublicKey = null
         )
         {
             if (_fantasyRuntime != null)
@@ -247,7 +248,7 @@ namespace Fantasy
             }
 
             Session = CreateSession(Scene, remoteIP, remotePort, protocol, isHttps, connectTimeout, OnConnectComplete,
-                OnConnectFail, OnConnectDisconnect, enableReceiveMessageJsonLog, enableEncryption);
+                OnConnectFail, OnConnectDisconnect, enableReceiveMessageJsonLog, enableEncryption, serverPublicKey);
 
             return Session;
         }
@@ -278,7 +279,8 @@ namespace Fantasy
             [CanBeNull] Action onConnectFail = null,
             [CanBeNull] Action onConnectDisconnect = null,
             bool enableReceiveMessageJsonLog = false,
-            bool enableEncryption = false)
+            bool enableEncryption = false,
+            string serverPublicKey = null)
         {
             NetworkProtocolType networkProtocolType;
 
@@ -313,7 +315,7 @@ namespace Fantasy
                 onConnectComplete,
                 onConnectFail,
                 onConnectDisconnect,
-                isHttps, connectTimeout, enableReceiveMessageJsonLog, enableEncryption);
+                isHttps, connectTimeout, enableReceiveMessageJsonLog, enableEncryption, serverPublicKey);
         }
 
         /// <summary>
@@ -448,6 +450,9 @@ namespace Fantasy
         [Tooltip("Transport encryption type (None = no encryption, Aes256Gcm recommended for production)")]
         public bool enableEncryption = false;
 
+        [Tooltip("Server X25519 public key (Base64, 32 bytes). Used to pin the server public key (anti-MITM). Get it from server startup log")]
+        public string serverPublicKey;
+
         [Tooltip("Print received client messages as JSON")]
         public bool enableReceiveMessageJsonLog;
 
@@ -569,7 +574,8 @@ namespace Fantasy
                 OnConnectFail,
                 OnConnectDisconnect,
                 enableReceiveMessageJsonLog,
-                enableEncryption);
+                enableEncryption,
+                serverPublicKey);
             
             if (isRuntimeInstance)
             {
