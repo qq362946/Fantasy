@@ -12,6 +12,7 @@ using System.Threading;
 using Fantasy.Entitas.Interface;
 using Fantasy.Helper;
 using Fantasy.Network.Interface;
+using Fantasy.Network.Security;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
 using KCP;
@@ -56,11 +57,14 @@ namespace Fantasy.Network.KCP
         
         private const int MaxReceiveCountPerUpdate = 2048;
         private const int ReceiveBufferSize = ushort.MaxValue;
-        private readonly byte[] _sendBuff = new byte[5];
+        private readonly byte[] _sendBuff = new byte[5 + EncryptionHelper.PublicKeySize]; // 5 + public key size
         private readonly byte[] _receiveBuffer = new byte[ReceiveBufferSize];
-        
+
         private readonly System.Diagnostics.Stopwatch _stopwatch = new();
-        
+        private EncryptionHelper _encryptionHelper;
+        private bool _enableEncryption;
+        private byte[] _encryptSendBuffer;
+        private byte[] _decryptReceiveBuffer;
         private readonly SocketAsyncEventArgs _connectEventArgs = new SocketAsyncEventArgs();
         private readonly Queue<MemoryStreamBuffer> _messageCache = new Queue<MemoryStreamBuffer>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -84,7 +88,7 @@ namespace Fantasy.Network.KCP
         public uint ChannelId { get; private set; }
         private long TimeNow => _stopwatch.ElapsedMilliseconds;
         
-        public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog)
+        public void Initialize(NetworkTarget networkTarget, bool enableReceiveMessageJsonLog, bool enableEncryption = false)
         {
             base.Initialize(NetworkType.Client, NetworkProtocolType.KCP, networkTarget, enableReceiveMessageJsonLog);
             _packetParser = PacketParserFactory.CreateBufferPacketParser(this);
@@ -95,6 +99,7 @@ namespace Fantasy.Network.KCP
 #else
             _packetHeadLength = Packet.OuterPacketHeadLength;
 #endif
+            _enableEncryption = enableEncryption;
         }
         
         public override void Dispose()
@@ -146,6 +151,9 @@ namespace Fantasy.Network.KCP
                 }
 
                 _packetParser?.Dispose();
+                _encryptionHelper = null;
+                _encryptSendBuffer = null;
+                _decryptReceiveBuffer = null;
                 ChannelId = 0;
                 _isConnected = false;
                 _receiveStarted = false;
@@ -216,7 +224,16 @@ namespace Fantasy.Network.KCP
                 
                 _kcp = KCPFactory.Create(NetworkTarget, ChannelId, KcpSpanCallback, out var kcpSettings);
                 _maxSndWnd = kcpSettings.MaxSendWindowSize;
-            
+
+                if (_enableEncryption)
+                {
+                    _encryptionHelper = new EncryptionHelper();
+                    _encryptionHelper.GenerateKeyPair();
+                    _kcp.SetMtu(kcpSettings.Mtu - EncryptionHelper.Overhead);
+                    // KCP 每个数据报只含一帧（≤ Mtu），无需按 MaxMessageSize 分配大缓冲
+                    (_encryptSendBuffer, _decryptReceiveBuffer) = EncryptionHelper.CreateBuffers(kcpSettings.Mtu + EncryptionHelper.Overhead);
+                }
+
 #if FANTASY_UNITY || FANTASY_CONSOLE
             Session = EnableMessageJsonLog
                 ? Session.CreateDebugClientSession(this, _remoteAddress)
@@ -410,14 +427,23 @@ namespace Fantasy.Network.KCP
                 {
                     return;
                 }
-                
-                if (buffer.Length == 0 || (uint)buffer.Length > _kcp.MaximumTransmissionUnit)
+
+                var maxReceiveLength = _enableEncryption ? _kcp.MaximumTransmissionUnit + EncryptionHelper.Overhead : _kcp.MaximumTransmissionUnit;
+                if (buffer.Length == 0 || (uint)buffer.Length > maxReceiveLength)
                 {
                     Dispose();
                     return;
                 }
-                    
-                Input(buffer);
+
+                if (_enableEncryption && _encryptionHelper != null && _encryptionHelper.IsReady)
+                {
+                    var decryptedLength = _encryptionHelper.Decrypt(buffer.Span, 0, buffer.Length, _decryptReceiveBuffer, 0);
+                    Input(new ReadOnlyMemory<byte>(_decryptReceiveBuffer, 0, decryptedLength));
+                }
+                else
+                {
+                    Input(buffer);
+                }
                 return;
             }
             
@@ -454,7 +480,20 @@ namespace Fantasy.Network.KCP
                     {
                         break;
                     }
-                    
+
+                    if (_enableEncryption)
+                    {
+                        if (buffer.Length < EncryptionHelper.PublicKeySize)
+                        {
+                            _connectDisconnectEvent = false;
+                            OnConnectFail?.Invoke();
+                            Dispose();
+                            break;
+                        }
+                        _encryptionHelper.DeriveSharedKey(buffer.Slice(0, EncryptionHelper.PublicKeySize).Span);
+                    }
+
+                    ClearConnectTimers();
                     SendConfirmConnection();
                     break;
                 }
@@ -692,8 +731,15 @@ namespace Fantasy.Network.KCP
         {
             try
             {
+                int dataLength = 5;
                 WriteSendHeader(KcpHeaderRequestConnection);
-                SendAsync(_sendBuff, 0, 5);
+                if (_enableEncryption)
+                {
+                    // 握手：头(5) + 公钥(32) = 37 字节
+                    dataLength = 37;
+                    _encryptionHelper.PublicKey.AsSpan().CopyTo(_sendBuff.AsSpan(5));
+                }
+                SendAsync(_sendBuff, 0, dataLength);
             }
             catch (Exception e)
             {
@@ -773,11 +819,21 @@ namespace Fantasy.Network.KCP
             {
                 throw new Exception("KcpOutput count 0");
             }
-            
-            buffer[0] = KcpHeaderReceiveData;
-            BinaryPrimitives.WriteUInt32LittleEndian(buffer.AsSpan(1, 4), ChannelId);
-            
-            SendAsync(buffer, 0, count + 5);
+
+            if (_encryptionHelper != null && _encryptionHelper.IsReady)
+            {
+                // 加密数据部分，写入加密发送缓冲区
+                var encLen = _encryptionHelper.Encrypt(buffer, 5, count, _encryptSendBuffer, 5);
+                _encryptSendBuffer[0] = KcpHeaderReceiveData;
+                BinaryPrimitives.WriteUInt32LittleEndian(_encryptSendBuffer.AsSpan(1, 4), ChannelId);
+                SendAsync(_encryptSendBuffer, 0, encLen + 5);
+            }
+            else
+            {
+                buffer[0] = KcpHeaderReceiveData;
+                BinaryPrimitives.WriteUInt32LittleEndian(buffer.AsSpan(1, 4), ChannelId);
+                SendAsync(buffer, 0, count + 5);
+            }
         }
 
         #endregion

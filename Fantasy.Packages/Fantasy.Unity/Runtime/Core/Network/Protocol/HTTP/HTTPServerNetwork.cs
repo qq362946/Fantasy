@@ -86,7 +86,7 @@ namespace Fantasy.Network.HTTP
         private WebApplication? _application;
         
         /// <summary>
-        /// 初始化入口
+        /// 初始化入口 
         /// </summary>
         /// <param name="networkTarget"></param>
         /// <param name="bindIp"></param>

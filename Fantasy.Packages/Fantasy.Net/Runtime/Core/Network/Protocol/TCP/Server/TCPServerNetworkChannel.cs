@@ -1,13 +1,16 @@
 #if FANTASY_NET
 using System;
 using System.Buffers;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Threading;
 using Fantasy.Async;
 using Fantasy.Network.Interface;
+using Fantasy.Network.Security;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
@@ -16,6 +19,7 @@ using Fantasy.Serialize;
 
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 #pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
@@ -26,7 +30,11 @@ namespace Fantasy.Network.TCP
     {
         private bool _isSending;
         private bool _isInnerDispose;
+        private bool _keyExchangeDone;
         private readonly Socket _socket;
+        private readonly EncryptionHelper _encryptionHelper;
+        private readonly byte[] _encryptSendBuffer;
+        private readonly byte[] _decryptReceiveBuffer;
         private readonly ANetwork _network;
         private readonly Pipe _pipe = new Pipe();
         private readonly SocketAsyncEventArgs _sendArgs;
@@ -34,17 +42,24 @@ namespace Fantasy.Network.TCP
         private readonly Queue<MemoryStreamBuffer> _sendBuffers = new Queue<MemoryStreamBuffer>();
         private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
-        public TCPServerNetworkChannel(ANetwork network, Socket socket, uint id) : base(network, id, socket.RemoteEndPoint)
+        public TCPServerNetworkChannel(ANetwork network, Socket socket, uint id, EncryptionHelper encryptionHelper = null) : base(network, id, socket.RemoteEndPoint)
         {
             _socket = socket;
             _network = network;
 
             try
             {
+                _encryptionHelper = encryptionHelper;
+
                 _socket.NoDelay = true;
                 _sendArgs = new SocketAsyncEventArgs();
                 _sendArgs.Completed += OnSendCompletedHandler;
                 _packetParser = PacketParserFactory.CreateReadOnlyMemoryPacketParser(network);
+
+                if (_encryptionHelper != null)
+                {
+                    (_encryptSendBuffer, _decryptReceiveBuffer) = EncryptionHelper.CreateBuffers();
+                }
             }
             catch
             {
@@ -193,10 +208,39 @@ namespace Fantasy.Network.TCP
                 var consumed = buffer.Start;
                 var examined = buffer.End;
 
-                while (TryReadMessage(ref buffer, out var message))
+                if (_encryptionHelper != null)
                 {
-                    ReceiveData(ref message);
-                    consumed = buffer.Start;
+                    try
+                    {
+                        // 加密路径：一次取整个可读序列（跨段时拷贝拼接），逐帧处理；
+                        // 半包留在 pipe 里，按实际消费字节数推进 consumed，等下次补齐。
+                        var message = buffer.IsSingleSegment ? buffer.First : buffer.ToArray();
+                        var originalLength = message.Length;
+                        while (true)
+                        {
+                            if (!TryHandleEncryption(ref message, out var disposed))
+                            {
+                                if (disposed) return;
+                                break; // 数据不足，等下次
+                            }
+                        }
+                        consumed = buffer.GetPosition(originalLength - message.Length);
+                    }
+                    catch (Exception e)
+                    {
+                        // 解密/密钥交换异常时断开连接，避免读协程泄漏
+                        Log.Error(e);
+                        Dispose();
+                        return;
+                    }
+                }
+                else
+                {
+                    while (TryReadMessage(ref buffer, out var message))
+                    {
+                        ReceiveData(ref message);
+                        consumed = buffer.Start;
+                    }
                 }
 
                 if (result.IsCompleted)
@@ -228,6 +272,63 @@ namespace Fantasy.Network.TCP
 
             buffer = buffer.Slice(message.Length);
             return true;
+        }
+
+        private bool TryHandleEncryption(ref ReadOnlyMemory<byte> buffer, out bool disposed)
+        {
+            disposed = false;
+            if (!_keyExchangeDone)
+            {
+                const int keyExchangePacketSize = sizeof(int) + 1 + EncryptionHelper.PublicKeySize;
+                var sp = buffer.Span;
+
+                if (sp.Length < keyExchangePacketSize) return false;
+
+                if (sp[sizeof(int)] != EncryptionHelper.KeyExchangeMarker)
+                {
+                    Log.Warning($"TCP encryption required but client handshake has no marker, is encryption enabled in the client?, channelId={Id}");
+                    Dispose();
+                    disposed = true;
+                    return false;
+                }
+
+                _encryptionHelper.DeriveSharedKey(sp.Slice(sizeof(int) + 1, EncryptionHelper.PublicKeySize).ToArray());
+                var kf = new byte[keyExchangePacketSize];
+                BinaryPrimitives.WriteInt32LittleEndian(kf, 33);
+                kf[sizeof(int)] = EncryptionHelper.KeyExchangeMarker;
+                Array.Copy(_encryptionHelper.PublicKey, 0, kf, sizeof(int) + 1, EncryptionHelper.PublicKeySize);
+                _socket.Send(kf);
+                _keyExchangeDone = true;
+                // 加密就绪后，发送握手期间积压的数据（Send 内部会加密）
+                if (!_isSending && _sendBuffers.Count > 0) Send();
+                buffer = buffer.Slice(keyExchangePacketSize);
+                return true;
+            }
+
+            if (_encryptionHelper is { IsReady: true })
+            {
+                var sp = buffer.Span;
+                if (sp.Length < sizeof(int)) return false;
+                var encLen = BinaryPrimitives.ReadInt32LittleEndian(sp);
+                if (encLen < 0 || encLen > ProgramDefine.MaxMessageSize + EncryptionHelper.Overhead)
+                {
+                    // 非法长度头，断开连接
+                    Dispose();
+                    disposed = true;
+                    return false;
+                }
+                if (sp.Length < sizeof(int) + encLen) return false;
+                var decryptedLength = _encryptionHelper.Decrypt(sp, sizeof(int), encLen, _decryptReceiveBuffer, 0);
+                var decryptedMemory = new ReadOnlyMemory<byte>(_decryptReceiveBuffer, 0, decryptedLength);
+                ReceiveData(ref decryptedMemory);
+                buffer = buffer.Slice(sizeof(int) + encLen);
+                return true;
+            }
+
+            Log.Error("Encryption state inconsistent: key exchange done but helper not ready.");
+            Dispose();
+            disposed = true;
+            return false;
         }
 
         private void ReceiveData(ref ReadOnlyMemory<byte> buffer)
@@ -272,9 +373,13 @@ namespace Fantasy.Network.TCP
             
             _sendBuffers.Enqueue(_packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType));
 
+            // 加密握手完成前不触发实际发送，否则明文数据会被客户端当作加密数据解密而失败
             if (!_isSending)
             {
-                Send();
+                if (_encryptionHelper == null || _encryptionHelper.IsReady)
+                {
+                    Send();
+                }
             }
         }
         
@@ -289,6 +394,19 @@ namespace Fantasy.Network.TCP
 
             while (_sendBuffers.TryDequeue(out var memoryStreamBuffer))
             {
+                // 出队时加密
+                if (_encryptionHelper is { IsReady: true })
+                {
+                    var buf = memoryStreamBuffer.GetBuffer();
+                    var len = (int)memoryStreamBuffer.Position;
+                    var encLen = _encryptionHelper.Encrypt(buf, 0, len, _encryptSendBuffer, 4);
+                    BinaryPrimitives.WriteInt32LittleEndian(_encryptSendBuffer, encLen);
+                    var encStream = _network.MemoryStreamBufferPool.RentMemoryStream(MemoryStreamBufferSource.Pack, 4 + encLen);
+                    encStream.Write(_encryptSendBuffer, 0, 4 + encLen);
+                    ReturnMemoryStream(memoryStreamBuffer);
+                    memoryStreamBuffer = encStream;
+                }
+
                 var offset = 0;
                 var totalLength = (int)memoryStreamBuffer.Position;
                 var buffer = memoryStreamBuffer.GetBuffer();
