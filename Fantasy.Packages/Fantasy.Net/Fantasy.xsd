@@ -431,6 +431,11 @@
         <xs:documentation>消息体最大长度(字节)，默认1048560字节(约1.02MB)</xs:documentation>
       </xs:annotation>
     </xs:attribute>
+    <xs:attribute name="enableEncryption" use="optional" default="false">
+      <xs:annotation>
+        <xs:documentation>启用网络加密 适用于KCP和TCP，默认关闭</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
 
   <!-- Session Runtime type -->

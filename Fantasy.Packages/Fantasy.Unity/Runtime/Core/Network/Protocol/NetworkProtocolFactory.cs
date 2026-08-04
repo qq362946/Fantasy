@@ -56,7 +56,7 @@ namespace Fantasy.Network
             }
         }
 #endif
-        public static AClientNetwork CreateClient(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, bool enableMessageJsonLog)
+        public static AClientNetwork CreateClient(Scene scene, NetworkProtocolType protocolType, NetworkTarget networkTarget, bool enableMessageJsonLog, bool enableEncryption = false)
         {
 #if !FANTASY_WEBGL
             switch (protocolType)
@@ -64,17 +64,21 @@ namespace Fantasy.Network
                 case NetworkProtocolType.TCP:
                 {
                     var network = Entity.Create<TCPClientNetwork>(scene, false, false);
-                    network.Initialize(networkTarget, enableMessageJsonLog);
+                    network.Initialize(networkTarget, enableMessageJsonLog, enableEncryption);
                     return network;
                 }
                 case NetworkProtocolType.KCP:
                 {
                     var network = Entity.Create<KCPClientNetwork>(scene, false, true);
-                    network.Initialize(networkTarget, enableMessageJsonLog);
+                    network.Initialize(networkTarget, enableMessageJsonLog, enableEncryption);
                     return network;
                 }
                 case NetworkProtocolType.WebSocket:
                 {
+                    if (enableEncryption)
+                    {
+                        Log.Warning("WebSocket does not support application-level encryption, use wss:// instead. Ignoring enableEncryption.");
+                    }
                     var network = Entity.Create<WebSocketClientNetwork>(scene, false, true);
                     network.Initialize(networkTarget, enableMessageJsonLog);
                     return network;
@@ -86,6 +90,10 @@ namespace Fantasy.Network
             }
 #else
             // Webgl平台只能用这个协议。
+            if (enableEncryption)
+            {
+                Log.Warning("WebSocket does not support application-level encryption, use wss:// instead. Ignoring enableEncryption.");
+            }
             var network = Entity.Create<WebSocketClientNetwork>(scene, false, true);
             network.Initialize(networkTarget, enableMessageJsonLog);
             return network;

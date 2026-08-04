@@ -90,5 +90,9 @@ namespace Fantasy
             internal set;
         } = DefaultControlCenterLeaseSeconds;
 #endif
+        /// <summary>
+        /// 传输层加密类型（客户端用此字段设置连接加密）。
+        /// </summary>
+        public static bool EnableEncryption { get; internal set; }
     }
 }

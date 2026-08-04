@@ -4,12 +4,14 @@ using System.Buffers;
 using System.Net;
 using System.Runtime.InteropServices;
 using Fantasy.Network.Interface;
+using Fantasy.Network.Security;
 using Fantasy.PacketParser;
 using Fantasy.Serialize;
 using KCP;
 // ReSharper disable ParameterHidesMember
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
@@ -25,11 +27,13 @@ namespace Fantasy.Network.KCP
         private KCPServerNetwork _kcpServerNetwork;
         private readonly BufferPacketParser _packetParser;
         private readonly int _packetHeadLength;
-        
+        private readonly EncryptionHelper _encryptionHelper;
+        private readonly byte[] _encryptSendBuffer = Array.Empty<byte>();
+        private readonly byte[] _decryptReceiveBuffer = Array.Empty<byte>();
         public Kcp Kcp { get; private set; }
         public uint ChannelId { get; private set; }
 
-        public KCPServerNetworkChannel(KCPServerNetwork network, uint channelId, IPEndPoint ipEndPoint) : base(network, channelId, ipEndPoint)
+        public KCPServerNetworkChannel(KCPServerNetwork network, uint channelId, IPEndPoint ipEndPoint, EncryptionHelper encryptionHelper = null) : base(network, channelId, ipEndPoint)
         {
             try
             {
@@ -40,12 +44,20 @@ namespace Fantasy.Network.KCP
                         : Packet.OuterPacketHeadLength;
                 ChannelId = channelId;
                 _maxSndWnd = network.Settings.MaxSendWindowSize;
+                _encryptionHelper = encryptionHelper;
                 Kcp = KCPFactory.Create(
                     network.Settings,
                     ChannelId,
                     KcpSpanCallback);
                 _packetParser =
                     PacketParserFactory.CreateBufferPacketParser(network);
+
+                if (_encryptionHelper != null)
+                {
+                    Kcp.SetMtu(network.Settings.Mtu - EncryptionHelper.Overhead);
+                    // KCP 每个数据报只含一帧（≤ Mtu），无需按 MaxMessageSize 分配大缓冲
+                    (_encryptSendBuffer, _decryptReceiveBuffer) = EncryptionHelper.CreateBuffers(network.Settings.Mtu + EncryptionHelper.Overhead);
+                }
             }
             catch
             {
@@ -85,10 +97,22 @@ namespace Fantasy.Network.KCP
 
         public void Input(ReadOnlyMemory<byte> buffer)
         {
-            if (Kcp.Input(buffer.Span) < 0)
+            if (_encryptionHelper != null && _encryptionHelper.IsReady)
             {
-                Dispose();
-                return;
+                var decryptedLength = _encryptionHelper.Decrypt(buffer.Span.Slice(0, buffer.Length), 0, buffer.Length, _decryptReceiveBuffer, 0);
+                if (Kcp.Input(new ReadOnlyMemory<byte>(_decryptReceiveBuffer, 0, decryptedLength).Span) < 0)
+                {
+                    Dispose();
+                    return;
+                }
+            }
+            else
+            {
+                if (Kcp.Input(buffer.Span) < 0)
+                {
+                    Dispose();
+                    return;
+                }
             }
             
             _kcpServerNetwork.AddUpdateChannel(ChannelId);
@@ -224,11 +248,21 @@ namespace Fantasy.Network.KCP
                 }
                 
                 var channelId = ChannelId;
-                var bufferSpan = buffer.AsSpan();
-                bufferSpan[0] = KcpHeaderReceiveData;
-                MemoryMarshal.Write(bufferSpan[1..], in channelId);
-                
-                _kcpServerNetwork.SendAsync(buffer, 0, count + 5, RemoteEndPoint);
+
+                if (_encryptionHelper != null && _encryptionHelper.IsReady)
+                {
+                    var encLen = _encryptionHelper.Encrypt(buffer, 5, count, _encryptSendBuffer!, 5);
+                    _encryptSendBuffer[0] = KcpHeaderReceiveData;
+                    MemoryMarshal.Write(_encryptSendBuffer.AsSpan(1), in channelId);
+                    _kcpServerNetwork.SendAsync(_encryptSendBuffer, 0, encLen + 5, RemoteEndPoint);
+                }
+                else
+                {
+                    var bufferSpan = buffer.AsSpan();
+                    bufferSpan[0] = KcpHeaderReceiveData;
+                    MemoryMarshal.Write(bufferSpan[1..], in channelId);
+                    _kcpServerNetwork.SendAsync(buffer, 0, count + 5, RemoteEndPoint);
+                }
             }
             catch (Exception e)
             {

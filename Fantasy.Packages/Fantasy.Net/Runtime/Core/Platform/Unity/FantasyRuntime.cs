@@ -2,6 +2,7 @@
 using System;
 using Fantasy.Async;
 using Fantasy.Network;
+using Fantasy.Network.Security;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
@@ -218,7 +219,8 @@ namespace Fantasy
             [CanBeNull] Action onConnectComplete = null,
             [CanBeNull] Action onConnectFail = null,
             [CanBeNull] Action onConnectDisconnect = null,
-            bool enableReceiveMessageJsonLog = false
+            bool enableReceiveMessageJsonLog = false,
+            bool enableEncryption = false
         )
         {
             if (_fantasyRuntime != null)
@@ -245,7 +247,7 @@ namespace Fantasy
             }
 
             Session = CreateSession(Scene, remoteIP, remotePort, protocol, isHttps, connectTimeout, OnConnectComplete,
-                OnConnectFail, OnConnectDisconnect, enableReceiveMessageJsonLog);
+                OnConnectFail, OnConnectDisconnect, enableReceiveMessageJsonLog, enableEncryption);
 
             return Session;
         }
@@ -275,7 +277,8 @@ namespace Fantasy
             [CanBeNull] Action onConnectComplete = null,
             [CanBeNull] Action onConnectFail = null,
             [CanBeNull] Action onConnectDisconnect = null,
-            bool enableReceiveMessageJsonLog = false)
+            bool enableReceiveMessageJsonLog = false,
+            bool enableEncryption = false)
         {
             NetworkProtocolType networkProtocolType;
 
@@ -310,7 +313,7 @@ namespace Fantasy
                 onConnectComplete,
                 onConnectFail,
                 onConnectDisconnect,
-                isHttps, connectTimeout, enableReceiveMessageJsonLog);
+                isHttps, connectTimeout, enableReceiveMessageJsonLog, enableEncryption);
         }
 
         /// <summary>
@@ -442,6 +445,9 @@ namespace Fantasy
         [Tooltip("Connection timeout in milliseconds")]
         public int connectTimeout = 5000;
 
+        [Tooltip("Transport encryption type (None = no encryption, Aes256Gcm recommended for production)")]
+        public bool enableEncryption = false;
+
         [Tooltip("Print received client messages as JSON")]
         public bool enableReceiveMessageJsonLog;
 
@@ -562,7 +568,8 @@ namespace Fantasy
                 OnConnectComplete,
                 OnConnectFail,
                 OnConnectDisconnect,
-                enableReceiveMessageJsonLog);
+                enableReceiveMessageJsonLog,
+                enableEncryption);
             
             if (isRuntimeInstance)
             {
