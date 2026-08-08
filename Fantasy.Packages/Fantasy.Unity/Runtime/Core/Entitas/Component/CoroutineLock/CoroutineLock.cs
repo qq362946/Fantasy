@@ -101,6 +101,7 @@ namespace Fantasy.Async
             {
                 queue = CoroutineLockComponent.CoroutineLockQueuePool.Rent();
                 _queue.Add(waitForId, queue);
+                waitCoroutineLock.SetAcquired();
                 return waitCoroutineLock;
             }
 
@@ -252,7 +253,9 @@ namespace Fantasy.Async
                 // 成功进入临界区：登记 tag
                 _tagMap[(int)idIndex] = (tag, DateTime.UtcNow); 
 
-                return CoroutineLockComponent.WaitCoroutineLockPool.Rent(this, ref idIndex, tag, timeOut);
+                var waitCoroutineLock = CoroutineLockComponent.WaitCoroutineLockPool.Rent(this, ref idIndex, tag, timeOut);
+                waitCoroutineLock.SetAcquired();
+                return waitCoroutineLock;
             }
             catch
             {
@@ -282,7 +285,9 @@ namespace Fantasy.Async
                 }
                 // 成功进入临界区：登记 tag
                 _tagMap[(int)idx] = (tag, DateTime.UtcNow);
-                return CoroutineLockComponent.WaitCoroutineLockPool.Rent(this, ref idx, tag, timeOut);
+                var waitCoroutineLock = CoroutineLockComponent.WaitCoroutineLockPool.Rent(this, ref idx, tag, timeOut);
+                waitCoroutineLock.SetAcquired();
+                return waitCoroutineLock;
             }
             catch
             {

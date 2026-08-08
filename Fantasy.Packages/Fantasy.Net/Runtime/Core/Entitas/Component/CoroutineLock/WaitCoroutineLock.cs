@@ -19,17 +19,20 @@ namespace Fantasy.Async
 
         public WaitCoroutineLock Rent(ICoroutineLock coroutineLock, ref long coroutineLockQueueKey, string tag = null, int timeOut = 30000)
         {
-            var timerId = 0L;
             var lockId = _coroutineLockComponent.LockId;
             var waitCoroutineLock = _coroutineLockComponent.WaitCoroutineLockPool.Rent();
-
-            if (timeOut > 0)
-            {
-                timerId = _scene.TimerComponent.Net.OnceTimer(timeOut, new CoroutineLockTimeout(ref lockId, waitCoroutineLock));
-            }
-
-            waitCoroutineLock.Initialize(coroutineLock, this, ref coroutineLockQueueKey, ref timerId, ref lockId, tag);
+            waitCoroutineLock.Initialize(coroutineLock, this, ref coroutineLockQueueKey, ref lockId, tag, timeOut);
             return waitCoroutineLock;
+        }
+
+        public long StartTimeoutTimer(int timeOut, ref long lockId, WaitCoroutineLock waitCoroutineLock)
+        {
+            return _scene.TimerComponent.Net.OnceTimer(timeOut, new CoroutineLockTimeout(ref lockId, waitCoroutineLock));
+        }
+
+        public void RemoveTimeoutTimer(long timerId)
+        {
+            _scene.TimerComponent.Net.Remove(timerId);
         }
     }
 
@@ -56,7 +59,7 @@ namespace Fantasy.Async
                 return;
             }
 
-            Log.Error($"coroutine lock timeout LockDuty:{selfWaitCoroutineLock.CoroutineLock.LockDuty} Key:{selfWaitCoroutineLock.CoroutineLockQueueKey} Tag:{selfWaitCoroutineLock.Tag}");
+            selfWaitCoroutineLock.Timeout();
         }
     }
 
@@ -73,16 +76,19 @@ namespace Fantasy.Async
         internal ICoroutineLock CoroutineLock { get; private set; }
 
         private bool _isSetResult;
+        private bool _isAcquired;
+        private bool _isReleased;
+        private int _timeOut;
         private FTask<WaitCoroutineLock> _tcs;
         private WaitCoroutineLockPool _waitCoroutineLockPool;
-        internal void Initialize(ICoroutineLock coroutineLock, WaitCoroutineLockPool waitCoroutineLockPool, ref long coroutineLockQueueKey, ref long timerId, ref long lockId, string tag)
+        internal void Initialize(ICoroutineLock coroutineLock, WaitCoroutineLockPool waitCoroutineLockPool, ref long coroutineLockQueueKey, ref long lockId, string tag, int timeOut)
         {
             Tag = tag;
             LockId = lockId;
-            TimerId = timerId;
             CoroutineLock = coroutineLock;
             CoroutineLockQueueKey = coroutineLockQueueKey;
             _waitCoroutineLockPool = waitCoroutineLockPool;
+            _timeOut = timeOut;
         }
         /// <summary>
         /// 释放协程锁
@@ -95,17 +101,64 @@ namespace Fantasy.Async
                 return;
             }
             
-            CoroutineLock.Release(CoroutineLockQueueKey);
+            if (TimerId != 0)
+            {
+                _waitCoroutineLockPool.RemoveTimeoutTimer(TimerId);
+                TimerId = 0;
+            }
+
+            if (!_isReleased)
+            {
+                _isReleased = true;
+
+                if (_isAcquired)
+                {
+                    CoroutineLock.Release(CoroutineLockQueueKey);
+                }
+            }
             
+            var waitCoroutineLockPool = _waitCoroutineLockPool;
             _tcs = null;
             Tag = null;
             LockId = 0;
             TimerId = 0;
             _isSetResult = false;
+            _isAcquired = false;
+            _isReleased = false;
+            _timeOut = 0;
             CoroutineLockQueueKey = 0;
-            _waitCoroutineLockPool.Return(this);
             CoroutineLock = null;
             _waitCoroutineLockPool = null;
+            waitCoroutineLockPool.Return(this);
+        }
+
+        internal void SetAcquired()
+        {
+            if (_isAcquired || _isReleased || LockId == 0)
+            {
+                return;
+            }
+
+            _isAcquired = true;
+
+            if (_timeOut > 0)
+            {
+                var lockId = LockId;
+                TimerId = _waitCoroutineLockPool.StartTimeoutTimer(_timeOut, ref lockId, this);
+            }
+        }
+
+        internal void Timeout()
+        {
+            if (!_isAcquired || _isReleased || LockId == 0)
+            {
+                return;
+            }
+
+            _isReleased = true;
+            TimerId = 0;
+            Log.Error($"coroutine lock timeout and auto release LockDuty:{CoroutineLock.LockDuty} Key:{CoroutineLockQueueKey} Tag:{Tag}");
+            CoroutineLock.Release(CoroutineLockQueueKey);
         }
         
         internal FTask<WaitCoroutineLock> Tcs
@@ -122,6 +175,7 @@ namespace Fantasy.Async
             }
             
             _isSetResult = true;
+            SetAcquired();
             Tcs.SetResult(this);
         }
 
