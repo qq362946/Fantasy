@@ -506,6 +506,72 @@ public sealed class CSharpExporter(
             
             disposeCode.Append($"            MessageObjectPool<{messageDefinitionName}>.Return(this);");
 
+            var copyCode = new StringBuilder();
+            if (IsResponseType(messageDefinition.MessageType) && !hasErrorCodeField)
+            {
+                copyCode.AppendLine("            other.ErrorCode = ErrorCode;");
+            }
+
+            foreach (var field in messageDefinition.Fields)
+            {
+                if (field.CustomTextLine != null)
+                {
+                    continue;
+                }
+
+                var fieldName = field.Name;
+                switch (field.CollectionType)
+                {
+                    case FieldCollectionType.Repeated:
+                        if (messageDefinitions.ContainsKey(field.Type))
+                        {
+                            copyCode.AppendLine($"            other.{fieldName} = new List<{ConvertBaseType(field.Type)}>({fieldName}.Count);");
+                            copyCode.AppendLine($"            foreach (var __item in {fieldName}) other.{fieldName}.Add(__item.DeepCopy());");
+                        }
+                        else
+                        {
+                            copyCode.AppendLine($"            other.{fieldName} = new List<{ConvertBaseType(field.Type)}>({fieldName});");
+                        }
+                        break;
+                    case FieldCollectionType.RepeatedList:
+                        if (messageDefinitions.ContainsKey(field.Type))
+                        {
+                            copyCode.AppendLine($"            other.{fieldName} = {fieldName} == null ? null : new List<{ConvertBaseType(field.Type)}>({fieldName}.Count);");
+                            copyCode.AppendLine($"            if ({fieldName} != null) foreach (var __item in {fieldName}) other.{fieldName}.Add(__item.DeepCopy());");
+                        }
+                        else
+                        {
+                            copyCode.AppendLine($"            other.{fieldName} = {fieldName} == null ? null : new List<{ConvertBaseType(field.Type)}>({fieldName});");
+                        }
+                        break;
+                    case FieldCollectionType.RepeatedArray:
+                        if (messageDefinitions.ContainsKey(field.Type))
+                        {
+                            copyCode.AppendLine($"            other.{fieldName} = {fieldName} == null ? null : new {ConvertBaseType(field.Type)}[{fieldName}.Length];");
+                            copyCode.AppendLine($"            if ({fieldName} != null) for (var __i = 0; __i < {fieldName}.Length; __i++) other.{fieldName}[__i] = {fieldName}[__i]?.DeepCopy();");
+                        }
+                        else
+                        {
+                            copyCode.AppendLine($"            other.{fieldName} = {fieldName}?.Clone() as {ConvertBaseType(field.Type)}[];");
+                        }
+                        break;
+                    case FieldCollectionType.Map:
+                        copyCode.AppendLine($"            other.{fieldName} = new Dictionary<{ConvertBaseType(field.MapKeyType)}, {ConvertBaseType(field.MapValueType)}>({fieldName}.Count);");
+                        if (messageDefinitions.ContainsKey(field.MapValueType))
+                        {
+                            copyCode.AppendLine($"            foreach (var __pair in {fieldName}) other.{fieldName}.Add(__pair.Key, __pair.Value.DeepCopy());");
+                        }
+                        else
+                        {
+                            copyCode.AppendLine($"            foreach (var __pair in {fieldName}) other.{fieldName}.Add(__pair.Key, __pair.Value);");
+                        }
+                        break;
+                    default:
+                        copyCode.AppendLine($"            other.{fieldName} = {(messageDefinitions.ContainsKey(field.Type) ? $"{fieldName}?.DeepCopy()" : fieldName)};");
+                        break;
+                }
+            }
+
             if (messageDefinition.DocumentationComments.Count > 0)
             {
                 builder.AppendLine("    /// <summary>");
@@ -573,6 +639,22 @@ public sealed class CSharpExporter(
                                            {
                                                if (!IsPool()) return; 
                                    {{disposeCode}}
+                                           }
+
+                                           public void CopyTo(ref {{messageDefinitionName}} other)
+                                           {
+                                               if (other == null)
+                                               {
+                                                   other = Create(false);
+                                               }
+                                   {{copyCode}}
+                                           }
+
+                                           public {{messageDefinitionName}} DeepCopy()
+                                           {
+                                               var other = Create(false);
+                                               CopyTo(ref other);
+                                               return other;
                                            }
                                    {{string.Join(Environment.NewLine, members)}}
                                        }
