@@ -360,22 +360,24 @@ public static class Entry
         typeof(Entry).Assembly.EnsureLoaded();
         // 加载Fantasy.config配置文件
         await ConfigLoader.InitializeFromXml(Path.Combine(AppContext.BaseDirectory, "Fantasy.config"));
-        // 检查启动参数,后期可能有机器人等不同的启动参数
-        switch (ProgramDefine.ProcessType)
-        {
-            case "Game":
-            {
-                break;
-            }
-            default:
-            {
-                throw new NotSupportedException($"ProcessType is {ProgramDefine.ProcessType} Unrecognized!");
-            }
-        }
         // 初始化序列化
         await SerializerManager.Initialize();
         // 精度处理（只针对Windows下有作用、其他系统没有这个问题、一般也不会用Windows来做服务器的）
         WinPeriod.Initialize();
+        // 调用启动注册的相关逻辑
+        foreach (var hookInfo in AssemblyManifest.ForEachCustomInterfaceInfo<IEntryInitializeHook>())
+        {
+            try
+            {
+                var hook = (IEntryInitializeHook)hookInfo.CustomInterfaceFunc();
+                await hook.OnInitialize();
+            }
+            catch (Exception e)
+            {
+                Log.Error($"EntryInitializeHook {hookInfo.Type.FullName} failed: {e}");
+                throw;
+            }
+        }
     }
 
     /// <summary>

@@ -320,11 +320,7 @@ public sealed class RoamingComponent : Entity
     /// <param name="roamingType">要移除的RoamingType，默认不设置是移除所有漫游。</param>
     /// <param name="delayRemove">当设置了延迟移除时间后，会在设置的时间后再进行移除。</param>
     /// <param name="expectedOwnerSessionRuntimeId">非0时，仅允许删除仍属于该Session的漫游组件。</param>
-    internal async FTask Remove(
-        long roamingId,
-        int roamingType,
-        int delayRemove = 0,
-        long expectedOwnerSessionRuntimeId = 0)
+    internal async FTask Remove(long roamingId, int roamingType, int delayRemove = 0, long expectedOwnerSessionRuntimeId = 0)
     {
         if (_isInnerDisposed)
         {
@@ -356,10 +352,7 @@ public sealed class RoamingComponent : Entity
         _delayRemoveTaskId.Add(roamingId, taskId);
     }
 
-    private async FTask InnerRemove(
-        long roamingId,
-        int roamingType,
-        long expectedOwnerSessionRuntimeId = 0)
+    private async FTask InnerRemove(long roamingId, int roamingType, long expectedOwnerSessionRuntimeId = 0)
     {
         if (_isInnerDisposed)
         {
