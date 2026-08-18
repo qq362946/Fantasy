@@ -10,28 +10,6 @@ using Fantasy.Entitas;
 namespace Fantasy.Network.Roaming;
 
 /// <summary>
-/// 漫游终端创建类型枚举。
-/// 用于区分漫游终端是首次创建还是重新连接。
-/// </summary>
-public enum CreateTerminusType
-{
-    /// <summary>
-    /// 未指定类型。
-    /// </summary>
-    None = 0,
-    /// <summary>
-    /// 首次创建漫游终端。
-    /// 当客户端第一次与目标服务器建立漫游连接时使用此类型。
-    /// </summary>
-    Link = 1,
-    /// <summary>
-    /// 重新连接漫游终端。
-    /// 当目标服务器重启或客户端断线重连时使用此类型。
-    /// </summary>
-    ReLink = 2,
-}
-
-/// <summary>
 /// 漫游终端销毁类型枚举。
 /// </summary>
 public enum DisposeTerminusType
@@ -74,25 +52,18 @@ public struct OnCreateTerminus
     /// 获取与事件关联的漫游终端实例。
     /// </summary>
     public readonly Terminus Terminus;
-    /// <summary>
-    /// 获取漫游终端的创建类型。
-    /// 用于区分是首次创建（Link）还是重新连接（ReLink）。
-    /// </summary>
-    public readonly CreateTerminusType Type;
 
     /// <summary>
     /// 初始化一个新的 <see cref="OnCreateTerminus"/> 实例。
     /// </summary>
     /// <param name="scene">与事件关联的场景实体。</param>
-    /// <param name="createTerminusType">漫游终端的创建类型。</param>
     /// <param name="terminus">漫游终端实例。</param>
     /// <param name="args">从 Gate 服务器传递的自定义参数。</param>
-    public OnCreateTerminus(Scene scene, CreateTerminusType createTerminusType, Terminus terminus, Entity? args)
+    public OnCreateTerminus(Scene scene, Terminus terminus, Entity? args)
     {
         Args = args;
         Scene = scene;
         Terminus = terminus;
-        Type = createTerminusType;
     }
 }
 
@@ -209,62 +180,7 @@ public sealed class TerminusComponent : Entity
             _terminals.Clear();
         }
     }
-
-    /// <summary>
-    /// 创建一个新的漫游终端。
-    /// <para>当 Gate 服务器首次请求与目标服务器建立漫游连接时调用此方法。</para>
-    /// <para>创建成功后会发布 <see cref="OnCreateTerminus"/> 事件，业务层可订阅此事件执行玩家实体创建逻辑。</para>
-    /// </summary>
-    /// <param name="scene">当前Scene</param>
-    /// <param name="roamingId">漫游唯一标识，通常使用玩家账号ID。不能为0。</param>
-    /// <param name="roamingType">漫游类型，用于区分不同的目标服务器类型（如 Map、Chat 等）。</param>
-    /// <param name="forwardSessionAddress">需要转发消息的 Session 地址（客户端连接的 Session）。</param>
-    /// <param name="forwardSceneAddress">转发 Session 所在的 Scene 地址（通常是 Gate 服务器地址）。</param>
-    /// <param name="args">可选的自定义参数，会传递给 <see cref="OnCreateTerminus"/> 事件。</param>
-    /// <returns>返回元组：(错误码, Terminus实例)。错误码为0表示成功。</returns>
-    internal async FTask<(uint, Terminus)> Create(Scene scene, long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress, Entity? args)
-    {
-        if (_isClosed)
-        {
-            return (InnerErrorCode.ErrRoamingDisposed, null);
-        }
-        
-        if (roamingId == 0)
-        {
-            return (InnerErrorCode.ErrCreateTerminusInvalidRoamingId, null);
-        }
-        
-        if (_terminals.ContainsKey(roamingId))
-        {
-            return (InnerErrorCode.ErrAddRoamingTerminalAlreadyExists, null);
-        }
-
-        var terminus = Entity.Create<Terminus>(scene, roamingId, false, true);
-        
-        terminus.IsDisposeTerminus = false;
-        terminus.RoamingType = roamingType;
-        terminus.ForwardSceneAddress = forwardSceneAddress;
-        terminus.ForwardSessionAddress = forwardSessionAddress;
-        terminus.RoamingMessageLock = scene.CoroutineLockComponent.Create(terminus.Type.TypeHandle.Value.ToInt64());
-        
-        _terminals.Add(terminus.Id, terminus);
-
-        await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, CreateTerminusType.Link, terminus, args));
-        
-        if (_isClosed ||
-            terminus.IsDisposeTerminus ||
-            terminus.IsDisposed)
-        {
-            return (InnerErrorCode.ErrRoamingDisposed, null);
-        }
-        
-        if (terminus.TerminusId == 0)
-        {
-            terminus.TerminusId = terminus.RuntimeId;
-        }
-        
-        return (0U, terminus);
-    }
+    
 
     /// <summary>
     /// 重新连接漫游终端。
@@ -279,7 +195,7 @@ public sealed class TerminusComponent : Entity
     /// <param name="forwardSceneAddress">转发 Session 所在的 Scene 地址（通常是 Gate 服务器地址）。</param>
     /// <param name="args">可选的自定义参数，会传递给 <see cref="OnCreateTerminus"/> 事件。</param>
     /// <returns>返回元组：(错误码, Terminus实例)。错误码为0表示成功。</returns>
-    internal async FTask<(uint, Terminus)> ReLink(Scene scene, long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress, Entity? args)
+    internal async FTask<(uint, Terminus)> Link(Scene scene, long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress, Entity? args)
     {
         if (_isClosed)
         {
@@ -310,7 +226,7 @@ public sealed class TerminusComponent : Entity
         terminus.ForwardSceneAddress = forwardSceneAddress;
         terminus.ForwardSessionAddress = forwardSessionAddress;
 
-        await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, CreateTerminusType.ReLink, terminus, args));
+        await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, terminus, args));
 
         if (_isClosed ||
             terminus.IsDisposeTerminus ||

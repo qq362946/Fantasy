@@ -208,7 +208,6 @@ public sealed class SessionRoamingComponent : Entity
 
         if (!_roaming.TryGetValue(roamingType, out var roaming))
         {
-            request.LinkType = 0;
             
             using var response = (I_LinkRoamingResponse)await Scene.NetworkMessagingComponent.Call(targetSceneAddress, request);
 
@@ -231,7 +230,6 @@ public sealed class SessionRoamingComponent : Entity
             roaming.TerminusId = 0;
             roaming.TargetSceneAddress = targetSceneAddress;
             roaming.ForwardSessionAddress = forwardSessionAddress;
-            request.LinkType = 1;
             
             using var response = (I_LinkRoamingResponse)await Scene.NetworkMessagingComponent.Call(targetSceneAddress, request);
 

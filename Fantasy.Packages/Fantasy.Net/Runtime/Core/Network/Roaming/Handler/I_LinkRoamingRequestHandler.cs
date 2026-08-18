@@ -16,21 +16,11 @@ internal sealed class I_LinkRoamingRequestHandler : AddressRPC<Scene, I_LinkRoam
         uint errorCode = 0;
         Terminus roamingTerminal = null;
 
-        if (request.LinkType == 1)
-        {
-            (errorCode, roamingTerminal) = await scene.TerminusComponent.ReLink(
-                scene,
-                request.RoamingId, request.RoamingType,
-                request.ForwardSessionAddress, request.SceneAddress, request.Args);
-        }
-        else
-        {
-            (errorCode, roamingTerminal) = await scene.TerminusComponent.Create(
-                scene,
-                request.RoamingId, request.RoamingType,
-                request.ForwardSessionAddress, request.SceneAddress, request.Args);
-        }
-
+        (errorCode, roamingTerminal) = await scene.TerminusComponent.Link(
+            scene,
+            request.RoamingId, request.RoamingType,
+            request.ForwardSessionAddress, request.SceneAddress, request.Args);
+        
         if (errorCode != 0)
         {
             response.ErrorCode = errorCode;
