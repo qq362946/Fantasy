@@ -11,8 +11,8 @@ internal sealed class I_UnLinkRoamingRequestHandler : AddressRPC<Scene, I_UnLink
 {
     protected override async FTask Run(Scene scene, I_UnLinkRoamingRequest request, I_UnLinkRoamingResponse response, Action reply)
     {
-        await scene.TerminusComponent.RemoveTerminusAsync(
-            DisposeTerminusType.UnLink, request.RoamingId, request.DisposeRoaming);
+        await scene.TerminusComponent.UnLinkTerminusAsync(
+            DisposeTerminusType.UnLink, request.RoamingId, request.AuthAddress);
     }
 }
 #endif

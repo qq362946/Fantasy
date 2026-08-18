@@ -307,6 +307,27 @@ public sealed class TerminusComponent : Entity
     }
 
     /// <summary>
+    /// 解除漫游终端绑定
+    /// 仅当 Terminus 当前的 ForwardSceneAddress 与指定地址一致时才有权解除绑定 执行Terminus销毁
+    /// </summary>
+    /// <param name="disposeTerminusType">漫游终端的销毁类型。</param>
+    /// <param name="roamingId">漫游唯一标识。</param>
+    /// <param name="authAddress"></param>
+    internal async FTask UnLinkTerminusAsync(DisposeTerminusType disposeTerminusType, long roamingId, long authAddress)
+    {
+        if (!_terminals.Remove(roamingId, out var terminus))
+        {
+            return;
+        }
+
+        if (terminus.ForwardSceneAddress != authAddress)
+        {
+            return;
+        }
+        await RemoveTerminusAsync(disposeTerminusType, roamingId, true);
+    }
+    
+    /// <summary>
     /// 根据 roamingId 移除漫游终端。
     /// </summary>
     /// <param name="disposeTerminusType">漫游终端的销毁类型。</param>

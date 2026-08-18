@@ -469,7 +469,7 @@ namespace Fantasy.InnerMessage
         public void Dispose()
         {
             RoamingId = 0;
-            DisposeRoaming = false;
+            AuthAddress = 0;
             MessageObjectPool<I_UnLinkRoamingRequest>.Return(this);
         }
 
@@ -480,7 +480,7 @@ namespace Fantasy.InnerMessage
         [ProtoMember(1)]
         public long RoamingId { get; set; }
         [ProtoMember(2)]
-        public bool DisposeRoaming { get; set; }
+        public long AuthAddress { get; set; }
     }
     [ProtoContract]
     public sealed partial class I_UnLinkRoamingResponse : AMessage, IAddressResponse

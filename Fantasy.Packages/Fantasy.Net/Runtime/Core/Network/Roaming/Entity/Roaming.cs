@@ -146,7 +146,7 @@ public sealed class Roaming : Entity
         using var response =
             await Scene.NetworkMessagingComponent.Call(TargetSceneAddress, new I_UnLinkRoamingRequest()
             {
-                RoamingId = SessionRoamingComponent!.Id, DisposeRoaming = true
+                RoamingId = SessionRoamingComponent!.Id,AuthAddress = Scene.Address,
             });
         return response.ErrorCode;
     }
