@@ -95,14 +95,18 @@ namespace Fantasy.Network.Security
             iv.CopyTo(dst.Slice(dstOffset, 16));
 
             int cipherLen = EncryptData(src.Slice(srcOffset, srcCount), iv, dst.Slice(dstOffset + 16));
-
             int total = 16 + cipherLen;
+
+#if FANTASY_NET || FANTASY_CONSOLE
+            HMACSHA256.HashData(_hmacKey, dst.Slice(dstOffset, total), dst.Slice(dstOffset + total, 32));
+#else
             Span<byte> hashBuf = stackalloc byte[32];
             using (var hmac = new HMACSHA256(_hmacKey))
             {
                 hmac.TryComputeHash(dst.Slice(dstOffset, total), hashBuf, out _);
             }
             hashBuf.CopyTo(dst.Slice(dstOffset + total, 32));
+#endif
             return total + 32;
         }
 
@@ -113,10 +117,14 @@ namespace Fantasy.Network.Security
 
             int bodyLen = srcCount - 32;
             Span<byte> hashExpected = stackalloc byte[32];
+#if FANTASY_NET || FANTASY_CONSOLE
+            HMACSHA256.HashData(_hmacKey, src.Slice(srcOffset, bodyLen), hashExpected);
+#else
             using (var hmac = new HMACSHA256(_hmacKey))
             {
                 hmac.TryComputeHash(src.Slice(srcOffset, bodyLen), hashExpected, out _);
             }
+#endif
 
             if (!CryptographicOperations.FixedTimeEquals(hashExpected, src.Slice(srcOffset + bodyLen, 32)))
                 throw new CryptographicException("HMAC verification failed");
