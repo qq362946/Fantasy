@@ -77,7 +77,7 @@ namespace Fantasy.Network.KCP
         {
             _startTime = Environment.TickCount64;
             Settings = KCPSettings.Create(networkTarget);
-            _enableEncryption = ProgramDefine.EnableEncryption;
+            _enableEncryption = ProgramDefine.EnableEncryption && networkTarget == NetworkTarget.Outer;
             base.Initialize(NetworkType.Server, NetworkProtocolType.KCP, networkTarget, false);
             _socket = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
             _socket.Blocking = false;
@@ -467,6 +467,7 @@ namespace Fantasy.Network.KCP
                 foreach (var channelId in _pendingConnectionTimeOut[timeId])
                 {
                     _pendingConnection.Remove(channelId);
+                    _channelEncryption.Remove(channelId);
                 }
 
                 _pendingConnectionTimeOut.RemoveKey(timeId);

@@ -28,7 +28,7 @@ namespace Fantasy.Network.TCP
         public void Initialize(NetworkTarget networkTarget, IPEndPoint address)
         {
             base.Initialize(NetworkType.Server, NetworkProtocolType.TCP, networkTarget, false);
-            _enableEncryption = ProgramDefine.EnableEncryption;
+            _enableEncryption = ProgramDefine.EnableEncryption && networkTarget == NetworkTarget.Outer;
             _random = new Random();
             _acceptAsync = new SocketAsyncEventArgs();
             _socket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
