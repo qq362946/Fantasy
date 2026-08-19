@@ -520,6 +520,15 @@ namespace Fantasy.Network.TCP
                 }
                 else if (marker == EncryptionHelper.KeyExchangeMarker)
                 {
+                    if (!string.IsNullOrEmpty(_serverPublicKey))
+                    {
+                        Log.Error("Key exchange failed. Public key pinning is enabled, but server responded with ephemeral key mode (0xEC). Connection rejected to prevent MITM.");
+                        _connectDisconnectEvent = false;
+                        _onConnectFail?.Invoke();
+                        Dispose();
+                        disposed = true;
+                        return false;
+                    }
                     const int keyExchangePacketSize = sizeof(int) + 1 + EncryptionHelper.PublicKeySize;
                     if (sp.Length < keyExchangePacketSize) return false;
                     serverPublicKey = sp.Slice(sizeof(int) + 1, EncryptionHelper.PublicKeySize).ToArray();
