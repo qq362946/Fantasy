@@ -633,7 +633,7 @@ namespace Fantasy
 #endif
 #if FANTASY_NET
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static Scene Create(Process process, byte worldId, uint sceneConfigId)
+        private static Scene Create(Process process, uint worldId, uint sceneConfigId)
         {
             var scene = new Scene();
             scene.Scene = scene;
@@ -657,7 +657,7 @@ namespace Fantasy
         /// <returns>创建成功后会返回创建的Scene的实例</returns>
         public static async FTask<Scene> Create(Process process, MachineConfig machineConfig, SceneConfig sceneConfig)
         {
-            var scene = Create(process, (byte)sceneConfig.WorldConfigId, sceneConfig.Id);
+            var scene = Create(process, sceneConfig.WorldConfigId, sceneConfig.Id);
             scene.SceneType = sceneConfig.SceneType;
             scene.SceneConfigId = sceneConfig.Id;
             await SetScheduler(scene, sceneConfig.SceneRuntimeMode);
@@ -668,7 +668,7 @@ namespace Fantasy
                 
                 if (sceneConfig.WorldConfigId != 0)
                 {
-                    scene.World = World.Create(scene, (byte)sceneConfig.WorldConfigId);
+                    scene.World = World.Create(scene, sceneConfig.WorldConfigId);
                 }
                 
                 if (sceneConfig.InnerPort != 0)

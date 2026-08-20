@@ -19,7 +19,7 @@ namespace Fantasy
         /// <summary>
         /// 获取世界的唯一标识。
         /// </summary>
-        public byte Id { get; private init; }
+        public uint Id { get; private init; }
         /// <summary>
         /// 世界名。
         /// </summary>
@@ -87,7 +87,7 @@ namespace Fantasy
         /// </summary>
         /// <param name="scene"></param>
         /// <param name="worldConfigId"></param>
-        private World(Scene scene, byte worldConfigId)
+        private World(Scene scene, uint worldConfigId)
         {
             Id = worldConfigId;  
             Name = WorldConfigData.Instance.Get(worldConfigId).WorldName;
@@ -149,7 +149,7 @@ namespace Fantasy
         /// <param name="scene"></param>
         /// <param name="id">游戏世界的唯一标识。</param>
         /// <returns>游戏世界实例。</returns>
-        internal static World Create(Scene scene, byte id)
+        internal static World Create(Scene scene, uint id)
         {
             if (!WorldConfigData.Instance.TryGet(id, out var worldConfigData))
             {

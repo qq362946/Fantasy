@@ -56,7 +56,7 @@ namespace Fantasy.IdFactory
             return _idFactoryType;
         }
 
-        internal static IEntityIdFactory EntityIdFactory(uint sceneId, byte worldId)
+        internal static IEntityIdFactory EntityIdFactory(uint sceneId, uint worldId)
         {
             switch (_idFactoryType)
             {
@@ -66,7 +66,7 @@ namespace Fantasy.IdFactory
                 }
                 case IdFactoryType.World:
                 {
-                    return new WorldEntityIdFactory(sceneId, worldId);
+                    return new WorldEntityIdFactory(sceneId, (byte)worldId);
                 }
                 default:
                 {
@@ -75,7 +75,7 @@ namespace Fantasy.IdFactory
             }
         }
 
-        internal static IRuntimeIdFactory RuntimeIdFactory(long epochNow, uint sceneId, byte worldId)
+        internal static IRuntimeIdFactory RuntimeIdFactory(long epochNow, uint sceneId, uint worldId)
         {
             switch (_idFactoryType)
             {
@@ -90,7 +90,7 @@ namespace Fantasy.IdFactory
                         epochNow = TimeHelper.Now;
                     }
 
-                    return new WorldRuntimeIdFactory(epochNow, sceneId, worldId);
+                    return new WorldRuntimeIdFactory(epochNow, sceneId, (byte)worldId);
                 }
                 default:
                 {
@@ -99,7 +99,7 @@ namespace Fantasy.IdFactory
             }
         }
 
-        internal static long EntityId(uint time, uint sceneId, byte wordId, uint sequence)
+        internal static long EntityId(uint time, uint sceneId, uint wordId, uint sequence)
         {
             switch (_idFactoryType)
             {
@@ -109,7 +109,7 @@ namespace Fantasy.IdFactory
                 }
                 case IdFactoryType.World:
                 {
-                    return new WorldEntityIdStruct(time, sceneId, wordId, sequence);
+                    return new WorldEntityIdStruct(time, sceneId, (byte)wordId, sequence);
                 }
                 default:
                 {
@@ -118,7 +118,7 @@ namespace Fantasy.IdFactory
             }
         }
 
-        internal static long RuntimeId(bool isPool, uint time, uint sceneId, byte wordId, uint sequence)
+        internal static long RuntimeId(bool isPool, uint time, uint sceneId, uint wordId, uint sequence)
         {
             switch (_idFactoryType)
             {
@@ -128,7 +128,7 @@ namespace Fantasy.IdFactory
                 }
                 case IdFactoryType.World:
                 {
-                    return new WorldRuntimeIdStruct(isPool, time, sceneId, wordId, sequence);
+                    return new WorldRuntimeIdStruct(isPool, time, sceneId, (byte)wordId, sequence);
                 }
                 default:
                 {
