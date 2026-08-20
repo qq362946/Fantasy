@@ -393,6 +393,11 @@ public sealed partial class Terminus : Entity
     {
         // 先恢复到目标 Scene，再重新生成只在进程内有效的 RuntimeId 和关联标记。
         Deserialize(scene);
+        
+        // RoamingMessageLock 不参与序列化，
+        // 传送到目标 Scene 后必须重新创建。
+        RoamingMessageLock = scene.CoroutineLockComponent.Create(Type.TypeHandle.Value.ToInt64());
+        
         TerminusId = RuntimeId;
 
         if (TerminusEntity != null)

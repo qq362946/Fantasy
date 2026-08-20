@@ -333,6 +333,14 @@ internal static class ProcessScheduler
                     if (entity == null || entity.IsDisposed)
                     {
                         ((IMessage)messageObject).Dispose();
+                        
+                        // Terminus 传送后，发送端可能仍缓存旧 TerminusId。
+                        // 返回路由不存在，使发送端重新向 Gate 查询新的 TerminusId。
+                        sceneMessageDispatcherComponent.FailRouteResponse(
+                            session,
+                            protocolCode,
+                            InnerErrorCode.ErrNotFoundRoute,
+                            rpcId);
                         return;
                     }
 
