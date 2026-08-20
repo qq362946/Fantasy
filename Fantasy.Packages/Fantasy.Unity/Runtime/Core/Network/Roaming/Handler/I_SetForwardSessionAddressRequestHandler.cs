@@ -8,21 +8,26 @@ using Fantasy.Network.Interface;
 
 namespace Fantasy.Roaming.Handler;
 
-internal sealed class
-    I_SetForwardSessionAddressRequestHandler : AddressRPC<Scene, I_SetForwardSessionAddressRequest,
-    I_SetForwardSessionAddressResponse>
+/// <summary>
+/// 在客户端重连后更新目标 Terminus 的 Session 地址并恢复转发。
+/// </summary>
+internal sealed class I_SetForwardSessionAddressRequestHandler : AddressRPC<Scene, I_SetForwardSessionAddressRequest, I_SetForwardSessionAddressResponse>
 {
-    protected override async FTask Run(Scene scene, I_SetForwardSessionAddressRequest request,
-        I_SetForwardSessionAddressResponse response,
-        Action reply)
+    protected override async FTask Run(Scene scene, I_SetForwardSessionAddressRequest request, I_SetForwardSessionAddressResponse response, Action reply)
     {
         if (!scene.TerminusComponent.TryGetTerminus(request.RoamingId, out var terminus))
         {
-            // 没有找到需要返回对应错误码
             response.ErrorCode = InnerErrorCode.ErrSetForwardSessionAddressNotFoundTerminus;
             return;
         }
+        
+        if (terminus.OwnerRoamingRuntimeId != request.OwnerRoamingRuntimeId)
+        {
+            response.ErrorCode = InnerErrorCode.ErrRoamingOwnerChanged;
+            return;
+        }
 
+        // 地址和开关在同一条 Scene 消息中顺序更新，避免恢复转发后仍指向旧 Session。
         terminus.StopForwarding = false;
         terminus.ForwardSessionAddress = request.ForwardSessionAddress;
         await FTask.CompletedTask;

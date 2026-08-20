@@ -5,6 +5,7 @@ using Fantasy.Async;
 using Fantasy.Entitas;
 using Fantasy.Network;
 #if FANTASY_NET
+using Fantasy.Network.Roaming;
 using Fantasy.Platform.Net;
 #endif
 #if !FANTASY_WEBGL
@@ -55,8 +56,10 @@ namespace Fantasy
 #if FANTASY_NET
             NetworkMessagingComponent = rootScene.NetworkMessagingComponent;
             SeparateTableComponent = rootScene.SeparateTableComponent;
-            RoamingComponent = rootScene.RoamingComponent;
-            TerminusComponent = rootScene.TerminusComponent;
+            // Roaming 管理当前源端 Scene 的 Session 漫游上下文。
+            RoamingComponent = Create<RoamingComponent>(this, false, true).Initialize();
+            // Terminus 属于具体目标 Scene，SubScene 之间不能共享管理索引。
+            TerminusComponent = Create<TerminusComponent>(this, false, true);
             SphereEventComponent = rootScene.SphereEventComponent;
 #endif
             ThreadSynchronizationContext = rootScene.ThreadSynchronizationContext;
@@ -93,6 +96,43 @@ namespace Fantasy
 
 #if !FANTASY_WEBGL && !UNITY_WEBGL
             // HTTP await 后重新切回 Scene 执行上下文。
+            await SwitchToSceneThread();
+#endif
+
+#if FANTASY_NET
+            try
+            {
+                // 先解除源端维护的全部漫游路由。
+                if (RoamingComponent != null && !RoamingComponent.IsDisposed)
+                {
+                    await RoamingComponent.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                closeException = closeException == null
+                    ? e
+                    : new AggregateException(closeException, e);
+            }
+            try
+            {
+                // SubScene 独立管理自己的 Terminus。
+                // 必须先发布 Terminus 离开事件并完成业务清理，再销毁 SubScene。
+                if (TerminusComponent != null && !TerminusComponent.IsDisposed)
+                {
+                    await TerminusComponent.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                closeException = closeException == null
+                    ? e
+                    : new AggregateException(closeException, e);
+            }
+#endif
+            
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+// TerminusComponent.Close 可能发生异步等待，销毁前重新切回 Scene 线程。
             await SwitchToSceneThread();
 #endif
 

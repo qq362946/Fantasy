@@ -52,7 +52,7 @@ namespace Fantasy.Platform.Unity
             Log.Info($"Fantasy Version:{ProgramDefine.VERSION}");
             // 初始化序列化
             await SerializerManager.Initialize();
-#if FANTASY_WEBGL
+#if FANTASY_WEBGL && !UNITY_EDITOR
             ThreadSynchronizationContext.Initialize();
 #endif
             _isInit = true;

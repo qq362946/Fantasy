@@ -133,5 +133,9 @@ namespace Fantasy.Network
         /// 需要先通过 LinkTerminusEntity 关联实体后才能使用。
         /// </summary>
         public const uint ErrTerminusNotLinked = 100000034;
+        /// <summary>
+        /// 表示漫游控制请求来自已经失效的 SessionRoamingComponent。
+        /// </summary>
+        public const uint ErrRoamingOwnerChanged = 100000035;
     }
 }

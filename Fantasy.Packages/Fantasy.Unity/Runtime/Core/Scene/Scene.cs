@@ -271,6 +271,31 @@ namespace Fantasy
                 closeException = e;
             }
 #endif
+            
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            await SwitchToSceneThread();
+#endif
+            
+            // SubScene 拥有独立的 TerminusComponent。
+            // Root Scene 关闭前，必须先完成所有 SubScene 的异步清理。
+            foreach (var subScene in _entities.Values.OfType<SubScene>().ToArray())
+            {
+                try
+                {
+                    await subScene.Close();
+                }
+                catch (Exception e)
+                {
+                    closeException = closeException == null
+                        ? e
+                        : new AggregateException(closeException, e);
+                }
+            }
+            
+#if !FANTASY_WEBGL && !UNITY_WEBGL
+            // SubScene.Close 可能发生异步等待，继续关闭 Root Scene 前重新切回 Scene 线程。
+            await SwitchToSceneThread();
+#endif
 
 #if FANTASY_NET
             // 网络自行决定是否需要异步释放，Scene不感知具体协议。

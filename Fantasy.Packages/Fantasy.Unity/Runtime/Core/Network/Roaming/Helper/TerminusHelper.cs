@@ -9,18 +9,17 @@ using Fantasy.Network.Interface;
 namespace Fantasy.Network.Roaming;
 
 /// <summary>
-/// Terminus 扩展方法帮助类。
-/// 提供便捷的 Terminus 操作方法，让 Entity 可以直接调用 Terminus 的功能。
+/// 提供关联实体到 Terminus 的查询、消息和传送扩展方法。
 /// </summary>
 public static class TerminusHelper
 {
     #region Entity 关联查询
 
     /// <summary>
-    /// 获取实体关联的 Terminus。
+    /// 获取实体关联的 Terminus；调用方必须保证实体已经完成关联。
     /// </summary>
-    /// <param name="entity">实体</param>
-    /// <returns>关联的 Terminus</returns>
+    /// <param name="entity">已关联 Terminus 的实体。</param>
+    /// <returns>实体当前关联的 Terminus。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Terminus GetLinkTerminus(this Entity entity)
     {
@@ -28,11 +27,11 @@ public static class TerminusHelper
     }
 
     /// <summary>
-    /// 尝试获取实体关联的 Terminus。
+    /// 尝试获取实体关联且仍有效的 Terminus。
     /// </summary>
-    /// <param name="entity">实体</param>
-    /// <param name="terminus">关联的 Terminus（如果存在）</param>
-    /// <returns>是否成功获取</returns>
+    /// <param name="entity">要查询的实体。</param>
+    /// <param name="terminus">找到的 Terminus。</param>
+    /// <returns>存在有效关联时返回 <see langword="true"/>。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool TryGetLinkTerminus(this Entity entity, out Terminus terminus)
     {
@@ -53,26 +52,11 @@ public static class TerminusHelper
     #region Message 方法
 
     /// <summary>
-    /// 通过关联的 Terminus 发送一个消息给客户端。
+    /// 通过实体关联的 Terminus 向源端 Session 转发消息。
     /// </summary>
-    /// <remarks>
-    /// 性能建议：如果需要频繁发送消息，建议先获取 Terminus 后直接调用其 Send 方法，可以避免重复的组件查找开销。
-    /// <para>获取 Terminus 的方式：</para>
-    /// <code>
-    /// // 方式 1：直接获取（如果确定存在）
-    /// var terminus = entity.GetLinkTerminus();
-    /// terminus.Send(message);
-    ///
-    /// // 方式 2：安全获取（推荐）
-    /// if (entity.TryGetLinkTerminus(out var terminus))
-    /// {
-    ///     terminus.Send(message);
-    /// }
-    /// </code>
-    /// </remarks>
-    /// <param name="entity">已关联 Terminus 的实体</param>
-    /// <param name="message">要发送的消息</param>
-    /// <typeparam name="T">消息类型</typeparam>
+    /// <param name="entity">已关联 Terminus 的实体。</param>
+    /// <param name="message">要转发的漫游消息。</param>
+    /// <typeparam name="T">漫游消息类型。</typeparam>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Send<T>(this Entity entity, T message) where T : IRoamingMessage
     {
@@ -96,27 +80,12 @@ public static class TerminusHelper
     }
 
     /// <summary>
-    /// 通过关联的 Terminus 发送一个漫游消息到指定的漫游类型。
+    /// 通过实体关联的 Terminus 向另一 roamingType 发送单向消息。
     /// </summary>
-    /// <remarks>
-    /// 性能建议：如果需要频繁发送消息，建议先获取 Terminus 后直接调用其 Send 方法，可以避免重复的组件查找开销。
-    /// <para>获取 Terminus 的方式：</para>
-    /// <code>
-    /// // 方式 1：直接获取（如果确定存在）
-    /// var terminus = entity.GetLinkTerminus();
-    /// terminus.Send(roamingType, message);
-    ///
-    /// // 方式 2：安全获取（推荐）
-    /// if (entity.TryGetLinkTerminus(out var terminus))
-    /// {
-    ///     terminus.Send(roamingType, message);
-    /// }
-    /// </code>
-    /// </remarks>
-    /// <param name="entity">已关联 Terminus 的实体</param>
-    /// <param name="roamingType">目标漫游类型</param>
-    /// <param name="message">要发送的消息</param>
-    /// <typeparam name="T">消息类型</typeparam>
+    /// <param name="entity">已关联 Terminus 的实体。</param>
+    /// <param name="roamingType">目标漫游类型。</param>
+    /// <param name="message">要发送的漫游消息。</param>
+    /// <typeparam name="T">漫游消息类型。</typeparam>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void Send<T>(this Entity entity, int roamingType, T message) where T : IRoamingMessage
     {
@@ -140,28 +109,13 @@ public static class TerminusHelper
     }
 
     /// <summary>
-    /// 通过关联的 Terminus 发送一个漫游 RPC 消息到指定的漫游类型。
+    /// 通过实体关联的 Terminus 调用另一 roamingType。
     /// </summary>
-    /// <remarks>
-    /// 性能建议：如果需要频繁发送消息，建议先获取 Terminus 后直接调用其 Call 方法，可以避免重复的组件查找开销。
-    /// <para>获取 Terminus 的方式：</para>
-    /// <code>
-    /// // 方式 1：直接获取（如果确定存在）
-    /// var terminus = entity.GetLinkTerminus();
-    /// var response = await terminus.Call(roamingType, request);
-    ///
-    /// // 方式 2：安全获取（推荐）
-    /// if (entity.TryGetLinkTerminus(out var terminus))
-    /// {
-    ///     var response = await terminus.Call(roamingType, request);
-    /// }
-    /// </code>
-    /// </remarks>
-    /// <param name="entity">已关联 Terminus 的实体</param>
-    /// <param name="roamingType">目标漫游类型</param>
-    /// <param name="request">要发送的请求</param>
-    /// <typeparam name="T">请求类型</typeparam>
-    /// <returns>响应消息</returns>
+    /// <param name="entity">已关联 Terminus 的实体。</param>
+    /// <param name="roamingType">目标漫游类型。</param>
+    /// <param name="request">要发送的漫游请求。</param>
+    /// <typeparam name="T">漫游请求类型。</typeparam>
+    /// <returns>目标端响应；实体未关联 Terminus 时返回对应错误响应。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static FTask<IResponse> Call<T>(this Entity entity, int roamingType, T request) where T : IRoamingMessage
     {
@@ -189,12 +143,11 @@ public static class TerminusHelper
     #region Transfer 方法
 
     /// <summary>
-    /// 传送关联的 Terminus 到目标场景。
-    /// 传送完成后，Terminus 和关联的实体都会被销毁。
+    /// 将实体关联的 Terminus 和实体本身传送到目标 Scene。
     /// </summary>
-    /// <param name="entity">已关联 Terminus 的实体</param>
-    /// <param name="targetSceneAddress">目标场景地址</param>
-    /// <returns>错误码，0 表示成功</returns>
+    /// <param name="entity">已关联 Terminus 的实体。</param>
+    /// <param name="targetSceneAddress">目标 Scene 地址。</param>
+    /// <returns>0 表示成功；实体未关联或传送失败时返回对应错误码。</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static FTask<uint> StartTransfer(this Entity entity, long targetSceneAddress)
     {
