@@ -598,10 +598,10 @@ namespace Fantasy
                 tcs.SetResult(scene);
             }
         }
-        public Session Connect(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000, bool enableReceiveMessageJsonLog = false)
+        public Session Connect(string remoteAddress, NetworkProtocolType networkProtocolType, Action onConnectComplete, Action onConnectFail, Action onConnectDisconnect, bool isHttps, int connectTimeout = 5000, bool enableReceiveMessageJsonLog = false, bool enableEncryption = false, string serverPublicKey = null)
         {
             UnityNetwork?.Dispose();
-            UnityNetwork = NetworkProtocolFactory.CreateClient(this, networkProtocolType, NetworkTarget.Outer, enableReceiveMessageJsonLog);
+            UnityNetwork = NetworkProtocolFactory.CreateClient(this, networkProtocolType, NetworkTarget.Outer, enableReceiveMessageJsonLog, enableEncryption, serverPublicKey);
             Session = UnityNetwork.Connect(remoteAddress, onConnectComplete, onConnectFail, onConnectDisconnect, isHttps, connectTimeout);
             return Session;
         }
