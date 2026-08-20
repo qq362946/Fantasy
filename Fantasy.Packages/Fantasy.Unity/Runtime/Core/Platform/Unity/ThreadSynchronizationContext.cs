@@ -69,7 +69,7 @@ public sealed class ThreadSynchronizationContext : SynchronizationContext
 
     public static void Initialize()
     {
-        var context = new ThreadSynchronizationContext();
+        var context = ThreadScheduler.MainScheduler.ThreadSynchronizationContext;
         SetSynchronizationContext(context);
         var go = new GameObject("WebGLSynchronizationContextUpdater");
         go.AddComponent<WebGLSynchronizationContextUpdater>().Initialize(context);
