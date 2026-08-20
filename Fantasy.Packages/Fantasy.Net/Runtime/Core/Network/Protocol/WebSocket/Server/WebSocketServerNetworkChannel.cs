@@ -23,17 +23,19 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
     private bool _isInnerDispose;
     private readonly Pipe _pipe = new Pipe();
     private readonly System.Net.WebSockets.WebSocket _webSocket;
+    private readonly HttpListenerResponse _httpResponse;
     private readonly WebSocketServerNetwork _network;
     private readonly ReadOnlyMemoryPacketParser _packetParser;
     private readonly Queue<MemoryStreamBuffer> _sendBuffers = new Queue<MemoryStreamBuffer>();
     private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     
-    public WebSocketServerNetworkChannel(ANetwork network, uint id, HttpListenerWebSocketContext httpListenerWebSocketContext, IPEndPoint remoteEndPoint) : base(network, id, remoteEndPoint)
+    public WebSocketServerNetworkChannel(ANetwork network, uint id, HttpListenerWebSocketContext httpListenerWebSocketContext, HttpListenerResponse httpResponse, IPEndPoint remoteEndPoint) : base(network, id, remoteEndPoint)
     {
         try
         {
             _network = (WebSocketServerNetwork)network;
             _webSocket = httpListenerWebSocketContext.WebSocket;
+            _httpResponse = httpResponse;
             _packetParser =
                 (ReadOnlyMemoryPacketParser)PacketParserFactory
                     .CreateWebglBufferPacketParser(network);
@@ -55,6 +57,14 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
     {
         if (IsDisposed || _isInnerDispose)
         {
+            return;
+        }
+        
+        var synchronizationContext = Scene?.ThreadSynchronizationContext;
+        
+        if (synchronizationContext != null && !ReferenceEquals(SynchronizationContext.Current, synchronizationContext))
+        {
+            synchronizationContext.Post(Dispose);
             return;
         }
         
@@ -115,7 +125,21 @@ public sealed class WebSocketServerNetworkChannel : ANetworkServerChannel
         }
         finally
         {
-            _webSocket.Dispose();
+            try
+            {
+                _webSocket.Dispose();
+            }
+            finally
+            {
+                try
+                {
+                    _httpResponse.Close();
+                }
+                catch
+                {
+                    // 关闭过程中的异常可以忽略
+                }
+            }
         }
     }
     

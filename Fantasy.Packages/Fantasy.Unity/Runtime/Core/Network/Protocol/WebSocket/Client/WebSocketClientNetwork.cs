@@ -92,8 +92,7 @@ namespace Fantasy.Network.WebSocket
                     using var closeTimeout = new CancellationTokenSource(TimeSpan.FromMilliseconds(500));
                     await _clientWebSocket.CloseOutputAsync(
                         WebSocketCloseStatus.NormalClosure,
-                        "Client Closing", closeTimeout.Token)
-                        .ConfigureAwait(false);
+                        "Client Closing", closeTimeout.Token);
                 }
             }
             catch (Exception)

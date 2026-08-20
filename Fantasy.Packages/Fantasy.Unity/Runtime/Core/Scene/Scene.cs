@@ -1270,7 +1270,7 @@ namespace Fantasy
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected internal FThreadTask SwitchToSceneThread()
         {
-            var completion = FThreadTask.Create(false);
+            var completion = FThreadTask.Create();
             var context = ThreadSynchronizationContext;
 
             // Scene 已销毁，或者当前已经位于 Scene 上下文。

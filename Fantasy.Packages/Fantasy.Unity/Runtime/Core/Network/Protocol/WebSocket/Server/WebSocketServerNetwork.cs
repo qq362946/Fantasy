@@ -158,6 +158,7 @@ public class WebSocketServerNetwork : ANetwork
 
     private async FTask StartAcceptAsync(int port)
     {
+        var scene = Scene;
         var listenUrl = $"http://+:{port}/";
         _httpListener.Prefixes.Add(listenUrl);
         _httpListener.Start();
@@ -167,6 +168,7 @@ public class WebSocketServerNetwork : ANetwork
         {
             WebSocketServerNetworkChannel? channel = null;
             System.Net.WebSockets.WebSocket? acceptedWebSocket = null;
+            HttpListenerResponse? acceptedHttpResponse = null;
             
             try
             {
@@ -187,8 +189,11 @@ public class WebSocketServerNetwork : ANetwork
                     continue;
                 }
                 
-                var webSocketContext = await httpListenerContext.AcceptWebSocketAsync(null);
+                var httpResponse = httpListenerContext.Response;
+                acceptedHttpResponse = httpResponse;
                 
+                var webSocketContext = await httpListenerContext.AcceptWebSocketAsync(null);
+                await scene.SwitchToSceneThread();
                 acceptedWebSocket = webSocketContext.WebSocket;
                 
                 if (IsDisposed)
@@ -209,10 +214,12 @@ public class WebSocketServerNetwork : ANetwork
                     this, 
                     channelId, 
                     webSocketContext, 
+                    httpResponse,
                     realClientEndPoint);
                 
-                // Channel 构造成功后，WebSocket 的所有权转交给 Channel。
+                // Channel 构造成功后，WebSocket 和 Response 的所有权转交给 Channel。
                 acceptedWebSocket = null;
+                acceptedHttpResponse = null;
                 
                 _connectionChannel.Add(channelId, channel);
                 channel.Start();
@@ -229,7 +236,21 @@ public class WebSocketServerNetwork : ANetwork
             finally
             {
                 // Channel 尚未接管时，由接入循环负责释放。
-                acceptedWebSocket?.Dispose();
+                try
+                {
+                    acceptedWebSocket?.Dispose();
+                }
+                finally
+                {
+                    try
+                    {
+                        acceptedHttpResponse?.Close();
+                    }
+                    catch
+                    {
+                        // 关闭过程中的异常可以忽略
+                    }
+                }
             }
         }
     }
