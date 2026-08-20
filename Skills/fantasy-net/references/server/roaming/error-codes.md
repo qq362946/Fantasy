@@ -11,9 +11,9 @@
 | `ErrRoamingDisposed` | 100000032 | 漫游组件已销毁 | Session 断开后仍在发送 |
 | `ErrRoamingTimeout` | 100000012 | 漫游消息超时 | 组件销毁或网络超时 |
 | `ErrRoamingRetryExhausted` | 100000031 | 重试超限 | 连续重试超过上限仍未送达 |
-| `ErrReLinkNotFoundRoaming` | 100000033 | ReLink 时找不到已有连接 | 该 roamingType 从未 Link 过 |
 | `ErrTerminusNotLinked` | 100000034 | Entity 未关联 Terminus | 未调用 `LinkTerminusEntity` 就使用扩展方法发送 |
-| `ErrAddRoamingTerminalAlreadyExists` | 100000010 | 漫游终端已存在 | 同一 roamingId 重复创建 |
+| `ErrRoamingOwnerChanged` | 100000035 | 漫游 owner 已变化 | 同一 roamingId 已被新的 Gate 接管 |
+| `ErrAddRoamingTerminalAlreadyExists` | 100000010 | 漫游终端已存在 | Terminus 传送到目标 Scene 时，同一 roamingId 已存在 |
 | `ErrCreateTerminusInvalidRoamingId` | 100000028 | 无效的 RoamingId | 传入的 roamingId 为 0 |
 | `ErrSetForwardSessionAddressNotFoundTerminus` | 100000027 | 未找到漫游终端 | 更新转发地址时找不到对应 Terminus |
 | `ErrTerminusStartTransfer` | 100000017 | 传送过程错误 | StartTransfer 执行中异常 |
@@ -30,11 +30,14 @@ Link 未完成时就并发发送了消息，通常是忘记 `await`：
 
 ```csharp
 // ❌ 错误：Link 和发送并发执行
-roaming.Link(session, chatConfig, RoamingType.ChatRoamingType); // 没有 await
+roaming.Link(chatAddress, session.RuntimeId, RoamingType.ChatRoamingType); // 没有 await
 session.Call(new C2Chat_SendMessageRequest { });                // Link 还没完成
 
 // ✅ 正确：等待 Link 完成后再发送
-var errorCode = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+var errorCode = await roaming.Link(
+    chatAddress,
+    session.RuntimeId,
+    RoamingType.ChatRoamingType);
 if (errorCode == 0)
     await session.Call(new C2Chat_SendMessageRequest { });
 ```

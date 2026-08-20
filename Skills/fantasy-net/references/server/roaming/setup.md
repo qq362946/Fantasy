@@ -1,106 +1,87 @@
 # Roaming 路由建立
 
-## 第 1 步：Gate 侧创建 Roaming 并 Link 到后端
+## Gate 侧统一入口
 
-Gate 侧在处理登录或重连请求时，使用 `session.TryCreateRoaming` 创建 Roaming 组件，再对每个需要通信的后端服务器各调用一次 `Link`。
+首次登录和断线重连都调用 `GetOrCreateRoaming`。它直接返回 `SessionRoamingComponent`，不返回创建状态：
 
-**`TryCreateRoaming` 只需调用一次**，创建的 Roaming 组件可以同时 Link 到多个后端服务器（Chat、Battle、Map 等），每个 RoamingType 对应一条独立路由。需要支持哪些后端服务器，在 `RoamingType.Config` 中定义好对应类型后，依次 Link 即可。
+```csharp
+var roaming = await session.GetOrCreateRoaming(
+    roamingId: request.PlayerId,
+    delayRemove: 180_000);
+```
 
-**参数说明：**
-- `roamingId`：漫游唯一标识，通常为玩家 ID；同一玩家每次登录/重连使用相同值
-- `isAutoDispose`：Session 断开时是否自动断开漫游
-- `delayRemove`：断开后延迟多少毫秒才真正移除（用于断线重连窗口）
+- `roamingId`：稳定的业务身份，通常是玩家 ID；重连前后必须一致
+- `delayRemove`：Session 释放后的重连窗口，默认 3 分钟；小于等于 `0` 时立即销毁
+- 同一 Gate 已有该 `roamingId`：取消延迟销毁、换绑新 Session，并刷新已有 Terminus 的转发地址
+- 当前 Session 已绑定其他 `roamingId`：框架先按旧连接的延迟策略解除旧绑定
 
-**`Link` 行为：** 内部自动通过 `IsLinked(roamingType)` 判断走首次连接还是重连路径，无需手动区分。
+业务上的首次登录和重连应由账号状态或登录票据判断，不要从漫游 API 推断。
 
-`TryCreateRoaming` 返回 `CreateRoamingResult`，含 `Status` 字段：
+## Link 到目标 Scene
 
-| Status | 含义 |
-|--------|------|
-| `NewCreated` | 新创建（首次登录） |
-| `AlreadyExists` | 已存在（断线重连） |
-| `SessionAlreadyHasRoaming` | 错误：Session 已有不同 roamingId 的漫游 |
+`Link` 只接收目标 Scene Address 和当前 Session RuntimeId：
 
-Control Center 模式先在文件顶部增加：
+```csharp
+var errorCode = await roaming.Link(
+    targetSceneAddress,
+    session.RuntimeId,
+    RoamingType.ChatRoamingType,
+    args: null);
+```
+
+目标 Scene 没有该 `roamingId` 时触发 `CreateTerminusType.Link`；已有 Terminus 时复用它并触发 `CreateTerminusType.ReLink`。调用方始终使用 `Link`。
+
+每个需要通信的后端 `RoamingType` 各调用一次 `Link`。一个 `SessionRoamingComponent` 可以同时维护 Chat、Map、Battle 等多条路由。
+
+## Control Center 示例
 
 ```csharp
 using NetServiceDiscovery = Fantasy.ServiceDiscovery;
-```
 
-```csharp
-var result = await session.TryCreateRoaming(
-    roamingId: request.PlayerId,
-    isAutoDispose: true,
-    delayRemove: 180000
-);
+var roaming = await session.GetOrCreateRoaming(
+    request.PlayerId,
+    delayRemove: 180_000);
 
-switch (result.Status)
+var worldId = session.Scene.SceneConfig.WorldConfigId;
+var chatAddress = await NetServiceDiscovery.DiscoverAddressByHashAsync(
+    SceneType.Chat,
+    request.PlayerId,
+    worldId: worldId);
+
+if (chatAddress == 0)
 {
-    case CreateRoamingStatus.NewCreated:
-    case CreateRoamingStatus.AlreadyExists:
-    {
-        // Link 到所有需要通信的后端服务器，每个 RoamingType 各调用一次
-        // RoamingType.ChatRoamingType / BattleRoamingType 等常量来自 RoamingType.Config 导出的 RoamingType.cs
-        var worldId = session.Scene.SceneConfig.WorldConfigId;
-        var chatAddress =
-            await NetServiceDiscovery.DiscoverAddressByHashAsync(
-                SceneType.Chat,
-                request.PlayerId,
-                worldId: worldId);
+    // 按项目约定设置“无在线 Chat”的业务错误码。
+    return;
+}
 
-        if (chatAddress == 0)
-        {
-            // 按项目约定设置“无在线 Chat”的业务错误码。
-            return;
-        }
+var errorCode = await roaming.Link(
+    chatAddress,
+    session.RuntimeId,
+    RoamingType.ChatRoamingType);
 
-        var errorCode = await result.Roaming.Link(
-            chatAddress,
-            session.RuntimeId,
-            RoamingType.ChatRoamingType);
-        if (errorCode != 0) { response.ErrorCode = errorCode; return; }
-
-        var battleAddress =
-            await NetServiceDiscovery.DiscoverAddressByHashAsync(
-                SceneType.Battle,
-                request.PlayerId,
-                worldId: worldId);
-
-        if (battleAddress == 0)
-        {
-            // 按项目约定设置“无在线 Battle”的业务错误码。
-            return;
-        }
-
-        errorCode = await result.Roaming.Link(
-            battleAddress,
-            session.RuntimeId,
-            RoamingType.BattleRoamingType);
-        if (errorCode != 0) { response.ErrorCode = errorCode; return; }
-
-        // 如需区分首次登录和断线重连的不同业务逻辑，在此判断 result.Status
-        if (result.Status == CreateRoamingStatus.NewCreated)
-        {
-            // 仅首次登录执行：初始化账号数据等
-        }
-        break;
-    }
-    case CreateRoamingStatus.SessionAlreadyHasRoaming:
-        // 当前 Session 已有不同 roamingId 的漫游，属于异常场景
-        response.ErrorCode = ErrorCode.SessionAlreadyHasRoaming;
-        return;
+if (errorCode != 0)
+{
+    response.ErrorCode = errorCode;
+    return;
 }
 ```
 
-上例适用于 Control Center 模式，并用玩家 ID 做 Rendezvous Hash，让同一玩家尽量稳定落到同一后端。未启用 Control Center 时，可以继续使用 `Link(session, sceneConfig, roamingType)` 静态重载。
+未启用 Control Center 时，从静态配置取得 `SceneConfig.Address`，再调用同一个 `Link(address, session.RuntimeId, roamingType, args)`。
 
-如果扩缩容后仍必须回到上一次后端，单靠 Rendezvous Hash 不够；应由业务层持久化玩家到 SceneId 的绑定，并提供按该 SceneId 恢复端点的解析入口。
+Rendezvous Hash 只在在线实例集合不变时稳定。扩缩容后仍必须回到原后端时，由业务层持久化玩家到 SceneId 的绑定并验证实例仍在线；主动迁移使用 `StartTransfer`，不要把同一 `roamingType` 直接 Link 到另一个目标 Scene。
 
-### 传递自定义参数到后端
+## 动态 Gate 与所有权
 
-Link 时可附带参数，后端在 `OnCreateTerminus` 事件中通过 `self.Args` 接收。
+同一账号必须保证任一时刻只有一个有效登录。
 
-**⚠️ args 实体类必须标注 `[MemoryPackable]` 特性**，参数通过 MemoryPack 序列化传输：
+- 新 Gate 创建本地 `SessionRoamingComponent` 后，再向原目标 Scene 调用 `Link`
+- Link 请求携带 `SessionRoamingComponent.RuntimeId` 作为 owner；目标 Terminus 已存在时由新 Gate 接管
+- 旧 Gate 后续到达的暂停或断开请求因 owner 不匹配而被忽略，不会清理新 Gate 的连接
+- 旧 Gate 的本地上下文由旧 Session 的心跳断开、`delayRemove` 或 Scene 关闭流程回收，不需要 Gate 间释放协议或全局注册表
+
+## 传递自定义参数
+
+参数 Entity 必须支持当前内部协议使用的序列化：
 
 ```csharp
 [MemoryPackable]
@@ -122,17 +103,42 @@ var errorCode = await roaming.Link(
     RoamingType.ChatRoamingType,
     loginData);
 
-// ⚠️ Gate 侧无论成功失败都必须销毁原始对象
-// 参数通过序列化传递，Gate 持有原始对象，后端收到的是反序列化副本，两端各自销毁
+// Gate 始终销毁原始对象；后端在 OnCreateTerminus 中独立销毁反序列化副本。
 loginData.Dispose();
 
-if (errorCode != 0) { response.ErrorCode = errorCode; return; }
+if (errorCode != 0)
+{
+    response.ErrorCode = errorCode;
+    return;
+}
 ```
 
----
+## 主动移除
 
-## 第 2 步：后端侧监听 OnCreateTerminus
+```csharp
+// 方式 1：移除整个漫游上下文；内部会先 UnLinkAll，默认立即执行
+await session.RemoveRoaming();
+```
 
-Gate 调用 `roaming.Link()` 时，目标服务器自动触发 `OnCreateTerminus` 事件，在此创建并关联业务实体。
+```csharp
+// 方式 2：只移除一条路由；整个上下文仍由 RemoveRoaming 统一回收
+var isEmpty = await roaming.UnLink(
+    RoamingType.ChatRoamingType,
+    disposeIfEmpty: false);
 
-详见 `references/server/roaming/on-create-terminus.md`。
+if (isEmpty)
+{
+    await session.RemoveRoaming();
+}
+```
+
+```csharp
+// 方式 3：只断开全部后端路由，保留空的漫游上下文供后续重新 Link
+await roaming.UnLinkAll();
+```
+
+Session 自然断开时通常不需要主动调用移除 API；框架会使用 `GetOrCreateRoaming` 设置的 `delayRemove`。
+
+## 后端下一步
+
+Gate 调用 `Link` 后，目标服务器通过 `OnCreateTerminus` 创建或恢复业务实体。继续读 `on-create-terminus.md`。

@@ -9,43 +9,42 @@ using Fantasy.InnerMessage;
 namespace Fantasy.Network.Roaming;
 
 /// <summary>
-/// 漫游实体
+/// 表示源端一个 roamingType 到目标 Terminus 的连接和路由状态。
 /// </summary>
 public sealed class Roaming : Entity
 {
     /// <summary>
-    /// 连接到漫游TerminusId。
-    /// 也可以理解为目标实体的Address。
+    /// 当前目标实体地址；传送期间会暂时置为 0，并在锁内更新。
     /// </summary>
     internal long TerminusId;
     /// <summary>
-    /// 漫游目标Scene的Address。
+    /// Terminus 当前所在的目标 Scene 地址。
     /// </summary>
     public long TargetSceneAddress { get; internal set; }
     /// <summary>
-    /// 漫游转发Session的Address。
+    /// 接收 Terminus 转发消息的 Session 地址。
     /// </summary>
     public long ForwardSessionAddress { get; internal set; }
     /// <summary>
-    /// 当前漫游类型。
+    /// 当前连接对应的漫游类型。
     /// </summary>
     public int RoamingType { get; internal set; }
     /// <summary>
-    /// 协程锁。
+    /// 保护当前 roamingType 的 TerminusId 迁移过程。
     /// </summary>
     internal CoroutineLock RoamingLock;
     /// <summary>
-    /// 当前正在执行的协程锁。
+    /// 跨远程 Lock/UnLock 请求持有的锁句柄。
     /// </summary>
     private WaitCoroutineLock? _waitCoroutineLock;
     /// <summary>
-    /// 关联Session的漫游组件。
+    /// 所属的源端漫游上下文。
     /// </summary>
     internal SessionRoamingComponent? SessionRoamingComponent;
     /// <summary>
-    /// 获得当前漫游对应终端的TerminusId。
+    /// 在迁移锁内读取当前 TerminusId。
     /// </summary>
-    /// <returns></returns>
+    /// <returns>当前可路由的 TerminusId；迁移中可能为 0。</returns>
     internal async FTask<long> GetTerminusId()
     {
         using (await RoamingLock.Wait(RoamingType,"Roaming.cs GetTerminusId"))
@@ -54,9 +53,9 @@ public sealed class Roaming : Entity
         }
     }
     /// <summary>
-    /// 设置当前漫游对应的终端的TerminusId。
+    /// 在迁移锁内更新当前 TerminusId。
     /// </summary>
-    /// <param name="terminusId"></param>
+    /// <param name="terminusId">新的目标实体地址。</param>
     internal async FTask SetTerminusId(long terminusId)
     {
         using (await RoamingLock.Wait(RoamingType,"Roaming.cs SetTerminusId"))
@@ -65,7 +64,7 @@ public sealed class Roaming : Entity
         }
     }
     /// <summary>
-    /// 锁定TerminusId。
+    /// 锁定 TerminusId，直到目标端通过 <see cref="UnLockTerminusId"/> 提交新地址。
     /// </summary>
     internal async FTask LockTerminusId()
     {
@@ -73,10 +72,10 @@ public sealed class Roaming : Entity
     }
 
     /// <summary>
-    /// 解锁TerminusId。
+    /// 原子更新 TerminusId 和目标 Scene 地址后释放迁移锁。
     /// </summary>
-    /// <param name="terminusId"></param>
-    /// <param name="targetSceneAddress"></param>
+    /// <param name="terminusId">迁移完成后的目标实体地址。</param>
+    /// <param name="targetSceneAddress">迁移完成后的目标 Scene 地址。</param>
     internal void UnLockTerminusId(long terminusId, long targetSceneAddress)
     {
         if (_waitCoroutineLock == null)
@@ -92,10 +91,9 @@ public sealed class Roaming : Entity
     }
 
     /// <summary>
-    /// 通知Terminus更新ForwardSessionAddress
+    /// 通知目标 Terminus 切换到新的转发 Session，并恢复转发。
     /// </summary>
-    /// <param name="forwardSessionAddress"></param>
-    /// <returns></returns>
+    /// <param name="forwardSessionAddress">重连后的 Session 地址。</param>
     internal async FTask SetForwardSessionAddress(long forwardSessionAddress)
     {
         using var response = await Scene.NetworkMessagingComponent.Call(
@@ -103,7 +101,8 @@ public sealed class Roaming : Entity
             new I_SetForwardSessionAddressRequest()
             {
                 RoamingId = SessionRoamingComponent!.Id,
-                ForwardSessionAddress = forwardSessionAddress
+                ForwardSessionAddress = forwardSessionAddress,
+                OwnerRoamingRuntimeId = SessionRoamingComponent.RuntimeId
             });
 
         if (response.ErrorCode == 0)
@@ -116,17 +115,17 @@ public sealed class Roaming : Entity
     }
 
     /// <summary>
-    /// 通知Terminus停止转发消息到ForwardSession。
-    /// 用于Session已断开但实体还在工作的场景，避免框架报错。
+    /// 通知目标 Terminus 暂停向已断开的 Session 转发消息。
     /// </summary>
-    /// <returns></returns>
+    /// <remarks>只暂停转发，不销毁目标 Terminus，便于客户端在保活期限内重连。</remarks>
     internal async FTask StopForwarding()
     {
         using var response = await Scene.NetworkMessagingComponent.Call(
             TargetSceneAddress,
             new I_StopForwardingRequest()
             {
-                RoamingId = SessionRoamingComponent!.Id
+                RoamingId = SessionRoamingComponent!.Id,
+                OwnerRoamingRuntimeId = SessionRoamingComponent.RuntimeId
             });
 
         if (response.ErrorCode == 0)
@@ -138,20 +137,28 @@ public sealed class Roaming : Entity
     }
 
     /// <summary>
-    /// 断开当前漫游的连接。
+    /// 请求目标 Scene 断开并销毁当前 Terminus。
     /// </summary>
-    /// <returns></returns>
+    /// <returns>目标端返回的错误码，0 表示成功。</returns>
     internal async FTask<uint> Disconnect()
     {
+        var sessionRoamingComponent = SessionRoamingComponent!;
+
         using var response =
-            await Scene.NetworkMessagingComponent.Call(TargetSceneAddress, new I_UnLinkRoamingRequest()
-            {
-                RoamingId = SessionRoamingComponent!.Id, DisposeRoaming = true
-            });
+            await Scene.NetworkMessagingComponent.Call(
+                TargetSceneAddress,
+                new I_UnLinkRoamingRequest()
+                {
+                    RoamingId = SessionRoamingComponent!.Id,
+                    DisposeRoaming = true,
+                    OwnerRoamingRuntimeId = sessionRoamingComponent.RuntimeId
+                });
+        
         return response.ErrorCode;
     }
+
     /// <summary>
-    /// 销毁方法
+    /// 释放迁移锁并从所属漫游上下文中摘除当前连接。
     /// </summary>
     public override void Dispose()
     {
@@ -165,18 +172,18 @@ public sealed class Roaming : Entity
             _waitCoroutineLock.Dispose();
             _waitCoroutineLock = null;
         }
-        
+
         if (SessionRoamingComponent != null)
         {
             SessionRoamingComponent.Remove(RoamingType, false);
             SessionRoamingComponent = null;
         }
-       
+
         TerminusId = 0;
         RoamingType = 0;
         TargetSceneAddress = 0;
         ForwardSessionAddress = 0;
-        
+
         RoamingLock = null;
         base.Dispose();
     }

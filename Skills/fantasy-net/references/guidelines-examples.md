@@ -240,7 +240,7 @@ AI："我将按以下步骤实现 Roaming，每步都有验证标准：
 
 1. 定义协议 → verify: 运行 `dotnet fantasy-export`，成功生成 `.g.cs`
 2. 配置 RoamingType → verify: `Fantasy.config` 中 `<roamingType>` 节点正确
-3. 实现 Gate 侧 TryCreateRoaming → verify: `dotnet build` 编译通过，无 Handler 重复注册警告
+3. 实现 Gate 侧 GetOrCreateRoaming + Link → verify: `dotnet build` 编译通过，无 Handler 重复注册警告
 4. 实现 Map 侧 OnCreateTerminus → verify: 编译通过，能访问 `LinkTerminusEntity`
 5. 实现 Roaming Handler → verify: 检查 `MessageHandlerRegister.g.cs`，确认 Handler 已自动注册
 6. 测试消息流转 → verify: Log.Debug 输出显示完整请求/响应链路

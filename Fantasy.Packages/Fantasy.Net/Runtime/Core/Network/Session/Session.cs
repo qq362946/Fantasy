@@ -52,7 +52,7 @@ namespace Fantasy.Network
         internal event Action OnDispose;
 #if FANTASY_NET
         internal RouteComponent RouteComponent;
-        internal SessionRoamingComponent SessionRoamingComponent;
+        internal SessionRoamingComponent? SessionRoamingComponent;
         internal AddressableRouteComponent AddressableRouteComponent;
         internal static Session Create(ANetworkMessageScheduler networkMessageScheduler, ANetworkServerChannel channel, NetworkTarget networkTarget)
         {
@@ -180,13 +180,11 @@ namespace Fantasy.Network
                     {
                         try
                         {
-                            requestCallback.SetException(
-                                new Exception($"session is dispose: {sessionId}"));
+                            requestCallback.SetException(new Exception($"session is dispose: {sessionId}"));
                         }
                         catch (Exception e)
                         {
-                            Log.Error(
-                                $"Session {sessionId} pending RPC completion callback failed: {e}");
+                            Log.Error($"Session {sessionId} pending RPC completion callback failed: {e}");
                         }
                     }
                 }

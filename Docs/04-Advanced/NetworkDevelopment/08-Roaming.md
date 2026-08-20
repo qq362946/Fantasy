@@ -178,46 +178,34 @@ message Map2G_GetPlayerResponse // IRoamingResponse
 **核心 API：**
 
 ```csharp
-// 1. 创建 Roaming 组件（简单版本，直接返回组件）
-SessionRoamingComponent session.CreateRoaming(long roamingId, int delayRemove);
+// 1. 获取或创建 Roaming；同一 roamingId 已存在时自动完成 Session 重绑
+FTask<SessionRoamingComponent> session.GetOrCreateRoaming(
+    long roamingId,
+    int delayRemove = 180_000);
 
-// 2. 创建 Roaming 组件（详细版本，返回状态信息）
-CreateRoamingResult session.TryCreateRoaming(long roamingId, int delayRemove);
+// 2. 建立或恢复到目标 Scene 的路由
+FTask<uint> roaming.Link(
+    long targetSceneAddress,
+    long forwardSessionAddress,
+    int roamingType,
+    Entity? args = null);
 
-// 3. 链接到后端服务器（自动判断首次连接或断线重连）
-uint roaming.Link(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
-
-// 4. 判断指定 roamingType 是否已建立漫游关系
+// 3. 查询路由
 bool roaming.IsLinked(int roamingType);
+bool roaming.TryGetRoaming(int roamingType, out Roaming route);
 
-// 5. 重新链接到后端服务器（已废弃，请使用 Link）
-[Obsolete] uint roaming.ReLink(Session session, SceneConfig sceneConfig, int roamingType, Entity? args = null);
+// 4. 主动断开
+FTask session.RemoveRoaming(int delayRemove = 0);
+FTask<bool> roaming.UnLink(int roamingType, bool disposeIfEmpty);
+FTask roaming.UnLinkAll();
 ```
 
-**CreateRoamingResult 结构体：**
+`GetOrCreateRoaming` 不再返回“首次创建/重连”状态。调用方只提供稳定的 `roamingId`，框架负责取消旧延迟任务、切换到新 Session，并恢复已有 Terminus 的转发地址。`delayRemove` 是 Session 释放后的重连窗口；小于等于 `0` 时立即销毁，默认值为 3 分钟。
+
+**完整示例：**
 
 ```csharp
-public readonly struct CreateRoamingResult
-{
-    // 创建状态
-    public readonly CreateRoamingStatus Status;
-
-    // 漫游组件实例（如果创建失败则为null）
-    public readonly SessionRoamingComponent Roaming;
-}
-
-public enum CreateRoamingStatus
-{
-    NewCreated,              // 新创建的漫游组件
-    AlreadyExists,           // 使用已存在的漫游组件（断线重连场景）
-    SessionAlreadyHasRoaming // 错误：当前Session已经创建了不同roamingId的漫游组件
-}
-```
-
-**完整示例（使用 CreateRoaming）：**
-
-```csharp
-// Gate 服务器：处理客户端的登录请求 - 简单版本
+// Gate 服务器：首次登录和断线重连使用同一条流程
 public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginResponse>
 {
     protected override async FTask Run(
@@ -226,23 +214,16 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
         G2C_LoginResponse response,
         Action reply)
     {
-        // 步骤 1：创建 Roaming 组件
-        // roamingId: 漫游的唯一标识，通常使用玩家 ID
-        // delayRemove: 延迟多久执行断开（毫秒）
-        var roaming = await session.CreateRoaming(
+        // roamingId 必须在重连前后保持不变；这里保留 3 分钟重连窗口。
+        var roaming = await session.GetOrCreateRoaming(
             roamingId: request.PlayerId,
-            delayRemove: 1000
-        );
+            delayRemove: 180_000);
 
-        if (roaming == null)
-        {
-            response.ErrorCode = ErrorCode.RoamingCreateFailed;
-            return;
-        }
-
-        // 步骤 2：链接到 Chat 服务器
         var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
-        var errorCode = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+        var errorCode = await roaming.Link(
+            chatConfig.Address,
+            session.RuntimeId,
+            RoamingType.ChatRoamingType);
 
         if (errorCode != 0)
         {
@@ -254,6 +235,28 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
         await FTask.CompletedTask;
     }
 }
+```
+
+启用 Control Center 时，不要从本进程的 `SceneConfigData[0]` 假设远程 Scene 存在；先发现在线地址：
+
+```csharp
+using NetServiceDiscovery = Fantasy.ServiceDiscovery;
+
+var chatAddress = await NetServiceDiscovery.DiscoverAddressByHashAsync(
+    SceneType.Chat,
+    request.PlayerId,
+    worldId: session.Scene.SceneConfig.WorldConfigId);
+
+if (chatAddress == 0)
+{
+    // 按项目约定返回“无在线 Chat”的业务错误码。
+    return;
+}
+
+var errorCode = await roaming.Link(
+    chatAddress,
+    session.RuntimeId,
+    RoamingType.ChatRoamingType);
 ```
 
 **传递自定义参数到后端服务器：**
@@ -268,17 +271,9 @@ public class C2G_LoginWithDataRequestHandler : MessageRPC<C2G_LoginRequest, G2C_
         G2C_LoginResponse response,
         Action reply)
     {
-        var roaming = await session.CreateRoaming(
+        var roaming = await session.GetOrCreateRoaming(
             roamingId: request.PlayerId,
-            isAutoDispose: true,
-            delayRemove: 1000
-        );
-
-        if (roaming == null)
-        {
-            response.ErrorCode = ErrorCode.RoamingCreateFailed;
-            return;
-        }
+            delayRemove: 180_000);
 
         // 创建要传递的参数实体
         var loginData = Entity.Create<PlayerLoginData>(session.Scene);
@@ -288,7 +283,11 @@ public class C2G_LoginWithDataRequestHandler : MessageRPC<C2G_LoginRequest, G2C_
 
         // 链接到 Chat 服务器并传递参数
         var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
-        var errorCode = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType, loginData);
+        var errorCode = await roaming.Link(
+            chatConfig.Address,
+            session.RuntimeId,
+            RoamingType.ChatRoamingType,
+            loginData);
 
         if (errorCode != 0)
         {
@@ -298,8 +297,8 @@ public class C2G_LoginWithDataRequestHandler : MessageRPC<C2G_LoginRequest, G2C_
             return;
         }
 
-        // ⚠️ Link 成功后，参数已通过序列化传递到后端服务器
-        // Gate 服务器上的原始对象需要立即销毁，销毁责任已转移到后端
+        // ⚠️ Link 成功后，后端收到的是反序列化副本
+        // Gate 仍要销毁原始对象，后端再独立销毁副本
         loginData.Dispose();
 
         Log.Info($"✅ 为玩家 {request.PlayerId} 建立到Chat的漫游路由，并传递了登录数据");
@@ -310,79 +309,7 @@ public class C2G_LoginWithDataRequestHandler : MessageRPC<C2G_LoginRequest, G2C_
 
 **⚠️ 重要：args 参数的内存管理**
 
-`Entity.Create<T>()` 创建的 Entity 使用了对象池，**必须在后端服务器的 OnCreateTerminus 事件中手动 Dispose() 销毁**，否则会导致内存泄露：
-
-```csharp
-// Chat 服务器：接收并销毁 args 参数
-public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
-{
-    protected override async FTask Handler(OnCreateTerminus self)
-    {
-        switch (self.Terminus.RoamingType)
-        {
-            case RoamingType.ChatRoamingType:
-            {
-                var chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
-
-                if (chatPlayer == null)
-                {
-                    Log.Error("创建 ChatPlayer 失败");
-
-                    // ⚠️ 创建失败时也要销毁 args 参数
-                    self.Args?.Dispose();
-                    return;
-                }
-
-                // 使用传递的参数进行初始化
-                if (self.Args is PlayerLoginData loginData)
-                {
-                    chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
-                    chatPlayer.PlayerName = loginData.PlayerName;
-                    chatPlayer.Level = loginData.Level;
-                    chatPlayer.VipLevel = loginData.VipLevel;
-
-                    // ⚠️ 使用完毕后立即销毁，归还对象池，防止内存泄露
-                    loginData.Dispose();
-
-                    Log.Info($"✅ Chat 服务器使用传递的参数创建了 ChatPlayer，已销毁参数");
-                }
-                else
-                {
-                    // 没有传递参数或参数类型不匹配，使用默认初始化
-                    chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
-                    chatPlayer.LoadData();
-
-                    // ⚠️ 即使参数类型不匹配，也要销毁参数
-                    self.Args?.Dispose();
-
-                    Log.Info($"✅ Chat 服务器创建了 ChatPlayer，使用默认初始化");
-                }
-
-                break;
-            }
-            case RoamingType.MapRoamingType:
-            {
-                var mapPlayer = Entity.Create<MapPlayer>(self.Scene);
-                mapPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
-                await self.Terminus.LinkTerminusEntity(mapPlayer, autoDispose: true);
-
-                // ⚠️ Map 不需要参数，但仍需销毁传递过来的参数
-                self.Args?.Dispose();
-
-                Log.Info($"✅ Map 服务器创建了 MapPlayer，PlayerId={mapPlayer.PlayerId}");
-                break;
-            }
-        }
-
-        await FTask.CompletedTask;
-    }
-
-    private long GetPlayerIdFromRoamingId(Terminus terminus)
-    {
-        return terminus.RuntimeId;
-    }
-}
-```
+`Entity.Create<T>()` 创建的 Entity 使用对象池。Gate 必须销毁原始参数，后端必须在 `OnCreateTerminus` 中用完并销毁反序列化副本；下面的后端示例同时处理 `Link` 和 `ReLink`。
 
 **⚠️ 内存管理核心要点：**
 
@@ -398,7 +325,11 @@ loginData.PlayerName = request.PlayerName;
 loginData.Level = request.Level;
 
 var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
-var errorCode = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType, loginData);
+var errorCode = await roaming.Link(
+    chatConfig.Address,
+    session.RuntimeId,
+    RoamingType.ChatRoamingType,
+    loginData);
 
 if (errorCode != 0)
 {
@@ -422,86 +353,23 @@ loginData.Dispose();
 | 创建失败 | 调用 `args.Dispose()` 销毁原始对象 | 调用 `Args?.Dispose()` 销毁副本 | 即使 `LinkTerminusEntity()` 失败，也要销毁参数 |
 | 不需要参数的 RoamingType | 调用 `args.Dispose()` 销毁原始对象 | 调用 `Args?.Dispose()` 销毁副本 | 防止误传参数导致内存泄露 |
 
-**完整示例（使用 TryCreateRoaming 处理断线重连）：**
+### 创建与重连语义
 
-```csharp
-// Gate 服务器：处理客户端的登录/重连请求 - 支持断线重连
-public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginResponse>
-{
-    protected override async FTask Run(
-        Session session,
-        C2G_LoginRequest request,
-        G2C_LoginResponse response,
-        Action reply)
-    {
-        // 步骤 1：创建 Roaming 组件，获取详细状态
-        var result = await session.TryCreateRoaming(
-            roamingId: request.PlayerId,
-            isAutoDispose: true,
-            delayRemove: 180000  // 3分钟延迟删除，支持断线重连
-        );
+`GetOrCreateRoaming` 是唯一入口，不需要也不能从返回值判断“新建”还是“重连”：
 
-        if (result.Status == CreateRoamingStatus.SessionAlreadyHasRoaming)
-        {
-            Log.Error($"❌ Session 已经创建了其他 roamingId 的漫游组件");
-            response.ErrorCode = ErrorCode.SessionAlreadyHasRoaming;
-            return;
-        }
-
-        var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
-
-        // 步骤 2：Link 自动判断首次连接或断线重连
-        var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
-
-        if (errorCode != 0)
-        {
-            response.ErrorCode = errorCode;
-            return;
-        }
-
-        await FTask.CompletedTask;
-    }
-}
-```
-
-如果需要根据首次登录和断线重连执行不同的业务逻辑，可以结合 `CreateRoamingStatus` 判断：
-
-```csharp
-switch (result.Status)
-{
-    case CreateRoamingStatus.NewCreated:
-    {
-        // 首次登录
-        var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
-        if (errorCode != 0) { response.ErrorCode = errorCode; return; }
-        Log.Info($"✅ 玩家 {request.PlayerId} 首次登录，建立漫游路由");
-        break;
-    }
-    case CreateRoamingStatus.AlreadyExists:
-    {
-        // 断线重连
-        var errorCode = await result.Roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
-        if (errorCode != 0) { response.ErrorCode = errorCode; return; }
-        Log.Info($"✅ 玩家 {request.PlayerId} 断线重连成功");
-        break;
-    }
-    case CreateRoamingStatus.SessionAlreadyHasRoaming:
-    {
-        Log.Error($"❌ Session 已经创建了其他 roamingId 的漫游组件");
-        response.ErrorCode = ErrorCode.SessionAlreadyHasRoaming;
-        return;
-    }
-}
-```
+- 同一 Gate 上已存在该 `roamingId` 时，框架取消延迟销毁、换绑新 Session，并刷新所有已有 Terminus 的转发地址。
+- 新 Gate 上没有本地上下文时会创建新的 `SessionRoamingComponent`；随后调用 `Link`，目标端若已有同一 `roamingId` 的 Terminus，会以 `CreateTerminusType.ReLink` 恢复。
+- 业务上的首次登录与重连应由账号状态、登录票据等业务数据判断，不再依赖漫游创建结果。
+- 一个 Session 同时只应使用一个稳定的 `roamingId`。
 
 **Link 的行为：**
 
 | 场景 | 内部行为 | OnCreateTerminus.Type |
 |------|---------|----------------------|
-| 首次调用（roamingType 未建立） | 创建新的 Terminus | `CreateTerminusType.Link` |
-| 再次调用（roamingType 已存在） | 复用或更新现有 Terminus | `CreateTerminusType.ReLink` |
+| 目标 Scene 没有该 roamingId | 创建新的 Terminus | `CreateTerminusType.Link` |
+| 目标 Scene 已有该 roamingId | 复用 Terminus，刷新 owner 和转发地址 | `CreateTerminusType.ReLink` |
 
-`Link` 内部通过 `IsLinked(roamingType)` 自动判断走哪条路径，无需手动区分。
+源端只调用 `Link`；目标端通过 `OnCreateTerminus.Type` 区分 `Link` 与 `ReLink`。这里的 `ReLink` 是目标端事件类型，不是源端公开方法。
 
 **`IsLinked` 的用途：**
 
@@ -515,16 +383,20 @@ if (roaming.IsLinked(RoamingType.ChatRoamingType))
 else
 {
     // 尚未建立，需要先 Link
-    await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+    await roaming.Link(
+        chatConfig.Address,
+        session.RuntimeId,
+        RoamingType.ChatRoamingType);
 }
 ```
 
-**两种创建方法的选择：**
+### 延迟销毁与动态 Gate
 
-| 方法 | 适用场景 | 优点 | 缺点 |
-|------|---------|------|------|
-| `CreateRoaming()` | 简单场景，不需要详细状态 | 代码简洁，直接获取组件 | 无法区分新创建还是已存在 |
-| `TryCreateRoaming()` | 需要详细状态判断的场景（如断线重连） | 可以根据不同状态做不同处理 | 代码稍复杂 |
+Session 释放时，框架会先停止目标 Terminus 向旧 Session 转发，再按 `delayRemove` 延迟清理。重连在期限内发生时会取消旧任务；小于等于 `0` 表示立即清理。
+
+动态 Gate 场景必须保证同一账号在任一时刻只有一个有效登录。新 Gate 通过 `SessionRoamingComponent.RuntimeId` 接管目标 Terminus；旧 Gate 后续到达的暂停或断开请求会因 owner 不匹配而被忽略。旧 Gate 的本地上下文仍由旧 Session 的心跳断开、延迟销毁或 Scene 关闭流程负责回收，不需要额外的 Gate 间释放协议或全局注册表。
+
+目标 Scene 的选择在同一条漫游关系存续期间应保持稳定。扩缩容后仍必须回到原后端时，由业务层持久化玩家到 SceneId 的绑定并验证实例仍在线；主动迁移使用 Terminus 传送，不要把同一 `roamingType` 直接 Link 到另一个目标 Scene。
 
 ---
 
@@ -566,7 +438,7 @@ public struct OnCreateTerminus
 |--------|------|
 | `None` | 未指定类型 |
 | `Link` | 首次创建漫游终端（客户端首次登录时） |
-| `ReLink` | 重新连接漫游终端（断线重连或目标服务器重启后） |
+| `ReLink` | 目标 Scene 复用已有 Terminus，并由新的 Session 或 Gate 恢复转发 |
 
 **核心 API：**
 
@@ -670,13 +542,19 @@ public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
             }
             case RoamingType.MapRoamingType:
             {
-                // 方式 2：先创建实体，再关联
-                var mapPlayer = Entity.Create<MapPlayer>(self.Scene);
-                mapPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
-                await self.Terminus.LinkTerminusEntity(mapPlayer, autoDispose: true);
+                var mapPlayer = self.Terminus.TerminusEntity as MapPlayer;
 
-                Log.Info($"✅ Map 服务器创建了 MapPlayer，PlayerId={mapPlayer.PlayerId}");
-                
+                if (mapPlayer == null)
+                {
+                    mapPlayer = Entity.Create<MapPlayer>(self.Scene);
+                    mapPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
+                    await self.Terminus.LinkTerminusEntity(mapPlayer, autoDispose: true);
+                }
+                else
+                {
+                    mapPlayer.IsOnline = true;
+                }
+
                 // ⚠️ 销毁 Args 参数
                 self.Args?.Dispose();
                 break;
@@ -689,7 +567,7 @@ public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
     private long GetPlayerIdFromRoamingId(Terminus terminus)
     {
         // 假设 roamingId 就是 PlayerId
-        return terminus.RuntimeId;
+        return terminus.Id;
     }
 }
 ```
@@ -702,56 +580,40 @@ public sealed class OnCreateTerminusHandler : AsyncEventSystem<OnCreateTerminus>
 {
     protected override async FTask Handler(OnCreateTerminus self)
     {
-        switch (self.Terminus.RoamingType)
+        if (self.Terminus.RoamingType != RoamingType.ChatRoamingType)
         {
-            case RoamingType.ChatRoamingType:
-            {
-                var chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
-
-                if (chatPlayer == null)
-                {
-                    Log.Error("创建 ChatPlayer 失败");
-                    // ⚠️ 创建失败时也要销毁 args 参数
-                    self.Args?.Dispose();
-                    return;
-                }
-
-                // 使用传递的参数进行初始化
-                if (self.Args is PlayerLoginData loginData)
-                {
-                    chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
-                    chatPlayer.PlayerName = loginData.PlayerName;
-                    chatPlayer.Level = loginData.Level;
-                    chatPlayer.VipLevel = loginData.VipLevel;
-
-                    Log.Info($"✅ Chat 服务器使用传递的参数创建了 ChatPlayer，" +
-                            $"Name={chatPlayer.PlayerName}, Level={chatPlayer.Level}");
-
-                    // ⚠️ 使用完毕后立即销毁，归还对象池
-                    loginData.Dispose();
-                }
-                else
-                {
-                    // 没有传递参数，使用默认初始化
-                    chatPlayer.PlayerId = GetPlayerIdFromRoamingId(self.Terminus);
-                    chatPlayer.LoadData();
-
-                    Log.Info($"✅ Chat 服务器创建了 ChatPlayer，使用默认初始化");
-
-                    // ⚠️ 即使没有匹配的参数类型，也要销毁 Args
-                    self.Args?.Dispose();
-                }
-
-                break;
-            }
+            return;
         }
 
-        await FTask.CompletedTask;
-    }
+        var chatPlayer = self.Terminus.TerminusEntity as ChatPlayer;
 
-    private long GetPlayerIdFromRoamingId(Terminus terminus)
-    {
-        return terminus.RuntimeId;
+        if (chatPlayer == null)
+        {
+            chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
+        }
+
+        if (chatPlayer == null)
+        {
+            self.Args?.Dispose();
+            return;
+        }
+
+        chatPlayer.PlayerId = self.Terminus.Id;
+
+        if (self.Args is PlayerLoginData loginData)
+        {
+            chatPlayer.PlayerName = loginData.PlayerName;
+            chatPlayer.Level = loginData.Level;
+            chatPlayer.VipLevel = loginData.VipLevel;
+        }
+        else if (self.Type == CreateTerminusType.Link)
+        {
+            chatPlayer.LoadData();
+        }
+
+        // Link 和 ReLink 收到的参数副本都由目标端销毁。
+        self.Args?.Dispose();
+        await FTask.CompletedTask;
     }
 }
 ```
@@ -1215,23 +1077,23 @@ public sealed class MapPlayerTransferInSystem : TransferInSystem<MapPlayer>
 
 ### OnDisposeTerminus 事件
 
-当 Terminus 被销毁时，框架会触发 `OnDisposeTerminus` 事件，供业务层执行清理逻辑。
+当 Terminus 断开或传送离开当前 Scene 时，框架会触发 `OnDisposeTerminus`。业务层必须区分真正下线和传送清理。
 
 **事件参数：**
 
 ```csharp
 public struct OnDisposeTerminus
 {
-    public readonly Scene Scene;      // 所属场景
+    public readonly Scene Scene;       // 当前场景
     public readonly Terminus Terminus; // 被销毁的 Terminus 实例
+    public readonly DisposeTerminusType Type;
 }
 ```
 
-**触发时机：**
-
-- 客户端断开连接，Gate 销毁 Terminus 时
-- 手动调用 `terminus.Dispose()` 时
-- 传送完成后，原服务器清理旧 Terminus 时
+| Type | 触发时机 | 业务处理 |
+|------|---------|---------|
+| `UnLink` | Session 超过 `delayRemove` 后断开、主动移除或 Terminus 主动销毁 | 保存数据并执行完整下线逻辑 |
+| `Transfer` | Terminus 传送成功，原 Scene 清理旧实例 | 只清理原 Scene 数据，不执行下线逻辑 |
 
 **使用示例：**
 
@@ -1241,26 +1103,29 @@ public sealed class OnDisposeTerminusHandler : AsyncEventSystem<OnDisposeTerminu
 {
     protected override async FTask Handler(OnDisposeTerminus self)
     {
-        // 根据 RoamingType 区分处理
-        switch (self.Terminus.RoamingType)
+        if (self.Scene.SceneType != SceneType.Map)
         {
-            case RoamingType.MapRoamingType:
-            {
-                var mapPlayer = self.Terminus.TerminusEntity as MapPlayer;
-                if (mapPlayer != null)
-                {
-                    // 玩家离线：保存数据、通知其他玩家等
-                    await mapPlayer.SaveToDatabase();
-                    Log.Info($"✅ MapPlayer {mapPlayer.PlayerId} 已离线，数据已保存");
-                }
-                break;
-            }
+            return;
         }
 
-        await FTask.CompletedTask;
+        var mapPlayer = self.Terminus.TerminusEntity as MapPlayer;
+        if (mapPlayer == null) return;
+
+        switch (self.Type)
+        {
+            case DisposeTerminusType.UnLink:
+                await mapPlayer.SaveToDatabase();
+                await mapPlayer.Offline();
+                return;
+            case DisposeTerminusType.Transfer:
+                await mapPlayer.RemoveFromCurrentMap();
+                return;
+        }
     }
 }
 ```
+
+`autoDispose=true` 时，事件发布完成后框架会自动销毁关联实体；不要在监听器中重复 `Dispose()`。
 
 ---
 
@@ -1277,14 +1142,14 @@ public sealed class OnDisposeTerminusHandler : AsyncEventSystem<OnDisposeTerminu
 | `ErrRoamingDisposed` | `100000032` | 漫游组件已销毁 | Session 断开或漫游被主动移除后仍在发送消息 |
 | `ErrRoamingTimeout` | `100000012` | 漫游消息超时 | 消息发送过程中组件被销毁或网络超时 |
 | `ErrRoamingRetryExhausted` | `100000031` | 漫游消息重试次数超限 | 连续重试超过上限仍无法送达 |
-| `ErrReLinkNotFoundRoaming` | `100000033` | ReLink 时找不到已有连接 | 调用了已废弃的 ReLink 方法，但该 roamingType 从未 Link 过 |
 | `ErrTerminusNotLinked` | `100000034` | Entity 未关联 Terminus | 通过 TerminusHelper 扩展方法发送消息，但 Entity 没有调用过 LinkTerminusEntity |
+| `ErrRoamingOwnerChanged` | `100000035` | 漫游控制请求来自失效 owner | 同一 roamingId 已被新的 Gate 接管 |
 
 ### Terminus 相关错误码
 
 | 错误码常量名 | 值 | 含义 | 常见原因 |
 |-------------|-----|------|---------|
-| `ErrAddRoamingTerminalAlreadyExists` | `100000010` | 漫游终端已存在 | 同一个 roamingId 重复创建 Terminus |
+| `ErrAddRoamingTerminalAlreadyExists` | `100000010` | 漫游终端已存在 | Terminus 传送到目标 Scene 时，同一 roamingId 已存在 |
 | `ErrCreateTerminusInvalidRoamingId` | `100000028` | 无效的 RoamingId | 传入的 roamingId 为 0 |
 | `ErrSetForwardSessionAddressNotFoundTerminus` | `100000027` | 未找到漫游终端 | 更新转发地址时找不到对应的 Terminus |
 | `ErrTerminusStartTransfer` | `100000017` | 传送过程发生错误 | StartTransfer 执行中抛出异常 |
@@ -1304,11 +1169,14 @@ Link 尚未完成时就并发发送了消息，这是最容易踩的坑。
 
 ```csharp
 // ❌ 错误写法：Link 和发送并发执行
-roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);  // 没有 await
+roaming.Link(chatAddress, session.RuntimeId, RoamingType.ChatRoamingType);  // 没有 await
 session.Call(new C2Chat_SendMessageRequest { });  // Link 还没完成就发了，返回 ErrRoamingNotReady
 
 // ✅ 正确写法：等待 Link 完成后再发送
-var errorCode = await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+var errorCode = await roaming.Link(
+    chatAddress,
+    session.RuntimeId,
+    RoamingType.ChatRoamingType);
 if (errorCode == 0)
 {
     var response = await session.Call(new C2Chat_SendMessageRequest { });
@@ -1321,7 +1189,7 @@ if (errorCode == 0)
 
 **场景 3：收到 `ErrRoamingDisposed`（100000032）**
 
-漫游组件已被销毁（Session 断开、主动 `Remove` 等）。检查 Session 是否仍然有效，或是否有其他逻辑提前销毁了漫游。
+漫游组件已被销毁（Session 断开、主动 `RemoveRoaming` 等）。检查 Session 是否仍然有效，或是否有其他逻辑提前销毁了漫游。
 
 **场景 4：收到 `ErrTerminusNotLinked`（100000034）**
 
@@ -1353,23 +1221,24 @@ if (errorCode == 0)
 
 ```csharp
 // 建立到 Chat 的路由
-await roaming.Link(session, chatConfig, RoamingType.ChatRoamingType);
+await roaming.Link(chatConfig.Address, session.RuntimeId, RoamingType.ChatRoamingType);
 
 // 建立到 Map 的路由
-await roaming.Link(session, mapConfig, RoamingType.MapRoamingType);
+await roaming.Link(mapConfig.Address, session.RuntimeId, RoamingType.MapRoamingType);
 
 // 建立到 Battle 的路由
-await roaming.Link(session, battleConfig, RoamingType.BattleRoamingType);
+await roaming.Link(battleConfig.Address, session.RuntimeId, RoamingType.BattleRoamingType);
 ```
 
 ---
 
 ### Q3: Terminus 什么时候销毁？
 
-- 客户端断开连接时，Gate 上的 Terminus 自动销毁
+- Session 断开后先停止向旧 Session 转发；超过 `delayRemove` 且没有重连时才销毁
+- `session.RemoveRoaming()` 默认立即销毁，也可以显式传入延迟时间
+- `roaming.UnLink(type, disposeIfEmpty)` 可移除单条路由，`UnLinkAll()` 可断开全部后端路由；整个上下文统一用 `RemoveRoaming()` 回收
 - Terminus 销毁时，如果 `autoDispose=true`，关联的实体也会销毁
-- 可以手动调用 `terminus.Dispose()` 销毁
-- Terminus 销毁时会触发 `OnDisposeTerminus` 事件，供业务层执行清理逻辑
+- Terminus 离开 Scene 时会触发 `OnDisposeTerminus`，必须根据 `Type` 区分下线与传送
 
 ---
 
@@ -1538,10 +1407,12 @@ Roaming 漫游系统的核心优势：
 
 | API | 返回值 | 说明 | 使用场景 |
 |-----|--------|------|---------|
-| `session.CreateRoaming()` | `SessionRoamingComponent` | Gate 创建 Roaming 组件（简单版本） | 不需要详细状态时 |
-| `session.TryCreateRoaming()` | `CreateRoamingResult` | Gate 创建 Roaming 组件（详细版本，包含状态） | 需要判断创建状态时 |
-| `roaming.Link(session, config, type, args)` | `uint` | 建立到后端服务器的路由，自动判断首次连接或重连 | 客户端登录和断线重连 |
+| `session.GetOrCreateRoaming(id, delayRemove)` | `FTask<SessionRoamingComponent>` | 获取或创建漫游上下文，并自动处理 Session 重绑 | 客户端登录和断线重连 |
+| `roaming.Link(address, session.RuntimeId, type, args)` | `FTask<uint>` | 建立或恢复到目标 Scene 的路由 | 登录初始化或恢复目标 Terminus |
 | `roaming.IsLinked(roamingType)` | `bool` | 判断指定 roamingType 是否已建立漫游关系 | 精细控制场景 |
+| `session.RemoveRoaming(delayRemove)` | `FTask` | 立即或延迟移除整个漫游上下文 | 主动下线 |
+| `roaming.UnLink(type, disposeIfEmpty)` | `FTask<bool>` | 移除指定 roamingType | 断开单条后端路由 |
+| `roaming.UnLinkAll()` | `FTask` | 断开全部 roamingType，但保留漫游上下文 | 后续准备重新 Link |
 | `terminus.LinkTerminusEntity()` | `FTask<T>` | 关联业务实体到 Terminus | OnCreateTerminus 事件中 |
 | `entity.Send(message)` | `void` | 向客户端发送消息 | 服务器主动推送 |
 | `entity.Send(roamingType, message)` | `void` | 向其他服务器发送消息 | 服务器间通信 |

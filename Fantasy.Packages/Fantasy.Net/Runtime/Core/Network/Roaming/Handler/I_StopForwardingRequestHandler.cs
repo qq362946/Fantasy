@@ -8,14 +8,23 @@ using Fantasy.Network.Interface;
 
 namespace Fantasy.Roaming.Handler;
 
+/// <summary>
+/// 在源端 Session 断开后的保活期内暂停 Terminus 消息转发。
+/// </summary>
 internal sealed class I_StopForwardingRequestHandler : AddressRPC<Scene, I_StopForwardingRequest, I_StopForwardingResponse>
 {
     protected override async FTask Run(Scene scene, I_StopForwardingRequest request, I_StopForwardingResponse response, Action reply)
     {
         if (!scene.TerminusComponent.TryGetTerminus(request.RoamingId, out var terminus))
         {
-            // 没有找到需要返回对应错误码
             response.ErrorCode = InnerErrorCode.ErrSetForwardSessionAddressNotFoundTerminus;
+            return;
+        }
+        
+        if (terminus.OwnerRoamingRuntimeId != request.OwnerRoamingRuntimeId)
+        {
+            // 旧 Gate 的延迟暂停请求已经失效。
+            // 按成功处理，避免旧 Gate 记录无意义的错误日志。
             return;
         }
 

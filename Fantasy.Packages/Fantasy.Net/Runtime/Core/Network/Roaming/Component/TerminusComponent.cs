@@ -10,83 +10,72 @@ using Fantasy.Entitas;
 namespace Fantasy.Network.Roaming;
 
 /// <summary>
-/// 漫游终端创建类型枚举。
-/// 用于区分漫游终端是首次创建还是重新连接。
+/// Terminus 建立事件的类型。
 /// </summary>
 public enum CreateTerminusType
 {
     /// <summary>
-    /// 未指定类型。
+    /// 未指定。
     /// </summary>
     None = 0,
     /// <summary>
-    /// 首次创建漫游终端。
-    /// 当客户端第一次与目标服务器建立漫游连接时使用此类型。
+    /// 目标 Scene 首次创建 Terminus。
     /// </summary>
     Link = 1,
     /// <summary>
-    /// 重新连接漫游终端。
-    /// 当目标服务器重启或客户端断线重连时使用此类型。
+    /// 目标 Scene 复用已有 Terminus 并恢复转发关系。
     /// </summary>
     ReLink = 2,
 }
 
 /// <summary>
-/// 漫游终端销毁类型枚举。
+/// Terminus 离开当前 Scene 的原因。
 /// </summary>
 public enum DisposeTerminusType
 {
     /// <summary>
-    /// 未指定类型。
+    /// 未指定。
     /// </summary>
     None = 0,
     /// <summary>
-    /// 断开漫游终端。
-    /// 当客户端完全断开连接此终端时使用此类型。
-    /// 用于当前 Scene 进行下线处理的操作。
+    /// 漫游关系断开，业务层通常在当前 Scene 执行下线清理。
     /// </summary>
     UnLink = 1,
     /// <summary>
-    /// 漫游终端进行传送。
-    /// 漫游终端进行传送后使用此类型。
-    /// 用于回收清理当前 Scene 下的数据。
+    /// Terminus 已传送到其他 Scene，当前 Scene 只清理源端数据。
     /// </summary>
     Transfer = 2,
 }
 
 /// <summary>
-/// 漫游终端创建完成时发送的事件参数。
-/// 当 Terminus 首次创建（Link）或重新连接（ReLink）时，会发布此事件。
-/// 业务层可以订阅此事件来执行玩家实体的创建或恢复逻辑。
+/// Terminus 在目标 Scene 创建或恢复时发布的事件数据。
 /// </summary>
 public struct OnCreateTerminus
 {
     /// <summary>
-    /// 获取与事件关联的场景实体。
+    /// 处理 Terminus 的目标 Scene。
     /// </summary>
     public readonly Scene Scene;
     /// <summary>
-    /// 获取从 Gate 服务器传递过来的自定义参数。
-    /// 可用于传递登录信息、玩家数据等业务数据。
+    /// 源端随 Link 请求传入的可选业务参数。
     /// </summary>
     public readonly Entity? Args;
     /// <summary>
-    /// 获取与事件关联的漫游终端实例。
+    /// 本次创建或恢复的 Terminus。
     /// </summary>
     public readonly Terminus Terminus;
     /// <summary>
-    /// 获取漫游终端的创建类型。
-    /// 用于区分是首次创建（Link）还是重新连接（ReLink）。
+    /// 本次是首次创建还是恢复已有 Terminus。
     /// </summary>
     public readonly CreateTerminusType Type;
 
     /// <summary>
-    /// 初始化一个新的 <see cref="OnCreateTerminus"/> 实例。
+    /// 创建 Terminus 建立事件数据。
     /// </summary>
-    /// <param name="scene">与事件关联的场景实体。</param>
-    /// <param name="createTerminusType">漫游终端的创建类型。</param>
-    /// <param name="terminus">漫游终端实例。</param>
-    /// <param name="args">从 Gate 服务器传递的自定义参数。</param>
+    /// <param name="scene">处理 Terminus 的目标 Scene。</param>
+    /// <param name="createTerminusType">建立类型。</param>
+    /// <param name="terminus">创建或恢复的 Terminus。</param>
+    /// <param name="args">源端传入的可选业务参数。</param>
     public OnCreateTerminus(Scene scene, CreateTerminusType createTerminusType, Terminus terminus, Entity? args)
     {
         Args = args;
@@ -96,27 +85,29 @@ public struct OnCreateTerminus
     }
 }
 
+/// <summary>
+/// Terminus 从当前 Scene 断开或传送离开时发布的事件数据。
+/// </summary>
 public struct OnDisposeTerminus
 {
     /// <summary>
-    /// 获取与事件关联的场景实体。
+    /// Terminus 当前所在的 Scene。
     /// </summary>
     public readonly Scene Scene;
     /// <summary>
-    /// 获取与事件关联的漫游终端实例。
+    /// 即将离开当前 Scene 的 Terminus。
     /// </summary>
     public readonly Terminus Terminus;
     /// <summary>
-    /// 获取漫游终端的销毁类型。
-    /// 用于区分是断开漫游终端（UnLink）还是漫游终端进行传送（Transfer）。
+    /// Terminus 离开当前 Scene 的原因。
     /// </summary>
     public readonly DisposeTerminusType Type;
     /// <summary>
-    /// 初始化一个新的 <see cref="OnDisposeTerminus"/> 实例。
+    /// 创建 Terminus 离开事件数据。
     /// </summary>
-    /// <param name="scene">与事件关联的场景实体。</param>
-    /// <param name="disposeTerminusType">漫游终端的销毁类型。</param>
-    /// <param name="terminus">漫游终端实例。</param>
+    /// <param name="scene">Terminus 当前所在的 Scene。</param>
+    /// <param name="disposeTerminusType">离开原因。</param>
+    /// <param name="terminus">即将离开的 Terminus。</param>
     public OnDisposeTerminus(Scene scene, DisposeTerminusType disposeTerminusType, Terminus terminus)
     {
         Scene = scene;
@@ -126,28 +117,23 @@ public struct OnDisposeTerminus
 }
 
 /// <summary>
-/// 漫游终端管理组件。
-/// <para>负责管理当前 Scene 下所有漫游终端（Terminus）的生命周期。</para>
-/// <para>此组件会在 Scene 启动时自动挂载，无需手动创建。</para>
-/// <para>主要功能：</para>
-/// <list type="bullet">
-///   <item>创建漫游终端（Link）：当 Gate 服务器请求建立漫游连接时调用。</item>
-///   <item>重新连接（ReLink）：当目标服务器重启或客户端断线重连时调用。</item>
-///   <item>管理漫游终端的添加、查询和移除。</item>
-/// </list>
+/// 管理当前目标 Scene 中全部 Terminus 的创建、重连、传送和销毁。
 /// </summary>
+/// <remarks>组件随 Scene 初始化，业务层通过 Terminus 生命周期事件创建、恢复或清理关联实体。</remarks>
 public sealed class TerminusComponent : Entity
 {
+    // Close 后拒绝新的 Link 或 Transfer 注册。
     private bool _isClosed;
+    // Dispose 是异步入口，该标记防止关闭流程被重复启动。
     private bool _isDisposing;
-    
+
     /// <summary>
-    /// 漫游终端的实体集合。Key 为 roamingId（即 Terminus.Id），Value 为 Terminus 实例。
+    /// 按 roamingId 保存当前 Scene 中的 Terminus。
     /// </summary>
     private readonly Dictionary<long, Terminus> _terminals = new();
 
     /// <summary>
-    /// 释放组件资源。销毁所有管理的漫游终端并清空集合。
+    /// 异步关闭全部 Terminus 后销毁组件。
     /// </summary>
     public override void Dispose()
     {
@@ -159,7 +145,7 @@ public sealed class TerminusComponent : Entity
         _isDisposing = true;
         DisposeAsync().Coroutine();
     }
-    
+
     private async FTask DisposeAsync()
     {
         try
@@ -171,9 +157,9 @@ public sealed class TerminusComponent : Entity
             base.Dispose();
         }
     }
-    
+
     /// <summary>
-    /// 关闭并清理当前 Scene 下的所有漫游终端。
+    /// 以断开原因关闭并清理当前 Scene 中的全部 Terminus。
     /// </summary>
     internal async FTask Close()
     {
@@ -211,127 +197,76 @@ public sealed class TerminusComponent : Entity
     }
 
     /// <summary>
-    /// 创建一个新的漫游终端。
-    /// <para>当 Gate 服务器首次请求与目标服务器建立漫游连接时调用此方法。</para>
-    /// <para>创建成功后会发布 <see cref="OnCreateTerminus"/> 事件，业务层可订阅此事件执行玩家实体创建逻辑。</para>
+    /// 获取或创建 roamingId 对应的 Terminus，并刷新源端转发地址。
     /// </summary>
-    /// <param name="scene">当前Scene</param>
-    /// <param name="roamingId">漫游唯一标识，通常使用玩家账号ID。不能为0。</param>
-    /// <param name="roamingType">漫游类型，用于区分不同的目标服务器类型（如 Map、Chat 等）。</param>
-    /// <param name="forwardSessionAddress">需要转发消息的 Session 地址（客户端连接的 Session）。</param>
-    /// <param name="forwardSceneAddress">转发 Session 所在的 Scene 地址（通常是 Gate 服务器地址）。</param>
-    /// <param name="args">可选的自定义参数，会传递给 <see cref="OnCreateTerminus"/> 事件。</param>
-    /// <returns>返回元组：(错误码, Terminus实例)。错误码为0表示成功。</returns>
-    internal async FTask<(uint, Terminus)> Create(Scene scene, long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress, Entity? args)
+    /// <remarks>
+    /// 首次建立时发布 <see cref="CreateTerminusType.Link"/>；已存在时视为重连并发布
+    /// <see cref="CreateTerminusType.ReLink"/>。业务层无需在源端区分两条调用路径。
+    /// </remarks>
+    /// <param name="scene">Terminus 所在的目标 Scene。</param>
+    /// <param name="roamingId">断线重连前后保持稳定的业务身份，不能为 0。</param>
+    /// <param name="roamingType">当前目标 Scene 对应的漫游类型。</param>
+    /// <param name="forwardSessionAddress">接收转发消息的 Session 地址。</param>
+    /// <param name="ownerRoamingRuntimeId">拥有当前 Terminus 的 SessionRoamingComponent.RuntimeId。</param>
+    /// <param name="forwardSceneAddress">管理源端漫游上下文的 Scene 地址。</param>
+    /// <param name="args">传给 <see cref="OnCreateTerminus"/> 事件的可选业务参数。</param>
+    /// <returns>错误码和 Terminus；错误码为 0 时 Terminus 有效。</returns>
+    internal async FTask<(uint, Terminus)> Create(Scene scene, long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress, long ownerRoamingRuntimeId, Entity? args)
     {
         if (_isClosed)
         {
             return (InnerErrorCode.ErrRoamingDisposed, null);
         }
-        
-        if (roamingId == 0)
-        {
-            return (InnerErrorCode.ErrCreateTerminusInvalidRoamingId, null);
-        }
-        
-        if (_terminals.ContainsKey(roamingId))
-        {
-            return (InnerErrorCode.ErrAddRoamingTerminalAlreadyExists, null);
-        }
 
-        var terminus = Entity.Create<Terminus>(scene, roamingId, false, true);
-        
-        terminus.IsDisposeTerminus = false;
-        terminus.RoamingType = roamingType;
-        terminus.ForwardSceneAddress = forwardSceneAddress;
-        terminus.ForwardSessionAddress = forwardSessionAddress;
-        terminus.RoamingMessageLock = scene.CoroutineLockComponent.Create(terminus.Type.TypeHandle.Value.ToInt64());
-        
-        _terminals.Add(terminus.Id, terminus);
-
-        await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, CreateTerminusType.Link, terminus, args));
-        
-        if (_isClosed ||
-            terminus.IsDisposeTerminus ||
-            terminus.IsDisposed)
-        {
-            return (InnerErrorCode.ErrRoamingDisposed, null);
-        }
-        
-        if (terminus.TerminusId == 0)
-        {
-            terminus.TerminusId = terminus.RuntimeId;
-        }
-        
-        return (0U, terminus);
-    }
-
-    /// <summary>
-    /// 重新连接漫游终端。
-    /// <para>当目标服务器重启或客户端断线重连时调用此方法。</para>
-    /// <para>如果指定 roamingId 的 Terminus 已存在，则更新其转发地址并重置状态；否则创建新的 Terminus。</para>
-    /// <para>重连成功后会发布 <see cref="OnCreateTerminus"/> 事件（Type 为 ReLink），业务层可订阅此事件执行玩家状态恢复逻辑。</para>
-    /// </summary>
-    /// <param name="scene">当前Scene</param>
-    /// <param name="roamingId">漫游唯一标识，通常使用玩家账号ID。不能为0。</param>
-    /// <param name="roamingType">漫游类型，用于区分不同的目标服务器类型（如 Map、Chat 等）。</param>
-    /// <param name="forwardSessionAddress">需要转发消息的 Session 地址（客户端连接的新 Session）。</param>
-    /// <param name="forwardSceneAddress">转发 Session 所在的 Scene 地址（通常是 Gate 服务器地址）。</param>
-    /// <param name="args">可选的自定义参数，会传递给 <see cref="OnCreateTerminus"/> 事件。</param>
-    /// <returns>返回元组：(错误码, Terminus实例)。错误码为0表示成功。</returns>
-    internal async FTask<(uint, Terminus)> ReLink(Scene scene, long roamingId, int roamingType, long forwardSessionAddress, long forwardSceneAddress, Entity? args)
-    {
-        if (_isClosed)
-        {
-            return (InnerErrorCode.ErrRoamingDisposed, null);
-        }
-        
-        if (roamingId == 0)
+        if (roamingId == 0 || ownerRoamingRuntimeId == 0)
         {
             return (InnerErrorCode.ErrCreateTerminusInvalidRoamingId, null);
         }
 
         if (!_terminals.TryGetValue(roamingId, out var terminus))
         {
+            // 首次 Link：先登记 Terminus，再让业务事件建立关联实体。
             terminus = Entity.Create<Terminus>(scene, roamingId, false, true);
-        
             terminus.IsDisposeTerminus = false;
             terminus.RoamingType = roamingType;
+            terminus.ForwardSceneAddress = forwardSceneAddress;
+            terminus.OwnerRoamingRuntimeId = ownerRoamingRuntimeId;
+            terminus.ForwardSessionAddress = forwardSessionAddress;
             terminus.RoamingMessageLock = scene.CoroutineLockComponent.Create(terminus.Type.TypeHandle.Value.ToInt64());
-        
+
             _terminals.Add(terminus.Id, terminus);
+            await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, CreateTerminusType.Link, terminus, args));
         }
         else
         {
-            // terminus.TerminusId = 0;
+            // ReLink：业务实体和 Terminus 保持不变，只恢复最新的源端转发地址。
             terminus.StopForwarding = false;
+            terminus.ForwardSceneAddress = forwardSceneAddress;
+            terminus.OwnerRoamingRuntimeId = ownerRoamingRuntimeId;
+            terminus.ForwardSessionAddress = forwardSessionAddress;
+
+            await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, CreateTerminusType.ReLink, terminus, args));
         }
-        
-        terminus.ForwardSceneAddress = forwardSceneAddress;
-        terminus.ForwardSessionAddress = forwardSessionAddress;
 
-        await scene.EventComponent.PublishAsync(new OnCreateTerminus(scene, CreateTerminusType.ReLink, terminus, args));
-
-        if (_isClosed ||
-            terminus.IsDisposeTerminus ||
-            terminus.IsDisposed)
+        if (_isClosed || terminus.IsDisposeTerminus || terminus.IsDisposed)
         {
             return (InnerErrorCode.ErrRoamingDisposed, null);
         }
-        
+
         if (terminus.TerminusId == 0)
         {
+            // 业务事件没有关联实体时，Terminus 自身就是可寻址目标。
             terminus.TerminusId = terminus.RuntimeId;
         }
-        
+
         return (0U, terminus);
     }
 
     /// <summary>
-    /// 添加一个漫游终端到管理集合。
-    /// <para>通常用于 Terminus 传送（Transfer）完成后，在目标 Scene 中注册 Terminus。</para>
+    /// 将传送到当前 Scene 的 Terminus 加入管理索引。
     /// </summary>
-    /// <param name="terminus">要添加的漫游终端实例。</param>
+    /// <param name="terminus">传送过来的 Terminus。</param>
+    /// <returns>组件仍可接收 Terminus 时返回 <see langword="true"/>。</returns>
     internal bool AddTerminus(Terminus terminus)
     {
         if (_isClosed)
@@ -344,32 +279,33 @@ public sealed class TerminusComponent : Entity
     }
 
     /// <summary>
-    /// 尝试根据 roamingId 获取漫游终端。
+    /// 尝试获取指定 roamingId 的 Terminus。
     /// </summary>
     /// <param name="roamingId">漫游唯一标识。</param>
-    /// <param name="terminus">如果找到则返回对应的 Terminus 实例，否则返回 null。</param>
-    /// <returns>如果找到返回 true，否则返回 false。</returns>
+    /// <param name="terminus">找到的 Terminus。</param>
+    /// <returns>找到时返回 <see langword="true"/>；否则返回 <see langword="false"/>。</returns>
     internal bool TryGetTerminus(long roamingId, out Terminus terminus)
     {
         return _terminals.TryGetValue(roamingId, out terminus);
     }
-    
+
     /// <summary>
-    /// 根据 roamingId 获取漫游终端。如果不存在会抛出异常。
+    /// 获取指定 roamingId 的 Terminus。
     /// </summary>
     /// <param name="roamingId">漫游唯一标识。</param>
     /// <returns>对应的 Terminus 实例。</returns>
-    /// <exception cref="KeyNotFoundException">当指定的 roamingId 不存在时抛出。</exception>
+    /// <exception cref="KeyNotFoundException">指定 roamingId 不存在。</exception>
     internal Terminus GetTerminus(long roamingId)
     {
         return _terminals[roamingId];
     }
 
     /// <summary>
-    /// 根据 roamingId 移除漫游终端。
+    /// 从索引中同步移除 Terminus，并按需触发销毁。
     /// </summary>
-    /// <param name="roamingId">漫游唯一标识</param>
-    /// <param name="isDispose">是否同时销毁 Terminus 实例。如果为 true，会调用 Terminus.Dispose()。</param>
+    /// <remarks>该入口用于传送注册失败时的本地回滚，不发布异步离开事件。</remarks>
+    /// <param name="roamingId">要移除的业务漫游身份。</param>
+    /// <param name="isDispose">是否同时销毁 Terminus。</param>
     internal void Remove(long roamingId, bool isDispose)
     {
         if (!_terminals.Remove(roamingId, out var terminus))
@@ -381,7 +317,7 @@ public sealed class TerminusComponent : Entity
         {
             return;
         }
-        
+
         if (terminus.IsDisposed)
         {
             return;
@@ -391,11 +327,11 @@ public sealed class TerminusComponent : Entity
     }
 
     /// <summary>
-    /// 根据 roamingId 移除漫游终端。
+    /// 从索引中移除 Terminus，发布离开事件，并按需完成异步销毁。
     /// </summary>
-    /// <param name="disposeTerminusType">漫游终端的销毁类型。</param>
-    /// <param name="roamingId">漫游唯一标识。</param>
-    /// <param name="isDispose">是否同时销毁 Terminus 实例。如果为 true，会调用 Terminus.DisposeAsync()。</param>
+    /// <param name="disposeTerminusType">Terminus 离开当前 Scene 的原因。</param>
+    /// <param name="roamingId">要移除的业务漫游身份。</param>
+    /// <param name="isDispose">是否在事件发布后销毁 Terminus。</param>
     internal async FTask RemoveTerminusAsync(DisposeTerminusType disposeTerminusType, long roamingId, bool isDispose)
     {
         if (!_terminals.Remove(roamingId, out var terminus))

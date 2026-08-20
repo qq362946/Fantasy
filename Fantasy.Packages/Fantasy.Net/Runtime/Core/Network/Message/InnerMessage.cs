@@ -410,6 +410,7 @@ namespace Fantasy.InnerMessage
             RoamingType = 0;
             ForwardSessionAddress = 0;
             SceneAddress = 0;
+            OwnerRoamingRuntimeId = 0;
             MessageObjectPool<I_LinkRoamingRequest>.Return(this);
         }
 
@@ -425,15 +426,10 @@ namespace Fantasy.InnerMessage
         public long ForwardSessionAddress { get; set; }
         [MemoryPackOrder(4)]
         public long SceneAddress { get; set; }
-        /// <summary>
-        /// Link类型
-        /// 0 为创建 Link
-        /// 1:重连 Link
-        /// </summary>
         [MemoryPackOrder(5)]
-        public int LinkType { get; set; } 
-        [MemoryPackOrder(6)]
         public Entity Args { get; set; }
+        [MemoryPackOrder(6)]
+        public long OwnerRoamingRuntimeId { get; set; }
     }
     [MemoryPackable]
     public sealed partial class I_LinkRoamingResponse : AMessage, IAddressResponse
@@ -470,6 +466,7 @@ namespace Fantasy.InnerMessage
         {
             RoamingId = 0;
             DisposeRoaming = false;
+            OwnerRoamingRuntimeId = 0;
             MessageObjectPool<I_UnLinkRoamingRequest>.Return(this);
         }
 
@@ -481,6 +478,8 @@ namespace Fantasy.InnerMessage
         public long RoamingId { get; set; }
         [ProtoMember(2)]
         public bool DisposeRoaming { get; set; }
+        [ProtoMember(3)]
+        public long OwnerRoamingRuntimeId { get; set; }
     }
     [ProtoContract]
     public sealed partial class I_UnLinkRoamingResponse : AMessage, IAddressResponse
@@ -687,6 +686,7 @@ namespace Fantasy.InnerMessage
         {
             RoamingId = 0;
             ForwardSessionAddress = 0;
+            OwnerRoamingRuntimeId = 0;
             MessageObjectPool<I_SetForwardSessionAddressRequest>.Return(this);
         }
 
@@ -698,6 +698,8 @@ namespace Fantasy.InnerMessage
         public long RoamingId { get; set; }
         [ProtoMember(2)]
         public long ForwardSessionAddress { get; set; }
+        [ProtoMember(3)]
+        public long OwnerRoamingRuntimeId { get; set; }
     }
     [ProtoContract]
     public sealed partial class I_SetForwardSessionAddressResponse : AMessage, IAddressResponse
@@ -728,6 +730,7 @@ namespace Fantasy.InnerMessage
         public void Dispose()
         {
             RoamingId = 0;
+            OwnerRoamingRuntimeId = 0;
             MessageObjectPool<I_StopForwardingRequest>.Return(this);
         }
 
@@ -737,6 +740,8 @@ namespace Fantasy.InnerMessage
         public long RouteTypeOpCode() { return 1; }
         [ProtoMember(1)]
         public long RoamingId { get; set; }
+        [ProtoMember(2)]
+        public long OwnerRoamingRuntimeId { get; set; }
     }
     [ProtoContract]
     public sealed partial class I_StopForwardingResponse : AMessage, IAddressResponse

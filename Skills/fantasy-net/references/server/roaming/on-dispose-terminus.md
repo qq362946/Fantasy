@@ -6,6 +6,8 @@ Terminus 被销毁时框架自动触发 `OnDisposeTerminus` 事件。
 - 客户端断开连接，且超过 `delayRemove` 设定的重连等待时间（`DisposeTerminusType.UnLink`）
 - Terminus 传送完成后，原服务器侧清理旧 Terminus（`DisposeTerminusType.Transfer`）
 
+`delayRemove <= 0` 表示立即销毁；默认重连窗口由 `GetOrCreateRoaming` 提供。期限内用同一 `roamingId` 重连会取消旧销毁任务。
+
 **事件参数：**
 
 ```csharp

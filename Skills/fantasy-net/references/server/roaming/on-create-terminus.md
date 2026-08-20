@@ -1,6 +1,6 @@
 # OnCreateTerminus 事件
 
-Gate 调用 `roaming.Link()` 时，目标服务器自动触发 `OnCreateTerminus` 事件，在此创建并关联业务实体。
+Gate 调用 `roaming.Link()` 时，目标服务器自动触发 `OnCreateTerminus` 事件，在此创建或恢复业务实体。`CreateTerminusType.ReLink` 仅表示目标端复用了已有 Terminus；调用方始终使用 `Link`。
 
 **事件参数：**
 
@@ -71,7 +71,7 @@ public sealed class OnCreateTerminus_CreateChatPlayer : AsyncEventSystem<OnCreat
                     return;
                 }
 
-                chatPlayer.PlayerId = self.Terminus.RuntimeId;
+                chatPlayer.PlayerId = self.Terminus.Id;
 
                 if (self.Args is PlayerLoginData loginData)
                 {
@@ -100,7 +100,7 @@ public sealed class OnCreateTerminus_CreateChatPlayer : AsyncEventSystem<OnCreat
                     chatPlayer = await self.Terminus.LinkTerminusEntity<ChatPlayer>(autoDispose: true);
                     if (chatPlayer != null)
                     {
-                        chatPlayer.PlayerId = self.Terminus.RuntimeId;
+                        chatPlayer.PlayerId = self.Terminus.Id;
                         await chatPlayer.LoadFromDatabase();
                     }
                 }
@@ -127,9 +127,19 @@ public sealed class OnCreateTerminus_CreateMapPlayer : AsyncEventSystem<OnCreate
             return;
         }
 
-        var mapPlayer = Entity.Create<MapPlayer>(self.Scene);
-        mapPlayer.PlayerId = self.Terminus.RuntimeId;
-        await self.Terminus.LinkTerminusEntity(mapPlayer, autoDispose: true);
+        var mapPlayer = self.Terminus.TerminusEntity as MapPlayer;
+
+        if (mapPlayer == null)
+        {
+            mapPlayer = Entity.Create<MapPlayer>(self.Scene);
+            mapPlayer.PlayerId = self.Terminus.Id;
+            await self.Terminus.LinkTerminusEntity(mapPlayer, autoDispose: true);
+        }
+        else
+        {
+            mapPlayer.IsOnline = true;
+        }
+
         self.Args?.Dispose();
 
         await FTask.CompletedTask;

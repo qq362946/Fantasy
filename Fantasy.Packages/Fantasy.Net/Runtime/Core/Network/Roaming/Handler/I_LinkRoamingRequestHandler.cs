@@ -9,27 +9,21 @@ using Fantasy.Network.Roaming;
 
 namespace Fantasy.Roaming.Handler;
 
+/// <summary>
+/// 在目标 Scene 创建或恢复 Terminus，并返回当前可路由的 TerminusId。
+/// </summary>
 internal sealed class I_LinkRoamingRequestHandler : AddressRPC<Scene, I_LinkRoamingRequest, I_LinkRoamingResponse>
 {
     protected override async FTask Run(Scene scene, I_LinkRoamingRequest request, I_LinkRoamingResponse response, Action reply)
     {
-        uint errorCode = 0;
-        Terminus roamingTerminal = null;
-
-        if (request.LinkType == 1)
-        {
-            (errorCode, roamingTerminal) = await scene.TerminusComponent.ReLink(
-                scene,
-                request.RoamingId, request.RoamingType,
-                request.ForwardSessionAddress, request.SceneAddress, request.Args);
-        }
-        else
-        {
-            (errorCode, roamingTerminal) = await scene.TerminusComponent.Create(
-                scene,
-                request.RoamingId, request.RoamingType,
-                request.ForwardSessionAddress, request.SceneAddress, request.Args);
-        }
+        var (errorCode, roamingTerminal) = await scene.TerminusComponent.Create(
+            scene,
+            request.RoamingId,
+            request.RoamingType,
+            request.ForwardSessionAddress,
+            request.SceneAddress,
+            request.OwnerRoamingRuntimeId,
+            request.Args);
 
         if (errorCode != 0)
         {

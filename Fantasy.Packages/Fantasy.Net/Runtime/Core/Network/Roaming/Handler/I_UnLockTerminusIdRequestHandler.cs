@@ -12,7 +12,7 @@ using Fantasy.Network.Interface;
 namespace Fantasy.Roaming.Handler;
 
 /// <summary>
-/// 内部网络漫游解锁的请求处理。
+/// 提交 Terminus 迁移后的新地址并解除源端路由锁。
 /// </summary>
 internal sealed class I_UnLockTerminusIdRequestHandler : AddressRPC<Scene, I_UnLockTerminusIdRequest, I_UnLockTerminusIdResponse>
 {
@@ -24,7 +24,8 @@ internal sealed class I_UnLockTerminusIdRequestHandler : AddressRPC<Scene, I_UnL
             response.ErrorCode = InnerErrorCode.ErrLockTerminusIdNotFoundRoamingType;
             return;
         }
-        
+
+        // 先更新地址再释放锁，等待中的消息恢复后只会看到新路由。
         sessionRoaming.UnLockTerminusId(request.TerminusId, request.TargetSceneAddress);
         await FTask.CompletedTask;
     }

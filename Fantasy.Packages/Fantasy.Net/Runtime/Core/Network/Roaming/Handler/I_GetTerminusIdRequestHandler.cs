@@ -8,6 +8,9 @@ using Fantasy.Network.Interface;
 
 namespace Fantasy.Roaming.Handler;
 
+/// <summary>
+/// 查询指定 roamingType 当前可路由的 TerminusId。
+/// </summary>
 internal sealed class I_GetTerminusIdRequestHandler : AddressRPC<Scene, I_GetTerminusIdRequest, I_GetTerminusIdResponse>
 {
     protected override async FTask Run(Scene scene, I_GetTerminusIdRequest request, I_GetTerminusIdResponse response, Action reply)
