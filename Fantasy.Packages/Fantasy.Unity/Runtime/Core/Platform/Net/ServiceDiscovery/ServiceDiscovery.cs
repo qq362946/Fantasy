@@ -260,7 +260,7 @@ public static class ServiceDiscovery
     /// </summary>
     /// <param name="instances">当前查询返回的实例快照。</param>
     /// <returns>随机实例；快照为空时返回空。</returns>
-    private static ServiceEndpointContract? SelectOne(IReadOnlyList<ServiceEndpointContract> instances)
+    public static ServiceEndpointContract? SelectOne(IReadOnlyList<ServiceEndpointContract> instances)
     {
         return instances.Count == 0
             ? null
@@ -274,7 +274,7 @@ public static class ServiceDiscovery
     /// <param name="instances">当前查询返回的实例快照。</param>
     /// <param name="routingKey">稳定的业务路由键。</param>
     /// <returns>得分最高的实例；快照为空时返回空。</returns>
-    private static ServiceEndpointContract? SelectByHash(IReadOnlyList<ServiceEndpointContract> instances, long routingKey)
+    public static ServiceEndpointContract? SelectByHash(IReadOnlyList<ServiceEndpointContract> instances, long routingKey)
     {
         if (instances.Count == 0)
         {
@@ -314,7 +314,7 @@ public static class ServiceDiscovery
     /// </summary>
     /// <param name="endpoint">服务发现选中的端点。</param>
     /// <returns>端点的运行时 Address；端点为空时返回 0。</returns>
-    private static long GetAddress(ServiceEndpointContract? endpoint)
+    public static long GetAddress(ServiceEndpointContract? endpoint)
     {
         if (endpoint == null)
         {
@@ -327,6 +327,27 @@ public static class ServiceDiscovery
         }
 
         return endpoint.Address;
+    }
+    
+    /// <summary>
+    /// 缓存 Scene 对应的网络端点并返回其运行时 Address。
+    /// </summary>
+    /// <param name="endpoints">服务发现选中的端点列表。</param>
+    /// <param name="addresses">端点的运行时 Address列表；端点为空时返回 0。</param>
+    public static void GetAllAddress(IReadOnlyList<ServiceEndpointContract> endpoints, HashSet<long> addresses)
+    {
+        addresses.Clear();
+
+        if (endpoints.Count == 0)
+        {
+            return;
+        }
+
+        for (var i = 0; i < endpoints.Count; i++)
+        {
+            var serviceEndpointContract = endpoints[i];
+            addresses.Add(serviceEndpointContract.Address);
+        }
     }
     
     /// <summary>
