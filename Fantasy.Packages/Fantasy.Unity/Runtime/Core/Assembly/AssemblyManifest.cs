@@ -219,7 +219,7 @@ namespace Fantasy.Assembly
             }
             
             customInterfaceRegistrar.Register(manifest._customInterfaces);
-            Manifests.TryAdd(assemblyManifestId, manifest);
+            Manifests[assemblyManifestId] = manifest;
             _ = ObserveLifecycleTask(AssemblyLifecycle.OnLoad(manifest));
         }
 #endif
@@ -276,11 +276,7 @@ namespace Fantasy.Assembly
                 ProtoBufDispatcherRegistrar = protoBufDispatcherRegistrar,
                 MemoryPackEntityGenerator = memoryPackEntityGenerator
             };
-#if FANTASY_WEBGL
             Manifests[assemblyManifestId] = manifest;
-#else
-            Manifests.TryAdd(assemblyManifestId, manifest);
-#endif
             customInterfaceRegistrar.Register(manifest._customInterfaces);
             _ = ObserveLifecycleTask(AssemblyLifecycle.OnLoad(manifest));
         }
@@ -289,22 +285,37 @@ namespace Fantasy.Assembly
         /// 取消注册指定程序集的清单
         /// </summary>
         /// <param name="assemblyManifestId">程序集唯一标识</param>
-        public static void Unregister(long assemblyManifestId)
+        /// <param name="assembly">可选的程序集实例。指定时仅注销属于该程序集实例的清单</param>
+        public static void Unregister(long assemblyManifestId, System.Reflection.Assembly? assembly = null)
         {
 #if FANTASY_WEBGL
-            if (Manifests.TryGetValue(assemblyManifestId, out var manifest))
+            if (!Manifests.TryGetValue(assemblyManifestId, out var manifest) ||
+                (assembly != null && !ReferenceEquals(manifest.Assembly, assembly)))
             {
-                _ = ObserveLifecycleTask(AssemblyLifecycle.OnUnLoad(manifest));
-                Manifests.Remove(assemblyManifestId);
-                manifest.CustomInterfaceRegistrar.UnRegister(manifest._customInterfaces);
+                return;
             }
+            Manifests.Remove(assemblyManifestId);
 #else
-            if (Manifests.TryRemove(assemblyManifestId, out var manifest))
+            AssemblyManifest? manifest;
+            if (assembly == null)
             {
-                _ = ObserveLifecycleTask(AssemblyLifecycle.OnUnLoad(manifest));
-                manifest.CustomInterfaceRegistrar.UnRegister(manifest._customInterfaces);
+                if (!Manifests.TryRemove(assemblyManifestId, out manifest))
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if (!Manifests.TryGetValue(assemblyManifestId, out manifest) ||
+                    !ReferenceEquals(manifest.Assembly, assembly) ||
+                    !Manifests.TryRemove(new KeyValuePair<long, AssemblyManifest>(assemblyManifestId, manifest)))
+                {
+                    return;
+                }
             }
 #endif
+            _ = ObserveLifecycleTask(AssemblyLifecycle.OnUnLoad(manifest));
+            manifest.CustomInterfaceRegistrar.UnRegister(manifest._customInterfaces);
         }
 
         /// <summary>
