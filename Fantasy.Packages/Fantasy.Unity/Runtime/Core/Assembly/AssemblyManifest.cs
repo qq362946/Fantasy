@@ -219,7 +219,7 @@ namespace Fantasy.Assembly
             }
             
             customInterfaceRegistrar.Register(manifest._customInterfaces);
-            Manifests.TryAdd(assemblyManifestId, manifest);
+            Manifests[assemblyManifestId] = manifest;
             _ = ObserveLifecycleTask(AssemblyLifecycle.OnLoad(manifest));
         }
 #endif
@@ -276,11 +276,7 @@ namespace Fantasy.Assembly
                 ProtoBufDispatcherRegistrar = protoBufDispatcherRegistrar,
                 MemoryPackEntityGenerator = memoryPackEntityGenerator
             };
-#if FANTASY_WEBGL
             Manifests[assemblyManifestId] = manifest;
-#else
-            Manifests.TryAdd(assemblyManifestId, manifest);
-#endif
             customInterfaceRegistrar.Register(manifest._customInterfaces);
             _ = ObserveLifecycleTask(AssemblyLifecycle.OnLoad(manifest));
         }
