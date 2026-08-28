@@ -92,7 +92,7 @@ namespace Fantasy.SourceGenerator.Generators
             // 生成 ModuleInitializer 方法
             GenerateInitializeMethod(builder, markerClassName, replaceAssemblyName, targetPlatform);
             // 生成卸载方法
-            GenerateUnloadMethod(builder, targetPlatform);
+            GenerateUnloadMethod(builder, markerClassName, targetPlatform);
             // 结束 AssemblyInitializer 类
             builder.EndClass();
             builder.AppendLine();
@@ -274,7 +274,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.EndMethod();
         }
 
-        private static void GenerateUnloadMethod(SourceCodeBuilder builder, int targetPlatform)
+        private static void GenerateUnloadMethod(SourceCodeBuilder builder, string markerClassName, int targetPlatform)
         {
             builder.AppendLine();
             builder.AddXmlComment("Called when AssemblyLoadContext is unloading (for hot-reload support)");
@@ -291,7 +291,7 @@ namespace Fantasy.SourceGenerator.Generators
             builder.AddComment("Unregister from framework");
             builder.AppendLine("if (_assemblyManifestId != 0)");
             builder.OpenBrace();
-            builder.AppendLine("Fantasy.Assembly.AssemblyManifest.Unregister(_assemblyManifestId);");
+            builder.AppendLine($"Fantasy.Assembly.AssemblyManifest.Unregister(_assemblyManifestId, typeof({markerClassName}).Assembly);");
             builder.CloseBrace();
 
             builder.EndMethod();
