@@ -847,7 +847,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Standalone: FANTASY_UNITY
+    Standalone: FANTASY_UNITY;FANTASY_WEBGL
     WebGL: FANTASY_WEBGL;FANTASY_UNITY
   additionalCompilerArguments: {}
   platformArchitecture: {}

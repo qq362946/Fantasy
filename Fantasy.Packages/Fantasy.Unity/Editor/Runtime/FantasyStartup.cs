@@ -11,12 +11,13 @@ namespace Fantasy
 
         static FantasyStartup()
         {
-            if (!FantasySettingsScriptableObject.Instance.autoCopyAssembly)
+            var settings = FantasySettingsScriptableObject.Instance;
+            if (settings == null || !settings.autoCopyAssembly)
             {
                 return;
             }
             
-            var hotUpdatePath = FantasySettingsScriptableObject.Instance.hotUpdatePath;
+            var hotUpdatePath = settings.hotUpdatePath;
             
             if (string.IsNullOrEmpty(hotUpdatePath))
             {
@@ -39,11 +40,11 @@ namespace Fantasy
             // ReSharper disable once StringLastIndexOfIsCultureSpecific.1
             if (hotUpdatePath.LastIndexOf("/") != hotUpdatePath.Length - 1)
             {
-                FantasySettingsScriptableObject.Instance.hotUpdatePath += "/";
-                hotUpdatePath = FantasySettingsScriptableObject.Instance.hotUpdatePath;
+                settings.hotUpdatePath += "/";
+                hotUpdatePath = settings.hotUpdatePath;
             }
 
-            foreach (var instanceHotUpdateAssemblyDefinition in FantasySettingsScriptableObject.Instance.hotUpdateAssemblyDefinitions)
+            foreach (var instanceHotUpdateAssemblyDefinition in settings.hotUpdateAssemblyDefinitions)
             {
                 var dll = instanceHotUpdateAssemblyDefinition.name;
                 File.Copy($"{ScriptAssemblies}{dll}.dll", $"{hotUpdatePath}/{dll}.dll.bytes", true);

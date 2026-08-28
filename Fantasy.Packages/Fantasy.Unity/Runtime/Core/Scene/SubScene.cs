@@ -72,6 +72,8 @@ namespace Fantasy
         {
 #if !FANTASY_WEBGL && !UNITY_WEBGL
             await SwitchToSceneThread();
+#else
+            await FTask.CompletedTask;
 #endif
 
             if (IsDisposed)
