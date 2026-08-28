@@ -286,7 +286,7 @@ namespace Fantasy.Assembly
         /// </summary>
         /// <param name="assemblyManifestId">程序集唯一标识</param>
         /// <param name="assembly">可选的程序集实例。指定时仅注销属于该程序集实例的清单</param>
-        public static void Unregister(long assemblyManifestId, System.Reflection.Assembly? assembly = null)
+        public static void Unregister(long assemblyManifestId, System.Reflection.Assembly assembly = null)
         {
 #if FANTASY_WEBGL
             if (!Manifests.TryGetValue(assemblyManifestId, out var manifest) ||
@@ -296,7 +296,7 @@ namespace Fantasy.Assembly
             }
             Manifests.Remove(assemblyManifestId);
 #else
-            AssemblyManifest? manifest;
+            AssemblyManifest manifest;
             if (assembly == null)
             {
                 if (!Manifests.TryRemove(assemblyManifestId, out manifest))
@@ -308,7 +308,8 @@ namespace Fantasy.Assembly
             {
                 if (!Manifests.TryGetValue(assemblyManifestId, out manifest) ||
                     !ReferenceEquals(manifest.Assembly, assembly) ||
-                    !Manifests.TryRemove(new KeyValuePair<long, AssemblyManifest>(assemblyManifestId, manifest)))
+                    !((ICollection<KeyValuePair<long, AssemblyManifest>>)Manifests)
+                        .Remove(new KeyValuePair<long, AssemblyManifest>(assemblyManifestId, manifest)))
                 {
                     return;
                 }
