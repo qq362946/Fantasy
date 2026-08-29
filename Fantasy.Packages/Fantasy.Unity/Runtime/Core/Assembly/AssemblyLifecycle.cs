@@ -25,7 +25,7 @@ namespace Fantasy.Assembly
         private static readonly ConcurrentHashSet<IAssemblyLifecycle> AssemblyLifecycles = new();
 #endif
         
-        internal static Task RunOnContext(ThreadSynchronizationContext context, Action action)
+        public static Task RunOnContext(ThreadSynchronizationContext context, Action action)
         {
             if (context == null)
             {
