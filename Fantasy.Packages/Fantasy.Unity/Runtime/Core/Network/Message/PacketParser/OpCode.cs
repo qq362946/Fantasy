@@ -116,8 +116,6 @@ namespace Fantasy.Network
         public const uint UnLockTerminusIdResponse = 1207959562;                    // Create(ProtoBuf=0, InnerAddressResponse=9, 10)
         public const uint GetTerminusIdRequest = 1073741835;                        // Create(ProtoBuf=0, InnerAddressRequest=8, 11)
         public const uint GetTerminusIdResponse = 1207959563;                       // Create(ProtoBuf=0, InnerAddressResponse=9, 11)
-        public const uint SetForwardSessionAddressRequest = 1073741836;             // Create(ProtoBuf=0, InnerAddressRequest=8, 12)
-        public const uint SetForwardSessionAddressResponse = 1207959564;            // Create(ProtoBuf=0, InnerAddressResponse=9, 12)
         public const uint StopForwardingRequest = 1073741837;                       // Create(ProtoBuf=0, InnerAddressRequest=8, 13)
         public const uint StopForwardingResponse = 1207959565;                      // Create(ProtoBuf=0, InnerAddressResponse=9, 13)
         

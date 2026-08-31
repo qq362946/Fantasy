@@ -14,14 +14,16 @@ public sealed class C2G_LoginRoamingHandler : MessageRPC<C2G_LoginRoamingRequest
     {
         // 给session创建一个漫游功能。
         var roamingComponent = await session.GetOrCreateRoaming(1, 10000);
-        // 连接一个漫游类型
-        var mapConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0];
-        var mapSceneAddress = mapConfig.Address;
-        var linkResponse = await roamingComponent.Link(mapSceneAddress, session.Address, RoamingType.MapRoamingType);
-        if (linkResponse != 0)
+        // 首次连接选择Map，重连使用漫游连接中保存的目标Scene地址。
+        var linkResuilt = roamingComponent.IsLinked(RoamingType.MapRoamingType)
+            ? await roamingComponent.Link(RoamingType.MapRoamingType)
+            : await roamingComponent.Link(
+                SceneConfigData.Instance.GetSceneBySceneType(SceneType.Map)[0].Address,
+                RoamingType.MapRoamingType);
+        if (linkResuilt != 0)
         {
-            response.ErrorCode = linkResponse;
-            Log.Debug($"Map漫游创建失败 ErrorCode:{linkResponse}");
+            response.ErrorCode = linkResuilt;
+            Log.Debug($"Map漫游创建失败 ErrorCode:{linkResuilt}");
             return;
         }
         Log.Debug("Map漫游创建成功");

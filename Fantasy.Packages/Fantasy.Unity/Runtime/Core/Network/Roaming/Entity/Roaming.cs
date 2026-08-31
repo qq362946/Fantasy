@@ -91,30 +91,6 @@ public sealed class Roaming : Entity
     }
 
     /// <summary>
-    /// 通知目标 Terminus 切换到新的转发 Session，并恢复转发。
-    /// </summary>
-    /// <param name="forwardSessionAddress">重连后的 Session 地址。</param>
-    internal async FTask SetForwardSessionAddress(long forwardSessionAddress)
-    {
-        using var response = await Scene.NetworkMessagingComponent.Call(
-            TargetSceneAddress,
-            new I_SetForwardSessionAddressRequest()
-            {
-                RoamingId = SessionRoamingComponent!.Id,
-                ForwardSessionAddress = forwardSessionAddress,
-                OwnerRoamingRuntimeId = SessionRoamingComponent.RuntimeId
-            });
-
-        if (response.ErrorCode == 0)
-        {
-            ForwardSessionAddress = forwardSessionAddress;
-            return;
-        }
-
-        Log.Warning($"SetForwardSessionAddress failed with ErrorCode: {response.ErrorCode}, RoamingId: {SessionRoamingComponent!.Id}, TargetSceneAddress: {TargetSceneAddress}");
-    }
-
-    /// <summary>
     /// 通知目标 Terminus 暂停向已断开的 Session 转发消息。
     /// </summary>
     /// <remarks>只暂停转发，不销毁目标 Terminus，便于客户端在保活期限内重连。</remarks>
