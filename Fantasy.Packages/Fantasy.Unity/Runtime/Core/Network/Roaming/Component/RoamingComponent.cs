@@ -127,7 +127,7 @@ public sealed class RoamingComponent : Entity
     /// 获取或创建 <paramref name="roamingId"/> 对应的漫游上下文，并绑定到当前 Session。
     /// </summary>
     /// <remarks>
-    /// 已存在的 roamingId 会取消待执行的销毁任务并绑定到新 Session；调用方随后应对需要恢复的每个 roamingType 执行 Link。
+    /// 已存在的 roamingId 会被视为断线重连：取消待执行的销毁任务，保留原有漫游关系，并把转发地址切换到新 Session。
     /// </remarks>
     /// <param name="session">本次建立或恢复漫游关系的 Session。</param>
     /// <param name="roamingId">业务定义的稳定身份；断线重连前后必须保持一致。</param>
@@ -166,7 +166,7 @@ public sealed class RoamingComponent : Entity
         {
             if (_sessionRoamingComponents.TryGetValue(roamingId, out sessionRoamingComponent))
             {
-                // 这里只恢复本地上下文绑定；目标 Terminus 由调用方随后执行 Link 恢复。
+                // 复用旧上下文即完成重连，目标 Terminus 不需要由调用者区分创建或恢复。
                 CancelRemoveTask(roamingId);
 
                 Session parentSession = sessionRoamingComponent.Session;
@@ -182,6 +182,7 @@ public sealed class RoamingComponent : Entity
                 sessionRoamingComponent.Session = session;
                 session.SessionRoamingComponent = sessionRoamingComponent;
                 AddSessionRoamingFlgComponent(session, sessionRoamingComponent, roamingId, delayRemove);
+                await sessionRoamingComponent.SetForwardSessionAddress(session);
                 return sessionRoamingComponent;
             }
 
@@ -350,7 +351,7 @@ public sealed class RoamingComponent : Entity
 public static class RoamingHelper
 {
     /// <summary>
-    /// 为 Session 获取或创建漫游上下文；同一 roamingId 已存在时复用本地上下文并绑定新 Session。
+    /// 为 Session 获取或创建漫游上下文；同一 roamingId 已存在时自动恢复原有漫游关系。
     /// </summary>
     /// <param name="session">要启用漫游的 Session。</param>
     /// <param name="roamingId">断线重连前后保持稳定的业务身份。</param>

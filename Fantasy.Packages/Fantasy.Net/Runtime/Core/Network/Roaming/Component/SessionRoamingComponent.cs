@@ -174,6 +174,23 @@ public sealed class SessionRoamingComponent : Entity
     public bool IsLinked(int roamingType) => _roaming.ContainsKey(roamingType);
 
     /// <summary>
+    /// 将所有目标 Terminus 的转发地址切换到新的 Session。
+    /// </summary>
+    /// <param name="session">重连后需要接收转发消息的 Session。</param>
+    internal async FTask SetForwardSessionAddress(Session session)
+    {
+        using var tasks = ListPool<FTask>.Create();
+        var forwardSessionAddress = session.RuntimeId;
+
+        foreach (var (_, roaming) in _roaming)
+        {
+            tasks.Add(roaming.SetForwardSessionAddress(forwardSessionAddress));
+        }
+
+        await FTask.WaitAll(tasks);
+    }
+
+    /// <summary>
     /// 通知全部目标 Terminus 暂停向 Session 转发消息。
     /// </summary>
     /// <remarks>漫游上下文仍会保留，用于等待客户端在延迟销毁期限内重连。</remarks>
@@ -190,44 +207,22 @@ public sealed class SessionRoamingComponent : Entity
     }
 
     /// <summary>
-    /// 使用已保存的目标 Scene 地址恢复指定 roamingType 的漫游关系。
-    /// </summary>
-    /// <param name="roamingType">已建立连接的漫游类型，不能为 0。</param>
-    /// <param name="args">目标端恢复事件中使用的可选业务参数。</param>
-    /// <returns>0 表示成功；连接不存在时返回 <see cref="InnerErrorCode.ErrReLinkNotFoundRoaming"/>。</returns>
-    /// <exception cref="ArgumentException"><paramref name="roamingType"/> 为 0。</exception>
-    public async FTask<uint> Link(int roamingType, Entity? args = null)
-    {
-        if (roamingType == 0)
-        {
-            throw new ArgumentException("roamingType cannot be 0.", nameof(roamingType));
-        }
-
-        if (!_roaming.TryGetValue(roamingType, out var roaming))
-        {
-            return InnerErrorCode.ErrReLinkNotFoundRoaming;
-        }
-
-        return await Link(roaming.TargetSceneAddress, roamingType, args);
-    }
-
-    /// <summary>
     /// 建立或恢复指定 roamingType 的漫游关系。
     /// </summary>
-    /// <remarks>首次连接使用传入的目标地址；连接已存在时使用已保存的目标地址恢复 Terminus。</remarks>
-    /// <param name="targetSceneAddress">首次连接的目标 Scene 地址。</param>
+    /// <remarks>同一 roamingType 已存在时复用本地 <see cref="Roaming"/>，由目标端决定创建还是恢复 Terminus。</remarks>
+    /// <param name="targetSceneAddress">目标 Scene 地址。</param>
+    /// <param name="forwardSessionAddress">接收目标端转发消息的 Session 地址。</param>
     /// <param name="roamingType">目标漫游类型，不能为 0。</param>
-    /// <param name="args">目标端创建或恢复事件中使用的可选业务参数。</param>
+    /// <param name="args">仅在目标端创建或恢复事件中使用的可选业务参数。</param>
     /// <returns>0 表示成功；其他值为 <see cref="InnerErrorCode"/> 中定义的错误码。</returns>
     /// <exception cref="ArgumentException"><paramref name="roamingType"/> 为 0。</exception>
-    public async FTask<uint> Link(long targetSceneAddress, int roamingType, Entity? args = null)
+    public async FTask<uint> Link(long targetSceneAddress, long forwardSessionAddress, int roamingType, Entity? args = null)
     {
         if (roamingType == 0)
         {
             throw new ArgumentException("roamingType cannot be 0.", nameof(roamingType));
         }
 
-        var forwardSessionAddress = Session.Address;
         var request = I_LinkRoamingRequest.Create();
 
         request.RoamingId = Id;
@@ -262,9 +257,9 @@ public sealed class SessionRoamingComponent : Entity
         }
         else
         {
-            targetSceneAddress = roaming.TargetSceneAddress;
             // 先将地址置为未知；恢复完成前发起的消息会等待并重新查询 TerminusId。
             roaming.TerminusId = 0;
+            roaming.TargetSceneAddress = targetSceneAddress;
             roaming.ForwardSessionAddress = forwardSessionAddress;
 
             using var response = (I_LinkRoamingResponse)await Scene.NetworkMessagingComponent.Call(targetSceneAddress, request);

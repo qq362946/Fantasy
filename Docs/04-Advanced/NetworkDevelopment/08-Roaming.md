@@ -183,28 +183,24 @@ FTask<SessionRoamingComponent> session.GetOrCreateRoaming(
     long roamingId,
     int delayRemove = 180_000);
 
-// 2. 首次建立路由：调用方提供目标 Scene 地址
+// 2. 建立或恢复到目标 Scene 的路由
 FTask<uint> roaming.Link(
     long targetSceneAddress,
+    long forwardSessionAddress,
     int roamingType,
     Entity? args = null);
 
-// 3. 恢复已有路由：沿用该 roamingType 已保存的目标 Scene 地址
-FTask<uint> roaming.Link(
-    int roamingType,
-    Entity? args = null);
-
-// 4. 查询路由
+// 3. 查询路由
 bool roaming.IsLinked(int roamingType);
 bool roaming.TryGetRoaming(int roamingType, out Roaming route);
 
-// 5. 主动断开
+// 4. 主动断开
 FTask session.RemoveRoaming(int delayRemove = 0);
 FTask<bool> roaming.UnLink(int roamingType, bool disposeIfEmpty);
 FTask roaming.UnLinkAll();
 ```
 
-`GetOrCreateRoaming` 不再返回“首次创建/重连”状态。调用方只提供稳定的 `roamingId`；已有上下文时，框架负责取消旧延迟任务并切换到新 Session，但不会单独向 Terminus 恢复转发。随后必须为本次登录需要使用的每个 `roamingType` 调用一次 `Link`：已存在的路由调用 `Link(roamingType, args)`，首次建立的路由调用 `Link(targetSceneAddress, roamingType, args)`。`Link` 会使用当前 Session 的地址并在目标端触发对应的 `Link` 或 `ReLink` 流程。`delayRemove` 是 Session 释放后的重连窗口；小于等于 `0` 时立即销毁，默认值为 3 分钟。
+`GetOrCreateRoaming` 不再返回“首次创建/重连”状态。调用方只提供稳定的 `roamingId`，框架负责取消旧延迟任务、切换到新 Session，并恢复已有 Terminus 的转发地址。`delayRemove` 是 Session 释放后的重连窗口；小于等于 `0` 时立即销毁，默认值为 3 分钟。
 
 **完整示例：**
 
@@ -223,20 +219,11 @@ public class C2G_LoginRequestHandler : MessageRPC<C2G_LoginRequest, G2C_LoginRes
             roamingId: request.PlayerId,
             delayRemove: 180_000);
 
-        uint errorCode;
-        if (roaming.IsLinked(RoamingType.ChatRoamingType))
-        {
-            // 重连：目标地址已保存在路由中，不需要重新选择 Chat 服务器。
-            errorCode = await roaming.Link(RoamingType.ChatRoamingType);
-        }
-        else
-        {
-            // 首次连接：只有尚未建立该路由时才选择目标服务器。
-            var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
-            errorCode = await roaming.Link(
-                chatConfig.Address,
-                RoamingType.ChatRoamingType);
-        }
+        var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
+        var errorCode = await roaming.Link(
+            chatConfig.Address,
+            session.RuntimeId,
+            RoamingType.ChatRoamingType);
 
         if (errorCode != 0)
         {
@@ -268,6 +255,7 @@ if (chatAddress == 0)
 
 var errorCode = await roaming.Link(
     chatAddress,
+    session.RuntimeId,
     RoamingType.ChatRoamingType);
 ```
 
@@ -297,6 +285,7 @@ public class C2G_LoginWithDataRequestHandler : MessageRPC<C2G_LoginRequest, G2C_
         var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
         var errorCode = await roaming.Link(
             chatConfig.Address,
+            session.RuntimeId,
             RoamingType.ChatRoamingType,
             loginData);
 
@@ -338,6 +327,7 @@ loginData.Level = request.Level;
 var chatConfig = SceneConfigData.Instance.GetSceneBySceneType(SceneType.Chat)[0];
 var errorCode = await roaming.Link(
     chatConfig.Address,
+    session.RuntimeId,
     RoamingType.ChatRoamingType,
     loginData);
 
@@ -367,7 +357,7 @@ loginData.Dispose();
 
 `GetOrCreateRoaming` 是唯一入口，不需要也不能从返回值判断“新建”还是“重连”：
 
-- 同一 Gate 上已存在该 `roamingId` 时，框架只取消延迟销毁并换绑新 Session；调用方随后必须为需要恢复的每条路由调用 `Link(roamingType, args)`。
+- 同一 Gate 上已存在该 `roamingId` 时，框架取消延迟销毁、换绑新 Session，并刷新所有已有 Terminus 的转发地址。
 - 新 Gate 上没有本地上下文时会创建新的 `SessionRoamingComponent`；随后调用 `Link`，目标端若已有同一 `roamingId` 的 Terminus，会以 `CreateTerminusType.ReLink` 恢复。
 - 业务上的首次登录与重连应由账号状态、登录票据等业务数据判断，不再依赖漫游创建结果。
 - 一个 Session 同时只应使用一个稳定的 `roamingId`。
@@ -388,14 +378,14 @@ loginData.Dispose();
 ```csharp
 if (roaming.IsLinked(RoamingType.ChatRoamingType))
 {
-    // 路由已存在：沿用原目标地址，恢复 Terminus 向当前 Session 的转发。
-    await roaming.Link(RoamingType.ChatRoamingType);
+    // 已建立，可以直接发消息
 }
 else
 {
-    // 路由尚未建立：选择目标服务器后首次 Link。
+    // 尚未建立，需要先 Link
     await roaming.Link(
         chatConfig.Address,
+        session.RuntimeId,
         RoamingType.ChatRoamingType);
 }
 ```
@@ -1161,6 +1151,7 @@ public sealed class OnDisposeTerminusHandler : AsyncEventSystem<OnDisposeTerminu
 |-------------|-----|------|---------|
 | `ErrAddRoamingTerminalAlreadyExists` | `100000010` | 漫游终端已存在 | Terminus 传送到目标 Scene 时，同一 roamingId 已存在 |
 | `ErrCreateTerminusInvalidRoamingId` | `100000028` | 无效的 RoamingId | 传入的 roamingId 为 0 |
+| `ErrSetForwardSessionAddressNotFoundTerminus` | `100000027` | 未找到漫游终端 | 更新转发地址时找不到对应的 Terminus |
 | `ErrTerminusStartTransfer` | `100000017` | 传送过程发生错误 | StartTransfer 执行中抛出异常 |
 | `ErrTransfer` | `100000029` | 传送通用错误 | 传送过程中的通用错误 |
 
@@ -1178,12 +1169,13 @@ Link 尚未完成时就并发发送了消息，这是最容易踩的坑。
 
 ```csharp
 // ❌ 错误写法：Link 和发送并发执行
-roaming.Link(chatAddress, RoamingType.ChatRoamingType);  // 没有 await
+roaming.Link(chatAddress, session.RuntimeId, RoamingType.ChatRoamingType);  // 没有 await
 session.Call(new C2Chat_SendMessageRequest { });  // Link 还没完成就发了，返回 ErrRoamingNotReady
 
 // ✅ 正确写法：等待 Link 完成后再发送
 var errorCode = await roaming.Link(
     chatAddress,
+    session.RuntimeId,
     RoamingType.ChatRoamingType);
 if (errorCode == 0)
 {
@@ -1229,13 +1221,13 @@ if (errorCode == 0)
 
 ```csharp
 // 建立到 Chat 的路由
-await roaming.Link(chatConfig.Address, RoamingType.ChatRoamingType);
+await roaming.Link(chatConfig.Address, session.RuntimeId, RoamingType.ChatRoamingType);
 
 // 建立到 Map 的路由
-await roaming.Link(mapConfig.Address, RoamingType.MapRoamingType);
+await roaming.Link(mapConfig.Address, session.RuntimeId, RoamingType.MapRoamingType);
 
 // 建立到 Battle 的路由
-await roaming.Link(battleConfig.Address, RoamingType.BattleRoamingType);
+await roaming.Link(battleConfig.Address, session.RuntimeId, RoamingType.BattleRoamingType);
 ```
 
 ---
@@ -1416,8 +1408,7 @@ Roaming 漫游系统的核心优势：
 | API | 返回值 | 说明 | 使用场景 |
 |-----|--------|------|---------|
 | `session.GetOrCreateRoaming(id, delayRemove)` | `FTask<SessionRoamingComponent>` | 获取或创建漫游上下文，并自动处理 Session 重绑 | 客户端登录和断线重连 |
-| `roaming.Link(address, type, args)` | `FTask<uint>` | 首次建立到目标 Scene 的路由 | 该 roamingType 尚未建立 |
-| `roaming.Link(type, args)` | `FTask<uint>` | 使用已保存的目标地址恢复路由 | 断线重连 |
+| `roaming.Link(address, session.RuntimeId, type, args)` | `FTask<uint>` | 建立或恢复到目标 Scene 的路由 | 登录初始化或恢复目标 Terminus |
 | `roaming.IsLinked(roamingType)` | `bool` | 判断指定 roamingType 是否已建立漫游关系 | 精细控制场景 |
 | `session.RemoveRoaming(delayRemove)` | `FTask` | 立即或延迟移除整个漫游上下文 | 主动下线 |
 | `roaming.UnLink(type, disposeIfEmpty)` | `FTask<bool>` | 移除指定 roamingType | 断开单条后端路由 |
