@@ -127,7 +127,7 @@
    ```csharp
    using Fantasy;
    using Fantasy.Network;
-
+   
    public class GameLogic : MonoBehaviour
    {
        private void Start()
@@ -135,10 +135,10 @@
            // 通过 Runtime 静态类访问
            var session = Runtime.Session;
            var scene = Runtime.Scene;
-
+   
            // 发送消息
            session.Send(new MyMessage());
-
+   
            Log.Debug($"网络延迟: {Runtime.PingMilliseconds} ms");
        }
    }
@@ -529,8 +529,6 @@ public class SimpleConnection : MonoBehaviour
 
         // 连接成功后,通过 Runtime 静态类访问
         Runtime.Session.Send(new MyMessage());
-
-        Log.Info($"Ping: {Runtime.PingMilliseconds} ms");
     }
 
     private void OnDestroy()
@@ -561,11 +559,7 @@ public class NetworkController : MonoBehaviour
 
     private async FTask ConnectAsync()
     {
-        try
-        {
-            Log.Info("开始连接服务器...");
-
-            var session = await Runtime.Connect(
+        var session = await Runtime.Connect(
                 remoteIP: serverIP,
                 remotePort: serverPort,
                 protocol: FantasyRuntime.NetworkProtocolType.TCP,
@@ -581,18 +575,11 @@ public class NetworkController : MonoBehaviour
                 onConnectDisconnect: OnDisconnected,
                 enableReceiveMessageJsonLog: false
             );
-
-            Log.Info($"连接成功: {session.RemoteEndPoint}");
-        }
-        catch (System.Exception ex)
-        {
-            Log.Error($"连接异常: {ex.Message}");
-        }
     }
 
     private void OnConnected()
     {
-        Log.Info("回调: 连接成功");
+        // "回调: 连接成功"
 
         // 发送登录消息
         Runtime.Session.Send(new LoginRequest
