@@ -67,7 +67,7 @@ namespace Fantasy.Assembly
                 loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
             
-            await Task.WhenAll(loadTasks).ConfigureAwait(false);
+            await Task.WhenAll(loadTasks);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Fantasy.Assembly
                 unloadTasks.Add(RunOnUnload(assemblyLifecycle));
             }
             
-            await Task.WhenAll(unloadTasks).ConfigureAwait(false);
+            await Task.WhenAll(unloadTasks);
             assemblyManifest.Clear();
             
             async Task RunOnUnload(IAssemblyLifecycle assemblyLifecycle)
@@ -93,8 +93,7 @@ namespace Fantasy.Assembly
                 try
                 {
                     await assemblyLifecycle
-                        .OnUnload(assemblyManifest)
-                        .ConfigureAwait(false);
+                        .OnUnload(assemblyManifest);
                 }
                 catch (Exception e)
                 {
@@ -122,7 +121,7 @@ namespace Fantasy.Assembly
                 loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
 
-            await Task.WhenAll(loadTasks).ConfigureAwait(false);
+            await Task.WhenAll(loadTasks);
         }
 
         /// <summary>
