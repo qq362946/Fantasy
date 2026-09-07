@@ -169,6 +169,7 @@ public sealed class CSharpExporter(
                                                                 {{GenerateNamespaces(outerNamespaces)}}
                                                                 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                                                                 #pragma warning disable CS8618
+                                                                #pragma warning disable CS8601 // Possible null reference assignment in generated message copies.
                                                                 // ReSharper disable InconsistentNaming
                                                                 // ReSharper disable CollectionNeverUpdated.Global
                                                                 // ReSharper disable RedundantTypeArgumentsOfMethod
@@ -215,6 +216,7 @@ public sealed class CSharpExporter(
                                                                 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
                                                                 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                                                                 #pragma warning disable CS8618
+                                                                #pragma warning disable CS8601 // Possible null reference assignment in generated message copies.
                                                                 namespace Fantasy
                                                                 {
                                                                 {{GenerateMessages("InnerOpcode", messageDefinitions)}}
