@@ -95,21 +95,13 @@ namespace Fantasy.SourceGenerator.Analyzers
                 return;
             }
 
-            // 检查参数数量
-            if (methodSymbol.Parameters.Length != 4)
+            var argsParameter = methodSymbol.Parameters.FirstOrDefault(parameter => parameter.Name == "args");
+            if (argsParameter == null)
             {
                 return;
             }
 
-            // 检查最后一个参数名是否是 args
-            var lastParam = methodSymbol.Parameters[3];
-            if (lastParam.Name != "args")
-            {
-                return;
-            }
-
-            // 查找 Entity args 参数（最后一个参数）
-            var entityArgument = FindEntityArgument(invocation.ArgumentList, methodSymbol);
+            var entityArgument = FindEntityArgument(invocation.ArgumentList, argsParameter.Ordinal);
             if (entityArgument == null)
             {
                 return;
@@ -162,14 +154,13 @@ namespace Fantasy.SourceGenerator.Analyzers
         /// <summary>
         /// 查找 Entity args 参数
         /// </summary>
-        private static ArgumentSyntax? FindEntityArgument(ArgumentListSyntax? argumentList, IMethodSymbol methodSymbol)
+        private static ArgumentSyntax? FindEntityArgument(ArgumentListSyntax? argumentList, int argsOrdinal)
         {
             if (argumentList == null || argumentList.Arguments.Count == 0)
             {
                 return null;
             }
 
-            // Entity args 是最后一个参数 (index 3)
             var arguments = argumentList.Arguments;
 
             // 检查命名参数
@@ -181,10 +172,9 @@ namespace Fantasy.SourceGenerator.Analyzers
                 }
             }
 
-            // 检查位置参数 - 如果有4个参数，最后一个就是 args
-            if (arguments.Count >= 4)
+            if (arguments.Count > argsOrdinal)
             {
-                return arguments[3];
+                return arguments[argsOrdinal];
             }
 
             return null;

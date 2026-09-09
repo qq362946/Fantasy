@@ -99,10 +99,6 @@ namespace Fantasy.Network
         /// </summary>
         public const uint ErrHandleRemotePublicationNotSubscribed = 100000026;
         /// <summary>
-        /// 表示设置转发会话地址时未找到对应的漫游终端的错误代码。
-        /// </summary>
-        public const uint ErrSetForwardSessionAddressNotFoundTerminus = 100000027;
-        /// <summary>
         /// 表示创建漫游终端时 RoamingId 无效的错误代码。
         /// </summary>
         public const uint ErrCreateTerminusInvalidRoamingId = 100000028;

@@ -12,24 +12,41 @@ var roaming = await session.GetOrCreateRoaming(
 
 - `roamingId`：稳定的业务身份，通常是玩家 ID；重连前后必须一致
 - `delayRemove`：Session 释放后的重连窗口，默认 3 分钟；小于等于 `0` 时立即销毁
-- 同一 Gate 已有该 `roamingId`：取消延迟销毁、换绑新 Session，并刷新已有 Terminus 的转发地址
+- 同一 Gate 已有该 `roamingId`：取消延迟销毁并换绑新 Session；随后仍要为每条需要恢复的路由调用 `Link`
 - 当前 Session 已绑定其他 `roamingId`：框架先按旧连接的延迟策略解除旧绑定
 
 业务上的首次登录和重连应由账号状态或登录票据判断，不要从漫游 API 推断。
 
 ## Link 到目标 Scene
 
-`Link` 只接收目标 Scene Address 和当前 Session RuntimeId：
+```csharp
+FTask<uint> Link(long targetSceneAddress, int roamingType, Entity? args = null);
+FTask<uint> Link(int roamingType, Entity? args = null);
+```
+
+首次建立某个 `roamingType` 时，调用带目标 Scene Address 的 `Link`：
 
 ```csharp
 var errorCode = await roaming.Link(
     targetSceneAddress,
-    session.RuntimeId,
     RoamingType.ChatRoamingType,
     args: null);
 ```
 
-目标 Scene 没有该 `roamingId` 时触发 `CreateTerminusType.Link`；已有 Terminus 时复用它并触发 `CreateTerminusType.ReLink`。调用方始终使用 `Link`。
+重连时路由已经保存了目标地址，直接按 `roamingType` 恢复：
+
+```csharp
+var errorCode = await roaming.Link(
+    RoamingType.ChatRoamingType,
+    args: null);
+```
+
+两种重载都会从组件当前绑定的 Session 取得转发地址，不需要也不能由调用方传入 Session Address。
+
+- `Link(targetSceneAddress, roamingType, args)`：首次连接时保存目标地址；本地路由已存在时自动改为重连，并使用路由中保存的原目标地址，传入的新地址不会替换它。
+- `Link(roamingType, args)`：只恢复本地已经保存的路由；路由不存在时返回 `ErrReLinkNotFoundRoaming`。
+
+目标 Scene 没有该 `roamingId` 时触发 `CreateTerminusType.Link`；已有 Terminus 时复用它并触发 `CreateTerminusType.ReLink`。
 
 每个需要通信的后端 `RoamingType` 各调用一次 `Link`。一个 `SessionRoamingComponent` 可以同时维护 Chat、Map、Battle 等多条路由。
 
@@ -42,22 +59,31 @@ var roaming = await session.GetOrCreateRoaming(
     request.PlayerId,
     delayRemove: 180_000);
 
-var worldId = session.Scene.SceneConfig.WorldConfigId;
-var chatAddress = await NetServiceDiscovery.DiscoverAddressByHashAsync(
-    SceneType.Chat,
-    request.PlayerId,
-    worldId: worldId);
-
-if (chatAddress == 0)
+uint errorCode;
+if (roaming.IsLinked(RoamingType.ChatRoamingType))
 {
-    // 按项目约定设置“无在线 Chat”的业务错误码。
-    return;
+    // 同一 Gate 内重连：沿用本地保存的目标，不再执行服务发现。
+    errorCode = await roaming.Link(RoamingType.ChatRoamingType);
 }
+else
+{
+    // 首次连接或切换到了没有本地路由的新 Gate：先确定目标地址。
+    var worldId = session.Scene.SceneConfig.WorldConfigId;
+    var chatAddress = await NetServiceDiscovery.DiscoverAddressByHashAsync(
+        SceneType.Chat,
+        request.PlayerId,
+        worldId: worldId);
 
-var errorCode = await roaming.Link(
-    chatAddress,
-    session.RuntimeId,
-    RoamingType.ChatRoamingType);
+    if (chatAddress == 0)
+    {
+        // 按项目约定设置“无在线 Chat”的业务错误码。
+        return;
+    }
+
+    errorCode = await roaming.Link(
+        chatAddress,
+        RoamingType.ChatRoamingType);
+}
 
 if (errorCode != 0)
 {
@@ -66,7 +92,7 @@ if (errorCode != 0)
 }
 ```
 
-未启用 Control Center 时，从静态配置取得 `SceneConfig.Address`，再调用同一个 `Link(address, session.RuntimeId, roamingType, args)`。
+未启用 Control Center 时，首次连接从静态配置取得 `SceneConfig.Address`，再调用 `Link(address, roamingType, args)`。同一 Gate 内重连且本地路由仍存在时，不必再次服务发现或读取静态配置，调用 `Link(roamingType, args)` 即可。
 
 Rendezvous Hash 只在在线实例集合不变时稳定。扩缩容后仍必须回到原后端时，由业务层持久化玩家到 SceneId 的绑定并验证实例仍在线；主动迁移使用 `StartTransfer`，不要把同一 `roamingType` 直接 Link 到另一个目标 Scene。
 
@@ -74,7 +100,7 @@ Rendezvous Hash 只在在线实例集合不变时稳定。扩缩容后仍必须�
 
 同一账号必须保证任一时刻只有一个有效登录。
 
-- 新 Gate 创建本地 `SessionRoamingComponent` 后，再向原目标 Scene 调用 `Link`
+- 新 Gate 没有旧 Gate 的本地路由，不能使用无地址重载；创建 `SessionRoamingComponent` 后，应取得原目标地址并调用 `Link(targetSceneAddress, roamingType, args)`
 - Link 请求携带 `SessionRoamingComponent.RuntimeId` 作为 owner；目标 Terminus 已存在时由新 Gate 接管
 - 旧 Gate 后续到达的暂停或断开请求因 owner 不匹配而被忽略，不会清理新 Gate 的连接
 - 旧 Gate 的本地上下文由旧 Session 的心跳断开、`delayRemove` 或 Scene 关闭流程回收，不需要 Gate 间释放协议或全局注册表
@@ -99,7 +125,6 @@ loginData.Level = request.Level;
 
 var errorCode = await roaming.Link(
     chatAddress,
-    session.RuntimeId,
     RoamingType.ChatRoamingType,
     loginData);
 

@@ -70,7 +70,14 @@ namespace Fantasy.Scheduler
                             return;
                         }
 
-                        action.SetResult(aResponse);
+                        try
+                        {
+                            action.SetResult(aResponse);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error(e);
+                        }
                     }
                     
                     return;

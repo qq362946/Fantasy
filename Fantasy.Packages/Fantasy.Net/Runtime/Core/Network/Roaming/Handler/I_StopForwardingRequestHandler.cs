@@ -17,7 +17,7 @@ internal sealed class I_StopForwardingRequestHandler : AddressRPC<Scene, I_StopF
     {
         if (!scene.TerminusComponent.TryGetTerminus(request.RoamingId, out var terminus))
         {
-            response.ErrorCode = InnerErrorCode.ErrSetForwardSessionAddressNotFoundTerminus;
+            // Terminus 已不存在时，目标已经处于无需转发的状态。
             return;
         }
         

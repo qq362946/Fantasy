@@ -31,17 +31,26 @@ namespace Fantasy
 
             if (string.IsNullOrEmpty(scriptableObjectPath))
             {
-                return null; 
+                Debug.LogError($"{typeof(T).Name} 缺少有效的 ScriptableObjectPath");
+                return CreateInstance<T>();
             }
             
-            var loadSerializedFileAndForget = InternalEditorUtility.LoadSerializedFileAndForget(scriptableObjectPath);
+            var objects = InternalEditorUtility.LoadSerializedFileAndForget(scriptableObjectPath);
 
-            if (loadSerializedFileAndForget.Length <= 0)
+            if (objects.Length <= 0)
             {
                 return CreateInstance<T>();
             }
             
-            return loadSerializedFileAndForget[0] as T;
+            var instance = objects[0] as T;
+
+            if (instance != null)
+            {
+                return instance;
+            }
+
+            Debug.LogError($"{scriptableObjectPath} 无法加载为 {typeof(T).Name}");
+            return CreateInstance<T>();
         }
 
         public static void Save(bool saveAsText = true)

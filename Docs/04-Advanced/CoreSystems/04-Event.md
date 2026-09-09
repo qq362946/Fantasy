@@ -1083,7 +1083,7 @@ public class OnPlayerLogin : AsyncEventSystem<PlayerLoginEvent>
     protected override async FTask Handler(PlayerLoginEvent self)
     {
         // ✅ 并行执行多个异步操作
-        await FTask.WhenAll(
+        await FTask.WaitAll(
             LoadPlayerData(self.PlayerId),
             LoadFriendList(self.PlayerId),
             LoadMailList(self.PlayerId)

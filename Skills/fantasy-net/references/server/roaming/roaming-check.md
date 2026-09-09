@@ -26,7 +26,7 @@
 - Gate 建链时是否选对目标服务器
 - Handler 是否落在真正接收该漫游消息的服务器上
 
-### 错误 3：路由建立位置不对
+### 错误 3：路由建立位置不对，或没有区分首次连接与重连
 
 常见正确位置：
 
@@ -36,7 +36,31 @@
 
 不要在任意业务调用路径重复建链。
 
-统一使用 `session.GetOrCreateRoaming(roamingId, delayRemove)`；它直接返回组件并自动处理 Session 重绑。`Link` 使用 `Link(targetSceneAddress, session.RuntimeId, roamingType, args)`，调用方不再维护创建/重连状态分支。
+统一使用 `session.GetOrCreateRoaming(roamingId, delayRemove)`；它直接返回组件并自动处理本地 Session 重绑，但不会单独恢复目标 Terminus 的转发。审查它后面的每个 `Link` 时，必须确认首次连接与重连使用不同分支：
+
+```csharp
+uint errorCode;
+if (roaming.IsLinked(roamingType))
+{
+    // 重连：沿用已保存的目标地址。
+    errorCode = await roaming.Link(roamingType, args);
+}
+else
+{
+    // 首次连接：此时才选择目标服务器。
+    var targetSceneAddress = GetTargetSceneAddress();
+    errorCode = await roaming.Link(targetSceneAddress, roamingType, args);
+}
+```
+
+每个需要恢复的 `roamingType` 都必须独立检查。以下两种写法都应作为审查问题提出：无条件调用带地址重载，会在重连时重复选择服务器；无条件调用无地址重载，会让首次连接返回 `ErrReLinkNotFoundRoaming`。
+
+同时检查：
+
+- 不要再向 `Link` 传 Session Address；框架从组件当前绑定的 Session 获取
+- 同一 Gate 内已有本地路由时，必须调用无地址重载，避免重复选择服务器
+- 新 Gate 没有原本的本地路由，即使目标端 Terminus 仍存在，也必须先取得原目标地址并调用带地址重载
+- 带地址重载遇到已有本地路由时会沿用已保存的地址，不能用它直接替换目标服务器
 
 ### 错误 4：OnCreateTerminus / OnDisposeTerminus 清理不完整
 
@@ -65,7 +89,7 @@
 
 ### 错误 8：服务发现模式仍固定从 `SceneConfigData[0]` 取后端
 
-Release 按 Process 拉取配置时，本进程不一定包含远程 SceneConfig。应使用 `DiscoverAddressAsync` / `DiscoverAddressByHashAsync`，处理 Address 为 `0`，再调用 `Link(long targetSceneAddress, long forwardSessionAddress, ...)`。
+Release 按 Process 拉取配置时，本进程不一定包含远程 SceneConfig。首次建链或新 Gate 接管时应使用 `DiscoverAddressAsync` / `DiscoverAddressByHashAsync`，处理 Address 为 `0`，再调用 `Link(long targetSceneAddress, int roamingType, Entity? args)`；同一 Gate 已有本地路由时直接调用 `Link(int roamingType, Entity? args)`，不要重复发现目标。
 
 ### 错误 9：把 Rendezvous Hash 当作永久 Roaming 归属
 
@@ -82,7 +106,7 @@ Rendezvous Hash 在节点集合变化时会迁移少量玩家。如果重连必�
 ## 审查时重点问自己
 
 1. 这段代码真的该用 Roaming 吗
-2. 路由建立、重连恢复、断线清理是否成对出现
+2. `GetOrCreateRoaming` 后的每个 `Link` 是否用 `IsLinked(roamingType)` 分开首次连接与重连
 3. Handler 是否在正确服务器和正确实体类型上执行
 4. 传送成功后是否仍然引用旧实体
 5. 是否把异常状态吞掉并错误返回成功

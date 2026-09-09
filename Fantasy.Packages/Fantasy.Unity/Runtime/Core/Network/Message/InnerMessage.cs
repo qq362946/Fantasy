@@ -675,51 +675,6 @@ namespace Fantasy.InnerMessage
         public uint ErrorCode { get; set; }
     }
     [ProtoContract]
-    public sealed partial class I_SetForwardSessionAddressRequest : AMessage, IAddressRequest
-    {
-        public static I_SetForwardSessionAddressRequest Create()
-        {
-            return MessageObjectPool<I_SetForwardSessionAddressRequest>.Rent();
-        }
-
-        public void Dispose()
-        {
-            RoamingId = 0;
-            ForwardSessionAddress = 0;
-            OwnerRoamingRuntimeId = 0;
-            MessageObjectPool<I_SetForwardSessionAddressRequest>.Return(this);
-        }
-
-        [ProtoIgnore]
-        public I_SetForwardSessionAddressResponse ResponseType { get; set; }
-        public uint OpCode() { return Fantasy.Network.OpCode.SetForwardSessionAddressRequest; }
-        public long RouteTypeOpCode() { return 1; }
-        [ProtoMember(1)]
-        public long RoamingId { get; set; }
-        [ProtoMember(2)]
-        public long ForwardSessionAddress { get; set; }
-        [ProtoMember(3)]
-        public long OwnerRoamingRuntimeId { get; set; }
-    }
-    [ProtoContract]
-    public sealed partial class I_SetForwardSessionAddressResponse : AMessage, IAddressResponse
-    {
-        public static I_SetForwardSessionAddressResponse Create()
-        {
-            return MessageObjectPool<I_SetForwardSessionAddressResponse>.Rent();
-        }
-
-        public void Dispose()
-        {
-            ErrorCode = 0;
-            MessageObjectPool<I_SetForwardSessionAddressResponse>.Return(this);
-        }
-
-        public uint OpCode() { return Fantasy.Network.OpCode.SetForwardSessionAddressResponse; }
-        [ProtoMember(1)]
-        public uint ErrorCode { get; set; }
-    }
-    [ProtoContract]
     public sealed partial class I_StopForwardingRequest : AMessage, IAddressRequest
     {
         public static I_StopForwardingRequest Create()
