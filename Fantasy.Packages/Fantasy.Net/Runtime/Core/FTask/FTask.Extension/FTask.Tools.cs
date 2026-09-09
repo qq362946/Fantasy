@@ -353,6 +353,99 @@ namespace Fantasy.Async
                 }
             }
         }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static async FTask<T[]> WaitAll<T>(List<FTask<T>> tasks)
+        {
+            if (tasks.Count <= 0) return Array.Empty<T>();
+   
+            Exception exception = null;
+            var count = tasks.Count;
+            var results = new T[count];
+            var sTaskCompletionSource = Create();
+
+            for (var i = 0; i < count; i++)
+            {
+                RunSTask(tasks[i], i).Coroutine();
+            }
+
+            await sTaskCompletionSource;
+
+            return results;
+
+            async FVoid RunSTask(FTask<T> task, int index)
+            {
+                try
+                {
+                    results[index] = await task;
+                }
+                catch (Exception e)
+                {
+                    exception ??= e;
+                }
+                finally
+                {
+                    count--;
+
+                    if (count <= 0)
+                    {
+                        if (exception != null)
+                        {
+                            sTaskCompletionSource.SetException(exception);
+                        }
+                        else
+                        {
+                            sTaskCompletionSource.SetResult();
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static async FTask<int> WaitAllNonAlloc<T>(List<FTask<T>> tasks, T[] results)
+        {
+            if (tasks.Count <= 0 || results == null || results.Length <= 0) return 0;
+     
+            var count = Math.Min(tasks.Count, results.Length);
+            Exception exception = null;
+            var remaining = count;
+            var sTaskCompletionSource = Create();
+            
+     
+            for (var i = 0; i < count; i++)
+            {
+                RunSTask(tasks[i], i).Coroutine();
+            }
+
+            await sTaskCompletionSource;
+
+            return exception != null ? -1 : count;
+
+            async FVoid RunSTask(FTask<T> task, int index)
+            {
+                try
+                {
+                    results[index] = await task;
+                }
+                catch (Exception e)
+                {
+                    exception ??= e;
+                }
+                finally
+                {
+                    if (--remaining <= 0)
+                    {
+                        sTaskCompletionSource.SetResult();
+                    }
+                }
+            }
+        }
+        
+        
+        
         /// <summary>
         /// 等待其中一个任务完成
         /// </summary>
