@@ -44,6 +44,8 @@ public sealed class ServiceRegistry(IOptions<ControlCenterOptions> options) : Ba
             request.Host.Trim(),
             request.InnerPort,
             request.OuterPort,
+            request.OuterHost?.Trim() ?? string.Empty,
+            request.NetworkProtocol?.Trim() ?? string.Empty,
             request.Version?.Trim() ?? string.Empty,
             now,
             now + NormalizeLeaseMilliseconds(request.LeaseSeconds));
@@ -430,6 +432,8 @@ public sealed class ServiceRegistry(IOptions<ControlCenterOptions> options) : Ba
             string host,
             int innerPort,
             int outerPort,
+            string outerHost,
+            string networkProtocol,
             string version,
             long startedAtUnixMilliseconds,
             long leaseExpiresUnixMilliseconds)
@@ -449,7 +453,9 @@ public sealed class ServiceRegistry(IOptions<ControlCenterOptions> options) : Ba
                 ProcessId = scene.ProcessId,
                 Host = host,
                 InnerPort = innerPort,
-                OuterPort = outerPort
+                OuterPort = outerPort,
+                OuterHost = outerHost,
+                NetworkProtocol = networkProtocol
             };
             _lastHeartbeatUnixMilliseconds = startedAtUnixMilliseconds;
             _leaseExpiresUnixMilliseconds = leaseExpiresUnixMilliseconds;
@@ -494,7 +500,9 @@ public sealed class ServiceRegistry(IOptions<ControlCenterOptions> options) : Ba
                 ProcessId = parentEndpoint.ProcessId,
                 Host = parentEndpoint.Host,
                 InnerPort = parentEndpoint.InnerPort,
-                OuterPort = parentEndpoint.OuterPort
+                OuterPort = parentEndpoint.OuterPort,
+                OuterHost = parentEndpoint.OuterHost,
+                NetworkProtocol = parentEndpoint.NetworkProtocol
             };
 
             _lastHeartbeatUnixMilliseconds = startedAtUnixMilliseconds;

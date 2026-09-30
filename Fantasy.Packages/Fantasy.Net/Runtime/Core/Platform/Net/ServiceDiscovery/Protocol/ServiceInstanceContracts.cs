@@ -60,6 +60,16 @@ public sealed class RegisterInstanceRequest
     /// Scene 外网监听端口；没有外网监听时为 0。
     /// </summary>
     public int OuterPort { get; set; }
+
+    /// <summary>
+    /// Machine 对客户端公布的主机地址，来自 OuterIP，不是 OuterBindIP。
+    /// </summary>
+    public string OuterHost { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Scene 配置的对外网络协议；没有外网监听时可以为空。
+    /// </summary>
+    public string NetworkProtocol { get; set; } = string.Empty;
     
     /// <summary>
     /// 当前服务器程序版本。
@@ -251,6 +261,16 @@ public sealed class ServiceEndpointContract
     /// Scene 外网监听端口；没有外网监听时为 0。
     /// </summary>
     public int OuterPort { get; set; }
+
+    /// <summary>
+    /// Machine 对客户端公布的主机地址，来自 OuterIP，不是 OuterBindIP。
+    /// </summary>
+    public string OuterHost { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Scene 配置的对外网络协议；没有外网监听时可以为空。
+    /// </summary>
+    public string NetworkProtocol { get; set; } = string.Empty;
 }
 
 /// <summary>
