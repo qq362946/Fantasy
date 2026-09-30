@@ -645,6 +645,8 @@ internal sealed class ServiceDiscoveryWorker
                 Host = machine.InnerBindIP,
                 InnerPort = sceneConfig.InnerPort,
                 OuterPort = sceneConfig.OuterPort,
+                OuterHost = machine.OuterIP,
+                NetworkProtocol = sceneConfig.NetworkProtocol,
                 Version = ProgramDefine.VERSION,
                 LeaseSeconds = _leaseSeconds
             });
@@ -734,6 +736,8 @@ internal sealed class ServiceDiscoveryWorker
                             Host = machine.InnerBindIP,
                             InnerPort = scene.InnerPort,
                             OuterPort = scene.OuterPort,
+                            OuterHost = machine.OuterIP,
+                            NetworkProtocol = scene.NetworkProtocol,
                             Version = ProgramDefine.VERSION,
                             LeaseSeconds = leaseSeconds
                         }));
