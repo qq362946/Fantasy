@@ -61,13 +61,16 @@ namespace Fantasy.Assembly
         internal static async Task OnLoad(AssemblyManifest assemblyManifest)
         {
             List<Task> loadTasks = new();
-            
+
             foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
                 loadTasks.Add(assemblyLifecycle.OnLoad(assemblyManifest));
             }
-            
+#if FANTASY_WEBGL
             await Task.WhenAll(loadTasks);
+#else
+            await Task.WhenAll(loadTasks).ConfigureAwait(false);
+#endif
         }
 
         /// <summary>
@@ -79,15 +82,18 @@ namespace Fantasy.Assembly
         internal static async Task OnUnLoad(AssemblyManifest assemblyManifest)
         {
             List<Task> unloadTasks = new();
-            
+
             foreach (IAssemblyLifecycle assemblyLifecycle in AssemblyLifecycles)
             {
                 unloadTasks.Add(RunOnUnload(assemblyLifecycle));
             }
-            
-            await Task.WhenAll(unloadTasks);
+#if FANTASY_WEBGL
+            await Task.WhenAll(unloadTasks); 
+#else
+            await Task.WhenAll(unloadTasks).ConfigureAwait(false);
+#endif
             assemblyManifest.Clear();
-            
+
             async Task RunOnUnload(IAssemblyLifecycle assemblyLifecycle)
             {
                 try
