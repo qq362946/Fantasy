@@ -468,7 +468,9 @@ public sealed class CSharpExporter(
                     case FieldCollectionType.RepeatedList:
                     case FieldCollectionType.RepeatedArray:
                     {
-                        disposeStatement = $"{field.Name} = null;";
+                        disposeStatement = messageDefinitions.ContainsKey(field.Type) ?
+                            $"if ({field.Name} != null)\n            {{\n                foreach (var __t in {field.Name}) __t.Dispose();\n            }}\n            {field.Name} = null;" :
+                            $"{field.Name} = null;";
                         break;
                     }
                     default:
