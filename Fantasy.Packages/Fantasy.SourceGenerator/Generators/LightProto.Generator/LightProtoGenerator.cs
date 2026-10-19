@@ -867,6 +867,31 @@ public class LightProtoGenerator : IIncrementalGenerator
                     );
                 }
 
+                // Pool only Fantasy messages with writable members; preserve construction semantics for ordinary contracts and init-only/readonly members.
+                var messageBase = compilation.GetTypeByMetadataName("Fantasy.Network.Interface.AMessage");
+                var isMessage = false;
+                for (var baseType = targetType.BaseType; baseType != null; baseType = baseType.BaseType)
+                {
+                    if (SymbolEqualityComparer.Default.Equals(baseType, messageBase))
+                    {
+                        isMessage = true;
+                        break;
+                    }
+                }
+
+                if (isMessage && proxyFor == null && !targetType.IsAbstract &&
+                    targetType.Constructors.Any(x => x.Parameters.Length == 0 &&
+                        x.DeclaredAccessibility == Accessibility.Public) &&
+                    protoMembers.All(member => !member.IsReadOnly && !member.IsInitOnly))
+                {
+                    yield return $"var parsed = global::Fantasy.Pool.MessageObjectPool<{className}>.Rent();";
+                    foreach (var member in protoMembers)
+                    {
+                        yield return $"parsed.{member.Name} = _{member.Name}HasValue ? _{member.Name} : {member.Initializer};";
+                    }
+                    yield break;
+                }
+
                 yield return $"var parsed = new {className}()";
                 yield return $"{{";
                 
