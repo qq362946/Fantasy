@@ -90,6 +90,8 @@ namespace Fantasy.Pool
             {
                 return;
             }
+            
+            obj.SetIsPool(false);
 
             if (_poolCount >= _maxCapacity)
             {
@@ -97,7 +99,6 @@ namespace Fantasy.Pool
             }
 
             _poolCount++;
-            obj.SetIsPool(false);
             _poolQueue.Enqueue(type.TypeHandle, obj);
         }
 
@@ -171,6 +172,8 @@ namespace Fantasy.Pool
             {
                 return;
             }
+            
+            item.SetIsPool(false);
 
             if (_poolCount >= _maxCapacity)
             {
@@ -178,7 +181,6 @@ namespace Fantasy.Pool
             }
 
             _poolCount++;
-            item.SetIsPool(false);
             _poolQueue.Enqueue(item);
         }
         
