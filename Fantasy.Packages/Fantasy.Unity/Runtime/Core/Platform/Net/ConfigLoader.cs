@@ -7,6 +7,7 @@ using Fantasy.Async;
 using Fantasy.Helper;
 using Fantasy.IdFactory;
 using Fantasy.Network;
+using Fantasy.Network.Security;
 using Fantasy.Platform.Net;
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
 #pragma warning disable CS8604 // Possible null reference argument.
@@ -166,11 +167,19 @@ public static class ConfigLoader
         XmlNode? networkNode = root.SelectSingleNode("f:network", nsManager);
         ProgramDefine.InnerNetwork = Enum.Parse<NetworkProtocolType>(GetOptionalAttribute(networkNode, "inner") ?? "TCP");
         ProgramDefine.MaxMessageSize = int.Parse(GetOptionalAttribute(networkNode, "maxMessageSize") ?? "1048560");
+        ProgramDefine.EnableEncryption = bool.Parse(GetOptionalAttribute(networkNode, "enableEncryption") ?? "false");
+        ProgramDefine.ServerPrivateKey = GetOptionalAttribute(networkNode, "serverPrivateKey") ?? null;
         // 加载会话配置
         XmlNode? sessionNode = root.SelectSingleNode("f:session", nsManager);
         ProgramDefine.SessionIdleCheckerTimeout = int.Parse(GetOptionalAttribute(sessionNode, "idleTimeout") ?? "8000");
         ProgramDefine.SessionIdleCheckerInterval = int.Parse(GetOptionalAttribute(sessionNode, "idleInterval") ?? "5000");
         
+
+        if (!string.IsNullOrEmpty(ProgramDefine.ServerPrivateKey))
+        {
+            var publicKey = EncryptionHelper.GeneratePublicKey(ProgramDefine.ServerPrivateKey);
+            Log.Info($"serverPublicKey: {Convert.ToBase64String(publicKey)}");
+        }
         Log.Info($"Current inner network protocol:{ProgramDefine.InnerNetwork.ToString()}");
         Log.Info($"Max Message Size(byte):{ProgramDefine.MaxMessageSize}");
         Log.Info($"Current session idle timeout:{ProgramDefine.SessionIdleCheckerTimeout}");
@@ -410,5 +419,279 @@ public static class ConfigLoader
         var value = node?.Attributes?[attributeName]?.Value;
         return string.IsNullOrWhiteSpace(value) ? null : value;
     }
+
+    #region CheckConfig
+
+    private static void CheckConfig()
+    {
+        // 检查Machine配置
+        CheckMachineConfig();
+        // 检查Process配置
+        CheckProcessConfig();
+        // 检查World配置
+        CheckWorldConfig();
+        // 检查Scene配置
+        CheckSceneConfig();
+        // 检查引用关系
+        CheckConfigReferences();
+        // 检查端口冲突
+        CheckPortConflicts();
+    }
+
+    private static void CheckMachineConfig()
+    {
+        var machines = MachineConfigData.Instance.List;
+        var machineIds = new HashSet<uint>();
+
+        foreach (var machine in machines)
+        {
+            // 检查ID重复
+            if (!machineIds.Add(machine.Id))
+            {
+                throw new InvalidOperationException($"Duplicate machine ID: {machine.Id}");
+            }
+
+            // 检查必填字段
+            if (string.IsNullOrWhiteSpace(machine.OuterIP))
+            {
+                throw new InvalidOperationException($"Machine {machine.Id}: OuterIP cannot be null or empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(machine.OuterBindIP))
+            {
+                throw new InvalidOperationException($"Machine {machine.Id}: OuterBindIP cannot be null or empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(machine.InnerBindIP))
+            {
+                throw new InvalidOperationException($"Machine {machine.Id}: InnerBindIP cannot be null or empty");
+            }
+        }
+    }
+
+    private static void CheckProcessConfig()
+    {
+        var processes = ProcessConfigData.Instance.List;
+        var processIds = new HashSet<uint>();
+
+        foreach (var process in processes)
+        {
+            // 检查ID重复
+            if (!processIds.Add(process.Id))
+            {
+                throw new InvalidOperationException($"Duplicate process ID: {process.Id}");
+            }
+
+            // 检查必填字段
+            if (process.Id == 0)
+            {
+                throw new InvalidOperationException("Process ID cannot be 0");
+            }
+
+            if (process.MachineId == 0)
+            {
+                throw new InvalidOperationException($"Process {process.Id}: MachineId cannot be 0");
+            }
+        }
+    }
+
+    private static void CheckWorldConfig()
+    {
+        var worlds = WorldConfigData.Instance.List;
+        var worldIds = new HashSet<uint>();
+        var idFactoryType = IdFactoryHelper.GetIdFactoryType();
+
+        foreach (var world in worlds)
+        {
+            // 检查ID重复
+            if (!worldIds.Add(world.Id))
+            {
+                throw new InvalidOperationException($"Duplicate world ID: {world.Id}");
+            }
+
+            // 检查必填字段
+            if (string.IsNullOrWhiteSpace(world.WorldName))
+            {
+                throw new InvalidOperationException($"World {world.Id}: WorldName cannot be null or empty");
+            }
+
+            // 检查IdFactoryType为World时，world.Id最大值为255
+            if (idFactoryType == IdFactoryType.World && world.Id > 255)
+            {
+                throw new InvalidOperationException($"World {world.Id}: When IdFactoryType is World, World ID must be <= 255");
+            }
+
+            if (world.DatabaseConfig != null)
+            {
+                var dbNames = new HashSet<string>();
+                foreach (var databaseConfig in world.DatabaseConfig)
+                {
+                    if (databaseConfig.DbName == null)
+                    {
+                        throw new InvalidOperationException($"World {world.Id}: DbName config has no value");
+                    }
+
+                    if (databaseConfig.DbType == null)
+                    {
+                        throw new InvalidOperationException($"World {world.Id}: DbType config has no value");
+                    }
+
+                    if (!dbNames.Add(databaseConfig.DbName))
+                    {
+                        throw new InvalidOperationException($"World {world.Id} configuration DbName:{databaseConfig.DbName} repeat");
+                    }
+                }
+            }
+        }
+    }
+
+    private static void CheckSceneConfig()
+    {
+        var scenes = SceneConfigData.Instance.List;
+        var sceneIds = new HashSet<uint>();
+
+        foreach (var scene in scenes)
+        {
+            // 检查ID重复
+            if (!sceneIds.Add(scene.Id))
+            {
+                throw new InvalidOperationException($"Duplicate scene ID: {scene.Id}");
+            }
+
+            // 检查必填字段
+            if (scene.ProcessConfigId == 0)
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: ProcessConfigId cannot be 0");
+            }
+
+            if (scene.WorldConfigId == 0)
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: WorldConfigId cannot be 0");
+            }
+
+            if (string.IsNullOrWhiteSpace(scene.SceneRuntimeMode))
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: SceneRuntimeMode cannot be null or empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(scene.SceneTypeString))
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: SceneTypeString cannot be null or empty");
+            }
+
+            if (scene.InnerPort == 0)
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: InnerPort cannot be 0");
+            }
+
+            if (scene.SceneType == 0)
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: SceneType cannot be 0");
+            }
+
+            // 检查NetworkProtocol配置
+            if (scene.OuterPort > 0 && string.IsNullOrWhiteSpace(scene.NetworkProtocol))
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: NetworkProtocol must be set when OuterPort > 0");
+            }
+
+            // 检查Scene ID范围（仅在IdFactoryType.World模式下）
+            CheckSceneIdRange(scene);
+        }
+    }
+
+    private static void CheckConfigReferences()
+    {
+        // 检查Process的MachineId引用
+        foreach (var process in ProcessConfigData.Instance.List)
+        {
+            if (MachineConfigData.Instance.List.All(m => m.Id != process.MachineId))
+            {
+                throw new InvalidOperationException($"Process {process.Id}: Referenced MachineId {process.MachineId} not found");
+            }
+        }
+
+        // 检查Scene的ProcessConfigId和WorldConfigId引用
+        foreach (var scene in SceneConfigData.Instance.List)
+        {
+            if (ProcessConfigData.Instance.List.All(p => p.Id != scene.ProcessConfigId))
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: Referenced ProcessConfigId {scene.ProcessConfigId} not found");
+            }
+
+            if (WorldConfigData.Instance.List.All(w => w.Id != scene.WorldConfigId))
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: Referenced WorldConfigId {scene.WorldConfigId} not found");
+            }
+        }
+    }
+
+    private static void CheckPortConflicts()
+    {
+        // 按机器分组检查端口冲突
+        var machinePortMap = new Dictionary<uint, Dictionary<int, uint>>(); // MachineId -> (Port -> SceneId)
+
+        foreach (var scene in SceneConfigData.Instance.List)
+        {
+            // 获取Scene所属的机器ID
+            var process = ProcessConfigData.Instance.Get(scene.ProcessConfigId);
+            var machineId = process.MachineId;
+
+            if (!machinePortMap.ContainsKey(machineId))
+            {
+                machinePortMap[machineId] = new Dictionary<int, uint>();
+            }
+
+            var machinePorts = machinePortMap[machineId];
+
+            // 检查同一Scene内InnerPort和OuterPort是否冲突
+            if (scene.OuterPort > 0 && scene.InnerPort == scene.OuterPort)
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: InnerPort and OuterPort cannot use the same port {scene.InnerPort}");
+            }
+
+            // 检查InnerPort在同一机器下是否与其他端口冲突
+            if (machinePorts.TryGetValue(scene.InnerPort, out var conflictSceneId1))
+            {
+                throw new InvalidOperationException($"Scene {scene.Id}: InnerPort {scene.InnerPort} conflicts with another port from Scene {conflictSceneId1} on Machine {machineId}");
+            }
+            machinePorts[scene.InnerPort] = scene.Id;
+
+            // 检查OuterPort在同一机器下是否与其他端口冲突（如果不为0）
+            if (scene.OuterPort > 0)
+            {
+                if (machinePorts.TryGetValue(scene.OuterPort, out var conflictSceneId))
+                {
+                    throw new InvalidOperationException($"Scene {scene.Id}: OuterPort {scene.OuterPort} conflicts with another port from Scene {conflictSceneId} on Machine {machineId}");
+                }
+                machinePorts[scene.OuterPort] = scene.Id;
+            }
+        }
+    }
+
+    private static void CheckSceneIdRange(SceneConfig scene)
+    {
+        // 检查当前是否为World模式的ID工厂
+        if (IdFactoryHelper.GetIdFactoryType() != IdFactoryType.World)
+        {
+            return; // 非World模式不需要检查
+        }
+
+        var worldConfigId = scene.WorldConfigId;
+        var minAllowedId = worldConfigId * 1000 + 1;
+        var maxAllowedId = worldConfigId * 1000 + 255;
+
+        if (scene.Id < minAllowedId)
+        {
+            throw new InvalidOperationException($"Scene {scene.Id}: ID must be >= {minAllowedId} (WorldConfigId {worldConfigId} * 1000 + 1)");
+        }
+
+        if (scene.Id > maxAllowedId)
+        {
+            throw new InvalidOperationException($"Scene {scene.Id}: ID must be <= {maxAllowedId} (WorldConfigId {worldConfigId} * 1000 + 255)");
+        }
+    }
+
+    #endregion
 }
 #endif

@@ -6,9 +6,11 @@ using System.Net;
 using System.Net.Sockets;
 using Fantasy.Helper;
 using Fantasy.Network.Interface;
+using Fantasy.Network.Security;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 // ReSharper disable GCSuppressFinalizeForTypeWithoutDestructor
+#pragma warning disable CS8604 // Possible null reference argument.
 #pragma warning disable CS8622 // Nullability of reference types in type of parameter doesn't match the target delegate (possibly because of nullability attributes).
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -21,10 +23,12 @@ namespace Fantasy.Network.TCP
         private Socket _socket;
         private SocketAsyncEventArgs _acceptAsync;
         private readonly Dictionary<uint, INetworkChannel> _connectionChannel = new Dictionary<uint, INetworkChannel>();
+        private bool _enableEncryption;
 
         public void Initialize(NetworkTarget networkTarget, IPEndPoint address)
         {
             base.Initialize(NetworkType.Server, NetworkProtocolType.TCP, networkTarget, false);
+            _enableEncryption = ProgramDefine.EnableEncryption && networkTarget == NetworkTarget.Outer;
             _random = new Random();
             _acceptAsync = new SocketAsyncEventArgs();
             _socket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -116,7 +120,21 @@ namespace Fantasy.Network.TCP
                     channelId = 0xC0000000 | (uint)_random.Next();
                 } while (_connectionChannel.ContainsKey(channelId));
 
-                channel = new TCPServerNetworkChannel(this, acceptSocket, channelId);
+                EncryptionHelper encryptionHelper = null;
+                if (_enableEncryption)
+                {
+                    encryptionHelper = new EncryptionHelper();
+                    if (!string.IsNullOrEmpty(ProgramDefine.ServerPrivateKey))
+                    {
+                        encryptionHelper.SetKeyPair(Convert.FromBase64String(ProgramDefine.ServerPrivateKey)); // 固定密钥模式（服务端认证）
+                    }
+                    else
+                    {
+                        encryptionHelper.GenerateKeyPair(); // 临时密钥（防解包)
+                    }
+                }
+
+                channel = new TCPServerNetworkChannel(this, acceptSocket, channelId, encryptionHelper);
                 acceptSocket = null;
                 _connectionChannel.Add(channelId, channel);
                 channel.Start();

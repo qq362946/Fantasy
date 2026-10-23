@@ -10,6 +10,7 @@ using Fantasy.DataStructure.Collection;
 using Fantasy.Entitas.Interface;
 using Fantasy.Helper;
 using Fantasy.Network.Interface;
+using Fantasy.Network.Security;
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 // ReSharper disable ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
@@ -52,7 +53,7 @@ namespace Fantasy.Network.KCP
         private const int ReceiveCountPerConnection = 12;
         
         private const int ReceiveBufferSize = ushort.MaxValue;
-        private readonly byte[] _sendBuff = new byte[5];
+        private readonly byte[] _sendBuff = new byte[5 + 1 + EncryptionHelper.PublicKeySize]; // 5 头 + 1 模式字节 + 公钥
         private readonly byte[] _receiveBuffer = new byte[ReceiveBufferSize];
         
         private readonly List<long> _pendingTimeOutTime = new List<long>();
@@ -65,6 +66,8 @@ namespace Fantasy.Network.KCP
         private readonly Dictionary<uint, PendingConnection> _pendingConnection = new Dictionary<uint, PendingConnection>();
         private readonly SortedOneToManyList<long, uint> _pendingConnectionTimeOut = new SortedOneToManyList<long, uint>();
         private readonly Dictionary<uint, KCPServerNetworkChannel> _connectionChannel = new Dictionary<uint, KCPServerNetworkChannel>();
+        private readonly Dictionary<uint, EncryptionHelper> _channelEncryption = new Dictionary<uint, EncryptionHelper>();
+        private bool _enableEncryption;
 
         public KCPSettings Settings { get; private set; }
 
@@ -74,6 +77,7 @@ namespace Fantasy.Network.KCP
         {
             _startTime = Environment.TickCount64;
             Settings = KCPSettings.Create(networkTarget);
+            _enableEncryption = ProgramDefine.EnableEncryption && networkTarget == NetworkTarget.Outer;
             base.Initialize(NetworkType.Server, NetworkProtocolType.KCP, networkTarget, false);
             _socket = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
             _socket.Blocking = false;
@@ -123,6 +127,7 @@ namespace Fantasy.Network.KCP
 
             _connectionChannel.Clear();
             _pendingConnection.Clear();
+            _channelEncryption.Clear();
             _updateChannels.Clear();
             _channelUpdateTime.Clear();
             _updateTimeOutTime.Clear();
@@ -300,6 +305,27 @@ namespace Fantasy.Network.KCP
                         break;
                     }
 
+                    // 加密握手：服务端必须也开启 enableEncryption 才接受
+                    if (_enableEncryption)
+                    {
+                        if (buffer.Length < 32)
+                        {
+                            Log.Warning($"KCP encryption required but client message has invalid format, is encryption enabled in the client?, channelId={channelId}");
+                            break;
+                        }
+                        var enc = new EncryptionHelper();
+                        if (!string.IsNullOrEmpty(ProgramDefine.ServerPrivateKey))
+                        {
+                            enc.SetKeyPair(Convert.FromBase64String(ProgramDefine.ServerPrivateKey)); // 固定密钥模式（服务端认证）
+                        }
+                        else
+                        {
+                            enc.GenerateKeyPair(); // 临时密钥（防解包)
+                        }
+                        enc.DeriveSharedKey(buffer.Slice(0, 32).Span);
+                        _channelEncryption[channelId] = enc;
+                    }
+
                     AddPendingConnection(ref channelId, ipEndPoint);
                     break;
                 }
@@ -441,6 +467,7 @@ namespace Fantasy.Network.KCP
                 foreach (var channelId in _pendingConnectionTimeOut[timeId])
                 {
                     _pendingConnection.Remove(channelId);
+                    _channelEncryption.Remove(channelId);
                 }
 
                 _pendingConnectionTimeOut.RemoveKey(timeId);
@@ -520,8 +547,15 @@ namespace Fantasy.Network.KCP
 
         private void AddConnection(ref uint channelId, IPEndPoint ipEndPoint)
         {
-            var eventArgs = new KCPServerNetworkChannel(this, channelId, ipEndPoint);
+            _channelEncryption.TryGetValue(channelId, out var encryptionHelper);
+            if (_enableEncryption && encryptionHelper == null)
+            {
+                Log.Error($"KCPServerNetwork AddConnection encryption required but no EncryptionHelper found for channelId={channelId}");
+                return;
+            }
+            var eventArgs = new KCPServerNetworkChannel(this, channelId, ipEndPoint, encryptionHelper);
             _connectionChannel.Add(channelId, eventArgs);
+            _channelEncryption.Remove(channelId);
 #if FANTASY_DEVELOP
         Log.Debug($"AddConnection _connectionChannel:{_connectionChannel.Count}");
 #endif
@@ -531,7 +565,9 @@ namespace Fantasy.Network.KCP
         {
             _updateChannels.Remove(channelId);
             RemoveUpdateTimer(channelId);
-            
+
+            // 如果握手失败会有残留，兜底清理 :)
+            _channelEncryption.Remove(channelId);
             if (!_connectionChannel.Remove(channelId, out var channel))
             {
                 return;
@@ -572,9 +608,30 @@ namespace Fantasy.Network.KCP
 
         private void SendWaitConfirmConnection(ref uint channelId, EndPoint clientEndPoint)
         {
-            _sendBuff[0] = KcpHeaderWaitConfirmConnection;
-            MemoryMarshal.Write(_sendBuff.AsSpan(1), in channelId);
-            SendAsync(_sendBuff, 0, 5, clientEndPoint);
+            if (_channelEncryption.TryGetValue(channelId, out var enc))
+            {
+                _sendBuff[0] = KcpHeaderWaitConfirmConnection;
+                MemoryMarshal.Write(_sendBuff.AsSpan(1), in channelId);
+                if (ProgramDefine.ServerPrivateKey != null)
+                {
+                    // 固定密钥模式：模式字节 0xED，不返回公钥，客户端必须用配置的 serverPublicKey
+                    _sendBuff[5] = EncryptionHelper.KeyExchangeMarkerFixed;
+                    SendAsync(_sendBuff, 0, 6, clientEndPoint);
+                }
+                else
+                {
+                    // 临时密钥模式：模式字节 0xEC + 公钥
+                    _sendBuff[5] = EncryptionHelper.KeyExchangeMarker;
+                    Array.Copy(enc.PublicKey, 0, _sendBuff, 6, EncryptionHelper.PublicKeySize);
+                    SendAsync(_sendBuff, 0, 6 + EncryptionHelper.PublicKeySize, clientEndPoint);
+                }
+            }
+            else
+            {
+                _sendBuff[0] = KcpHeaderWaitConfirmConnection;
+                MemoryMarshal.Write(_sendBuff.AsSpan(1), in channelId);
+                SendAsync(_sendBuff, 0, 5, clientEndPoint);
+            }
         }
         
         private void SendConfirmConnection(ref uint channelId, EndPoint clientEndPoint)
