@@ -177,7 +177,7 @@ namespace Fantasy.Network.KCP
                 buffer = _packetParser.Pack(ref rpcId, ref address, memoryStream, message, messageType);
                 packetLength = (int)buffer.Position;
                 
-                var maxPacketLength = (long)Kcp.MaximumSegmentSize * byte.MaxValue;
+                var maxPacketLength = (long)Kcp.MaximumSegmentSize * ushort.MaxValue;
 
                 if (packetLength > maxPacketLength)
                 {

@@ -36,7 +36,7 @@ namespace kcp
         public const uint IKCP_MTU_DEF = 1400;
         public const uint IKCP_ACK_FAST = 3;
         public const uint IKCP_INTERVAL = 100;
-        public const uint IKCP_OVERHEAD = 24;
+        public const uint IKCP_OVERHEAD = 25;
         public const uint IKCP_DEADLINK = 20;
         public const uint IKCP_THRESH_INIT = 2;
         public const uint IKCP_THRESH_MIN = 2;
@@ -500,13 +500,14 @@ namespace kcp
             if (len <= (int)kcp->mss) count = 1;
             else count = (int)((len + kcp->mss - 1) / kcp->mss);
 
-            if (kcp->stream == 0 && count > 255) return -2;
-
-            if (count >= (int)kcp->rcv_wnd)
+            if (kcp->stream == 0)
             {
-                if (kcp->stream != 0 && sent > 0)
-                    return sent;
-                return -2;
+                if (count > ushort.MaxValue || count > kcp->rcv_wnd)
+                    return -2;
+            }
+            else if (count >= kcp->rcv_wnd)
+            {
+                return sent > 0 ? sent : -2;
             }
 
             if (count == 0) count = 1;
@@ -781,8 +782,8 @@ namespace kcp
             while (true)
             {
                 uint ts, sn, len, una, conv;
-                ushort wnd;
-                byte cmd, frg;
+                ushort wnd, frg;
+                byte cmd;
                 IKCPSEG* seg;
 
                 if (size < (int)IKCP_OVERHEAD) break;
@@ -791,7 +792,7 @@ namespace kcp
                 if (conv != kcp->conv) return -1;
 
                 data = ikcp_decode8u(data, &cmd);
-                data = ikcp_decode8u(data, &frg);
+                data = ikcp_decode16u(data, &frg);
                 data = ikcp_decode16u(data, &wnd);
                 data = ikcp_decode32u(data, &ts);
                 data = ikcp_decode32u(data, &sn);
@@ -805,6 +806,9 @@ namespace kcp
                 if (cmd != IKCP_CMD_PUSH && cmd != IKCP_CMD_ACK &&
                     cmd != IKCP_CMD_WASK && cmd != IKCP_CMD_WINS)
                     return -3;
+                
+                if (cmd == IKCP_CMD_PUSH && (frg == ushort.MaxValue || frg >= kcp->rcv_wnd))
+                    return -2;
 
                 kcp->rmt_wnd = wnd;
                 ikcp_parse_una(kcp, una);
@@ -930,7 +934,7 @@ namespace kcp
         {
             ptr = ikcp_encode32u(ptr, seg->conv);
             ptr = ikcp_encode8u(ptr, (byte)seg->cmd);
-            ptr = ikcp_encode8u(ptr, (byte)seg->frg);
+            ptr = ikcp_encode16u(ptr, (ushort)seg->frg);
             ptr = ikcp_encode16u(ptr, (ushort)seg->wnd);
             ptr = ikcp_encode32u(ptr, seg->ts);
             ptr = ikcp_encode32u(ptr, seg->sn);

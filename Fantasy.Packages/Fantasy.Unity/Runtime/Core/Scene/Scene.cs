@@ -1001,7 +1001,7 @@ namespace Fantasy
             }
             
             // 目标 Scene 位于当前进程时，使用进程内 Session。
-            if (Process.IsInAppliaction(ref sceneId))
+            if (Process.IsInAppliaction(ref sceneId))   
             {
                 session = Session.CreateInnerSession(Scene);
                 AddProcessSessionInfo(sceneId, new ProcessSessionInfo(session, null));

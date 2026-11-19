@@ -26,11 +26,9 @@ namespace Fantasy.Network.KCP
                     settings.Mtu = 470;
 #if FANTASY_NET
                     settings.SendWindowSize = 8192;
-                    settings.ReceiveWindowSize = 8192;
 #endif
 #if FANTASY_UNITY || FANTASY_CONSOLE
                     settings.SendWindowSize = 2048;
-                    settings.ReceiveWindowSize = 2048;
 #endif
                     break;
                 }
@@ -44,7 +42,6 @@ namespace Fantasy.Network.KCP
                     // 4、因为内网发送的不只是外网转发数据，还有其他进程间通信
                     settings.Mtu = 1200;
                     settings.SendWindowSize = 8192;
-                    settings.ReceiveWindowSize = 8192;
                     break;
                 }
 #endif
@@ -54,8 +51,10 @@ namespace Fantasy.Network.KCP
                 }
             }
 
+            settings.ReceiveWindowSize = ushort.MaxValue;
             // KCP等待发送的数据超过两倍发送窗口时断开连接。
-            settings.MaxSendWindowSize = settings.SendWindowSize * 2;
+            // 队列阈值至少容纳一条最大消息，避免下一次发送立即触发断连。
+            settings.MaxSendWindowSize = Math.Max(settings.SendWindowSize * 2, settings.ReceiveWindowSize);
 
             return settings;
         }
