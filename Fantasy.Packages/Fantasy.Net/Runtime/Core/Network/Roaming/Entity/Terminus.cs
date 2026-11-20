@@ -101,7 +101,12 @@ public sealed partial class Terminus : Entity
 
         try
         {
-            await Scene.TerminusComponent.RemoveTerminusAsync(disposeTerminusType, Id, false);
+            var terminusComponent = Scene.TerminusComponent;
+            if (terminusComponent.TryGetTerminus(Id, out var currentTerminus) &&
+                ReferenceEquals(currentTerminus, this))
+            {
+                await terminusComponent.RemoveTerminusAsync(disposeTerminusType, Id, false);
+            }
         }
         finally
         {

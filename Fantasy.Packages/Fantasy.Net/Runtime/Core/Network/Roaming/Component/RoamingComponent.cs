@@ -133,7 +133,7 @@ public sealed class RoamingComponent : Entity
     /// <param name="roamingId">业务定义的稳定身份；断线重连前后必须保持一致。</param>
     /// <param name="delayRemove">Session 释放后保留漫游上下文的毫秒数；小于等于 0 时立即销毁。</param>
     /// <returns>与 <paramref name="roamingId"/> 关联的漫游上下文。</returns>
-    /// <exception cref="ObjectDisposedException">漫游管理组件已经关闭。</exception>
+    /// <exception cref="ObjectDisposedException">漫游管理组件已经关闭，或原 Session 生命周期已结束。</exception>
     internal async FTask<SessionRoamingComponent> GetOrCreateRoaming(Session session, long roamingId, int delayRemove)
     {
         if (_isInnerDisposed)
@@ -141,6 +141,7 @@ public sealed class RoamingComponent : Entity
             throw new ObjectDisposedException(nameof(RoamingComponent));
         }
 
+        EntityReference<Session> sessionReference = session;
         SessionRoamingComponent sessionRoamingComponent;
 
         if (session.SessionRoamingComponent != null)
@@ -164,6 +165,11 @@ public sealed class RoamingComponent : Entity
 
         using (await _roamingManageLock.Wait(roamingId))
         {
+            if (session.IsDisposed || !sessionReference.IsValid)
+            {
+                throw new ObjectDisposedException(nameof(Session));
+            }
+
             if (_sessionRoamingComponents.TryGetValue(roamingId, out sessionRoamingComponent))
             {
                 // 这里只恢复本地上下文绑定；目标 Terminus 由调用方随后执行 Link 恢复。
