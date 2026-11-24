@@ -228,10 +228,17 @@ public class WebSocketServerNetwork : ANetwork
             {
                 channel?.Dispose();
 
-                if (!IsDisposed)
+                // 监听器已停止（或网络实体已销毁）时必须立即退出循环：
+                // GetContextAsync 在监听器停止后每次调用都会同步抛出异常，
+                // 失败路径上没有真正的 await 让出点，继续循环会独占场景线程，
+                // 并以每秒数十万条的速率刷写错误日志。_httpListener 在 Dispose
+                // 中会被置 null，一并按已停止处理。
+                if (IsDisposed || _httpListener is not { IsListening: true })
                 {
-                    Log.Error(e);
+                    break;
                 }
+
+                Log.Error(e);
             }
             finally
             {
