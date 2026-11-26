@@ -642,8 +642,8 @@ public sealed partial class ProtocolFileParser(string filePath)
             }
         }
 
-        // 移除末尾的逗号
-        line = line.TrimEnd(',').Trim();
+        // 移除末尾的 Protobuf 分号或原有逗号
+        line = line.TrimEnd(';', ',').Trim();
 
         if (string.IsNullOrWhiteSpace(line))
         {
